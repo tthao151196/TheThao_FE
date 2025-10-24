@@ -645,7 +645,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductCardHome from "../../components/ProductCardHome";
 
 // 👉 Chỉ 1 import duy nhất từ env (đổi "@/config/env" thành "../config/env" nếu project bạn chưa cấu hình alias @)
-import { API_BASE } from "@/config/env";
+import { API_BASE } from "../../config/env";
 
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 const HEADER_OFFSET = 110;
