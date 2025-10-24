@@ -639,15 +639,14 @@
 //       }
 //     `}</style>
 //   );
-// }
-import { API_BASE } from "../config/env"; // chỉnh đường dẫn tùy file
-
-
+// }// src/pages/Customers/Products.jsx
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductCardHome from "../../components/ProductCardHome";
 
-import { API_BASE, ASSET_ORIGIN, toHttps } from "@/config/env"; 
+// 👉 Chỉ 1 import duy nhất từ env (đổi "@/config/env" thành "../config/env" nếu project bạn chưa cấu hình alias @)
+import { API_BASE } from "@/config/env";
+
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 const HEADER_OFFSET = 110;
 
@@ -658,7 +657,7 @@ const toNum = (x) => {
   const n = Number(x);
   return Number.isFinite(n) ? n : 0;
 };
-const getName = (p) => p.name || p.title || `Sáº£n pháº©m #${p.id}`;
+const getName = (p) => p.name || p.title || `Sản phẩm #${p.id}`;
 const getCreatedTs = (p) => new Date(p.created_at || p.updated_at || 0).getTime();
 const getPrice = (p) =>
   toNum(p.price_sale ?? p.sale_price ?? p.price ?? p.price_buy ?? p.amount);
@@ -688,13 +687,11 @@ function applyClientFilterAndSort(list, f) {
     });
   }
 
-  if (f.category_id)
-    arr = arr.filter((p) => getCategoryId(p) === String(f.category_id));
+  if (f.category_id) arr = arr.filter((p) => getCategoryId(p) === String(f.category_id));
 
   if (f.only_sale) {
     arr = arr.filter((p) => {
-      const price = getPrice(p),
-        root = getRootPrice(p);
+      const price = getPrice(p), root = getRootPrice(p);
       return root && price && price < root;
     });
   }
@@ -710,6 +707,7 @@ function applyClientFilterAndSort(list, f) {
   else if (by === "name-asc") arr.sort((a, b) => collator.compare(getName(a), getName(b)));
   else if (by === "name-desc") arr.sort((a, b) => collator.compare(getName(b), getName(a)));
   else arr.sort((a, b) => getCreatedTs(b) - getCreatedTs(a));
+
   return arr;
 }
 
@@ -765,6 +763,7 @@ export default function Products() {
   });
   const debounced = useDebounce(filter, 400);
 
+  // sync filter từ URL
   useEffect(() => {
     const sp = new URLSearchParams(location.search);
     const qFromUrl = sp.get("q") || sp.get("keyword") || "";
@@ -773,6 +772,7 @@ export default function Products() {
     setFilter((s) => ({ ...s, q: qFromUrl, category_id: cat, only_sale: onlySale }));
   }, [location.search]);
 
+  // load categories
   useEffect(() => {
     const ac = new AbortController();
     (async () => {
@@ -780,7 +780,7 @@ export default function Products() {
         const res = await fetch(`${API_BASE}/categories`, { signal: ac.signal });
         const data = await res.json().catch(() => ({}));
         const list = Array.isArray(data) ? data : data?.data ?? [];
-        setCategories(list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh má»¥c ${c.id}` })));
+        setCategories(list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh mục ${c.id}` })));
       } catch {
         setCategories([]);
       }
@@ -788,6 +788,7 @@ export default function Products() {
     return () => ac.abort();
   }, []);
 
+  // load products theo filter
   useEffect(() => {
     const ac = new AbortController();
     (async () => {
@@ -801,12 +802,13 @@ export default function Products() {
         const list = Array.isArray(data) ? data : data?.data ?? [];
         setItems(applyClientFilterAndSort(list, debounced));
 
+        // lấy thêm all (phục vụ client filter khác nếu cần)
         const resAll = await fetch(`${API_BASE}/products?per_page=200`, { signal: ac.signal });
         const dataAll = await resAll.json().catch(() => ({}));
         const listAll = Array.isArray(dataAll) ? dataAll : dataAll?.data ?? [];
         setAll(listAll);
       } catch (e) {
-        if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
+        if (e.name !== "AbortError") setErr("Không tải được danh sách sản phẩm.");
       } finally {
         setLoading(false);
       }
@@ -828,7 +830,7 @@ export default function Products() {
   };
 
   if (loading && items.length === 0)
-    return <p style={{ padding: 20, textAlign: "center", color: "#2563eb" }}>Äang táº£i sáº£n pháº©m...</p>;
+    return <p style={{ padding: 20, textAlign: "center", color: "#2563eb" }}>Đang tải sản phẩm...</p>;
   if (err)
     return <p style={{ padding: 20, textAlign: "center", color: "#d32f2f" }}>{err}</p>;
 
@@ -844,10 +846,10 @@ export default function Products() {
     >
       <StyleTag />
 
-      <h2 className="products-title">Táº¤T Cáº¢ Sáº¢N PHáº¨M</h2>
+      <h2 className="products-title">TẤT CẢ SẢN PHẨM</h2>
 
       <div className="products-layout">
-        {/* Bá»™ lá»c trÃ¡i */}
+        {/* Bộ lọc trái */}
         <FilterBar
           filter={filter}
           setFilter={(patch) => setFilter((s) => ({ ...s, ...patch }))}
@@ -856,11 +858,11 @@ export default function Products() {
           onClear={clearAll}
         />
 
-        {/* Sáº£n pháº©m pháº£i */}
+        {/* Danh sách sản phẩm */}
         <div className="product-list-area">
           {items.length === 0 ? (
             <p style={{ padding: 20, textAlign: "center", color: "#475569", fontWeight: 700 }}>
-              KhÃ´ng cÃ³ sáº£n pháº©m phÃ¹ há»£p bá»™ lá»c.
+              Không có sản phẩm phù hợp bộ lọc.
             </p>
           ) : (
             <div className="grid4">
@@ -877,7 +879,7 @@ export default function Products() {
 
       <p style={{ marginTop: 40, textAlign: "center" }}>
         <Link to="/" style={{ color: "#2563eb", fontWeight: 800, textDecoration: "none" }}>
-          â† Vá» trang chá»§
+          ← Về trang chủ
         </Link>
       </p>
     </div>
@@ -890,19 +892,19 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
   return (
     <div className={`filter-wrap ${loading ? "is-loading" : ""}`}>
       <div className="field">
-        <label>TÃ¬m kiáº¿m</label>
+        <label>Tìm kiếm</label>
         <input
           type="text"
           value={filter.q}
-          placeholder="Nháº­p tÃªn sáº£n pháº©m..."
+          placeholder="Nhập tên sản phẩm..."
           onChange={(e) => onChange({ q: e.target.value })}
         />
       </div>
 
       <div className="field">
-        <label>Danh má»¥c</label>
+        <label>Danh mục</label>
         <select value={filter.category_id} onChange={(e) => onChange({ category_id: e.target.value })}>
-          <option value="">â€” Táº¥t cáº£ â€”</option>
+          <option value="">— Tất cả —</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
@@ -912,19 +914,19 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
       </div>
 
       <div className="field">
-        <label>Khoáº£ng giÃ¡ (VNÄ)</label>
+        <label>Khoảng giá (VNĐ)</label>
         <div className="row-2">
           <input
             type="number"
             min={0}
-            placeholder="Tá»«"
+            placeholder="Từ"
             value={filter.min_price}
             onChange={(e) => onChange({ min_price: e.target.value })}
           />
           <input
             type="number"
             min={0}
-            placeholder="Äáº¿n"
+            placeholder="Đến"
             value={filter.max_price}
             onChange={(e) => onChange({ max_price: e.target.value })}
           />
@@ -932,13 +934,13 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
       </div>
 
       <div className="field">
-        <label>Sáº¯p xáº¿p</label>
+        <label>Sắp xếp</label>
         <select value={filter.sort} onChange={(e) => onChange({ sort: e.target.value })}>
-          <option value="newest">Má»›i nháº¥t</option>
-          <option value="price-asc">GiÃ¡ tháº¥p â†’ cao</option>
-          <option value="price-desc">GiÃ¡ cao â†’ tháº¥p</option>
-          <option value="name-asc">TÃªn A â†’ Z</option>
-          <option value="name-desc">TÃªn Z â†’ A</option>
+          <option value="newest">Mới nhất</option>
+          <option value="price-asc">Giá thấp → cao</option>
+          <option value="price-desc">Giá cao → thấp</option>
+          <option value="name-asc">Tên A → Z</option>
+          <option value="name-desc">Tên Z → A</option>
         </select>
       </div>
 
@@ -949,13 +951,11 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
             checked={!!filter.only_sale}
             onChange={(e) => onChange({ only_sale: e.target.checked })}
           />
-          <span>Chá»‰ sáº£n pháº©m giáº£m giÃ¡</span>
+          <span>Chỉ sản phẩm giảm giá</span>
         </label>
 
-       
-
         <button className="btn-clear" onClick={onClear}>
-          XoÃ¡ lá»c
+          Xoá lọc
         </button>
       </div>
     </div>
@@ -976,7 +976,6 @@ function StyleTag() {
         text-align: center;
       }
 
-      /* Layout 2 cá»™t */
       .products-layout {
         display: grid;
         grid-template-columns: 260px 1fr;
@@ -985,81 +984,39 @@ function StyleTag() {
         margin: 0 auto;
         align-items: start;
       }
-
-      @media (max-width: 900px) {
-        .products-layout {
-          grid-template-columns: 1fr;
-        }
-      }
+      @media (max-width: 900px) { .products-layout { grid-template-columns: 1fr; } }
 
       .filter-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        padding: 16px;
-        border-radius: 18px;
+        display: flex; flex-direction: column; gap: 14px;
+        padding: 16px; border-radius: 18px;
         background: linear-gradient(180deg, #f9faff 0%, #f1f5ff 100%);
         border: 1px solid rgba(147, 197, 253, 0.35);
         box-shadow: 0 6px 16px rgba(147, 197, 253, 0.15);
       }
-
-      .filter-wrap.is-loading { opacity: 0.7; }
+      .filter-wrap.is-loading { opacity: .7; }
 
       .field > label {
-        display: block;
-        color: #334155;
-        font-size: 13px;
-        margin-bottom: 6px;
-        font-weight: 600;
+        display: block; color: #334155; font-size: 13px; margin-bottom: 6px; font-weight: 600;
       }
-
       .field input, .field select {
-        width: 100%;
-        padding: 10px 12px;
-        border-radius: 12px;
-        border: 1px solid #e0e7ff;
-        background: #fff;
-        color: #1e293b;
+        width: 100%; padding: 10px 12px; border-radius: 12px;
+        border: 1px solid #e0e7ff; background: #fff; color: #1e293b;
       }
 
       .row-2 { display: flex; gap: 10px; }
       .row-2 > * { flex: 1; }
 
-      .field.toggles {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
+      .field.toggles { display: flex; flex-direction: column; gap: 10px; }
 
       .btn-clear {
         background: linear-gradient(135deg, #a5b4fc, #93c5fd);
-        color: #fff;
-        font-weight: 700;
-        border: 0;
-        border-radius: 12px;
-        padding: 9px 14px;
-        cursor: pointer;
+        color: #fff; font-weight: 700; border: 0; border-radius: 12px; padding: 9px 14px; cursor: pointer;
       }
 
-      .grid4 {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-      }
-.ck {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #334155;
-}
+      .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-.ck input {
-  width: 16px;
-  height: 16px;
-  accent-color: #6366f1; /* tÃ­m pastel Ä‘áº¹p */
-  cursor: pointer;
-}
+      .ck { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #334155; }
+      .ck input { width: 16px; height: 16px; accent-color: #6366f1; cursor: pointer; }
 
       @media (max-width: 1024px) { .grid4 { grid-template-columns: repeat(3, 1fr); } }
       @media (max-width: 768px) { .grid4 { grid-template-columns: repeat(2, 1fr); } }
@@ -1067,6 +1024,3 @@ function StyleTag() {
     `}</style>
   );
 }
-
-
-

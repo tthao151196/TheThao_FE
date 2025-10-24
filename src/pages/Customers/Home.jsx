@@ -620,20 +620,21 @@
 //     `}</style>
 //   );
 // }
-import { API_BASE, ASSET_ORIGIN, toHttps } from "../config/env";
-
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCardHome from "../../components/ProductCardHome";
 
-const API_BASE = "http://127.0.0.1:8000";
+// 👉 CHỈ import từ env, KHÔNG tự const API_BASE nữa
+import { API_BASE, ASSET_ORIGIN, toHttps } from "@/config/env";
+
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 
 /* ====== BANNER SLIDES ====== */
 const BANNERS = [
- { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner.webp`),  alt: "Siêu ưu đãi thể thao",          link: "/products" },
-  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner1.jpg`),  alt: "Phong cách & hiệu năng",        link: "/products?only_sale=1" },
-  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner11.jpg`), alt: "Bùng nổ mùa giải mới",           link: "/category/1" }, ];
+  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner.webp`),  alt: "Siêu ưu đãi thể thao",  link: "/products" },
+  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner1.jpg`),  alt: "Phong cách & hiệu năng", link: "/products?only_sale=1" },
+  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner11.jpg`), alt: "Bùng nổ mùa giải mới",   link: "/category/1" },
+];
 
 /* ---------- Icon chevron ---------- */
 function IconChevron({ dir = "left", size = 24 }) {
@@ -647,7 +648,7 @@ function IconChevron({ dir = "left", size = 24 }) {
   );
 }
 
-/* ---------- Style nÃºt mÅ©i tÃªn ---------- */
+/* ---------- Style nút mũi tên ---------- */
 function arrowStyle(side) {
   const base = {
     position: "absolute",
@@ -666,7 +667,7 @@ function arrowStyle(side) {
   return side === "left" ? { ...base, left: 18 } : { ...base, right: 18 };
 }
 
-/* ---------- Slider tá»± Ä‘á»™ng ---------- */
+/* ---------- Slider tự động ---------- */
 function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", auto = 5000 }) {
   const [idx, setIdx] = useState(0);
   const touch = useRef({ x: 0, dx: 0, active: false });
@@ -676,7 +677,13 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
   const go = (n) => setIdx((p) => (count ? (p + n + count) % count : 0));
   const goTo = (i) => setIdx(() => (count ? (i + count) % count : 0));
 
-  useEffect(() => { if (count && auto > 0) { const t = setInterval(() => go(1), auto); return () => clearInterval(t); } }, [count, auto]);
+  useEffect(() => {
+    if (count && auto > 0) {
+      const t = setInterval(() => go(1), auto);
+      return () => clearInterval(t);
+    }
+  }, [count, auto]);
+
   useEffect(() => {
     const onKey = (e) => { if (e.key === "ArrowLeft") go(-1); if (e.key === "ArrowRight") go(1); };
     window.addEventListener("keydown", onKey);
@@ -685,14 +692,18 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
 
   const onTouchStart = (e) => { touch.current = { x: e.touches[0].clientX, dx: 0, active: true }; };
   const onTouchMove = (e) => { if (touch.current.active) touch.current.dx = e.touches[0].clientX - touch.current.x; };
-  const onTouchEnd = () => { if (!touch.current.active) return; const dx = touch.current.dx; touch.current.active = false; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); };
+  const onTouchEnd = () => {
+    if (!touch.current.active) return;
+    const dx = touch.current.dx;
+    touch.current.active = false;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+  };
 
   if (!count) return null;
 
   return (
     <div style={{ position: "relative", height: heightCSS, overflow: "hidden" }}
       onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-      {/* Track */}
       <div style={{
         display: "flex", width: `${count * 100}%`, height: "100%",
         transform: `translateX(-${idx * (100 / count)}%)`,
@@ -709,13 +720,9 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
             <img
               src={b.src} alt={b.alt || ""}
               onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
-              style={{
-                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%",
-                filter: "brightness(.82) contrast(1.06)",
-              }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", filter: "brightness(.82) contrast(1.06)" }}
               loading={i === 0 ? "eager" : "lazy"}
             />
-            {/* Overlay nháº¹ Ä‘á»ƒ chá»¯ rÃµ */}
             <div aria-hidden style={{
               position: "absolute", inset: 0,
               background: "linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.18) 45%, rgba(0,0,0,0) 70%)",
@@ -724,11 +731,10 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
         ))}
       </div>
 
-      {/* Arrows */}
       {count > 1 && (
         <>
           <button
-            onClick={() => go(-1)} aria-label="Slide trÆ°á»›c" style={arrowStyle("left")}
+            onClick={() => go(-1)} aria-label="Slide trước" style={arrowStyle("left")}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-50%) scale(1.07)"; e.currentTarget.style.boxShadow = "0 14px 32px rgba(0,0,0,.35)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(-50%)"; e.currentTarget.style.boxShadow = "0 10px 26px rgba(0,0,0,.25)"; }}
           >
@@ -744,14 +750,13 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
         </>
       )}
 
-      {/* Dots */}
       {count > 1 && (
         <div style={{
           position: "absolute", left: 0, right: 0, bottom: 16,
           display: "flex", alignItems: "center", justifyContent: "center", gap: 10, zIndex: 6,
         }}>
           {banners.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)} aria-label={`Tá»›i slide ${i + 1}`}
+            <button key={i} onClick={() => goTo(i)} aria-label={`Tới slide ${i + 1}`}
               style={{
                 width: i === idx ? 14 : 11, height: i === idx ? 14 : 11,
                 borderRadius: 999, border: 0,
@@ -773,14 +778,13 @@ function SearchBar() {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]); // gá»£i Ã½
+  const [items, setItems] = useState([]);
   const [highlight, setHighlight] = useState(-1);
   const nav = useNavigate();
   const boxRef = useRef(null);
   const abortRef = useRef(null);
   const timerRef = useRef(null);
 
-  // click ngoÃ i Ä‘á»ƒ Ä‘Ã³ng
   useEffect(() => {
     const fn = (e) => {
       if (!boxRef.current) return;
@@ -790,14 +794,13 @@ function SearchBar() {
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
-  // debounce gá»i API
+  // debounce gọi API
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (abortRef.current) abortRef.current.abort();
 
     if (!q || q.trim().length < 1) {
-      setItems([]);
-      setLoading(false);
+      setItems([]); setLoading(false);
       return;
     }
 
@@ -811,16 +814,18 @@ function SearchBar() {
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
         const list = Array.isArray(data) ? data : data?.data ?? [];
-        // Chuáº©n hoÃ¡ trÆ°á»ng áº£nh
         const mapped = list.map((p) => ({
           id: p.id,
           name: p.name || p.title || `#${p.id}`,
-thumbnail_url: p.thumbnail_url || (p.thumbnail ? toHttps(`${ASSET_ORIGIN}/storage/${p.thumbnail}`) : null),          slug: p.slug,
+          thumbnail_url:
+            p.thumbnail_url ||
+            (p.thumbnail ? toHttps(`${ASSET_ORIGIN}/storage/${p.thumbnail}`) : null),
+          slug: p.slug,
         }));
         setItems(mapped);
         setOpen(true);
       } catch (e) {
-        // ignore khi abort
+        // ignore when aborted
       } finally {
         setLoading(false);
       }
@@ -853,14 +858,9 @@ thumbnail_url: p.thumbnail_url || (p.thumbnail ? toHttps(`${ASSET_ORIGIN}/storag
       e.preventDefault();
       setHighlight((h) => Math.max(h - 1, 0));
     } else if (e.key === "Enter") {
-      if (highlight >= 0 && items[highlight]) {
-        goDetail(items[highlight].id);
-      } else {
-        goSearch();
-      }
-    } else if (e.key === "Escape") {
-      setOpen(false);
-    }
+      if (highlight >= 0 && items[highlight]) goDetail(items[highlight].id);
+      else goSearch();
+    } else if (e.key === "Escape") setOpen(false);
   };
 
   return (
@@ -871,49 +871,45 @@ thumbnail_url: p.thumbnail_url || (p.thumbnail ? toHttps(`${ASSET_ORIGIN}/storag
           onChange={(e) => setQ(e.target.value)}
           onFocus={() => (items.length ? setOpen(true) : null)}
           onKeyDown={onKeyDown}
-          placeholder="TÃ¬m nhanh: giÃ y, Ã¡o, táº¥t... (gÃµ Ä‘á»ƒ gá»£i Ã½)"
+          placeholder="Tìm nhanh: giày, áo, tất... (gõ để gợi ý)"
           className="sb-input"
-          aria-label="TÃ¬m kiáº¿m sáº£n pháº©m"
+          aria-label="Tìm kiếm sản phẩm"
         />
-        <button className="sb-btn" onClick={goSearch} aria-label="TÃ¬m kiáº¿m">
-          ðŸ”
-        </button>
+        <button className="sb-btn" onClick={goSearch} aria-label="Tìm kiếm">🔍</button>
       </div>
 
-      {/* dropdown */}
       {open && (
         <div className="sb-dd">
-          {loading && <div className="sb-dd-row muted">Äang tÃ¬m...</div>}
+          {loading && <div className="sb-dd-row muted">Đang tìm...</div>}
           {!loading && items.length === 0 && (
-            <div className="sb-dd-row muted">KhÃ´ng cÃ³ káº¿t quáº£ phÃ¹ há»£p</div>
+            <div className="sb-dd-row muted">Không có kết quả phù hợp</div>
           )}
-          {!loading &&
-            items.map((it, i) => (
-              <button
-                type="button"
-                key={it.id}
-                className={`sb-dd-row ${i === highlight ? "active" : ""}`}
-                onMouseEnter={() => setHighlight(i)}
-                onMouseLeave={() => setHighlight(-1)}
-                onClick={() => goDetail(it.id)}
-              >
-                <div className="sb-thumb">
-                  <img
-                    src={it.thumbnail_url || PLACEHOLDER}
-                    alt={it.name}
-                    onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
-                  />
-                </div>
-                <div className="sb-name">{it.name}</div>
-              </button>
-            ))}
+          {!loading && items.map((it, i) => (
+            <button
+              type="button"
+              key={it.id}
+              className={`sb-dd-row ${i === highlight ? "active" : ""}`}
+              onMouseEnter={() => setHighlight(i)}
+              onMouseLeave={() => setHighlight(-1)}
+              onClick={() => goDetail(it.id)}
+            >
+              <div className="sb-thumb">
+                <img
+                  src={it.thumbnail_url || PLACEHOLDER}
+                  alt={it.name}
+                  onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
+                />
+              </div>
+              <div className="sb-name">{it.name}</div>
+            </button>
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-/* ---------- Card danh má»¥c (light) ---------- */
+/* ---------- Card danh mục (light) ---------- */
 function CategoryCard({ c, onClick, style }) {
   return (
     <button
@@ -957,14 +953,14 @@ function CategoryCard({ c, onClick, style }) {
   );
 }
 
-/* ====== Tiá»‡n Ã­ch ====== */
-const vnd = (n) => `${Number(n || 0).toLocaleString("vi-VN")}Ä‘`;
+/* ====== Tiện ích ====== */
+const vnd = (n) => `${Number(n || 0).toLocaleString("vi-VN")}đ`;
 const discountPercent = (root, sale) =>
   root > 0 && sale > 0 && sale < root ? Math.round(((root - sale) / root) * 100) : 0;
 
-/* ====== Countdown Ä‘Æ¡n giáº£n ====== */
+/* ====== Countdown đơn giản ====== */
 function useCountdown(hours = 6) {
-  const [left, setLeft] = useState(hours * 3600); // giÃ¢y
+  const [left, setLeft] = useState(hours * 3600);
   useEffect(() => {
     const t = setInterval(() => setLeft((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
@@ -972,23 +968,17 @@ function useCountdown(hours = 6) {
   const h = Math.floor(left / 3600);
   const m = Math.floor((left % 3600) / 60);
   const s = left % 60;
-  return {
-    h: String(h).padStart(2, "0"),
-    m: String(m).padStart(2, "0"),
-    s: String(s).padStart(2, "0"),
-  };
+  return { h: String(h).padStart(2, "0"), m: String(m).padStart(2, "0"), s: String(s).padStart(2, "0") };
 }
 
-/* ====== Deal card (kÃ­ch thÆ°á»›c nhÆ° card SP má»›i) ====== */
+/* ====== Deal card ====== */
 function DealCard({ p }) {
   const off = discountPercent(p.price_root, p.price_sale);
   const status =
-    (p.qty ?? 10) <= 0 ? "Háº¿t hÃ ng" : (p.qty ?? 10) < 5 ? "Sáº¯p chÃ¡y hÃ ng" : "Vá»«a má»Ÿ bÃ¡n";
+    (p.qty ?? 10) <= 0 ? "Hết hàng" : (p.qty ?? 10) < 5 ? "Sắp cháy hàng" : "Vừa mở bán";
   const badgeStyle =
-    status === "Háº¿t hÃ ng"
-      ? { bg: "#ef4444" }
-      : status === "Sáº¯p chÃ¡y hÃ ng"
-      ? { bg: "#f59e0b", icon: "ðŸ”¥" }
+    status === "Hết hàng" ? { bg: "#ef4444" }
+      : status === "Sắp cháy hàng" ? { bg: "#f59e0b", icon: "🔥" }
       : { bg: "#d1d5db" };
 
   return (
@@ -999,7 +989,7 @@ function DealCard({ p }) {
           alt={p.name}
           onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
         />
-        <button className="deal-like" aria-label="YÃªu thÃ­ch">â™¡</button>
+        <button className="deal-like" aria-label="Yêu thích">♡</button>
       </div>
 
       <div className="deal-name" title={p.name}>{p.name}</div>
@@ -1014,7 +1004,7 @@ function DealCard({ p }) {
             </>
           ) : null}
         </div>
-        <button className="deal-cart" aria-label="ThÃªm vÃ o giá»">ðŸ›’</button>
+        <button className="deal-cart" aria-label="Thêm vào giỏ">🛒</button>
       </div>
 
       <div className="deal-status" style={{ background: badgeStyle.bg }}>
@@ -1028,7 +1018,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [newItems, setNewItems] = useState([]);
   const [saleItems, setSaleItems] = useState([]);
-  const [suggestItems, setSuggestItems] = useState([]); // 1 hÃ ng gá»£i Ã½
+  const [suggestItems, setSuggestItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -1039,12 +1029,12 @@ export default function Home() {
       try {
         setLoading(true); setError("");
 
-        const resCats = await fetch(`${API_BASE}/categories`);
+        const resCats = await fetch(`${API_BASE}/categories`, { signal: ac.signal });
         if (!resCats.ok) throw new Error(`HTTP ${resCats.status}`);
         const cats = await resCats.json();
         setCategories(Array.isArray(cats) ? cats : cats?.data ?? []);
 
-        const resProds = await fetch(`${API_BASE}/products`)
+        const resProds = await fetch(`${API_BASE}/products`, { signal: ac.signal });
         if (!resProds.ok) throw new Error(`HTTP ${resProds.status}`);
         const prods = await resProds.json();
         const list = Array.isArray(prods) ? prods : prods?.data ?? [];
@@ -1071,7 +1061,7 @@ export default function Home() {
         }
         setSuggestItems(suggestion.slice(0, 4));
       } catch (err) {
-        if (err.name !== "AbortError") setError("KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u");
+        if (err.name !== "AbortError") setError("Không tải được dữ liệu");
       } finally {
         setLoading(false);
       }
