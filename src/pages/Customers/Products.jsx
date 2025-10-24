@@ -647,7 +647,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ProductCardHome from "../../components/ProductCardHome";
 
-const API_BASE = "http://127.0.0.1:8000/api";
+import { API_BASE, ASSET_ORIGIN, toHttps } from "@/config/env"; 
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 const HEADER_OFFSET = 110;
 
