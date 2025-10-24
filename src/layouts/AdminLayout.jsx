@@ -1,4 +1,4 @@
-// import { useState } from "react";
+﻿// import { useState } from "react";
 // import { Outlet } from "react-router-dom";
 // import AdminSidebar from "../components/AdminSidebar";
 // import AdminHeader from "../components/AdminHeader";
@@ -9,7 +9,7 @@
 //   return (
 //     <div className={`admin-shell ${collapsed ? "is-collapsed" : ""}`}>
 //       <style>{`
-//         /* ========= THEME (đồng bộ tím → cyan loang) ========= */
+//         /* ========= THEME (Ä‘á»“ng bá»™ tÃ­m â†’ cyan loang) ========= */
 //         .admin-shell{
 //           --header-h:64px;
 //           --sidebar-w:260px; --sidebar-w-collapsed:84px;
@@ -27,7 +27,7 @@
 //         /* ===== Sidebar ===== */
 //         .aside{
 //           grid-row:1 / span 2; position:relative; isolation:isolate;
-//           color:#e5e7eb; border-right:1px solid #0b1220; z-index:4; /* cao hơn header để không bị che mép */
+//           color:#e5e7eb; border-right:1px solid #0b1220; z-index:4; /* cao hÆ¡n header Ä‘á»ƒ khÃ´ng bá»‹ che mÃ©p */
 //           overflow:hidden; box-shadow:2px 0 12px rgba(2,6,23,.25);
 //         }
 //         .aside::before{
@@ -55,7 +55,7 @@
 //         .aside-body::-webkit-scrollbar{ width:10px }
 //         .aside-body::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.18); border-radius:999px }
 
-//         /* ===== Header (không che nội dung, bo nhẹ) ===== */
+//         /* ===== Header (khÃ´ng che ná»™i dung, bo nháº¹) ===== */
 //         .header{ grid-column:2; position:sticky; top:0; z-index:3; color:#fff; isolation:isolate; }
 //         .header::before{
 //           content:""; position:absolute; inset:0; z-index:-1;
@@ -69,7 +69,7 @@
 
 //         /* ===== Main ===== */
 //         .main{
-//           grid-column:2; overflow:auto; padding:18px 18px 24px; /* thêm đệm để không "dính" header */
+//           grid-column:2; overflow:auto; padding:18px 18px 24px; /* thÃªm Ä‘á»‡m Ä‘á»ƒ khÃ´ng "dÃ­nh" header */
 //           background:
 //             radial-gradient(100% 120% at 10% -10%, rgba(99,102,241,.08) 0%, rgba(99,102,241,0) 35%),
 //             radial-gradient(100% 120% at 90% -10%, rgba(6,182,212,.08) 0%, rgba(6,182,212,0) 35%),
@@ -135,13 +135,13 @@
 //       <aside className="aside">
 //         <div className="aside-head">
 //           <span className="brand-dot" />
-//           <span className="brand-text hide-when-collapsed">Quản Trị Viên Sports</span>
-//           <button className="collapse-btn" onClick={() => setCollapsed(v => !v)} title={collapsed ? "Mở rộng" : "Thu gọn"}>
-//             {collapsed ? "»" : "«"}
+//           <span className="brand-text hide-when-collapsed">Quáº£n Trá»‹ ViÃªn Sports</span>
+//           <button className="collapse-btn" onClick={() => setCollapsed(v => !v)} title={collapsed ? "Má»Ÿ rá»™ng" : "Thu gá»n"}>
+//             {collapsed ? "Â»" : "Â«"}
 //           </button>
 //         </div>
 //         <div className="aside-body">
-//           {/* Gợi ý: trong AdminSidebar, cho text thêm class "hide-when-collapsed" nếu muốn ẩn khi thu gọn */}
+//           {/* Gá»£i Ã½: trong AdminSidebar, cho text thÃªm class "hide-when-collapsed" náº¿u muá»‘n áº©n khi thu gá»n */}
 //           <AdminSidebar />
 //         </div>
 //       </aside>
@@ -157,7 +157,7 @@
 //       <main className="main">
 //         <div className="content">
 //           <div className="panel">
-//             {/* Tip: bọc page trong .admin-kit để dùng bộ style chung phía trên */}
+//             {/* Tip: bá»c page trong .admin-kit Ä‘á»ƒ dÃ¹ng bá»™ style chung phÃ­a trÃªn */}
 //             <Outlet />
 //           </div>
 //         </div>
@@ -330,13 +330,13 @@ export default function AdminLayout() {
       <aside className="aside">
         <div className="aside-head">
           <span className="brand-dot" />
-          <span className="brand-text hide-when-collapsed">Quản Trị Viên Sports</span>
+          <span className="brand-text hide-when-collapsed">Quáº£n Trá»‹ ViÃªn Sports</span>
           <button
             className="collapse-btn"
             onClick={() => setCollapsed((v) => !v)}
-            title={collapsed ? "Mở rộng" : "Thu gọn"}
+            title={collapsed ? "Má»Ÿ rá»™ng" : "Thu gá»n"}
           >
-            {collapsed ? "»" : "«"}
+            {collapsed ? "Â»" : "Â«"}
           </button>
         </div>
         <div className="aside-body">
@@ -360,3 +360,5 @@ export default function AdminLayout() {
     </div>
   );
 }
+
+

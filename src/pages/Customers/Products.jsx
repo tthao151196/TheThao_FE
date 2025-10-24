@@ -1,7 +1,7 @@
-// // src/pages/Customers/Products.jsx
+﻿// // src/pages/Customers/Products.jsx
 // import { useEffect, useState } from "react";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
-// import ProductCardHome from "../../components/ProductCardHome"; // đồng bộ card như Home
+// import ProductCardHome from "../../components/ProductCardHome"; // Ä‘á»“ng bá»™ card nhÆ° Home
 
 // const API_BASE = "http://127.0.0.1:8000/api";
 // const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
@@ -14,7 +14,7 @@
 //   const n = Number(x);
 //   return Number.isFinite(n) ? n : 0;
 // };
-// const getName = (p) => p.name || p.title || `Sản phẩm #${p.id}`;
+// const getName = (p) => p.name || p.title || `Sáº£n pháº©m #${p.id}`;
 // const getCreatedTs = (p) => new Date(p.created_at || p.updated_at || 0).getTime();
 // const getPrice = (p) =>
 //   toNum(p.price_sale ?? p.sale_price ?? p.price ?? p.price_buy ?? p.amount);
@@ -87,10 +87,10 @@
 //   return v;
 // }
 
-// /* ✅ build query để gọi server-side filter */
+// /* âœ… build query Ä‘á»ƒ gá»i server-side filter */
 // function buildQuery(f) {
 //   const q = new URLSearchParams();
-//   if (f.q) q.set("keyword", f.q); // server đọc keyword|q
+//   if (f.q) q.set("keyword", f.q); // server Ä‘á»c keyword|q
 //   if (f.category_id) q.set("category_id", f.category_id);
 //   if (f.min_price) q.set("min_price", f.min_price);
 //   if (f.max_price) q.set("max_price", f.max_price);
@@ -105,7 +105,7 @@
 //   };
 //   const s = map[f.sort || "newest"];
 //   if (s) q.set("sort", s);
-//   q.set("per_page", 120); // tăng nhẹ để đủ hàng gợi ý/related
+//   q.set("per_page", 120); // tÄƒng nháº¹ Ä‘á»ƒ Ä‘á»§ hÃ ng gá»£i Ã½/related
 //   return q.toString();
 // }
 
@@ -115,7 +115,7 @@
 //   const navigate = useNavigate();
 
 //   const [items, setItems] = useState([]);
-//   const [all, setAll] = useState([]); // để tính "liên quan / gợi ý"
+//   const [all, setAll] = useState([]); // Ä‘á»ƒ tÃ­nh "liÃªn quan / gá»£i Ã½"
 //   const [loading, setLoading] = useState(true);
 //   const [err, setErr] = useState("");
 
@@ -131,7 +131,7 @@
 //   });
 //   const debounced = useDebounce(filter, 400);
 
-//   // ✅ Nạp từ khoá (và một số bộ lọc cơ bản) từ URL
+//   // âœ… Náº¡p tá»« khoÃ¡ (vÃ  má»™t sá»‘ bá»™ lá»c cÆ¡ báº£n) tá»« URL
 //   useEffect(() => {
 //     const sp = new URLSearchParams(location.search);
 //     const qFromUrl = sp.get("q") || sp.get("keyword") || "";
@@ -154,7 +154,7 @@
 //         const data = await res.json().catch(() => ({}));
 //         const list = Array.isArray(data) ? data : data?.data ?? [];
 //         setCategories(
-//           list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh mục ${c.id}` }))
+//           list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh má»¥c ${c.id}` }))
 //         );
 //       } catch {
 //         setCategories([]);
@@ -171,7 +171,7 @@
 //         setLoading(true);
 //         setErr("");
 
-//         // 1) Dữ liệu đã lọc theo server
+//         // 1) Dá»¯ liá»‡u Ä‘Ã£ lá»c theo server
 //         const qs = buildQuery(debounced);
 //         const res = await fetch(
 //           `${API_BASE}/products${qs ? "?" + qs : ""}`,
@@ -182,7 +182,7 @@
 //         const list = Array.isArray(data) ? data : data?.data ?? [];
 //         setItems(applyClientFilterAndSort(list, debounced)); // fallback client
 
-//         // 2) Lấy một bản "all" để tính gợi ý/related (lấy ít nhiều tuỳ ý)
+//         // 2) Láº¥y má»™t báº£n "all" Ä‘á»ƒ tÃ­nh gá»£i Ã½/related (láº¥y Ã­t nhiá»u tuá»³ Ã½)
 //         const resAll = await fetch(`${API_BASE}/products?per_page=200`, {
 //           signal: ac.signal,
 //         });
@@ -191,7 +191,7 @@
 //         setAll(listAll);
 //       } catch (e) {
 //         if (e.name !== "AbortError")
-//           setErr("Không tải được danh sách sản phẩm.");
+//           setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
 //       } finally {
 //         setLoading(false);
 //       }
@@ -209,26 +209,26 @@
 //       in_stock: false,
 //       sort: "newest",
 //     });
-//     navigate("/products", { replace: true }); // xoá query
+//     navigate("/products", { replace: true }); // xoÃ¡ query
 //   };
 
-//   /* ====== Tính "Liên quan / Gợi ý" (1 hàng / 4 sp) ====== */
+//   /* ====== TÃ­nh "LiÃªn quan / Gá»£i Ã½" (1 hÃ ng / 4 sp) ====== */
 //   const related = (() => {
 //     if (!all.length) return [];
 //     const exclude = new Set(items.map((x) => x.id));
 //     let pool = all;
 
-//     // ưu tiên theo danh mục hiện tại nếu có
+//     // Æ°u tiÃªn theo danh má»¥c hiá»‡n táº¡i náº¿u cÃ³
 //     if (filter.category_id) {
 //       pool = all.filter(
 //         (p) => getCategoryId(p) === String(filter.category_id)
 //       );
 //     }
 
-//     // loại trừ những sp đang hiển thị ở list
+//     // loáº¡i trá»« nhá»¯ng sp Ä‘ang hiá»ƒn thá»‹ á»Ÿ list
 //     let suggestion = pool.filter((p) => !exclude.has(p.id));
 
-//     // fallback nếu quá ít
+//     // fallback náº¿u quÃ¡ Ã­t
 //     if (suggestion.length < 4) {
 //       const plus = all.filter(
 //         (p) =>
@@ -236,7 +236,7 @@
 //       );
 //       suggestion = suggestion.concat(plus);
 //     }
-//     // sắp xếp mới nhất
+//     // sáº¯p xáº¿p má»›i nháº¥t
 //     suggestion.sort((a, b) => getCreatedTs(b) - getCreatedTs(a));
 //     return suggestion.slice(0, 4);
 //   })();
@@ -245,7 +245,7 @@
 //   if (loading && items.length === 0)
 //     return (
 //       <p style={{ padding: 20, textAlign: "center", color: "#2563eb" }}>
-//         Đang tải sản phẩm...
+//         Äang táº£i sáº£n pháº©m...
 //       </p>
 //     );
 //   if (err)
@@ -261,13 +261,13 @@
 //       style={{
 //         padding: `${HEADER_OFFSET}px 20px 40px`,
 //         fontFamily: "Montserrat, Arial, sans-serif",
-//         background: "#f8fafc",     // NỀN SÁNG
-//         color: "#0b1220",          // CHỮ ĐẬM
+//         background: "#f8fafc",     // Ná»€N SÃNG
+//         color: "#0b1220",          // CHá»® Äáº¬M
 //       }}
 //     >
 //       <StyleTag />
 
-//       <h2 className="products-title">TẤT CẢ SẢN PHẨM</h2>
+//       <h2 className="products-title">Táº¤T Cáº¢ Sáº¢N PHáº¨M</h2>
 //       {filter.q ? (
 //         <p
 //           style={{
@@ -278,7 +278,7 @@
 //             fontWeight: 700,
 //           }}
 //         >
-//           Kết quả cho: <strong>{filter.q}</strong>
+//           Káº¿t quáº£ cho: <strong>{filter.q}</strong>
 //         </p>
 //       ) : null}
 
@@ -291,7 +291,7 @@
 //         onClear={clearAll}
 //       />
 
-//       {/* Lưới sản phẩm (4 cột giống Home) */}
+//       {/* LÆ°á»›i sáº£n pháº©m (4 cá»™t giá»‘ng Home) */}
 //       {items.length === 0 ? (
 //         <p
 //           style={{
@@ -301,7 +301,7 @@
 //             fontWeight: 700,
 //           }}
 //         >
-//           Không có sản phẩm phù hợp bộ lọc.
+//           KhÃ´ng cÃ³ sáº£n pháº©m phÃ¹ há»£p bá»™ lá»c.
 //         </p>
 //       ) : (
 //         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -316,7 +316,7 @@
 //         </div>
 //       )}
 
-//       {/* Hàng "Liên quan / Gợi ý" */}
+//       {/* HÃ ng "LiÃªn quan / Gá»£i Ã½" */}
 //       {related.length > 0 && (
 //         <section style={{ marginTop: 36 }}>
 //           <h3
@@ -326,14 +326,14 @@
 //               fontSize: 22,
 //               fontWeight: 900,
 //               textTransform: "uppercase",
-//               textShadow: "0 1px 0 #fff, 0 0 14px rgba(99,102,241,.28)", // nổi chữ
+//               textShadow: "0 1px 0 #fff, 0 0 14px rgba(99,102,241,.28)", // ná»•i chá»¯
 //               borderBottom: "3px solid #6366f1",
 //               display: "inline-block",
 //               paddingBottom: 6,
 //               margin: "0 auto 16px",
 //             }}
 //           >
-//             {filter.category_id ? "Sản phẩm liên quan" : "Gợi ý cho bạn"}
+//             {filter.category_id ? "Sáº£n pháº©m liÃªn quan" : "Gá»£i Ã½ cho báº¡n"}
 //           </h3>
 
 //           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -358,7 +358,7 @@
 //             textDecoration: "none",
 //           }}
 //         >
-//           ← Về trang chủ
+//           â† Vá» trang chá»§
 //         </Link>
 //       </p>
 //     </div>
@@ -371,22 +371,22 @@
 //   return (
 //     <div className={`filter-wrap ${loading ? "is-loading" : ""}`}>
 //       <div className="field">
-//         <label>Tìm kiếm</label>
+//         <label>TÃ¬m kiáº¿m</label>
 //         <input
 //           type="text"
 //           value={filter.q}
-//           placeholder="Nhập tên sản phẩm..."
+//           placeholder="Nháº­p tÃªn sáº£n pháº©m..."
 //           onChange={(e) => onChange({ q: e.target.value })}
 //         />
 //       </div>
 
 //       <div className="field">
-//         <label>Danh mục</label>
+//         <label>Danh má»¥c</label>
 //         <select
 //           value={filter.category_id}
 //           onChange={(e) => onChange({ category_id: e.target.value })}
 //         >
-//           <option value="">— Tất cả —</option>
+//           <option value="">â€” Táº¥t cáº£ â€”</option>
 //           {categories.map((c) => (
 //             <option key={c.id} value={c.id}>
 //               {c.name}
@@ -396,19 +396,19 @@
 //       </div>
 
 //       <div className="field">
-//         <label>Khoảng giá (VNĐ)</label>
+//         <label>Khoáº£ng giÃ¡ (VNÄ)</label>
 //         <div className="row-2">
 //           <input
 //             type="number"
 //             min={0}
-//             placeholder="Từ"
+//             placeholder="Tá»«"
 //             value={filter.min_price}
 //             onChange={(e) => onChange({ min_price: e.target.value })}
 //           />
 //           <input
 //             type="number"
 //             min={0}
-//             placeholder="Đến"
+//             placeholder="Äáº¿n"
 //             value={filter.max_price}
 //             onChange={(e) => onChange({ max_price: e.target.value })}
 //           />
@@ -416,16 +416,16 @@
 //       </div>
 
 //       <div className="field">
-//         <label>Sắp xếp</label>
+//         <label>Sáº¯p xáº¿p</label>
 //         <select
 //           value={filter.sort}
 //           onChange={(e) => onChange({ sort: e.target.value })}
 //         >
-//           <option value="newest">Mới nhất</option>
-//           <option value="price-asc">Giá thấp → cao</option>
-//           <option value="price-desc">Giá cao → thấp</option>
-//           <option value="name-asc">Tên A → Z</option>
-//           <option value="name-desc">Tên Z → A</option>
+//           <option value="newest">Má»›i nháº¥t</option>
+//           <option value="price-asc">GiÃ¡ tháº¥p â†’ cao</option>
+//           <option value="price-desc">GiÃ¡ cao â†’ tháº¥p</option>
+//           <option value="name-asc">TÃªn A â†’ Z</option>
+//           <option value="name-desc">TÃªn Z â†’ A</option>
 //         </select>
 //       </div>
 
@@ -436,7 +436,7 @@
 //             checked={!!filter.only_sale}
 //             onChange={(e) => onChange({ only_sale: e.target.checked })}
 //           />
-//           <span>Chỉ sản phẩm giảm giá</span>
+//           <span>Chá»‰ sáº£n pháº©m giáº£m giÃ¡</span>
 //         </label>
 
 //         <label className="ck">
@@ -445,28 +445,28 @@
 //             checked={!!filter.in_stock}
 //             onChange={(e) => onChange({ in_stock: e.target.checked })}
 //           />
-//           <span>Chỉ còn hàng</span>
+//           <span>Chá»‰ cÃ²n hÃ ng</span>
 //         </label>
 
 //         <button className="btn-clear" onClick={onClear}>
-//           Xoá lọc
+//           XoÃ¡ lá»c
 //         </button>
 //       </div>
 //     </div>
 //   );
 // }
 
-// /* ===== Styles (sáng – nổi, đồng bộ Liên hệ) ===== */
+// /* ===== Styles (sÃ¡ng â€“ ná»•i, Ä‘á»“ng bá»™ LiÃªn há»‡) ===== */
 
 
-// /* ===== Styles (pastel – nhẹ nhàng, đồng bộ toàn trang) ===== */
+// /* ===== Styles (pastel â€“ nháº¹ nhÃ ng, Ä‘á»“ng bá»™ toÃ n trang) ===== */
 // function StyleTag() {
 //   return (
 //     <style>{`
-//      /* === Tiêu đề === */
+//      /* === TiÃªu Ä‘á» === */
 //      .products-title {
 //         font-size: clamp(26px, 4vw, 38px);
-//         font-weight: 500; /* 👈 không in đậm */
+//         font-weight: 500; /* ðŸ‘ˆ khÃ´ng in Ä‘áº­m */
 //         line-height: 1.2;
 //         letter-spacing: 0.5px;
 //         text-transform: none;
@@ -478,7 +478,7 @@
 //         gap: 10px;
 //         position: relative;
 
-//         /* màu pastel tím-xanh nhẹ */
+//         /* mÃ u pastel tÃ­m-xanh nháº¹ */
 //         background: linear-gradient(180deg, #a5b4fc 0%, #c7d2fe 70%, #e0e7ff 100%);
 //         -webkit-background-clip: text;
 //         -webkit-text-fill-color: transparent;
@@ -486,7 +486,7 @@
 //         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 //       }
 
-//       /* gạch chân pastel */
+//       /* gáº¡ch chÃ¢n pastel */
 //       .products-title::after {
 //         content: "";
 //         position: absolute;
@@ -505,7 +505,7 @@
 //         filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
 //       }
 
-//       /* === Bộ lọc sản phẩm === */
+//       /* === Bá»™ lá»c sáº£n pháº©m === */
 //       .filter-wrap {
 //         display: grid;
 //         grid-template-columns: repeat(12, 1fr);
@@ -599,7 +599,7 @@
 //         accent-color: #a5b4fc;
 //       }
 
-//       /* === Nút clear === */
+//       /* === NÃºt clear === */
 //       .btn-clear {
 //         margin-left: auto;
 //         background: linear-gradient(135deg, #a5b4fc, #93c5fd);
@@ -618,7 +618,7 @@
 //         box-shadow: 0 8px 20px rgba(147,197,253,0.3);
 //       }
 
-//       /* === Lưới 4 cột === */
+//       /* === LÆ°á»›i 4 cá»™t === */
 //       .grid4 {
 //         display: grid;
 //         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -640,7 +640,7 @@
 //     `}</style>
 //   );
 // }
-
+import { API_BASE } from "../config/env"; // chỉnh đường dẫn tùy file
 
 
 import { useEffect, useState } from "react";
@@ -658,7 +658,7 @@ const toNum = (x) => {
   const n = Number(x);
   return Number.isFinite(n) ? n : 0;
 };
-const getName = (p) => p.name || p.title || `Sản phẩm #${p.id}`;
+const getName = (p) => p.name || p.title || `Sáº£n pháº©m #${p.id}`;
 const getCreatedTs = (p) => new Date(p.created_at || p.updated_at || 0).getTime();
 const getPrice = (p) =>
   toNum(p.price_sale ?? p.sale_price ?? p.price ?? p.price_buy ?? p.amount);
@@ -780,7 +780,7 @@ export default function Products() {
         const res = await fetch(`${API_BASE}/categories`, { signal: ac.signal });
         const data = await res.json().catch(() => ({}));
         const list = Array.isArray(data) ? data : data?.data ?? [];
-        setCategories(list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh mục ${c.id}` })));
+        setCategories(list.map((c) => ({ id: c.id, name: c.name || c.title || `Danh má»¥c ${c.id}` })));
       } catch {
         setCategories([]);
       }
@@ -806,7 +806,7 @@ export default function Products() {
         const listAll = Array.isArray(dataAll) ? dataAll : dataAll?.data ?? [];
         setAll(listAll);
       } catch (e) {
-        if (e.name !== "AbortError") setErr("Không tải được danh sách sản phẩm.");
+        if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
       } finally {
         setLoading(false);
       }
@@ -828,7 +828,7 @@ export default function Products() {
   };
 
   if (loading && items.length === 0)
-    return <p style={{ padding: 20, textAlign: "center", color: "#2563eb" }}>Đang tải sản phẩm...</p>;
+    return <p style={{ padding: 20, textAlign: "center", color: "#2563eb" }}>Äang táº£i sáº£n pháº©m...</p>;
   if (err)
     return <p style={{ padding: 20, textAlign: "center", color: "#d32f2f" }}>{err}</p>;
 
@@ -844,10 +844,10 @@ export default function Products() {
     >
       <StyleTag />
 
-      <h2 className="products-title">TẤT CẢ SẢN PHẨM</h2>
+      <h2 className="products-title">Táº¤T Cáº¢ Sáº¢N PHáº¨M</h2>
 
       <div className="products-layout">
-        {/* Bộ lọc trái */}
+        {/* Bá»™ lá»c trÃ¡i */}
         <FilterBar
           filter={filter}
           setFilter={(patch) => setFilter((s) => ({ ...s, ...patch }))}
@@ -856,11 +856,11 @@ export default function Products() {
           onClear={clearAll}
         />
 
-        {/* Sản phẩm phải */}
+        {/* Sáº£n pháº©m pháº£i */}
         <div className="product-list-area">
           {items.length === 0 ? (
             <p style={{ padding: 20, textAlign: "center", color: "#475569", fontWeight: 700 }}>
-              Không có sản phẩm phù hợp bộ lọc.
+              KhÃ´ng cÃ³ sáº£n pháº©m phÃ¹ há»£p bá»™ lá»c.
             </p>
           ) : (
             <div className="grid4">
@@ -877,7 +877,7 @@ export default function Products() {
 
       <p style={{ marginTop: 40, textAlign: "center" }}>
         <Link to="/" style={{ color: "#2563eb", fontWeight: 800, textDecoration: "none" }}>
-          ← Về trang chủ
+          â† Vá» trang chá»§
         </Link>
       </p>
     </div>
@@ -890,19 +890,19 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
   return (
     <div className={`filter-wrap ${loading ? "is-loading" : ""}`}>
       <div className="field">
-        <label>Tìm kiếm</label>
+        <label>TÃ¬m kiáº¿m</label>
         <input
           type="text"
           value={filter.q}
-          placeholder="Nhập tên sản phẩm..."
+          placeholder="Nháº­p tÃªn sáº£n pháº©m..."
           onChange={(e) => onChange({ q: e.target.value })}
         />
       </div>
 
       <div className="field">
-        <label>Danh mục</label>
+        <label>Danh má»¥c</label>
         <select value={filter.category_id} onChange={(e) => onChange({ category_id: e.target.value })}>
-          <option value="">— Tất cả —</option>
+          <option value="">â€” Táº¥t cáº£ â€”</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
@@ -912,19 +912,19 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
       </div>
 
       <div className="field">
-        <label>Khoảng giá (VNĐ)</label>
+        <label>Khoáº£ng giÃ¡ (VNÄ)</label>
         <div className="row-2">
           <input
             type="number"
             min={0}
-            placeholder="Từ"
+            placeholder="Tá»«"
             value={filter.min_price}
             onChange={(e) => onChange({ min_price: e.target.value })}
           />
           <input
             type="number"
             min={0}
-            placeholder="Đến"
+            placeholder="Äáº¿n"
             value={filter.max_price}
             onChange={(e) => onChange({ max_price: e.target.value })}
           />
@@ -932,13 +932,13 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
       </div>
 
       <div className="field">
-        <label>Sắp xếp</label>
+        <label>Sáº¯p xáº¿p</label>
         <select value={filter.sort} onChange={(e) => onChange({ sort: e.target.value })}>
-          <option value="newest">Mới nhất</option>
-          <option value="price-asc">Giá thấp → cao</option>
-          <option value="price-desc">Giá cao → thấp</option>
-          <option value="name-asc">Tên A → Z</option>
-          <option value="name-desc">Tên Z → A</option>
+          <option value="newest">Má»›i nháº¥t</option>
+          <option value="price-asc">GiÃ¡ tháº¥p â†’ cao</option>
+          <option value="price-desc">GiÃ¡ cao â†’ tháº¥p</option>
+          <option value="name-asc">TÃªn A â†’ Z</option>
+          <option value="name-desc">TÃªn Z â†’ A</option>
         </select>
       </div>
 
@@ -949,13 +949,13 @@ function FilterBar({ filter, setFilter, categories, loading, onClear }) {
             checked={!!filter.only_sale}
             onChange={(e) => onChange({ only_sale: e.target.checked })}
           />
-          <span>Chỉ sản phẩm giảm giá</span>
+          <span>Chá»‰ sáº£n pháº©m giáº£m giÃ¡</span>
         </label>
 
        
 
         <button className="btn-clear" onClick={onClear}>
-          Xoá lọc
+          XoÃ¡ lá»c
         </button>
       </div>
     </div>
@@ -976,7 +976,7 @@ function StyleTag() {
         text-align: center;
       }
 
-      /* Layout 2 cột */
+      /* Layout 2 cá»™t */
       .products-layout {
         display: grid;
         grid-template-columns: 260px 1fr;
@@ -1057,7 +1057,7 @@ function StyleTag() {
 .ck input {
   width: 16px;
   height: 16px;
-  accent-color: #6366f1; /* tím pastel đẹp */
+  accent-color: #6366f1; /* tÃ­m pastel Ä‘áº¹p */
   cursor: pointer;
 }
 
@@ -1067,4 +1067,6 @@ function StyleTag() {
     `}</style>
   );
 }
+
+
 

@@ -1,4 +1,4 @@
-// src/pages/Admin/User/Users.jsx
+﻿// src/pages/Admin/User/Users.jsx
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -8,7 +8,7 @@ export default function Users() {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
-  const [deletingId, setDeletingId] = useState(null); // giống Products: khoá nút khi xoá
+  const [deletingId, setDeletingId] = useState(null); // giá»‘ng Products: khoÃ¡ nÃºt khi xoÃ¡
 
   const token = localStorage.getItem("admin_token") || localStorage.getItem("token");
 
@@ -26,7 +26,7 @@ export default function Users() {
       const data = await res.json();
       setUsers(Array.isArray(data) ? data : data?.data ?? []);
     } catch (e) {
-      setErr("Không tải được danh sách người dùng.");
+      setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch ngÆ°á»i dÃ¹ng.");
       console.error(e);
     } finally {
       setLoading(false);
@@ -38,9 +38,9 @@ export default function Users() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Xoá: cùng pattern như Products (confirm + disabled + màu nền khác khi xoá)
+  // XoÃ¡: cÃ¹ng pattern nhÆ° Products (confirm + disabled + mÃ u ná»n khÃ¡c khi xoÃ¡)
   const removeUser = async (id) => {
-    if (!window.confirm("Bạn chắc chắn muốn xoá người dùng này?")) return;
+    if (!window.confirm("Báº¡n cháº¯c cháº¯n muá»‘n xoÃ¡ ngÆ°á»i dÃ¹ng nÃ y?")) return;
     try {
       setDeletingId(id);
       const res = await fetch(`${API_BASE}/admin/users/${id}`, {
@@ -53,16 +53,16 @@ export default function Users() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.message || `HTTP ${res.status}`);
       setUsers((prev) => prev.filter((u) => u.id !== id));
-      alert("✅ Đã xoá người dùng");
+      alert("âœ… ÄÃ£ xoÃ¡ ngÆ°á»i dÃ¹ng");
     } catch (e) {
       console.error("Delete error:", e);
-      alert("❌ Xoá thất bại");
+      alert("âŒ XoÃ¡ tháº¥t báº¡i");
     } finally {
       setDeletingId(null);
     }
   };
 
-  // Lọc: giống Products (client-side keyword)
+  // Lá»c: giá»‘ng Products (client-side keyword)
   const filtered = useMemo(() => {
     const kw = q.trim().toLowerCase();
     if (!kw) return users;
@@ -78,14 +78,14 @@ export default function Users() {
 
   return (
     <section style={{ padding: 20 }}>
-      {/* Toolbar giống Products */}
+      {/* Toolbar giá»‘ng Products */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-        <h1 style={{ fontSize: 24 }}>Quản lý người dùng</h1>
+        <h1 style={{ fontSize: 24 }}>Quáº£n lÃ½ ngÆ°á»i dÃ¹ng</h1>
         <div style={{ display: "flex", gap: 8 }}>
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Tìm tên/email/username/role…"
+            placeholder="TÃ¬m tÃªn/email/username/roleâ€¦"
             style={{
               height: 36,
               padding: "0 10px",
@@ -95,7 +95,7 @@ export default function Users() {
             }}
           />
           <button
-            onClick={() => alert("Chức năng thêm user đang phát triển")}
+            onClick={() => alert("Chá»©c nÄƒng thÃªm user Ä‘ang phÃ¡t triá»ƒn")}
             style={{
               padding: "8px 12px",
               borderRadius: 8,
@@ -110,7 +110,7 @@ export default function Users() {
         </div>
       </div>
 
-      {loading && <p>Đang tải dữ liệu…</p>}
+      {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
       {err && <p style={{ color: "red" }}>{err}</p>}
 
       {!loading && !err && (
@@ -119,12 +119,12 @@ export default function Users() {
             <thead>
               <tr style={{ background: "#fafafa" }}>
                 <th align="left">ID</th>
-                <th align="left">Tên</th>
+                <th align="left">TÃªn</th>
                 <th align="left">Email</th>
                 <th align="left">Username</th>
-                <th align="left">Vai trò</th>
-                <th align="left">Trạng thái</th>
-                <th align="center">Hành động</th>
+                <th align="left">Vai trÃ²</th>
+                <th align="left">Tráº¡ng thÃ¡i</th>
+                <th align="center">HÃ nh Ä‘á»™ng</th>
               </tr>
             </thead>
             <tbody>
@@ -135,9 +135,9 @@ export default function Users() {
                   <td>{u.email}</td>
                   <td>{u.username}</td>
                   <td style={{ textTransform: "capitalize" }}>{u.roles || "-"}</td>
-                  <td>{u.status === 1 ? "Hoạt động" : "Khoá"}</td>
+                  <td>{u.status === 1 ? "Hoáº¡t Ä‘á»™ng" : "KhoÃ¡"}</td>
                   <td align="center">
-                    {/* Giữ đúng pattern nút như Products */}
+                    {/* Giá»¯ Ä‘Ãºng pattern nÃºt nhÆ° Products */}
 
                     <button
                       onClick={() => removeUser(u.id)}
@@ -151,7 +151,7 @@ export default function Users() {
                         cursor: deletingId === u.id ? "not-allowed" : "pointer",
                       }}
                     >
-                      {deletingId === u.id ? "Đang xoá..." : "Xóa"}
+                      {deletingId === u.id ? "Äang xoÃ¡..." : "XÃ³a"}
                     </button>
                   </td>
                 </tr>
@@ -159,7 +159,7 @@ export default function Users() {
               {!filtered.length && (
                 <tr>
                   <td colSpan={7} align="center" style={{ padding: 18, color: "#777" }}>
-                    Không có dữ liệu
+                    KhÃ´ng cÃ³ dá»¯ liá»‡u
                   </td>
                 </tr>
               )}
@@ -170,3 +170,5 @@ export default function Users() {
     </section>
   );
 }
+
+

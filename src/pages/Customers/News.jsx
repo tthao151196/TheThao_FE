@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const API_BASE = (import.meta?.env?.VITE_API_BASE || "http://127.0.0.1:8000").replace(/\/+$/, "");
@@ -36,7 +36,7 @@ const styles = `
     --card-bg:#0b1320cc; --card-border:rgba(148,163,184,.14); --muted:#94a3b8; --title:#e2e8f0; --ring:rgba(99,102,241,.35);}
 }
 .news-page{min-height:100vh;background:#f8fafc;}
-.news-hero{background:var(--news-bg);padding:56px 20px 36px;position:relative;overflow:visible} /* <-- đổi visible */
+.news-hero{background:var(--news-bg);padding:56px 20px 36px;position:relative;overflow:visible} /* <-- Ä‘á»•i visible */
 .news-hero__inner{max-width:1120px;margin:0 auto;text-align:center;position:relative;z-index:1}
 .news-kicker{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-2);font-weight:800;background:#ffffffcc;border:1px solid var(--card-border);padding:6px 10px;border-radius:999px;backdrop-filter:blur(6px)}
 .news-hero h1{margin:10px 0 6px;font-size:clamp(28px,3.8vw,40px);font-weight:900;letter-spacing:-.02em;color:var(--title)}
@@ -52,7 +52,7 @@ const styles = `
 .news-search__btn:active{transform:translateY(1px)}
 
 /* Dropdown */
-.search-panel{grid-column:1/-1;position:absolute;left:8px;right:8px;top:calc(100% + 8px);z-index:80; /* cao hơn nữa */
+.search-panel{grid-column:1/-1;position:absolute;left:8px;right:8px;top:calc(100% + 8px);z-index:80; /* cao hÆ¡n ná»¯a */
   background:#fff;border:1px solid var(--card-border);border-radius:14px;box-shadow:0 20px 40px rgba(2,6,23,.18);text-align:left;
   max-height:360px;overflow:auto}
 .sp-section{padding:10px 12px;border-bottom:1px solid rgba(2,6,23,.06)}
@@ -182,29 +182,29 @@ export default function News() {
             <section className="news-hero">
                 <div className="news-hero__inner">
                     <span className="news-kicker">Blog & News</span>
-                    <h1>Tin tức mới nhất</h1>
-                    <p className="news-hero__desc">Cập nhật xu hướng thể thao, mẹo mua sắm thông minh, review sản phẩm và nhiều hơn nữa.</p>
+                    <h1>Tin tá»©c má»›i nháº¥t</h1>
+                    <p className="news-hero__desc">Cáº­p nháº­t xu hÆ°á»›ng thá»ƒ thao, máº¹o mua sáº¯m thÃ´ng minh, review sáº£n pháº©m vÃ  nhiá»u hÆ¡n ná»¯a.</p>
 
-                    <form className="news-search" onSubmit={onSearch} role="search" aria-label="Tìm bài viết">
+                    <form className="news-search" onSubmit={onSearch} role="search" aria-label="TÃ¬m bÃ i viáº¿t">
                         <span className="news-search__icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16a6.471 6.471 0 004.23-1.57l.27.28v.79L20 21.5 21.5 20 15.5 14zM4 9.5C4 6.46 6.46 4 9.5 4S15 6.46 15 9.5 12.54 15 9.5 15 4 12.54 4 9.5z" /></svg>
                         </span>
-                        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Tìm bài viết…" className="news-search__input" />
-                        <button type="submit" className="news-search__btn">Tìm</button>
+                        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="TÃ¬m bÃ i viáº¿tâ€¦" className="news-search__input" />
+                        <button type="submit" className="news-search__btn">TÃ¬m</button>
 
                         {(history.length > 0 || (q.trim() && suggests.length > 0)) && (
                             <div className="search-panel" role="listbox">
                                 {history.length > 0 && (
                                     <div className="sp-section">
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                            <span className="sp-title">Lịch sử tìm kiếm</span>
-                                            <button type="button" className="clear-history" onClick={wipeHistory}>Xoá lịch sử</button>
+                                            <span className="sp-title">Lá»‹ch sá»­ tÃ¬m kiáº¿m</span>
+                                            <button type="button" className="clear-history" onClick={wipeHistory}>XoÃ¡ lá»‹ch sá»­</button>
                                         </div>
                                         <div className="history-list">
                                             {history.map(h => (
                                                 <span key={h} className="history-chip" onClick={() => useHistoryKeyword(h)}>
                                                     {h}
-                                                    <button className="history-remove" title="Xoá" onClick={(e) => removeHistory(h, e)}>✕</button>
+                                                    <button className="history-remove" title="XoÃ¡" onClick={(e) => removeHistory(h, e)}>âœ•</button>
                                                 </span>
                                             ))}
                                         </div>
@@ -212,7 +212,7 @@ export default function News() {
                                 )}
                                 {q.trim() && suggests.length > 0 && (
                                     <div className="sp-section">
-                                        <div className="sp-title">Gợi ý liên quan</div>
+                                        <div className="sp-title">Gá»£i Ã½ liÃªn quan</div>
                                         <div className="suggest-list">
                                             {suggests.map(s => (
                                                 <div key={s.id} className="suggest-item" onClick={() => useSuggestion(s)}>
@@ -232,23 +232,23 @@ export default function News() {
 
             {/* BODY */}
             <div className="news-container">
-                {err && <div className="news-alert error"><b>Lỗi:</b> {err}</div>}
+                {err && <div className="news-alert error"><b>Lá»—i:</b> {err}</div>}
                 {loading ? <GridSkeleton /> : items.length === 0 ? <EmptyState onReset={clearSearch} /> : (
                     <>
                         <div className="news-grid">
                             {items.map(p => <NewsCard key={p.id} p={p} />)}
                         </div>
-                        <nav className="news-pagination" aria-label="Phân trang">
-                            <button className="page-btn" disabled={page <= 1} onClick={() => load(1)} title="Trang đầu">« Đầu</button>
-                            <button className="page-btn" disabled={page <= 1} onClick={() => load(page - 1)} title="Trang trước">← Trước</button>
+                        <nav className="news-pagination" aria-label="PhÃ¢n trang">
+                            <button className="page-btn" disabled={page <= 1} onClick={() => load(1)} title="Trang Ä‘áº§u">Â« Äáº§u</button>
+                            <button className="page-btn" disabled={page <= 1} onClick={() => load(page - 1)} title="Trang trÆ°á»›c">â† TrÆ°á»›c</button>
                             <ul className="page-list">
                                 {pages.map((it, i) =>
-                                    it === "…" ? <li key={`dots-${i}`} className="page-dots">…</li> :
+                                    it === "â€¦" ? <li key={`dots-${i}`} className="page-dots">â€¦</li> :
                                         <li key={it}><button className={`page-num ${it === meta.current_page ? "active" : ""}`} aria-current={it === meta.current_page ? "page" : undefined} onClick={() => load(it)}>{it}</button></li>
                                 )}
                             </ul>
-                            <button className="page-btn" disabled={page >= meta.last_page} onClick={() => load(page + 1)} title="Trang sau">Sau →</button>
-                            <button className="page-btn" disabled={page >= meta.last_page} onClick={() => load(meta.last_page)} title="Trang cuối">Cuối »</button>
+                            <button className="page-btn" disabled={page >= meta.last_page} onClick={() => load(page + 1)} title="Trang sau">Sau â†’</button>
+                            <button className="page-btn" disabled={page >= meta.last_page} onClick={() => load(meta.last_page)} title="Trang cuá»‘i">Cuá»‘i Â»</button>
                         </nav>
                     </>
                 )}
@@ -295,9 +295,9 @@ function EmptyState({ onReset }) {
             <div className="icon-wrap">
                 <svg viewBox="0 0 24 24" width="24" height="24"><path d="M21 6h-7.59l-2-2H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V7a1 1 0 00-1-1zm-1 12H4V6h6.59l2 2H20v10z" /></svg>
             </div>
-            <h3>Không có bài viết phù hợp</h3>
-            <p>Thử thay đổi từ khoá hoặc xem tất cả bài viết mới nhất.</p>
-            <button className="news-search__btn" onClick={onReset}>Xoá lọc & xem tất cả</button>
+            <h3>KhÃ´ng cÃ³ bÃ i viáº¿t phÃ¹ há»£p</h3>
+            <p>Thá»­ thay Ä‘á»•i tá»« khoÃ¡ hoáº·c xem táº¥t cáº£ bÃ i viáº¿t má»›i nháº¥t.</p>
+            <button className="news-search__btn" onClick={onReset}>XoÃ¡ lá»c & xem táº¥t cáº£</button>
         </div>
     );
 }
@@ -307,8 +307,8 @@ function buildPages(current, last) {
     const c = Number(current || 1), l = Number(last || 1);
     if (l <= 7) return Array.from({ length: l }, (_, i) => i + 1);
     const pages = [1], left = Math.max(2, c - 1), right = Math.min(l - 1, c + 1);
-    if (left > 2) pages.push("…"); for (let i = left; i <= right; i++) pages.push(i);
-    if (right < l - 1) pages.push("…"); pages.push(l); return pages;
+    if (left > 2) pages.push("â€¦"); for (let i = left; i <= right; i++) pages.push(i);
+    if (right < l - 1) pages.push("â€¦"); pages.push(l); return pages;
 }
 function formatVNDate(s) { try { return new Date(s).toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" }); } catch { return ""; } }
 function toAbs(x) {
@@ -318,3 +318,5 @@ function toAbs(x) {
     if (s.startsWith("/")) return `${API_BASE}${s}`; if (/^(storage|uploads|images|img)\//i.test(s)) return `${API_BASE}/${s}`;
     return `${API_BASE}/storage/${s}`;
 }
+
+

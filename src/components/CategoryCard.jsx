@@ -1,4 +1,4 @@
-export default function CategoryCard({ id, name, icon, selected, onSelect }) {
+﻿export default function CategoryCard({ id, name, icon, selected, onSelect }) {
   return (
     <div
       onClick={() => onSelect(id)}
@@ -21,3 +21,5 @@ export default function CategoryCard({ id, name, icon, selected, onSelect }) {
     </div>
   )
 }
+
+

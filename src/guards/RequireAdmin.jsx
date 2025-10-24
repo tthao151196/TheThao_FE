@@ -1,4 +1,4 @@
-// src/guards/RequireAdmin.jsx
+﻿// src/guards/RequireAdmin.jsx
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const ADMIN_TOKEN_KEY = "admin_token";
@@ -26,7 +26,7 @@ export default function RequireAdmin() {
                 replace
                 state={{
                     from: location,
-                    denied: user && !isAdmin(user) ? "Bạn không có quyền truy cập khu vực Quản trị." : undefined,
+                    denied: user && !isAdmin(user) ? "Báº¡n khÃ´ng cÃ³ quyá»n truy cáº­p khu vá»±c Quáº£n trá»‹." : undefined,
                 }}
             />
         );
@@ -34,3 +34,5 @@ export default function RequireAdmin() {
 
     return <Outlet />;
 }
+
+

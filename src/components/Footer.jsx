@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 export default function Footer() {
     return (
@@ -6,27 +6,27 @@ export default function Footer() {
             <style>{`
         /* ===== Footer gradient loang ===== */
         .cp-footer{
-          /* Accent có thể chỉnh tuỳ ý */
-          --accent1:#6366f1; /* tím indigo */
+          /* Accent cÃ³ thá»ƒ chá»‰nh tuá»³ Ã½ */
+          --accent1:#6366f1; /* tÃ­m indigo */
           --accent2:#06b6d4; /* cyan */
 
           position:relative; isolation:isolate;
           padding:40px 0 24px;
           font-family:"Montserrat", Arial, sans-serif;
-          color:#eef2ff; /* chữ sáng trên nền gradient */
+          color:#eef2ff; /* chá»¯ sÃ¡ng trÃªn ná»n gradient */
           border-top:0;
-          overflow:hidden; /* để thấy bo góc tròn của lớp nền */
+          overflow:hidden; /* Ä‘á»ƒ tháº¥y bo gÃ³c trÃ²n cá»§a lá»›p ná»n */
         }
 
-        /* Lớp nền gradient “loang loang” */
+        /* Lá»›p ná»n gradient â€œloang loangâ€ */
         .cp-footer .cp-bg{
           position:absolute; inset:0;
-          /* vài lớp radial để tạo vệt loang + 1 lớp linear chuyển màu */
+          /* vÃ i lá»›p radial Ä‘á»ƒ táº¡o vá»‡t loang + 1 lá»›p linear chuyá»ƒn mÃ u */
           background:
             radial-gradient(120% 180% at -10% -20%, rgba(99,102,241,.35) 0%, rgba(99,102,241,0) 40%),
             radial-gradient(120% 180% at 110% -10%, rgba(6,182,212,.35) 0%, rgba(6,182,212,0) 42%),
             linear-gradient(90deg, var(--accent1) 0%, var(--accent2) 100%);
-          border-radius:28px 28px 0 0; /* bo 2 góc trên giống ảnh */
+          border-radius:28px 28px 0 0; /* bo 2 gÃ³c trÃªn giá»‘ng áº£nh */
           filter:saturate(1.05);
           z-index:-1;
         }
@@ -85,7 +85,7 @@ export default function Footer() {
         .cp-credit strong{ color:#ffffff }
       `}</style>
 
-            {/* lớp nền gradient */}
+            {/* lá»›p ná»n gradient */}
             <div className="cp-bg" aria-hidden="true" />
 
             <div className="cp-container">
@@ -98,16 +98,16 @@ export default function Footer() {
                             onError={(e) => (e.currentTarget.style.display = "none")}
                         />
                         <p style={{ marginTop: 8, color: "#f0f9ff", fontWeight: 900 }}>
-                            Cửa hàng phân phối đồ thể thao chính hãng
+                            Cá»­a hÃ ng phÃ¢n phá»‘i Ä‘á»“ thá»ƒ thao chÃ­nh hÃ£ng
                         </p>
                         <div style={{ marginTop: 12 }}>
                             <p>
                                 <i className="fa-solid fa-location-dot" style={{ color: "#fff", marginRight: 8 }} />
-                                Tầng 6, Tòa Ladeco, 266 Đội Cấn, Quận Ba Đình, TP Hà Nội
+                                Táº§ng 6, TÃ²a Ladeco, 266 Äá»™i Cáº¥n, Quáº­n Ba ÄÃ¬nh, TP HÃ  Ná»™i
                             </p>
                             <p>
                                 <i className="fa-solid fa-clock" style={{ color: "#fff", marginRight: 8 }} />
-                                Giờ làm việc: 8:00 - 22:00, Thứ 2 - Chủ nhật
+                                Giá» lÃ m viá»‡c: 8:00 - 22:00, Thá»© 2 - Chá»§ nháº­t
                             </p>
                             <p>
                                 <i className="fa-solid fa-phone" style={{ color: "#fff", marginRight: 8 }} />
@@ -117,38 +117,38 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h3>Về chúng tôi</h3>
+                        <h3>Vá» chÃºng tÃ´i</h3>
                         <ul>
-                            <li><a href="/">Trang chủ</a></li>
-                            <li><a href="/products">Sản phẩm</a></li>
-                            <li><a href="/about">Giới thiệu</a></li>
-                            <li><a href="/contact">Liên hệ</a></li>
-                            <li><a href="/stores">Hệ thống cửa hàng</a></li>
+                            <li><a href="/">Trang chá»§</a></li>
+                            <li><a href="/products">Sáº£n pháº©m</a></li>
+                            <li><a href="/about">Giá»›i thiá»‡u</a></li>
+                            <li><a href="/contact">LiÃªn há»‡</a></li>
+                            <li><a href="/stores">Há»‡ thá»‘ng cá»­a hÃ ng</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3>Chính sách</h3>
+                        <h3>ChÃ­nh sÃ¡ch</h3>
                         <ul>
-                            <li><a href="#">Chính sách đối tác</a></li>
-                            <li><a href="#">Chính sách đổi trả</a></li>
-                            <li><a href="#">Chính sách thanh toán</a></li>
-                            <li><a href="#">Chính sách giao hàng</a></li>
+                            <li><a href="#">ChÃ­nh sÃ¡ch Ä‘á»‘i tÃ¡c</a></li>
+                            <li><a href="#">ChÃ­nh sÃ¡ch Ä‘á»•i tráº£</a></li>
+                            <li><a href="#">ChÃ­nh sÃ¡ch thanh toÃ¡n</a></li>
+                            <li><a href="#">ChÃ­nh sÃ¡ch giao hÃ ng</a></li>
                             <li>
                                 <a href="#" style={{ fontWeight: 900 }}>
-                                    Hình thức thanh toán
+                                    HÃ¬nh thá»©c thanh toÃ¡n
                                 </a>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3>Tư vấn khách hàng</h3>
+                        <h3>TÆ° váº¥n khÃ¡ch hÃ ng</h3>
                         <ul>
-                            <li><a href="#">Mua hàng 1900.8386</a></li>
-                            <li><a href="#">Bảo hành 1900.8386</a></li>
-                            <li><a href="#">Khiếu nại 1900.8386</a></li>
-                            <li><a href="#">Mua qua các sàn điện tử</a></li>
+                            <li><a href="#">Mua hÃ ng 1900.8386</a></li>
+                            <li><a href="#">Báº£o hÃ nh 1900.8386</a></li>
+                            <li><a href="#">Khiáº¿u náº¡i 1900.8386</a></li>
+                            <li><a href="#">Mua qua cÃ¡c sÃ n Ä‘iá»‡n tá»­</a></li>
                         </ul>
                         <div className="cp-social">
                             <a className="cp-pill" href="#" aria-label="Shopify">
@@ -168,10 +168,12 @@ export default function Footer() {
                 </div>
 
                 <div className="cp-credit">
-                    <span>© 2025 StoreVegetables</span>
-                    <span>Made with ❤️ <strong>SPORT OH!</strong></span>
+                    <span>Â© 2025 StoreVegetables</span>
+                    <span>Made with â¤ï¸ <strong>SPORT OH!</strong></span>
                 </div>
             </div>
         </footer>
     );
 }
+
+

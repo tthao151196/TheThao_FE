@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 
 const API = "http://127.0.0.1:8000";
 
@@ -62,14 +62,14 @@ export default function Coupons() {
       const data = await safeJson(res);
 
       if (!res.ok) {
-        throw new Error(data?.message || `Lỗi ${res.status}`);
+        throw new Error(data?.message || `Lá»—i ${res.status}`);
       }
 
       setList(normalizeArray(data));
     } catch (e) {
       console.error(e);
       setList([]);
-      setMessage(`❌ ${e.message || "Không tải được danh sách."}`);
+      setMessage(`âŒ ${e.message || "KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch."}`);
     } finally {
       setLoading(false);
     }
@@ -128,23 +128,23 @@ export default function Coupons() {
       const data = await safeJson(res);
 
       if (!res.ok) {
-        throw new Error(data?.message || "Lưu thất bại.");
+        throw new Error(data?.message || "LÆ°u tháº¥t báº¡i.");
       }
 
-      setMessage(editing ? "✅ Đã cập nhật!" : "✅ Đã tạo mã mới!");
+      setMessage(editing ? "âœ… ÄÃ£ cáº­p nháº­t!" : "âœ… ÄÃ£ táº¡o mÃ£ má»›i!");
       setModalOpen(false);
       setEditing(null);
       await fetchList(q);
     } catch (e) {
       console.error(e);
-      setMessage(`❌ ${e.message || "Lỗi kết nối máy chủ."}`);
+      setMessage(`âŒ ${e.message || "Lá»—i káº¿t ná»‘i mÃ¡y chá»§."}`);
     } finally {
       setLoading(false);
     }
   }
 
   async function removeRow(id) {
-    if (!window.confirm("Xoá mã này?")) return;
+    if (!window.confirm("XoÃ¡ mÃ£ nÃ y?")) return;
     setLoading(true);
     setMessage("");
     try {
@@ -153,12 +153,12 @@ export default function Coupons() {
         headers,
       });
       const data = await safeJson(res);
-      if (!res.ok) throw new Error(data?.message || "Xoá thất bại.");
-      setMessage("🗑️ Đã xoá!");
+      if (!res.ok) throw new Error(data?.message || "XoÃ¡ tháº¥t báº¡i.");
+      setMessage("ðŸ—‘ï¸ ÄÃ£ xoÃ¡!");
       await fetchList(q);
     } catch (e) {
       console.error(e);
-      setMessage(`❌ ${e.message || "Lỗi kết nối."}`);
+      setMessage(`âŒ ${e.message || "Lá»—i káº¿t ná»‘i."}`);
     } finally {
       setLoading(false);
     }
@@ -174,17 +174,17 @@ export default function Coupons() {
         body: JSON.stringify({ is_active: !row.is_active }),
       });
       const data = await safeJson(res);
-      if (!res.ok) throw new Error(data?.message || "Đổi trạng thái thất bại.");
+      if (!res.ok) throw new Error(data?.message || "Äá»•i tráº¡ng thÃ¡i tháº¥t báº¡i.");
       await fetchList(q);
     } catch (e) {
       console.error(e);
-      setMessage(`❌ ${e.message || "Lỗi kết nối."}`);
+      setMessage(`âŒ ${e.message || "Lá»—i káº¿t ná»‘i."}`);
     } finally {
       setLoading(false);
     }
   }
 
-  // ====== TẠO NHANH: GIAM10K / GIAM20K / GIAM50K ======
+  // ====== Táº O NHANH: GIAM10K / GIAM20K / GIAM50K ======
   function quickCreateFixed(amount) {
     const code = `GIAM${amount / 1000}K`;
     setForm({
@@ -205,19 +205,19 @@ export default function Coupons() {
     <div className="admin-screen">
       {/* Toolbar */}
       <div className="toolbar" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <h2>Quản Lý Mã Giảm Giá</h2>
+        <h2>Quáº£n LÃ½ MÃ£ Giáº£m GiÃ¡</h2>
 
         <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           <input
-            placeholder="Tìm mã..."
+            placeholder="TÃ¬m mÃ£..."
             className="input"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && fetchList(q)}
             style={{ minWidth: 240 }}
           />
-          <button className="btn" onClick={() => fetchList(q)}>Tìm</button>
-          <button className="btn btn-primary" onClick={openCreate}>+ Thêm mã</button>
+          <button className="btn" onClick={() => fetchList(q)}>TÃ¬m</button>
+          <button className="btn btn-primary" onClick={openCreate}>+ ThÃªm mÃ£</button>
         </div>
       </div>
 
@@ -243,7 +243,7 @@ export default function Coupons() {
               setModalOpen(true);
             }}
           >
-            + GIAM10% (trần 50K)
+            + GIAM10% (tráº§n 50K)
           </button>
         </div>
       </div>
@@ -257,37 +257,37 @@ export default function Coupons() {
             <thead>
               <tr>
                 <th style={{ textAlign: "left" }}>Code</th>
-                <th>Loại</th>
-                <th>Giá trị</th>
-                <th>Tối thiểu đơn</th>
-                <th>Trần (percent)</th>
-                <th>Dùng/Limit</th>
-                <th>Thời gian</th>
+                <th>Loáº¡i</th>
+                <th>GiÃ¡ trá»‹</th>
+                <th>Tá»‘i thiá»ƒu Ä‘Æ¡n</th>
+                <th>Tráº§n (percent)</th>
+                <th>DÃ¹ng/Limit</th>
+                <th>Thá»i gian</th>
                 <th>TT</th>
-                <th style={{ width: 160 }}>Hành động</th>
+                <th style={{ width: 160 }}>HÃ nh Ä‘á»™ng</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={9}>Đang tải...</td></tr>
+                <tr><td colSpan={9}>Äang táº£i...</td></tr>
               ) : !Array.isArray(list) || list.length === 0 ? (
-                <tr><td colSpan={9}>Chưa có mã</td></tr>
+                <tr><td colSpan={9}>ChÆ°a cÃ³ mÃ£</td></tr>
               ) : (
                 list.map((r) => (
                   <tr key={r.id}>
                     <td style={{ textAlign: "left", fontWeight: 600 }}>{r.code}</td>
                     <td>{r.type}</td>
                     <td>{r.type === "fixed"
-                        ? Number(r.value).toLocaleString("vi-VN") + " đ"
+                        ? Number(r.value).toLocaleString("vi-VN") + " Ä‘"
                         : Number(r.value) + " %"}</td>
-                    <td>{Number(r.min_order_total || 0).toLocaleString("vi-VN")} đ</td>
+                    <td>{Number(r.min_order_total || 0).toLocaleString("vi-VN")} Ä‘</td>
                     <td>{r.type === "percent"
-                          ? (r.max_discount ? Number(r.max_discount).toLocaleString("vi-VN") + " đ" : "—")
-                          : "—"}</td>
-                    <td>{(r.used_count || 0)}/{r.usage_limit ?? "∞"}</td>
+                          ? (r.max_discount ? Number(r.max_discount).toLocaleString("vi-VN") + " Ä‘" : "â€”")
+                          : "â€”"}</td>
+                    <td>{(r.used_count || 0)}/{r.usage_limit ?? "âˆž"}</td>
                     <td style={{ fontSize: 12 }}>
-                      {r.start_at ? new Date(r.start_at).toLocaleString() : "—"} <br />
-                      {r.end_at ? "→ " + new Date(r.end_at).toLocaleString() : ""}
+                      {r.start_at ? new Date(r.start_at).toLocaleString() : "â€”"} <br />
+                      {r.end_at ? "â†’ " + new Date(r.end_at).toLocaleString() : ""}
                     </td>
                     <td>
                       <span
@@ -305,11 +305,11 @@ export default function Coupons() {
                     </td>
                     <td>
                       <div style={{ display: "flex", gap: 6 }}>
-                        <button className="btn btn-green" onClick={() => openEdit(r)}>Sửa</button>
+                        <button className="btn btn-green" onClick={() => openEdit(r)}>Sá»­a</button>
                         <button className="btn" onClick={() => toggleActive(r)}>
-                          {r.is_active ? "Tắt" : "Bật"}
+                          {r.is_active ? "Táº¯t" : "Báº­t"}
                         </button>
-                        <button className="btn btn-danger" onClick={() => removeRow(r.id)}>Xoá</button>
+                        <button className="btn btn-danger" onClick={() => removeRow(r.id)}>XoÃ¡</button>
                       </div>
                     </td>
                   </tr>
@@ -336,12 +336,12 @@ export default function Coupons() {
             }}
           >
             <h3 style={{ marginBottom: 12 }}>
-              {editing ? "Sửa mã giảm giá" : "Thêm mã giảm giá"}
+              {editing ? "Sá»­a mÃ£ giáº£m giÃ¡" : "ThÃªm mÃ£ giáº£m giÃ¡"}
             </h3>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               <div>
-                <label>Mã (CODE)</label>
+                <label>MÃ£ (CODE)</label>
                 <input
                   className="input"
                   value={form.code}
@@ -353,30 +353,30 @@ export default function Coupons() {
               </div>
 
               <div>
-                <label>Loại</label>
+                <label>Loáº¡i</label>
                 <select
                   className="input"
                   value={form.type}
                   onChange={(e) => setForm((s) => ({ ...s, type: e.target.value }))}
                 >
-                  <option value="fixed">Cố định (đ)</option>
-                  <option value="percent">Phần trăm (%)</option>
+                  <option value="fixed">Cá»‘ Ä‘á»‹nh (Ä‘)</option>
+                  <option value="percent">Pháº§n trÄƒm (%)</option>
                 </select>
               </div>
 
               <div>
-                <label>Giá trị</label>
+                <label>GiÃ¡ trá»‹</label>
                 <input
                   type="number"
                   className="input"
                   value={form.value}
                   onChange={(e) => setForm((s) => ({ ...s, value: Number(e.target.value) }))}
-                  placeholder="10 hoặc 50000"
+                  placeholder="10 hoáº·c 50000"
                 />
               </div>
 
               <div>
-                <label>Trần giảm (cho %)</label>
+                <label>Tráº§n giáº£m (cho %)</label>
                 <input
                   type="number"
                   className="input"
@@ -388,7 +388,7 @@ export default function Coupons() {
               </div>
 
               <div>
-                <label>Giá trị tối thiểu đơn</label>
+                <label>GiÃ¡ trá»‹ tá»‘i thiá»ƒu Ä‘Æ¡n</label>
                 <input
                   type="number"
                   className="input"
@@ -399,18 +399,18 @@ export default function Coupons() {
               </div>
 
               <div>
-                <label>Giới hạn tổng lượt</label>
+                <label>Giá»›i háº¡n tá»•ng lÆ°á»£t</label>
                 <input
                   type="number"
                   className="input"
                   value={form.usage_limit}
                   onChange={(e) => setForm((s) => ({ ...s, usage_limit: e.target.value }))}
-                  placeholder="để trống = không giới hạn"
+                  placeholder="Ä‘á»ƒ trá»‘ng = khÃ´ng giá»›i háº¡n"
                 />
               </div>
 
               <div>
-                <label>Giới hạn mỗi user</label>
+                <label>Giá»›i háº¡n má»—i user</label>
                 <input
                   type="number"
                   className="input"
@@ -421,7 +421,7 @@ export default function Coupons() {
               </div>
 
               <div>
-                <label>Bắt đầu</label>
+                <label>Báº¯t Ä‘áº§u</label>
                 <input
                   type="datetime-local"
                   className="input"
@@ -431,7 +431,7 @@ export default function Coupons() {
               </div>
 
               <div>
-                <label>Kết thúc</label>
+                <label>Káº¿t thÃºc</label>
                 <input
                   type="datetime-local"
                   className="input"
@@ -447,14 +447,14 @@ export default function Coupons() {
                   checked={form.is_active}
                   onChange={(e) => setForm((s) => ({ ...s, is_active: e.target.checked }))}
                 />
-                <label htmlFor="is_active">Kích hoạt</label>
+                <label htmlFor="is_active">KÃ­ch hoáº¡t</label>
               </div>
             </div>
 
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 16 }}>
-              <button className="btn" onClick={() => setModalOpen(false)}>Đóng</button>
+              <button className="btn" onClick={() => setModalOpen(false)}>ÄÃ³ng</button>
               <button className="btn btn-primary" onClick={saveForm} disabled={loading}>
-                {editing ? "Lưu thay đổi" : "Tạo mã"}
+                {editing ? "LÆ°u thay Ä‘á»•i" : "Táº¡o mÃ£"}
               </button>
             </div>
           </div>
@@ -463,3 +463,5 @@ export default function Coupons() {
     </div>
   );
 }
+
+

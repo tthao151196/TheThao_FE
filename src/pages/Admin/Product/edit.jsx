@@ -1,4 +1,4 @@
-// // src/pages/Admin/Product/edit.jsx
+﻿// // src/pages/Admin/Product/edit.jsx
 // import { useState, useEffect, useMemo } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
 
@@ -30,7 +30,7 @@
 //   const [error, setError] = useState("");
 //   const [success, setSuccess] = useState("");
 
-//   // ✅ Load danh mục & thương hiệu
+//   // âœ… Load danh má»¥c & thÆ°Æ¡ng hiá»‡u
 //   useEffect(() => {
 //     (async () => {
 //       try {
@@ -48,7 +48,7 @@
 //     })();
 //   }, []);
 
-//   // ✅ Load thông tin sản phẩm
+//   // âœ… Load thÃ´ng tin sáº£n pháº©m
 //   useEffect(() => {
 //     const fetchProduct = async () => {
 //       try {
@@ -61,12 +61,12 @@
 
 //         if (!res.ok) {
 //           if (res.status === 401)
-//             throw new Error("Bạn chưa đăng nhập hoặc token hết hạn");
-//           throw new Error("Không lấy được dữ liệu sản phẩm");
+//             throw new Error("Báº¡n chÆ°a Ä‘Äƒng nháº­p hoáº·c token háº¿t háº¡n");
+//           throw new Error("KhÃ´ng láº¥y Ä‘Æ°á»£c dá»¯ liá»‡u sáº£n pháº©m");
 //         }
 
 //         const json = await res.json();
-//         const data = json.data || json; // ✅ Lấy đúng phần 'data' của response
+//         const data = json.data || json; // âœ… Láº¥y Ä‘Ãºng pháº§n 'data' cá»§a response
 
 //         setForm((prev) => ({
 //           ...prev,
@@ -86,13 +86,13 @@
 //         setPreview(data.thumbnail_url || null);
 //       } catch (err) {
 //         console.error(err);
-//         setError(err.message || "Không tải được dữ liệu sản phẩm");
+//         setError(err.message || "KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u sáº£n pháº©m");
 //       }
 //     };
 //     fetchProduct();
 //   }, [id, token]);
 
-//   // ✅ Xử lý thay đổi input
+//   // âœ… Xá»­ lÃ½ thay Ä‘á»•i input
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
 //     setForm((s) => ({ ...s, [name]: value }));
@@ -107,14 +107,14 @@
 //     }
 //   };
 
-//   // ✅ Xử lý upload file + preview
+//   // âœ… Xá»­ lÃ½ upload file + preview
 //   const handleFile = (e) => {
 //     const file = e.target.files?.[0];
 //     setForm((s) => ({ ...s, thumbnail: file || null }));
 //     setPreview(file ? URL.createObjectURL(file) : preview);
 //   };
 
-//   // ✅ Gửi cập nhật sản phẩm
+//   // âœ… Gá»­i cáº­p nháº­t sáº£n pháº©m
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     setLoading(true);
@@ -147,13 +147,13 @@
 //       });
 
 //       const data = await res.json().catch(() => ({}));
-//       if (!res.ok) throw new Error(data.message || "Cập nhật thất bại");
+//       if (!res.ok) throw new Error(data.message || "Cáº­p nháº­t tháº¥t báº¡i");
 
-//       setSuccess("✅ Cập nhật sản phẩm thành công!");
+//       setSuccess("âœ… Cáº­p nháº­t sáº£n pháº©m thÃ nh cÃ´ng!");
 //       setTimeout(() => navigate("/admin/products"), 900);
 //     } catch (err) {
 //       console.error(err);
-//       setError(err.message || "Có lỗi xảy ra");
+//       setError(err.message || "CÃ³ lá»—i xáº£y ra");
 //     } finally {
 //       setLoading(false);
 //     }
@@ -172,7 +172,7 @@
 //         }}
 //       >
 //         <h1 style={{ fontSize: 24, marginBottom: 16, fontWeight: 700 }}>
-//           Chỉnh sửa sản phẩm
+//           Chá»‰nh sá»­a sáº£n pháº©m
 //         </h1>
 
 //         {error && <p style={{ color: "red", marginBottom: 12 }}>{error}</p>}
@@ -188,7 +188,7 @@
 //             }}
 //           >
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Tên sản phẩm</span>
+//               <span>TÃªn sáº£n pháº©m</span>
 //               <input
 //                 type="text"
 //                 name="name"
@@ -222,7 +222,7 @@
 
 //             {/* Brand */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Thương hiệu</span>
+//               <span>ThÆ°Æ¡ng hiá»‡u</span>
 //               <select
 //                 name="brand_id"
 //                 value={form.brand_id ?? ""}
@@ -234,7 +234,7 @@
 //                   borderRadius: 8,
 //                 }}
 //               >
-//                 <option value="">-- chọn thương hiệu --</option>
+//                 <option value="">-- chá»n thÆ°Æ¡ng hiá»‡u --</option>
 //                 {brands.map((b) => (
 //                   <option key={b.id} value={b.id}>
 //                     {b.name}
@@ -245,7 +245,7 @@
 
 //             {/* Category */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Danh mục</span>
+//               <span>Danh má»¥c</span>
 //               <select
 //                 name="category_id"
 //                 value={form.category_id ?? ""}
@@ -257,7 +257,7 @@
 //                   borderRadius: 8,
 //                 }}
 //               >
-//                 <option value="">-- chọn danh mục --</option>
+//                 <option value="">-- chá»n danh má»¥c --</option>
 //                 {categories.map((c) => (
 //                   <option key={c.id} value={c.id}>
 //                     {c.name}
@@ -266,9 +266,9 @@
 //               </select>
 //             </label>
 
-//             {/* Giá gốc */}
+//             {/* GiÃ¡ gá»‘c */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Giá gốc</span>
+//               <span>GiÃ¡ gá»‘c</span>
 //               <input
 //                 type="number"
 //                 name="price_root"
@@ -284,9 +284,9 @@
 //               />
 //             </label>
 
-//             {/* Giá sale */}
+//             {/* GiÃ¡ sale */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Giá sale</span>
+//               <span>GiÃ¡ sale</span>
 //               <input
 //                 type="number"
 //                 name="price_sale"
@@ -302,9 +302,9 @@
 //               />
 //             </label>
 
-//             {/* Tồn kho */}
+//             {/* Tá»“n kho */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Tồn kho</span>
+//               <span>Tá»“n kho</span>
 //               <input
 //                 type="number"
 //                 name="qty"
@@ -320,9 +320,9 @@
 //               />
 //             </label>
 
-//             {/* Trạng thái */}
+//             {/* Tráº¡ng thÃ¡i */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Trạng thái</span>
+//               <span>Tráº¡ng thÃ¡i</span>
 //               <select
 //                 name="status"
 //                 value={form.status}
@@ -334,14 +334,14 @@
 //                   borderRadius: 8,
 //                 }}
 //               >
-//                 <option value={1}>Hiển thị</option>
-//                 <option value={0}>Ẩn</option>
+//                 <option value={1}>Hiá»ƒn thá»‹</option>
+//                 <option value={0}>áº¨n</option>
 //               </select>
 //             </label>
 
-//             {/* Ảnh sản phẩm */}
+//             {/* áº¢nh sáº£n pháº©m */}
 //             <label style={{ display: "grid", gap: 6 }}>
-//               <span>Ảnh sản phẩm</span>
+//               <span>áº¢nh sáº£n pháº©m</span>
 //               <input type="file" accept="image/*" onChange={handleFile} />
 //             </label>
 //           </div>
@@ -361,7 +361,7 @@
 //           )}
 
 //           <label style={{ display: "grid", gap: 6 }}>
-//             <span>Mô tả</span>
+//             <span>MÃ´ táº£</span>
 //             <textarea
 //               name="description"
 //               value={form.description}
@@ -376,7 +376,7 @@
 //           </label>
 
 //           <label style={{ display: "grid", gap: 6 }}>
-//             <span>Chi tiết</span>
+//             <span>Chi tiáº¿t</span>
 //             <textarea
 //               name="detail"
 //               value={form.detail}
@@ -402,7 +402,7 @@
 //                 cursor: "pointer",
 //               }}
 //             >
-//               Hủy
+//               Há»§y
 //             </button>
 //             <button
 //               type="submit"
@@ -416,7 +416,7 @@
 //                 cursor: "pointer",
 //               }}
 //             >
-//               {loading ? "Đang lưu…" : "Cập nhật"}
+//               {loading ? "Äang lÆ°uâ€¦" : "Cáº­p nháº­t"}
 //             </button>
 //           </div>
 //         </form>
@@ -430,7 +430,7 @@
 // src/pages/Admin/Product/EditProduct.jsx
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Editor } from "@tinymce/tinymce-react"; // ✅ TinyMCE Editor
+import { Editor } from "@tinymce/tinymce-react"; // âœ… TinyMCE Editor
 
 const API_BASE = "http://127.0.0.1:8000/api";
 
@@ -460,7 +460,7 @@ export default function EditProduct() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // ✅ Load danh mục & thương hiệu
+  // âœ… Load danh má»¥c & thÆ°Æ¡ng hiá»‡u
   useEffect(() => {
     (async () => {
       try {
@@ -478,7 +478,7 @@ export default function EditProduct() {
     })();
   }, []);
 
-  // ✅ Load thông tin sản phẩm
+  // âœ… Load thÃ´ng tin sáº£n pháº©m
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -491,8 +491,8 @@ export default function EditProduct() {
 
         if (!res.ok) {
           if (res.status === 401)
-            throw new Error("Bạn chưa đăng nhập hoặc token hết hạn");
-          throw new Error("Không lấy được dữ liệu sản phẩm");
+            throw new Error("Báº¡n chÆ°a Ä‘Äƒng nháº­p hoáº·c token háº¿t háº¡n");
+          throw new Error("KhÃ´ng láº¥y Ä‘Æ°á»£c dá»¯ liá»‡u sáº£n pháº©m");
         }
 
         const json = await res.json();
@@ -516,13 +516,13 @@ export default function EditProduct() {
         setPreview(data.thumbnail_url || null);
       } catch (err) {
         console.error(err);
-        setError(err.message || "Không tải được dữ liệu sản phẩm");
+        setError(err.message || "KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u sáº£n pháº©m");
       }
     };
     fetchProduct();
   }, [id, token]);
 
-  // ✅ Xử lý thay đổi input
+  // âœ… Xá»­ lÃ½ thay Ä‘á»•i input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
@@ -537,14 +537,14 @@ export default function EditProduct() {
     }
   };
 
-  // ✅ Upload file + preview
+  // âœ… Upload file + preview
   const handleFile = (e) => {
     const file = e.target.files?.[0];
     setForm((s) => ({ ...s, thumbnail: file || null }));
     setPreview(file ? URL.createObjectURL(file) : preview);
   };
 
-  // ✅ Gửi cập nhật sản phẩm
+  // âœ… Gá»­i cáº­p nháº­t sáº£n pháº©m
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -576,13 +576,13 @@ export default function EditProduct() {
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.message || "Cập nhật thất bại");
+      if (!res.ok) throw new Error(data.message || "Cáº­p nháº­t tháº¥t báº¡i");
 
-      setSuccess("✅ Cập nhật sản phẩm thành công!");
+      setSuccess("âœ… Cáº­p nháº­t sáº£n pháº©m thÃ nh cÃ´ng!");
       setTimeout(() => navigate("/admin/products"), 1000);
     } catch (err) {
       console.error(err);
-      setError(err.message || "Có lỗi xảy ra");
+      setError(err.message || "CÃ³ lá»—i xáº£y ra");
     } finally {
       setLoading(false);
     }
@@ -601,7 +601,7 @@ export default function EditProduct() {
         }}
       >
         <h1 style={{ fontSize: 24, marginBottom: 16, fontWeight: 700 }}>
-          Chỉnh sửa sản phẩm
+          Chá»‰nh sá»­a sáº£n pháº©m
         </h1>
 
         {error && <p style={{ color: "red", marginBottom: 12 }}>{error}</p>}
@@ -616,9 +616,9 @@ export default function EditProduct() {
               alignItems: "start",
             }}
           >
-            {/* Tên và Slug */}
+            {/* TÃªn vÃ  Slug */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Tên sản phẩm</span>
+              <span>TÃªn sáº£n pháº©m</span>
               <input
                 type="text"
                 name="name"
@@ -652,7 +652,7 @@ export default function EditProduct() {
 
             {/* Brand */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Thương hiệu</span>
+              <span>ThÆ°Æ¡ng hiá»‡u</span>
               <select
                 name="brand_id"
                 value={form.brand_id ?? ""}
@@ -664,7 +664,7 @@ export default function EditProduct() {
                   borderRadius: 8,
                 }}
               >
-                <option value="">-- chọn thương hiệu --</option>
+                <option value="">-- chá»n thÆ°Æ¡ng hiá»‡u --</option>
                 {brands.map((b) => (
                   <option key={b.id} value={b.id}>
                     {b.name}
@@ -675,7 +675,7 @@ export default function EditProduct() {
 
             {/* Category */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Danh mục</span>
+              <span>Danh má»¥c</span>
               <select
                 name="category_id"
                 value={form.category_id ?? ""}
@@ -687,7 +687,7 @@ export default function EditProduct() {
                   borderRadius: 8,
                 }}
               >
-                <option value="">-- chọn danh mục --</option>
+                <option value="">-- chá»n danh má»¥c --</option>
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -696,9 +696,9 @@ export default function EditProduct() {
               </select>
             </label>
 
-            {/* Giá gốc / Giá sale */}
+            {/* GiÃ¡ gá»‘c / GiÃ¡ sale */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Giá gốc</span>
+              <span>GiÃ¡ gá»‘c</span>
               <input
                 type="number"
                 name="price_root"
@@ -715,7 +715,7 @@ export default function EditProduct() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Giá sale</span>
+              <span>GiÃ¡ sale</span>
               <input
                 type="number"
                 name="price_sale"
@@ -731,9 +731,9 @@ export default function EditProduct() {
               />
             </label>
 
-            {/* Tồn kho */}
+            {/* Tá»“n kho */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Tồn kho</span>
+              <span>Tá»“n kho</span>
               <input
                 type="number"
                 name="qty"
@@ -749,9 +749,9 @@ export default function EditProduct() {
               />
             </label>
 
-            {/* Trạng thái */}
+            {/* Tráº¡ng thÃ¡i */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Trạng thái</span>
+              <span>Tráº¡ng thÃ¡i</span>
               <select
                 name="status"
                 value={form.status}
@@ -763,14 +763,14 @@ export default function EditProduct() {
                   borderRadius: 8,
                 }}
               >
-                <option value={1}>Hiển thị</option>
-                <option value={0}>Ẩn</option>
+                <option value={1}>Hiá»ƒn thá»‹</option>
+                <option value={0}>áº¨n</option>
               </select>
             </label>
 
-            {/* Ảnh */}
+            {/* áº¢nh */}
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Ảnh sản phẩm</span>
+              <span>áº¢nh sáº£n pháº©m</span>
               <input type="file" accept="image/*" onChange={handleFile} />
             </label>
           </div>
@@ -789,9 +789,9 @@ export default function EditProduct() {
             />
           )}
 
-          {/* ✅ MÔ TẢ - TinyMCE Editor */}
+          {/* âœ… MÃ” Táº¢ - TinyMCE Editor */}
           <label style={{ display: "grid", gap: 6 }}>
-            <span>Mô tả</span>
+            <span>MÃ´ táº£</span>
             <Editor
               apiKey="43suu6t6wy8vgq44sgpw0vsnwdodva8jlalw6zys9ckjhs56"
               value={form.description}
@@ -811,9 +811,9 @@ export default function EditProduct() {
             />
           </label>
 
-          {/* Chi tiết */}
+          {/* Chi tiáº¿t */}
           <label style={{ display: "grid", gap: 6 }}>
-            <span>Chi tiết</span>
+            <span>Chi tiáº¿t</span>
             <textarea
               name="detail"
               value={form.detail}
@@ -839,7 +839,7 @@ export default function EditProduct() {
                 cursor: "pointer",
               }}
             >
-              Hủy
+              Há»§y
             </button>
             <button
               type="submit"
@@ -853,7 +853,7 @@ export default function EditProduct() {
                 cursor: "pointer",
               }}
             >
-              {loading ? "Đang lưu…" : "Cập nhật"}
+              {loading ? "Äang lÆ°uâ€¦" : "Cáº­p nháº­t"}
             </button>
           </div>
         </form>
@@ -861,3 +861,5 @@ export default function EditProduct() {
     </section>
   );
 }
+
+

@@ -1,4 +1,4 @@
-
+﻿
 
 
 // import { useEffect, useRef, useState } from "react";
@@ -10,9 +10,9 @@
 
 // /* ====== BANNER SLIDES ====== */
 // const BANNERS = [
-//   { src: `${API_BASE}/assets/images/banner.webp`, alt: "Siêu ưu đãi thể thao", link: "/products" },
-//   { src: `${API_BASE}/assets/images/banner1.jpg`, alt: "Phong cách & hiệu năng", link: "/products?only_sale=1" },
-//   { src: `${API_BASE}/assets/images/banner11.jpg`, alt: "Bùng nổ mùa giải mới", link: "/category/1" },
+//   { src: `${API_BASE}/assets/images/banner.webp`, alt: "SiÃªu Æ°u Ä‘Ã£i thá»ƒ thao", link: "/products" },
+//   { src: `${API_BASE}/assets/images/banner1.jpg`, alt: "Phong cÃ¡ch & hiá»‡u nÄƒng", link: "/products?only_sale=1" },
+//   { src: `${API_BASE}/assets/images/banner11.jpg`, alt: "BÃ¹ng ná»• mÃ¹a giáº£i má»›i", link: "/category/1" },
 // ];
 
 // /* ---------- Icon chevron ---------- */
@@ -27,7 +27,7 @@
 //   );
 // }
 
-// /* ---------- Style nút mũi tên ---------- */
+// /* ---------- Style nÃºt mÅ©i tÃªn ---------- */
 // function arrowStyle(side) {
 //   const base = {
 //     position: "absolute",
@@ -46,7 +46,7 @@
 //   return side === "left" ? { ...base, left: 18 } : { ...base, right: 18 };
 // }
 
-// /* ---------- Slider tự động ---------- */
+// /* ---------- Slider tá»± Ä‘á»™ng ---------- */
 // function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", auto = 5000 }) {
 //   const [idx, setIdx] = useState(0);
 //   const touch = useRef({ x: 0, dx: 0, active: false });
@@ -95,7 +95,7 @@
 //               }}
 //               loading={i === 0 ? "eager" : "lazy"}
 //             />
-//             {/* Overlay nhẹ để chữ rõ */}
+//             {/* Overlay nháº¹ Ä‘á»ƒ chá»¯ rÃµ */}
 //             <div aria-hidden style={{
 //               position: "absolute", inset: 0,
 //               background: "linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.18) 45%, rgba(0,0,0,0) 70%)",
@@ -108,7 +108,7 @@
 //       {count > 1 && (
 //         <>
 //           <button
-//             onClick={() => go(-1)} aria-label="Slide trước" style={arrowStyle("left")}
+//             onClick={() => go(-1)} aria-label="Slide trÆ°á»›c" style={arrowStyle("left")}
 //             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-50%) scale(1.07)"; e.currentTarget.style.boxShadow = "0 14px 32px rgba(0,0,0,.35)"; }}
 //             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(-50%)"; e.currentTarget.style.boxShadow = "0 10px 26px rgba(0,0,0,.25)"; }}
 //           >
@@ -131,7 +131,7 @@
 //           display: "flex", alignItems: "center", justifyContent: "center", gap: 10, zIndex: 6,
 //         }}>
 //           {banners.map((_, i) => (
-//             <button key={i} onClick={() => goTo(i)} aria-label={`Tới slide ${i + 1}`}
+//             <button key={i} onClick={() => goTo(i)} aria-label={`Tá»›i slide ${i + 1}`}
 //               style={{
 //                 width: i === idx ? 14 : 11, height: i === idx ? 14 : 11,
 //                 borderRadius: 999, border: 0,
@@ -153,14 +153,14 @@
 //   const [q, setQ] = useState("");
 //   const [open, setOpen] = useState(false);
 //   const [loading, setLoading] = useState(false);
-//   const [items, setItems] = useState([]); // gợi ý
+//   const [items, setItems] = useState([]); // gá»£i Ã½
 //   const [highlight, setHighlight] = useState(-1);
 //   const nav = useNavigate();
 //   const boxRef = useRef(null);
 //   const abortRef = useRef(null);
 //   const timerRef = useRef(null);
 
-//   // click ngoài để đóng
+//   // click ngoÃ i Ä‘á»ƒ Ä‘Ã³ng
 //   useEffect(() => {
 //     const fn = (e) => {
 //       if (!boxRef.current) return;
@@ -170,7 +170,7 @@
 //     return () => document.removeEventListener("mousedown", fn);
 //   }, []);
 
-//   // debounce gọi API
+//   // debounce gá»i API
 //   useEffect(() => {
 //     if (timerRef.current) clearTimeout(timerRef.current);
 //     if (abortRef.current) abortRef.current.abort();
@@ -191,7 +191,7 @@
 //         if (!res.ok) throw new Error("HTTP " + res.status);
 //         const data = await res.json();
 //         const list = Array.isArray(data) ? data : data?.data ?? [];
-//         // Chuẩn hoá trường ảnh
+//         // Chuáº©n hoÃ¡ trÆ°á»ng áº£nh
 //         const mapped = list.map((p) => ({
 //           id: p.id,
 //           name: p.name || p.title || `#${p.id}`,
@@ -252,21 +252,21 @@
 //           onChange={(e) => setQ(e.target.value)}
 //           onFocus={() => (items.length ? setOpen(true) : null)}
 //           onKeyDown={onKeyDown}
-//           placeholder="Tìm nhanh: giày, áo, tất... (gõ để gợi ý)"
+//           placeholder="TÃ¬m nhanh: giÃ y, Ã¡o, táº¥t... (gÃµ Ä‘á»ƒ gá»£i Ã½)"
 //           className="sb-input"
-//           aria-label="Tìm kiếm sản phẩm"
+//           aria-label="TÃ¬m kiáº¿m sáº£n pháº©m"
 //         />
-//         <button className="sb-btn" onClick={goSearch} aria-label="Tìm kiếm">
-//           🔍
+//         <button className="sb-btn" onClick={goSearch} aria-label="TÃ¬m kiáº¿m">
+//           ðŸ”
 //         </button>
 //       </div>
 
 //       {/* dropdown */}
 //       {open && (
 //         <div className="sb-dd">
-//           {loading && <div className="sb-dd-row muted">Đang tìm...</div>}
+//           {loading && <div className="sb-dd-row muted">Äang tÃ¬m...</div>}
 //           {!loading && items.length === 0 && (
-//             <div className="sb-dd-row muted">Không có kết quả phù hợp</div>
+//             <div className="sb-dd-row muted">KhÃ´ng cÃ³ káº¿t quáº£ phÃ¹ há»£p</div>
 //           )}
 //           {!loading &&
 //             items.map((it, i) => (
@@ -294,7 +294,7 @@
 //   );
 // }
 
-// /* ---------- Card danh mục (light) ---------- */
+// /* ---------- Card danh má»¥c (light) ---------- */
 // function CategoryCard({ c, onClick, style }) {
 //   return (
 //     <button
@@ -342,7 +342,7 @@
 //   const [categories, setCategories] = useState([]);
 //   const [newItems, setNewItems] = useState([]);
 //   const [saleItems, setSaleItems] = useState([]);
-//   const [suggestItems, setSuggestItems] = useState([]); // 1 hàng gợi ý
+//   const [suggestItems, setSuggestItems] = useState([]); // 1 hÃ ng gá»£i Ã½
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState("");
 //   const navigate = useNavigate();
@@ -385,7 +385,7 @@
 //         }
 //         setSuggestItems(suggestion.slice(0, 4));
 //       } catch (err) {
-//         if (err.name !== "AbortError") setError("Không tải được dữ liệu");
+//         if (err.name !== "AbortError") setError("KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u");
 //       } finally {
 //         setLoading(false);
 //       }
@@ -409,7 +409,7 @@
 //       <section style={{ position: "relative", overflow: "hidden" }}>
 //         <BannerSlider banners={BANNERS} heightCSS="clamp(360px, 50vw, 620px)" auto={5000} />
 
-//         {/* Text ở giữa banner */}
+//         {/* Text á»Ÿ giá»¯a banner */}
 //         <div style={{
 //           position: "absolute", zIndex: 4, top: "50%", left: "50%",
 //           transform: "translate(-50%, -50%)",
@@ -423,22 +423,22 @@
 //             THETHAO SPORTS
 //           </h1>
 //           <p style={{ fontSize: "clamp(14px, 2.2vw, 22px)", fontWeight: 600, marginBottom: 22 }}>
-//             Hiệu năng bùng nổ – Phong cách thể thao hiện đại
+//             Hiá»‡u nÄƒng bÃ¹ng ná»• â€“ Phong cÃ¡ch thá»ƒ thao hiá»‡n Ä‘áº¡i
 //           </p>
 
-//           {/* === SearchBar đặt ngay dưới hero text === */}
+//           {/* === SearchBar Ä‘áº·t ngay dÆ°á»›i hero text === */}
 //           <div style={{ display: "flex", justifyContent: "center" }}>
 //             <SearchBar />
 //           </div>
 //         </div>
 //       </section>
 
-//       {/* ====== DANH MỤC NỔI BẬT ====== */}
+//       {/* ====== DANH Má»¤C Ná»”I Báº¬T ====== */}
 //       <section style={{ margin: "54px 0" }}>
-//         <h2 className="lt-section-title">Danh mục nổi bật</h2>
+//         <h2 className="lt-section-title">Danh má»¥c ná»•i báº­t</h2>
 
 //         {categories.length === 0 ? (
-//           <p style={{ textAlign: "center", color: "#6b7280" }}>Chưa có danh mục.</p>
+//           <p style={{ textAlign: "center", color: "#6b7280" }}>ChÆ°a cÃ³ danh má»¥c.</p>
 //         ) : (
 //           <div className="lt-wrap">
 //             <div style={{ display: "flex", gap: 24, justifyContent: "center", marginBottom: 18 }}>
@@ -456,7 +456,7 @@
 //             {restCats.length > 0 && (
 //               <>
 //                 <h3 style={{ textAlign: "center", color: "#6b7280", fontSize: 14, fontWeight: 700, marginBottom: 14 }}>
-//                   Các danh mục khác
+//                   CÃ¡c danh má»¥c khÃ¡c
 //                 </h3>
 //                 <div style={{ display: "flex", gap: 18, justifyContent: "center", flexWrap: "wrap" }}>
 //                   {restCats.map((c) => (
@@ -469,16 +469,16 @@
 //         )}
 //       </section>
 
-//       {/* ====== TRẠNG THÁI ====== */}
-//       {loading && <p style={{ textAlign: "center", color: "#2563eb" }}>Đang tải dữ liệu...</p>}
+//       {/* ====== TRáº NG THÃI ====== */}
+//       {loading && <p style={{ textAlign: "center", color: "#2563eb" }}>Äang táº£i dá»¯ liá»‡u...</p>}
 //       {error && <p style={{ textAlign: "center", color: "#dc2626" }}>{error}</p>}
 
-//       {/* ====== LƯỚI SẢN PHẨM ====== */}
+//       {/* ====== LÆ¯á»šI Sáº¢N PHáº¨M ====== */}
 //       {!loading && !error && (
 //         <>
-//           {/* Sản phẩm mới */}
+//           {/* Sáº£n pháº©m má»›i */}
 //           <section style={{ margin: "52px 0" }}>
-//             <h2 className="lt-section-title">Sản phẩm mới</h2>
+//             <h2 className="lt-section-title">Sáº£n pháº©m má»›i</h2>
 //             <div className="lt-wrap">
 //               <div className="lt-grid4">
 //                 {newItems.slice(0, 8).map((p) => <ProductCardHome key={p.id} p={p} />)}
@@ -486,9 +486,9 @@
 //             </div>
 //           </section>
 
-//           {/* Đang giảm giá */}
+//           {/* Äang giáº£m giÃ¡ */}
 //           <section style={{ margin: "52px 0" }}>
-//             <h2 className="lt-section-title">Đang giảm giá</h2>
+//             <h2 className="lt-section-title">Äang giáº£m giÃ¡</h2>
 //             <div className="lt-wrap">
 //               <div className="lt-grid4">
 //                 {saleItems.slice(0, 8).map((p) => <ProductCardHome key={p.id} p={p} />)}
@@ -496,9 +496,9 @@
 //             </div>
 //           </section>
 
-//           {/* Gợi ý cho bạn */}
+//           {/* Gá»£i Ã½ cho báº¡n */}
 //           <section style={{ margin: "44px 0" }}>
-//             <h2 className="lt-section-title">Gợi ý cho bạn</h2>
+//             <h2 className="lt-section-title">Gá»£i Ã½ cho báº¡n</h2>
 //             <div className="lt-wrap">
 //               <div className="lt-grid4">
 //                 {suggestItems.slice(0, 4).map((p) => <ProductCardHome key={p.id} p={p} />)}
@@ -508,19 +508,19 @@
 //         </>
 //       )}
 
-//       {/* ====== Footer/info (card nhạt) ====== */}
+//       {/* ====== Footer/info (card nháº¡t) ====== */}
 //       <section style={{
 //         background: "#f8fafc", borderRadius: 16, border: "1px solid #e5e7eb",
 //         boxShadow: "0 8px 22px rgba(2,6,23,.06)", padding: "28px 22px",
 //         margin: "50px auto 10px", maxWidth: 760, textAlign: "center",
 //       }}>
 //         <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 10, color: "#0f172a", textTransform: "uppercase" }}>
-//           ⚽ Cảm ơn bạn đã đồng hành cùng SPORT OH!
+//           âš½ Cáº£m Æ¡n báº¡n Ä‘Ã£ Ä‘á»“ng hÃ nh cÃ¹ng SPORT OH!
 //         </h2>
 //         <p style={{ color: "#334155", fontSize: 16, lineHeight: 1.6 }}>
-//           THETHAO SPORTS mang đến trang phục & phụ kiện thể thao chính hãng, bền bỉ và thời
-//           thượng. Chúng tôi tối ưu hiệu năng cho từng chuyển động, để bạn tự tin luyện tập,
-//           thi đấu và phá vỡ giới hạn mỗi ngày.
+//           THETHAO SPORTS mang Ä‘áº¿n trang phá»¥c & phá»¥ kiá»‡n thá»ƒ thao chÃ­nh hÃ£ng, bá»n bá»‰ vÃ  thá»i
+//           thÆ°á»£ng. ChÃºng tÃ´i tá»‘i Æ°u hiá»‡u nÄƒng cho tá»«ng chuyá»ƒn Ä‘á»™ng, Ä‘á»ƒ báº¡n tá»± tin luyá»‡n táº­p,
+//           thi Ä‘áº¥u vÃ  phÃ¡ vá»¡ giá»›i háº¡n má»—i ngÃ y.
 //         </p>
 //       </section>
 //     </div>
@@ -541,7 +541,7 @@
 //       @media (max-width:768px){ .lt-grid4{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
 //       @media (max-width:480px){ .lt-grid4{ grid-template-columns: 1fr; } }
 
-//       /* TITLE – đậm, màu đen, gạch chân gradient */
+//       /* TITLE â€“ Ä‘áº­m, mÃ u Ä‘en, gáº¡ch chÃ¢n gradient */
 //       .lt-section-title{
 //         font-size: clamp(22px, 3.2vw, 28px);
 //         font-weight: 1000;
@@ -620,6 +620,7 @@
 //     `}</style>
 //   );
 // }
+import { API_BASE } from "../config/env";
 
 
 import { useEffect, useRef, useState } from "react";
@@ -631,9 +632,9 @@ const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 
 /* ====== BANNER SLIDES ====== */
 const BANNERS = [
-  { src: `${API_BASE}/assets/images/banner.webp`, alt: "Siêu ưu đãi thể thao", link: "/products" },
-  { src: `${API_BASE}/assets/images/banner1.jpg`, alt: "Phong cách & hiệu năng", link: "/products?only_sale=1" },
-  { src: `${API_BASE}/assets/images/banner11.jpg`, alt: "Bùng nổ mùa giải mới", link: "/category/1" },
+  { src: `${API_BASE}/assets/images/banner.webp`, alt: "SiÃªu Æ°u Ä‘Ã£i thá»ƒ thao", link: "/products" },
+  { src: `${API_BASE}/assets/images/banner1.jpg`, alt: "Phong cÃ¡ch & hiá»‡u nÄƒng", link: "/products?only_sale=1" },
+  { src: `${API_BASE}/assets/images/banner11.jpg`, alt: "BÃ¹ng ná»• mÃ¹a giáº£i má»›i", link: "/category/1" },
 ];
 
 /* ---------- Icon chevron ---------- */
@@ -648,7 +649,7 @@ function IconChevron({ dir = "left", size = 24 }) {
   );
 }
 
-/* ---------- Style nút mũi tên ---------- */
+/* ---------- Style nÃºt mÅ©i tÃªn ---------- */
 function arrowStyle(side) {
   const base = {
     position: "absolute",
@@ -667,7 +668,7 @@ function arrowStyle(side) {
   return side === "left" ? { ...base, left: 18 } : { ...base, right: 18 };
 }
 
-/* ---------- Slider tự động ---------- */
+/* ---------- Slider tá»± Ä‘á»™ng ---------- */
 function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", auto = 5000 }) {
   const [idx, setIdx] = useState(0);
   const touch = useRef({ x: 0, dx: 0, active: false });
@@ -716,7 +717,7 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
               }}
               loading={i === 0 ? "eager" : "lazy"}
             />
-            {/* Overlay nhẹ để chữ rõ */}
+            {/* Overlay nháº¹ Ä‘á»ƒ chá»¯ rÃµ */}
             <div aria-hidden style={{
               position: "absolute", inset: 0,
               background: "linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.18) 45%, rgba(0,0,0,0) 70%)",
@@ -729,7 +730,7 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
       {count > 1 && (
         <>
           <button
-            onClick={() => go(-1)} aria-label="Slide trước" style={arrowStyle("left")}
+            onClick={() => go(-1)} aria-label="Slide trÆ°á»›c" style={arrowStyle("left")}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-50%) scale(1.07)"; e.currentTarget.style.boxShadow = "0 14px 32px rgba(0,0,0,.35)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(-50%)"; e.currentTarget.style.boxShadow = "0 10px 26px rgba(0,0,0,.25)"; }}
           >
@@ -752,7 +753,7 @@ function BannerSlider({ banners = [], heightCSS = "clamp(360px, 50vw, 620px)", a
           display: "flex", alignItems: "center", justifyContent: "center", gap: 10, zIndex: 6,
         }}>
           {banners.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)} aria-label={`Tới slide ${i + 1}`}
+            <button key={i} onClick={() => goTo(i)} aria-label={`Tá»›i slide ${i + 1}`}
               style={{
                 width: i === idx ? 14 : 11, height: i === idx ? 14 : 11,
                 borderRadius: 999, border: 0,
@@ -774,14 +775,14 @@ function SearchBar() {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]); // gợi ý
+  const [items, setItems] = useState([]); // gá»£i Ã½
   const [highlight, setHighlight] = useState(-1);
   const nav = useNavigate();
   const boxRef = useRef(null);
   const abortRef = useRef(null);
   const timerRef = useRef(null);
 
-  // click ngoài để đóng
+  // click ngoÃ i Ä‘á»ƒ Ä‘Ã³ng
   useEffect(() => {
     const fn = (e) => {
       if (!boxRef.current) return;
@@ -791,7 +792,7 @@ function SearchBar() {
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
-  // debounce gọi API
+  // debounce gá»i API
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (abortRef.current) abortRef.current.abort();
@@ -812,7 +813,7 @@ function SearchBar() {
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
         const list = Array.isArray(data) ? data : data?.data ?? [];
-        // Chuẩn hoá trường ảnh
+        // Chuáº©n hoÃ¡ trÆ°á»ng áº£nh
         const mapped = list.map((p) => ({
           id: p.id,
           name: p.name || p.title || `#${p.id}`,
@@ -873,21 +874,21 @@ function SearchBar() {
           onChange={(e) => setQ(e.target.value)}
           onFocus={() => (items.length ? setOpen(true) : null)}
           onKeyDown={onKeyDown}
-          placeholder="Tìm nhanh: giày, áo, tất... (gõ để gợi ý)"
+          placeholder="TÃ¬m nhanh: giÃ y, Ã¡o, táº¥t... (gÃµ Ä‘á»ƒ gá»£i Ã½)"
           className="sb-input"
-          aria-label="Tìm kiếm sản phẩm"
+          aria-label="TÃ¬m kiáº¿m sáº£n pháº©m"
         />
-        <button className="sb-btn" onClick={goSearch} aria-label="Tìm kiếm">
-          🔍
+        <button className="sb-btn" onClick={goSearch} aria-label="TÃ¬m kiáº¿m">
+          ðŸ”
         </button>
       </div>
 
       {/* dropdown */}
       {open && (
         <div className="sb-dd">
-          {loading && <div className="sb-dd-row muted">Đang tìm...</div>}
+          {loading && <div className="sb-dd-row muted">Äang tÃ¬m...</div>}
           {!loading && items.length === 0 && (
-            <div className="sb-dd-row muted">Không có kết quả phù hợp</div>
+            <div className="sb-dd-row muted">KhÃ´ng cÃ³ káº¿t quáº£ phÃ¹ há»£p</div>
           )}
           {!loading &&
             items.map((it, i) => (
@@ -915,7 +916,7 @@ function SearchBar() {
   );
 }
 
-/* ---------- Card danh mục (light) ---------- */
+/* ---------- Card danh má»¥c (light) ---------- */
 function CategoryCard({ c, onClick, style }) {
   return (
     <button
@@ -959,14 +960,14 @@ function CategoryCard({ c, onClick, style }) {
   );
 }
 
-/* ====== Tiện ích ====== */
-const vnd = (n) => `${Number(n || 0).toLocaleString("vi-VN")}đ`;
+/* ====== Tiá»‡n Ã­ch ====== */
+const vnd = (n) => `${Number(n || 0).toLocaleString("vi-VN")}Ä‘`;
 const discountPercent = (root, sale) =>
   root > 0 && sale > 0 && sale < root ? Math.round(((root - sale) / root) * 100) : 0;
 
-/* ====== Countdown đơn giản ====== */
+/* ====== Countdown Ä‘Æ¡n giáº£n ====== */
 function useCountdown(hours = 6) {
-  const [left, setLeft] = useState(hours * 3600); // giây
+  const [left, setLeft] = useState(hours * 3600); // giÃ¢y
   useEffect(() => {
     const t = setInterval(() => setLeft((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
@@ -981,16 +982,16 @@ function useCountdown(hours = 6) {
   };
 }
 
-/* ====== Deal card (kích thước như card SP mới) ====== */
+/* ====== Deal card (kÃ­ch thÆ°á»›c nhÆ° card SP má»›i) ====== */
 function DealCard({ p }) {
   const off = discountPercent(p.price_root, p.price_sale);
   const status =
-    (p.qty ?? 10) <= 0 ? "Hết hàng" : (p.qty ?? 10) < 5 ? "Sắp cháy hàng" : "Vừa mở bán";
+    (p.qty ?? 10) <= 0 ? "Háº¿t hÃ ng" : (p.qty ?? 10) < 5 ? "Sáº¯p chÃ¡y hÃ ng" : "Vá»«a má»Ÿ bÃ¡n";
   const badgeStyle =
-    status === "Hết hàng"
+    status === "Háº¿t hÃ ng"
       ? { bg: "#ef4444" }
-      : status === "Sắp cháy hàng"
-      ? { bg: "#f59e0b", icon: "🔥" }
+      : status === "Sáº¯p chÃ¡y hÃ ng"
+      ? { bg: "#f59e0b", icon: "ðŸ”¥" }
       : { bg: "#d1d5db" };
 
   return (
@@ -1001,7 +1002,7 @@ function DealCard({ p }) {
           alt={p.name}
           onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
         />
-        <button className="deal-like" aria-label="Yêu thích">♡</button>
+        <button className="deal-like" aria-label="YÃªu thÃ­ch">â™¡</button>
       </div>
 
       <div className="deal-name" title={p.name}>{p.name}</div>
@@ -1016,7 +1017,7 @@ function DealCard({ p }) {
             </>
           ) : null}
         </div>
-        <button className="deal-cart" aria-label="Thêm vào giỏ">🛒</button>
+        <button className="deal-cart" aria-label="ThÃªm vÃ o giá»">ðŸ›’</button>
       </div>
 
       <div className="deal-status" style={{ background: badgeStyle.bg }}>
@@ -1030,7 +1031,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [newItems, setNewItems] = useState([]);
   const [saleItems, setSaleItems] = useState([]);
-  const [suggestItems, setSuggestItems] = useState([]); // 1 hàng gợi ý
+  const [suggestItems, setSuggestItems] = useState([]); // 1 hÃ ng gá»£i Ã½
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -1041,7 +1042,7 @@ export default function Home() {
       try {
         setLoading(true); setError("");
 
-        const resCats = await fetch(`${API_BASE}/categories`, { signal: ac.signal });
+        const resCats = await fetch(`${API_BASE}/categories`);
         if (!resCats.ok) throw new Error(`HTTP ${resCats.status}`);
         const cats = await resCats.json();
         setCategories(Array.isArray(cats) ? cats : cats?.data ?? []);
@@ -1073,7 +1074,7 @@ export default function Home() {
         }
         setSuggestItems(suggestion.slice(0, 4));
       } catch (err) {
-        if (err.name !== "AbortError") setError("Không tải được dữ liệu");
+        if (err.name !== "AbortError") setError("KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u");
       } finally {
         setLoading(false);
       }
@@ -1098,7 +1099,7 @@ export default function Home() {
       <section style={{ position: "relative", overflow: "hidden" }}>
         <BannerSlider banners={BANNERS} heightCSS="clamp(360px, 50vw, 620px)" auto={5000} />
 
-        {/* Text ở giữa banner */}
+        {/* Text á»Ÿ giá»¯a banner */}
         <div style={{
           position: "absolute", zIndex: 4, top: "50%", left: "50%",
           transform: "translate(-50%, -50%)",
@@ -1112,22 +1113,22 @@ export default function Home() {
             THETHAO SPORTS
           </h1>
           <p style={{ fontSize: "clamp(14px, 2.2vw, 22px)", fontWeight: 600, marginBottom: 22 }}>
-            Hiệu năng bùng nổ – Phong cách thể thao hiện đại
+            Hiá»‡u nÄƒng bÃ¹ng ná»• â€“ Phong cÃ¡ch thá»ƒ thao hiá»‡n Ä‘áº¡i
           </p>
 
-          {/* === SearchBar đặt ngay dưới hero text === */}
+          {/* === SearchBar Ä‘áº·t ngay dÆ°á»›i hero text === */}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <SearchBar />
           </div>
         </div>
       </section>
 
-      {/* ====== DANH MỤC NỔI BẬT ====== */}
+      {/* ====== DANH Má»¤C Ná»”I Báº¬T ====== */}
       <section style={{ margin: "54px 0" }}>
-        <h2 className="lt-section-title">Danh mục nổi bật</h2>
+        <h2 className="lt-section-title">Danh má»¥c ná»•i báº­t</h2>
 
         {categories.length === 0 ? (
-          <p style={{ textAlign: "center", color: "#6b7280" }}>Chưa có danh mục.</p>
+          <p style={{ textAlign: "center", color: "#6b7280" }}>ChÆ°a cÃ³ danh má»¥c.</p>
         ) : (
           <div className="lt-wrap">
             <div style={{ display: "flex", gap: 24, justifyContent: "center", marginBottom: 18 }}>
@@ -1145,7 +1146,7 @@ export default function Home() {
             {restCats.length > 0 && (
               <>
                 <h3 style={{ textAlign: "center", color: "#6b7280", fontSize: 14, fontWeight: 700, marginBottom: 14 }}>
-                  Các danh mục khác
+                  CÃ¡c danh má»¥c khÃ¡c
                 </h3>
                 <div style={{ display: "flex", gap: 18, justifyContent: "center", flexWrap: "wrap" }}>
                   {restCats.map((c) => (
@@ -1158,16 +1159,16 @@ export default function Home() {
         )}
       </section>
 
-      {/* ====== TRẠNG THÁI ====== */}
-      {loading && <p style={{ textAlign: "center", color: "#2563eb" }}>Đang tải dữ liệu...</p>}
+      {/* ====== TRáº NG THÃI ====== */}
+      {loading && <p style={{ textAlign: "center", color: "#2563eb" }}>Äang táº£i dá»¯ liá»‡u...</p>}
       {error && <p style={{ textAlign: "center", color: "#dc2626" }}>{error}</p>}
 
-      {/* ====== LƯỚI SẢN PHẨM ====== */}
+      {/* ====== LÆ¯á»šI Sáº¢N PHáº¨M ====== */}
       {!loading && !error && (
         <>
-          {/* Sản phẩm mới */}
+          {/* Sáº£n pháº©m má»›i */}
           <section style={{ margin: "52px 0" }}>
-            <h2 className="lt-section-title">Sản phẩm mới</h2>
+            <h2 className="lt-section-title">Sáº£n pháº©m má»›i</h2>
             <div className="lt-wrap">
               <div className="lt-grid4">
                 {newItems.slice(0, 8).map((p) => <ProductCardHome key={p.id} p={p} />)}
@@ -1175,12 +1176,12 @@ export default function Home() {
             </div>
           </section>
 
-          {/* ====== ĐANG GIẢM GIÁ — nền đỏ pastel, kích thước như SP mới ====== */}
+          {/* ====== ÄANG GIáº¢M GIÃ â€” ná»n Ä‘á» pastel, kÃ­ch thÆ°á»›c nhÆ° SP má»›i ====== */}
           <DealSection items={saleItems.slice(0, 4)} />
 
-          {/* Gợi ý cho bạn */}
+          {/* Gá»£i Ã½ cho báº¡n */}
           <section style={{ margin: "44px 0" }}>
-            <h2 className="lt-section-title">Gợi ý cho bạn</h2>
+            <h2 className="lt-section-title">Gá»£i Ã½ cho báº¡n</h2>
             <div className="lt-wrap">
               <div className="lt-grid4">
                 {suggestItems.slice(0, 4).map((p) => <ProductCardHome key={p.id} p={p} />)}
@@ -1190,43 +1191,43 @@ export default function Home() {
         </>
       )}
 
-      {/* ====== Footer/info (card nhạt) ====== */}
+      {/* ====== Footer/info (card nháº¡t) ====== */}
       <section style={{
         background: "#f8fafc", borderRadius: 16, border: "1px solid #e5e7eb",
         boxShadow: "0 8px 22px rgba(2,6,23,.06)", padding: "28px 22px",
         margin: "50px auto 10px", maxWidth: 760, textAlign: "center",
       }}>
         <h2 style={{ fontSize: 22, fontWeight: 900, marginBottom: 10, color: "#0f172a", textTransform: "uppercase" }}>
-          ⚽ Cảm ơn bạn đã đồng hành cùng SPORT OH!
+          âš½ Cáº£m Æ¡n báº¡n Ä‘Ã£ Ä‘á»“ng hÃ nh cÃ¹ng SPORT OH!
         </h2>
         <p style={{ color: "#334155", fontSize: 16, lineHeight: 1.6 }}>
-          THETHAO SPORTS mang đến trang phục & phụ kiện thể thao chính hãng, bền bỉ và thời
-          thượng. Chúng tôi tối ưu hiệu năng cho từng chuyển động, để bạn tự tin luyện tập,
-          thi đấu và phá vỡ giới hạn mỗi ngày.
+          THETHAO SPORTS mang Ä‘áº¿n trang phá»¥c & phá»¥ kiá»‡n thá»ƒ thao chÃ­nh hÃ£ng, bá»n bá»‰ vÃ  thá»i
+          thÆ°á»£ng. ChÃºng tÃ´i tá»‘i Æ°u hiá»‡u nÄƒng cho tá»«ng chuyá»ƒn Ä‘á»™ng, Ä‘á»ƒ báº¡n tá»± tin luyá»‡n táº­p,
+          thi Ä‘áº¥u vÃ  phÃ¡ vá»¡ giá»›i háº¡n má»—i ngÃ y.
         </p>
       </section>
     </div>
   );
 }
 
-/* ====== DEAL SECTION (dùng cùng layout .lt-wrap + .lt-grid4) ====== */
+/* ====== DEAL SECTION (dÃ¹ng cÃ¹ng layout .lt-wrap + .lt-grid4) ====== */
 function DealSection({ items = [] }) {
-  const { h, m, s } = useCountdown(6); // đếm ngược 6 giờ
+  const { h, m, s } = useCountdown(6); // Ä‘áº¿m ngÆ°á»£c 6 giá»
   return (
     <section className="deal-surface">
       <div className="lt-wrap">
         <div className="deal-header">
           <div className="deal-title">
-            MÙA YÊU, DEAL NGỌT <span className="hot">HOT</span>
+            MÃ™A YÃŠU, DEAL NGá»ŒT <span className="hot">HOT</span>
           </div>
           <div className="deal-timer">
-            Kết thúc sau&nbsp;
+            Káº¿t thÃºc sau&nbsp;
             <span className="time">{h}</span>
-            <small>Giờ</small>
+            <small>Giá»</small>
             <span className="time">{m}</span>
-            <small>Phút</small>
+            <small>PhÃºt</small>
             <span className="time">{s}</span>
-            <small>Giây</small>
+            <small>GiÃ¢y</small>
           </div>
         </div>
 
@@ -1258,7 +1259,7 @@ function LightStyle() {
       @media (max-width:768px){ .lt-grid4{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
       @media (max-width:480px){ .lt-grid4{ grid-template-columns: 1fr; } }
 
-      /* TITLE – đậm, màu đen, gạch chân gradient */
+      /* TITLE â€“ Ä‘áº­m, mÃ u Ä‘en, gáº¡ch chÃ¢n gradient */
       .lt-section-title{
         font-size: clamp(22px, 3.2vw, 28px);
         font-weight: 1000;
@@ -1338,26 +1339,26 @@ function SearchBarStyle() {
   );
 }
 
-/* ====== CSS cho DEAL (đỏ pastel, card giống kích thước SP mới) ====== */
-/* ====== CSS cho DEAL (compact, đỏ pastel, thấp – gọn) ====== */
+/* ====== CSS cho DEAL (Ä‘á» pastel, card giá»‘ng kÃ­ch thÆ°á»›c SP má»›i) ====== */
+/* ====== CSS cho DEAL (compact, Ä‘á» pastel, tháº¥p â€“ gá»n) ====== */
 function DealStyle() {
   return (
     <style>{`
       :root{
-        --deal-img-h: 98px;         /* 👈 chiều cao ảnh card (điều chỉnh nhanh) */
-        --deal-gap: 12px;           /* khoảng cách giữa các card */
+        --deal-img-h: 98px;         /* ðŸ‘ˆ chiá»u cao áº£nh card (Ä‘iá»u chá»‰nh nhanh) */
+        --deal-gap: 12px;           /* khoáº£ng cÃ¡ch giá»¯a cÃ¡c card */
       }
 
-      /* NỀN KHU VỰC DEAL – đỏ pastel */
+      /* Ná»€N KHU Vá»°C DEAL â€“ Ä‘á» pastel */
       .deal-surface{
-        margin: 28px 0;             /* thấp hơn */
-        padding: 6px 0 10px 0;      /* giảm padding trên/dưới */
+        margin: 28px 0;             /* tháº¥p hÆ¡n */
+        padding: 6px 0 10px 0;      /* giáº£m padding trÃªn/dÆ°á»›i */
         background: linear-gradient(180deg, #ffd8dc, #ffc7cd);
         border-top: 1px solid #f3b2b8;
         border-bottom: 1px solid #f3b2b8;
       }
 
-      /* Header gọn */
+      /* Header gá»n */
       .deal-header{
         display:flex; justify-content:space-between; align-items:center;
         gap: 10px; padding: 6px 10px;
@@ -1379,20 +1380,20 @@ function DealStyle() {
         box-shadow: inset 0 -2px 0 rgba(0,0,0,.12);
       }
 
-      /* BODY giống layout .lt-grid4 nhưng gap nhỏ */
+      /* BODY giá»‘ng layout .lt-grid4 nhÆ°ng gap nhá» */
       .deal-body .lt-grid4{ gap: var(--deal-gap); }
 
-      /* CARD – compact như card Sản phẩm mới */
+      /* CARD â€“ compact nhÆ° card Sáº£n pháº©m má»›i */
       .deal-card{
         background:#fff; border-radius: 12px;
         border:1px solid #f3f4f6;
         box-shadow: 0 8px 18px rgba(2,6,23,.07);
-        padding: 8px;                /* 👈 giảm padding */
+        padding: 8px;                /* ðŸ‘ˆ giáº£m padding */
         display:flex; flex-direction:column; gap:8px;
       }
       .deal-card.placeholder{ background:transparent; border:1px dashed rgba(0,0,0,.08); box-shadow:none; }
 
-      /* Ảnh thấp */
+      /* áº¢nh tháº¥p */
       .deal-img{
         height: var(--deal-img-h);
         border-radius:10px; overflow:hidden; border:1px solid #e5e7eb; background:#fff; position:relative;
@@ -1405,14 +1406,14 @@ function DealStyle() {
         font-size:15px;
       }
 
-      /* Tên 1 dòng (rất gọn) */
+      /* TÃªn 1 dÃ²ng (ráº¥t gá»n) */
       .deal-name{
         font-weight:800; color:#111827; font-size:14px;
         white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
         min-height:auto; line-height:1.25;
       }
 
-      /* Giá + nút */
+      /* GiÃ¡ + nÃºt */
       .deal-price{ display:flex; align-items:center; justify-content:space-between; gap:6px; }
       .deal-sale{ color:#dc2626; font-weight:1000; font-size:16px; }
       .deal-root{ color:#6b7280; font-weight:700; display:flex; align-items:center; gap:6px; font-size:12px; }
@@ -1425,7 +1426,7 @@ function DealStyle() {
         background:#ef4444; color:#fff; font-size:16px; box-shadow: 0 8px 16px rgba(239,68,68,.32);
       }
 
-      /* Nhãn trạng thái nhỏ */
+      /* NhÃ£n tráº¡ng thÃ¡i nhá» */
       .deal-status{
         margin-top:4px; color:#fff; font-weight:900; font-size:12px;
         border-radius: 9px; padding: 4px 8px; text-align:center;
@@ -1440,4 +1441,6 @@ function DealStyle() {
     `}</style>
   );
 }
+
+
 

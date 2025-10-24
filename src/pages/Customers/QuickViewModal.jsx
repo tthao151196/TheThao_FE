@@ -1,4 +1,6 @@
-// src/pages/Customers/QuickViewModal.jsx
+﻿// src/pages/Customers/QuickViewModal.jsx
+
+
 import { useEffect, useRef, useState } from "react";
 
 export default function QuickViewModal({ productId, open, onClose, onAdd }) {
@@ -9,7 +11,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
   const [error, setError] = useState("");
   const dlgRef = useRef(null);
 
-  // lock body scroll khi mở modal
+  // lock body scroll khi má»Ÿ modal
   useEffect(() => {
     if (open) {
       const prev = document.body.style.overflow;
@@ -18,7 +20,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
     }
   }, [open]);
 
-  // fetch dữ liệu
+  // fetch dá»¯ liá»‡u
   useEffect(() => {
     if (!open || !productId) return;
     let abort = new AbortController();
@@ -29,7 +31,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
 
     fetch(`/api/products/${productId}/quick`, { signal: abort.signal })
       .then((r) => {
-        if (!r.ok) throw new Error("Không tải được dữ liệu sản phẩm");
+        if (!r.ok) throw new Error("KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u sáº£n pháº©m");
         return r.json();
       })
       .then((json) => {
@@ -42,14 +44,14 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
       })
       .catch((e) => {
         if (e.name !== "AbortError")
-          setError(e.message || "Lỗi không xác định");
+          setError(e.message || "Lá»—i khÃ´ng xÃ¡c Ä‘á»‹nh");
       })
       .finally(() => setLoading(false));
 
     return () => abort.abort();
   }, [open, productId]);
 
-  // Esc để đóng
+  // Esc Ä‘á»ƒ Ä‘Ã³ng
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
@@ -65,7 +67,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
     if (e.target === e.currentTarget) onClose?.();
   };
 
-  const price = (v) => Intl.NumberFormat("vi-VN").format(v || 0) + "₫";
+  const price = (v) => Intl.NumberFormat("vi-VN").format(v || 0) + "â‚«";
 
   return (
     <div
@@ -89,9 +91,9 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
           <button
             onClick={onClose}
             className="p-2 rounded-lg border hover:bg-slate-50 active:scale-95 transition"
-            aria-label="Đóng"
+            aria-label="ÄÃ³ng"
           >
-            ✕
+            âœ•
           </button>
         </div>
 
@@ -116,7 +118,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
                     onError={(e) => (e.currentTarget.style.opacity = 0)}
                   />
                   <span className="absolute bottom-2 right-2 text-[11px] px-2 py-0.5 rounded-full bg-black/50 text-white">
-                    Hover để phóng to
+                    Hover Ä‘á»ƒ phÃ³ng to
                   </span>
                 </div>
 
@@ -130,7 +132,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
                         onClick={() => setActiveImg(u)}
                         className={`shrink-0 w-14 h-14 rounded-lg border overflow-hidden
                                     ${activeImg === u ? "border-indigo-600" : "border-slate-200"}`}
-                        aria-label={`Ảnh ${i + 1}`}
+                        aria-label={`áº¢nh ${i + 1}`}
                       >
                         <img src={u} alt="" className="w-full h-full object-cover" />
                       </button>
@@ -154,14 +156,14 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
             </div>
             <div className="mt-1 text-xs sm:text-sm">
               {data?.in_stock ? (
-                <span className="text-emerald-600">Còn hàng</span>
+                <span className="text-emerald-600">CÃ²n hÃ ng</span>
               ) : (
-                <span className="text-rose-600">Hết hàng</span>
+                <span className="text-rose-600">Háº¿t hÃ ng</span>
               )}
             </div>
 
             <div className="mt-4">
-              <div className="text-sm font-medium mb-1">Chọn biến thể</div>
+              <div className="text-sm font-medium mb-1">Chá»n biáº¿n thá»ƒ</div>
               <div className="flex flex-wrap gap-2">
                 {(data?.variants || []).map((v) => {
                   const active = variant?.id === v.id;
@@ -175,7 +177,7 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
                                   ${active ? "border-indigo-600 bg-indigo-50" : "border-slate-300 bg-white"}
                                   ${v.stock <= 0 ? "opacity-45 cursor-not-allowed" : "hover:border-indigo-400"}`}
                     >
-                      {v.size || v.color || "Variant"}{v.stock <= 0 ? " (Hết)" : ""}
+                      {v.size || v.color || "Variant"}{v.stock <= 0 ? " (Háº¿t)" : ""}
                     </button>
                   );
                 })}
@@ -189,19 +191,19 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
                 className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300
                            text-white px-4 py-2 rounded-xl shadow-sm active:scale-95 transition"
               >
-                Thêm vào giỏ
+                ThÃªm vÃ o giá»
               </button>
               <a
                 href={`/product/${data?.id}`}
                 className="px-4 py-2 rounded-xl border hover:bg-slate-50 active:scale-95 transition text-center"
               >
-                Xem chi tiết
+                Xem chi tiáº¿t
               </a>
             </div>
 
             {(data?.rating_avg || data?.rating_count) && (
               <div className="mt-3 text-xs text-slate-500">
-                ⭐ {data?.rating_avg ?? 0}/5 • {data?.rating_count ?? 0} đánh giá
+                â­ {data?.rating_avg ?? 0}/5 â€¢ {data?.rating_count ?? 0} Ä‘Ã¡nh giÃ¡
               </div>
             )}
           </div>
@@ -210,3 +212,5 @@ export default function QuickViewModal({ productId, open, onClose, onAdd }) {
     </div>
   );
 }
+
+

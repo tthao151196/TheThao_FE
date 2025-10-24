@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 
 const linkStyle = ({ isActive }) => ({
   display: "block",
@@ -11,7 +11,7 @@ const linkStyle = ({ isActive }) => ({
   fontWeight: 600,
   transition: "all 0.2s",
   outline: "none",
-  // thanh nhấn nhá khi active
+  // thanh nháº¥n nhÃ¡ khi active
   boxShadow: isActive ? "inset 2px 0 0 #34eff6ff" : "none",
 });
 
@@ -51,41 +51,41 @@ export default function AdminSidebar() {
           flex: 1,
         }}
       >
-        <NavLink to="/admin" end style={linkStyle} title="Tổng quan">
+        <NavLink to="/admin" end style={linkStyle} title="Tá»•ng quan">
           Dashboard
         </NavLink>
 
-        <NavLink to="/admin/products" style={linkStyle} title="Quản lý sản phẩm">
-          Quản Lý Sản Phẩm
+        <NavLink to="/admin/products" style={linkStyle} title="Quáº£n lÃ½ sáº£n pháº©m">
+          Quáº£n LÃ½ Sáº£n Pháº©m
         </NavLink>
 
-        <NavLink to="/admin/categories" style={linkStyle} title="Quản lý danh mục">
-          Quản Lý Danh Mục
+        <NavLink to="/admin/categories" style={linkStyle} title="Quáº£n lÃ½ danh má»¥c">
+          Quáº£n LÃ½ Danh Má»¥c
         </NavLink>
 
-        <NavLink to="/admin/orders" style={linkStyle} title="Quản lý đơn hàng">
-          Quản Lý Đơn Hàng
+        <NavLink to="/admin/orders" style={linkStyle} title="Quáº£n lÃ½ Ä‘Æ¡n hÃ ng">
+          Quáº£n LÃ½ ÄÆ¡n HÃ ng
         </NavLink>
 
-        <NavLink to="/admin/posts" style={linkStyle} title="Quản lý bài viết">
-          Quản Lý Bài Viết
+        <NavLink to="/admin/posts" style={linkStyle} title="Quáº£n lÃ½ bÃ i viáº¿t">
+          Quáº£n LÃ½ BÃ i Viáº¿t
         </NavLink>
 
-        <NavLink to="/admin/contacts" style={linkStyle} title="Quản lý liên hệ">
-          Quản Lý Liên Hệ
+        <NavLink to="/admin/contacts" style={linkStyle} title="Quáº£n lÃ½ liÃªn há»‡">
+          Quáº£n LÃ½ LiÃªn Há»‡
         </NavLink>
 
-        <NavLink to="/admin/stock-movements" style={linkStyle} title="Nhập/Xuất/Kiểm kê kho">
-          Quản Lý Tồn Kho
+        <NavLink to="/admin/stock-movements" style={linkStyle} title="Nháº­p/Xuáº¥t/Kiá»ƒm kÃª kho">
+          Quáº£n LÃ½ Tá»“n Kho
         </NavLink>
 
-        {/* ✅ Mục mới: Mã giảm giá */}
-        <NavLink to="/admin/coupons" style={linkStyle} title="Tạo và quản lý mã giảm giá">
-          Quản Lý Mã Giảm Giá
+        {/* âœ… Má»¥c má»›i: MÃ£ giáº£m giÃ¡ */}
+        <NavLink to="/admin/coupons" style={linkStyle} title="Táº¡o vÃ  quáº£n lÃ½ mÃ£ giáº£m giÃ¡">
+          Quáº£n LÃ½ MÃ£ Giáº£m GiÃ¡
         </NavLink>
       </nav>
 
-      {/* Footer nho nhỏ */}
+      {/* Footer nho nhá» */}
       <div
         style={{
           fontSize: 12,
@@ -94,8 +94,10 @@ export default function AdminSidebar() {
           paddingTop: 8,
         }}
       >
-        v1.0 • TheThao Admin
+        v1.0 â€¢ TheThao Admin
       </div>
     </aside>
   );
 }
+
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+﻿import React, { useEffect, useState, useMemo } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -44,26 +44,26 @@ export default function Dashboard() {
       setData(json.data || {});
     } catch (e) {
       console.error(e);
-      setErr("Không thể tải dữ liệu dashboard.");
+      setErr("KhÃ´ng thá»ƒ táº£i dá»¯ liá»‡u dashboard.");
     } finally {
       setLoading(false);
     }
   }
 
-  // 👉 Dữ liệu cho biểu đồ: top 10 tồn kho thấp nhất (<= 10)
+  // ðŸ‘‰ Dá»¯ liá»‡u cho biá»ƒu Ä‘á»“: top 10 tá»“n kho tháº¥p nháº¥t (<= 10)
   const chartData = useMemo(() => {
     const arr = Array.isArray(data.lowStockProducts) ? data.lowStockProducts : [];
     return arr
       .slice() // clone
-      .sort((a, b) => a.qty - b.qty) // tăng dần theo SL
+      .sort((a, b) => a.qty - b.qty) // tÄƒng dáº§n theo SL
       .slice(0, 10)                  // top 10
       .map((p) => ({
-        name: p.name?.length > 15 ? p.name.slice(0, 15) + "…" : p.name || `#${p.id}`,
+        name: p.name?.length > 15 ? p.name.slice(0, 15) + "â€¦" : p.name || `#${p.id}`,
         qty: Number(p.qty || 0),
       }));
   }, [data.lowStockProducts]);
 
-  // 👉 Mở modal xem chi tiết
+  // ðŸ‘‰ Má»Ÿ modal xem chi tiáº¿t
   const handleOpenModal = async (type) => {
     try {
       const token =
@@ -74,19 +74,19 @@ export default function Dashboard() {
       switch (type) {
         case "products":
           url = `${API_BASE}/admin/products?per_page=30`;
-          title = "📦 Danh sách sản phẩm";
+          title = "ðŸ“¦ Danh sÃ¡ch sáº£n pháº©m";
           break;
         case "orders":
           url = `${API_BASE}/admin/orders?per_page=30`;
-          title = "🧾 Danh sách đơn hàng";
+          title = "ðŸ§¾ Danh sÃ¡ch Ä‘Æ¡n hÃ ng";
           break;
         case "users":
           url = `${API_BASE}/admin/users?per_page=30`;
-          title = "👤 Danh sách người dùng";
+          title = "ðŸ‘¤ Danh sÃ¡ch ngÆ°á»i dÃ¹ng";
           break;
         case "revenue":
           url = `${API_BASE}/admin/orders?status=4&per_page=30`;
-          title = "💰 Đơn hàng đã giao (doanh thu)";
+          title = "ðŸ’° ÄÆ¡n hÃ ng Ä‘Ã£ giao (doanh thu)";
           break;
         default:
           return;
@@ -102,12 +102,12 @@ export default function Dashboard() {
       const list = json.data || json;
       setModal({ show: true, title, list, type });
     } catch (e) {
-      alert("Không tải được dữ liệu chi tiết!");
+      alert("KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u chi tiáº¿t!");
       console.error(e);
     }
   };
 
-  if (loading) return <p style={{ textAlign: "center" }}>Đang tải dữ liệu...</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>Äang táº£i dá»¯ liá»‡u...</p>;
   if (err) return <p style={{ color: "red", textAlign: "center" }}>{err}</p>;
 
   return (
@@ -128,10 +128,10 @@ export default function Dashboard() {
           color: "#0284c7",
         }}
       >
-        🧭 Dashboard
+        ðŸ§­ Dashboard
       </h1>
 
-      {/* Các ô thống kê */}
+      {/* CÃ¡c Ã´ thá»‘ng kÃª */}
       <div
         style={{
           display: "grid",
@@ -140,45 +140,45 @@ export default function Dashboard() {
         }}
       >
         <Card
-          label="Tất cả sản phẩm"
+          label="Táº¥t cáº£ sáº£n pháº©m"
           value={data.totalProducts}
           color="#3b82f6"
           onClick={() => handleOpenModal("products")}
         />
         <Card
-          label="Tổng đơn hàng"
+          label="Tá»•ng Ä‘Æ¡n hÃ ng"
           value={data.totalOrders}
           color="#10b981"
           onClick={() => handleOpenModal("orders")}
         />
         <Card
-          label="Tổng doanh thu (đã giao)"
-          value={`₫${VND.format(data.totalRevenue)}`}
+          label="Tá»•ng doanh thu (Ä‘Ã£ giao)"
+          value={`â‚«${VND.format(data.totalRevenue)}`}
           color="#22c55e"
           onClick={() => handleOpenModal("revenue")}
         />
         <Card
-          label="Người dùng đã đăng ký"
+          label="NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng kÃ½"
           value={data.totalUsers}
           color="#9333ea"
           onClick={() => handleOpenModal("users")}
         />
       </div>
 
-      {/* Biểu đồ tồn kho thấp */}
+      {/* Biá»ƒu Ä‘á»“ tá»“n kho tháº¥p */}
       <div style={{ marginTop: 32 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: "#0f172a" }}>
-            📊 Biểu đồ Top sản phẩm tồn kho thấp
+            ðŸ“Š Biá»ƒu Ä‘á»“ Top sáº£n pháº©m tá»“n kho tháº¥p
           </h2>
           <small style={{ color: "#64748b" }}>
-            Hiển thị tối đa 10 sản phẩm có SL thấp nhất
+            Hiá»ƒn thá»‹ tá»‘i Ä‘a 10 sáº£n pháº©m cÃ³ SL tháº¥p nháº¥t
           </small>
         </div>
 
         {chartData.length === 0 ? (
           <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 20 }}>
-            ✅ Không có sản phẩm nào sắp hết hàng.
+            âœ… KhÃ´ng cÃ³ sáº£n pháº©m nÃ o sáº¯p háº¿t hÃ ng.
           </div>
         ) : (
           <div style={{ height: 320, background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 10 }}>
@@ -187,7 +187,7 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} interval={0} angle={-15} textAnchor="end" height={50} />
                 <YAxis allowDecimals={false} />
-                <Tooltip formatter={(v) => [`${v}`, "SL tồn"]} />
+                <Tooltip formatter={(v) => [`${v}`, "SL tá»“n"]} />
                 <Bar dataKey="qty" />
               </BarChart>
             </ResponsiveContainer>
@@ -195,7 +195,7 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Sản phẩm tồn kho thấp (thẻ) */}
+      {/* Sáº£n pháº©m tá»“n kho tháº¥p (tháº») */}
       <div style={{ marginTop: 24 }}>
         <h2
           style={{
@@ -205,21 +205,21 @@ export default function Dashboard() {
             marginBottom: 12,
             cursor: "pointer",
           }}
-          title="Xem toàn bộ sản phẩm tồn kho thấp"
+          title="Xem toÃ n bá»™ sáº£n pháº©m tá»“n kho tháº¥p"
           onClick={() =>
             setModal({
               show: true,
-              title: "📉 Sản phẩm tồn kho thấp (≤10)",
+              title: "ðŸ“‰ Sáº£n pháº©m tá»“n kho tháº¥p (â‰¤10)",
               list: data.lowStockProducts || [],
               type: "lowstock",
             })
           }
         >
-          📋 Sản phẩm tồn kho thấp (≤ 10)
+          ðŸ“‹ Sáº£n pháº©m tá»“n kho tháº¥p (â‰¤ 10)
         </h2>
 
         {data.lowStockProducts?.length === 0 ? (
-          <p>✅ Không có sản phẩm nào sắp hết hàng.</p>
+          <p>âœ… KhÃ´ng cÃ³ sáº£n pháº©m nÃ o sáº¯p háº¿t hÃ ng.</p>
         ) : (
           <div
             style={{
@@ -241,7 +241,7 @@ export default function Dashboard() {
                 }}
               >
                 <b>{p.name}</b>
-                <div style={{ fontSize: 14, color: "#475569" }}>Mã: {p.id}</div>
+                <div style={{ fontSize: 14, color: "#475569" }}>MÃ£: {p.id}</div>
                 <div style={{ fontSize: 14, color: "#e11d48" }}>SL: {p.qty}</div>
               </div>
             ))}
@@ -249,7 +249,7 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Modal chi tiết */}
+      {/* Modal chi tiáº¿t */}
       {modal.show && (
         <DetailModal
           title={modal.title}
@@ -289,7 +289,7 @@ function Card({ label, value, color, onClick }) {
   );
 }
 
-// Modal hiển thị chi tiết có hình ảnh
+// Modal hiá»ƒn thá»‹ chi tiáº¿t cÃ³ hÃ¬nh áº£nh
 function DetailModal({ title, data, onClose, type }) {
   return (
     <div
@@ -321,7 +321,7 @@ function DetailModal({ title, data, onClose, type }) {
         </h3>
 
         {(!data || data.length === 0) ? (
-          <p>Không có dữ liệu.</p>
+          <p>KhÃ´ng cÃ³ dá»¯ liá»‡u.</p>
         ) : (
           <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse", fontSize: 14 }}>
             <thead>
@@ -372,10 +372,12 @@ function DetailModal({ title, data, onClose, type }) {
               cursor: "pointer",
             }}
           >
-            Đóng
+            ÄÃ³ng
           </button>
         </div>
       </div>
     </div>
   );
 }
+
+

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -44,7 +44,7 @@ export default function PostEdit() {
                 });
                 setPreview(p.image_url || "");
             } catch (e) {
-                setErr("Không tải được bài viết.");
+                setErr("KhÃ´ng táº£i Ä‘Æ°á»£c bÃ i viáº¿t.");
             } finally {
                 setLoading(false);
             }
@@ -79,40 +79,40 @@ export default function PostEdit() {
             else if (f.image_url) fd.append("image_url", f.image_url);
 
             const res = await fetch(`${API_BASE}/admin/posts/${id}`, {
-                method: "POST", // server của bạn đang nhận POST update
+                method: "POST", // server cá»§a báº¡n Ä‘ang nháº­n POST update
                 headers: { Authorization: `Bearer ${token}` },
                 body: fd,
             });
             const txt = await res.text();
             if (!res.ok) throw new Error(`HTTP ${res.status}: ${txt}`);
 
-            alert("✅ Đã cập nhật bài viết");
+            alert("âœ… ÄÃ£ cáº­p nháº­t bÃ i viáº¿t");
             nav("/admin/posts");
         } catch (err) {
-            alert(`❌ Lỗi lưu: ${err.message}`);
+            alert(`âŒ Lá»—i lÆ°u: ${err.message}`);
         }
     }
 
-    if (loading) return <section style={{ padding: 20 }}>Đang tải…</section>;
+    if (loading) return <section style={{ padding: 20 }}>Äang táº£iâ€¦</section>;
     if (err) return <section style={{ padding: 20, color: "red" }}>{err}</section>;
 
     return (
         <section style={{ padding: 20 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Sửa bài viết #{id}</h1>
+                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Sá»­a bÃ i viáº¿t #{id}</h1>
                 <div style={{ display: "flex", gap: 8 }}>
                     <button
                         onClick={() => nav("/admin/posts")}
                         style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", cursor: "pointer" }}
                     >
-                        ← Quay lại
+                        â† Quay láº¡i
                     </button>
                     <button
                         form="post-form"
                         type="submit"
                         style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #0f62fe", background: "#0f62fe", color: "#fff", cursor: "pointer" }}
                     >
-                        Lưu
+                        LÆ°u
                     </button>
                 </div>
             </div>
@@ -122,7 +122,7 @@ export default function PostEdit() {
                     {/* Left */}
                     <div style={{ display: "grid", gap: 12 }}>
                         <div>
-                            <label style={{ fontSize: 13 }}>Tiêu đề *</label>
+                            <label style={{ fontSize: 13 }}>TiÃªu Ä‘á» *</label>
                             <input
                                 required
                                 value={f.title}
@@ -153,7 +153,7 @@ export default function PostEdit() {
 
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                             <div>
-                                <label style={{ fontSize: 13 }}>Trạng thái</label>
+                                <label style={{ fontSize: 13 }}>Tráº¡ng thÃ¡i</label>
                                 <select
                                     value={f.status}
                                     onChange={(e) => setF({ ...f, status: e.target.value })}
@@ -164,7 +164,7 @@ export default function PostEdit() {
                                 </select>
                             </div>
                             <div>
-                                <label style={{ fontSize: 13 }}>Ngày xuất bản</label>
+                                <label style={{ fontSize: 13 }}>NgÃ y xuáº¥t báº£n</label>
                                 <input
                                     value={f.published_at}
                                     onChange={(e) => setF({ ...f, published_at: e.target.value })}
@@ -175,7 +175,7 @@ export default function PostEdit() {
                         </div>
 
                         <div>
-                            <label style={{ fontSize: 13 }}>Tóm tắt</label>
+                            <label style={{ fontSize: 13 }}>TÃ³m táº¯t</label>
                             <textarea
                                 value={f.excerpt}
                                 onChange={(e) => setF({ ...f, excerpt: e.target.value })}
@@ -187,7 +187,7 @@ export default function PostEdit() {
 
                     {/* Right */}
                     <div style={{ display: "grid", gap: 12 }}>
-                        <label style={{ fontSize: 13 }}>Ảnh đại diện</label>
+                        <label style={{ fontSize: 13 }}>áº¢nh Ä‘áº¡i diá»‡n</label>
                         <div style={{ display: "flex", gap: 12, alignItems: "flex-start", background: "#f8fafc", border: "1px dashed #cbd5e1", borderRadius: 12, padding: 12 }}>
                             <div>
                                 {preview ? (
@@ -202,15 +202,15 @@ export default function PostEdit() {
                             <div style={{ flex: 1 }}>
                                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                                     <input type="file" accept="image/*" onChange={(e) => onPick(e.target.files?.[0] || null)} />
-                                    <span style={{ fontSize: 12, color: "#64748b" }}>Tối đa 2MB</span>
+                                    <span style={{ fontSize: 12, color: "#64748b" }}>Tá»‘i Ä‘a 2MB</span>
                                 </div>
 
                                 <div style={{ marginTop: 10 }}>
-                                    <label style={{ fontSize: 13 }}>Hoặc dán URL ảnh</label>
+                                    <label style={{ fontSize: 13 }}>Hoáº·c dÃ¡n URL áº£nh</label>
                                     <input
                                         value={f.image_url}
                                         onChange={(e) => { setF({ ...f, image_url: e.target.value }); setPreview(""); }}
-                                        placeholder="https://…"
+                                        placeholder="https://â€¦"
                                         style={{ width: "100%", height: 36, padding: "0 10px", border: "1px solid #ddd", borderRadius: 10 }}
                                     />
                                 </div>
@@ -218,11 +218,11 @@ export default function PostEdit() {
                         </div>
 
                         <div>
-                            <label style={{ fontSize: 13 }}>Nội dung</label>
+                            <label style={{ fontSize: 13 }}>Ná»™i dung</label>
                             <textarea
                                 value={f.content}
                                 onChange={(e) => setF({ ...f, content: e.target.value })}
-                                placeholder="Bạn có thể tích hợp WYSIWYG sau."
+                                placeholder="Báº¡n cÃ³ thá»ƒ tÃ­ch há»£p WYSIWYG sau."
                                 style={{ width: "100%", minHeight: 120, padding: 10, border: "1px solid #ddd", borderRadius: 10 }}
                             />
                         </div>
@@ -232,3 +232,5 @@ export default function PostEdit() {
         </section>
     );
 }
+
+

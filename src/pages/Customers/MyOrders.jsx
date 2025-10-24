@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ const API_BASE = "http://127.0.0.1:8000/api";
 
 /* ================= Helpers ================= */
 function getCustomerToken() {
-  // Ưu tiên key chuẩn, fallback sang các key phổ biến để tương thích code cũ
+  // Æ¯u tiÃªn key chuáº©n, fallback sang cÃ¡c key phá»• biáº¿n Ä‘á»ƒ tÆ°Æ¡ng thÃ­ch code cÅ©
   return (
     localStorage.getItem("mbs.customer.token") ||
     localStorage.getItem("mbs.customerToken") ||
@@ -23,7 +23,7 @@ function formatVND(n) {
 
 function toDateTimeString(s) {
   if (!s) return "-";
-  // hỗ trợ "2025-10-16T12:34:56.000000Z" hoặc "2025-10-16 12:34:56"
+  // há»— trá»£ "2025-10-16T12:34:56.000000Z" hoáº·c "2025-10-16 12:34:56"
   return s.toString().slice(0, 19).replace("T", " ");
 }
 
@@ -33,31 +33,31 @@ function normalizeStatus(raw) {
   const key = String(raw).trim().toLowerCase();
 
   const map = {
-    "0": 0, pending: 0, "chờ xác nhận": 0, "cho xac nhan": 0, "cho duyet": 0, "chờ duyệt": 0,
-    "1": 1, confirmed: 1, "đã xác nhận": 1, "da xac nhan": 1, "xac nhan": 1,
-    "2": 2, ready: 2, "chờ giao hàng": 2, "cho giao hang": 2, "đóng gói": 2, "dong goi": 2, "san sang": 2,
-    "3": 3, shipping: 3, "đang giao": 3, "dang giao": 3, "vận chuyển": 3, "van chuyen": 3,
-    "4": 4, delivered: 4, "đã giao": 4, "da giao": 4, "hoàn tất": 4, "hoan tat": 4,
-    "5": 5, canceled: 5, cancelled: 5, cancel: 5, "hủy": 5, "huy": 5,
+    "0": 0, pending: 0, "chá» xÃ¡c nháº­n": 0, "cho xac nhan": 0, "cho duyet": 0, "chá» duyá»‡t": 0,
+    "1": 1, confirmed: 1, "Ä‘Ã£ xÃ¡c nháº­n": 1, "da xac nhan": 1, "xac nhan": 1,
+    "2": 2, ready: 2, "chá» giao hÃ ng": 2, "cho giao hang": 2, "Ä‘Ã³ng gÃ³i": 2, "dong goi": 2, "san sang": 2,
+    "3": 3, shipping: 3, "Ä‘ang giao": 3, "dang giao": 3, "váº­n chuyá»ƒn": 3, "van chuyen": 3,
+    "4": 4, delivered: 4, "Ä‘Ã£ giao": 4, "da giao": 4, "hoÃ n táº¥t": 4, "hoan tat": 4,
+    "5": 5, canceled: 5, cancelled: 5, cancel: 5, "há»§y": 5, "huy": 5,
   };
   return map.hasOwnProperty(key) ? map[key] : 0;
 }
 
 function statusStyle(n) {
   const s = normalizeStatus(n);
-  if (s === 0) return { bg: "#fef3c7", color: "#92400e", text: "Chờ xác nhận" };
-  if (s === 1) return { bg: "#e9d5ff", color: "#6b21a8", text: "Đã xác nhận" };
-  if (s === 2) return { bg: "#cffafe", color: "#155e75", text: "Chuẩn bị giao" };
-  if (s === 3) return { bg: "#dbeafe", color: "#1e3a8a", text: "Đang giao" };
-  if (s === 4) return { bg: "#bbf7d0", color: "#065f46", text: "Đã giao" };
-  if (s === 5) return { bg: "#fee2e2", color: "#991b1b", text: "Đã hủy" };
-  return { bg: "#f3f4f6", color: "#374151", text: "Chờ xử lý" };
+  if (s === 0) return { bg: "#fef3c7", color: "#92400e", text: "Chá» xÃ¡c nháº­n" };
+  if (s === 1) return { bg: "#e9d5ff", color: "#6b21a8", text: "ÄÃ£ xÃ¡c nháº­n" };
+  if (s === 2) return { bg: "#cffafe", color: "#155e75", text: "Chuáº©n bá»‹ giao" };
+  if (s === 3) return { bg: "#dbeafe", color: "#1e3a8a", text: "Äang giao" };
+  if (s === 4) return { bg: "#bbf7d0", color: "#065f46", text: "ÄÃ£ giao" };
+  if (s === 5) return { bg: "#fee2e2", color: "#991b1b", text: "ÄÃ£ há»§y" };
+  return { bg: "#f3f4f6", color: "#374151", text: "Chá» xá»­ lÃ½" };
 }
 
 async function downloadInvoice(orderId, token) {
   try {
-    if (!orderId) throw new Error("Thiếu mã đơn hàng (id).");
-    if (!token) throw new Error("Chưa đăng nhập.");
+    if (!orderId) throw new Error("Thiáº¿u mÃ£ Ä‘Æ¡n hÃ ng (id).");
+    if (!token) throw new Error("ChÆ°a Ä‘Äƒng nháº­p.");
 
     const url = `${API_BASE}/orders/${orderId}/invoice.pdf`;
     const res = await fetch(url, {
@@ -66,7 +66,7 @@ async function downloadInvoice(orderId, token) {
 
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(`HTTP ${res.status} - ${txt || "Tải hóa đơn thất bại"}`);
+      throw new Error(`HTTP ${res.status} - ${txt || "Táº£i hÃ³a Ä‘Æ¡n tháº¥t báº¡i"}`);
     }
 
     const blob = await res.blob();
@@ -75,10 +75,10 @@ async function downloadInvoice(orderId, token) {
     link.download = `invoice-${orderId}.pdf`;
     link.click();
     URL.revokeObjectURL(link.href);
-    toast.success("Đã tải hóa đơn PDF");
+    toast.success("ÄÃ£ táº£i hÃ³a Ä‘Æ¡n PDF");
   } catch (e) {
     console.error("[downloadInvoice] error:", e);
-    toast.error(e.message || "Không thể tải hóa đơn");
+    toast.error(e.message || "KhÃ´ng thá»ƒ táº£i hÃ³a Ä‘Æ¡n");
   }
 }
 
@@ -92,7 +92,7 @@ export default function MyOrders() {
   useEffect(() => {
     const token = getCustomerToken();
     if (!token) {
-      setErr("⚠️ Vui lòng đăng nhập để xem đơn hàng của bạn.");
+      setErr("âš ï¸ Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ xem Ä‘Æ¡n hÃ ng cá»§a báº¡n.");
       setLoading(false);
       return;
     }
@@ -109,7 +109,7 @@ export default function MyOrders() {
         });
         if (!res.ok) {
           const txt = await res.text();
-          throw new Error(txt || "Lỗi khi tải danh sách đơn hàng.");
+          throw new Error(txt || "Lá»—i khi táº£i danh sÃ¡ch Ä‘Æ¡n hÃ ng.");
         }
         const data = await res.json();
         const arr = Array.isArray(data?.data)
@@ -118,10 +118,10 @@ export default function MyOrders() {
           ? data
           : [];
         setOrders(arr);
-        if (!arr.length) setErr("Chưa có đơn hàng nào.");
+        if (!arr.length) setErr("ChÆ°a cÃ³ Ä‘Æ¡n hÃ ng nÃ o.");
       } catch (e) {
         console.error(e);
-        setErr("Không thể tải danh sách đơn hàng.");
+        setErr("KhÃ´ng thá»ƒ táº£i danh sÃ¡ch Ä‘Æ¡n hÃ ng.");
       } finally {
         setLoading(false);
       }
@@ -140,7 +140,7 @@ export default function MyOrders() {
         padding: 40,
         position: "relative",
         overflow: "hidden",
-        background: "#f0fdf4", // nền xanh nhạt pastel
+        background: "#f0fdf4", // ná»n xanh nháº¡t pastel
       }}
     >
       <AppleBackground />
@@ -163,18 +163,18 @@ export default function MyOrders() {
         <div
           style={{
             padding: "16px 24px",
-            background: "linear-gradient(to right, #bbf7d0, #fef9c3)", // xanh pastel → vàng pastel
+            background: "linear-gradient(to right, #bbf7d0, #fef9c3)", // xanh pastel â†’ vÃ ng pastel
             borderBottom: "1px solid rgba(0,0,0,0.05)",
           }}
         >
-          <h1 className="text-xl font-bold text-emerald-800">🛍️ Đơn hàng của bạn</h1>
+          <h1 className="text-xl font-bold text-emerald-800">ðŸ›ï¸ ÄÆ¡n hÃ ng cá»§a báº¡n</h1>
           <div className="text-sm text-emerald-900/70">
-            Quản lý và theo dõi trạng thái đơn hàng dễ dàng.
+            Quáº£n lÃ½ vÃ  theo dÃµi tráº¡ng thÃ¡i Ä‘Æ¡n hÃ ng dá»… dÃ ng.
           </div>
         </div>
 
         <div style={{ padding: 24 }}>
-          {loading && <p>Đang tải danh sách đơn hàng...</p>}
+          {loading && <p>Äang táº£i danh sÃ¡ch Ä‘Æ¡n hÃ ng...</p>}
           {!loading && err && <p className="text-red-600 font-medium">{err}</p>}
 
           {!loading && !err && orders.length > 0 && (
@@ -182,11 +182,11 @@ export default function MyOrders() {
               <table className="min-w-full bg-white">
                 <thead className="bg-gray-50">
                   <tr className="text-left">
-                    <th className="px-4 py-3">Mã đơn</th>
-                    <th className="px-4 py-3">Ngày đặt</th>
-                    <th className="px-4 py-3">Tổng tiền</th>
-                    <th className="px-4 py-3">Trạng thái</th>
-                    <th className="px-4 py-3 text-right">Thao tác</th>
+                    <th className="px-4 py-3">MÃ£ Ä‘Æ¡n</th>
+                    <th className="px-4 py-3">NgÃ y Ä‘áº·t</th>
+                    <th className="px-4 py-3">Tá»•ng tiá»n</th>
+                    <th className="px-4 py-3">Tráº¡ng thÃ¡i</th>
+                    <th className="px-4 py-3 text-right">Thao tÃ¡c</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -248,7 +248,7 @@ export default function MyOrders() {
                             onMouseOver={(e) => (e.currentTarget.style.background = "#bfdbfe")}
                             onMouseOut={(e) => (e.currentTarget.style.background = "#dbeafe")}
                           >
-                            Tải hóa đơn (PDF)
+                            Táº£i hÃ³a Ä‘Æ¡n (PDF)
                           </button>
                         </td>
                       </tr>
@@ -264,7 +264,7 @@ export default function MyOrders() {
   );
 }
 
-/* ==== Icon nền pastel táo ==== */
+/* ==== Icon ná»n pastel tÃ¡o ==== */
 function AppleBackground() {
   const apples = [
     { top: "20%", left: "10%" },
@@ -291,3 +291,5 @@ function AppleBackground() {
     </div>
   );
 }
+
+

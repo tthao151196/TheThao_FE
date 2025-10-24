@@ -1,4 +1,4 @@
-// src/layouts/CustomerLayout.jsx
+﻿// src/layouts/CustomerLayout.jsx
 import React from "react";
 import { Outlet } from "react-router-dom";
 import TopBarAuth from "../components/header/TopBarAuth";
@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 export default function CustomerLayout() {
     return (
         <div className="site-wrap">
-            {/* CSS chuẩn cho toàn bộ site */}
+            {/* CSS chuáº©n cho toÃ n bá»™ site */}
             <style>{`
   .site-wrap{
     min-height:100dvh;
@@ -18,13 +18,13 @@ export default function CustomerLayout() {
     color:#f5f5f5;
   }
 
-  /* ↓ GIẢM khoảng bù cho header ở đây */
+  /* â†“ GIáº¢M khoáº£ng bÃ¹ cho header á»Ÿ Ä‘Ã¢y */
   :root{
-    --header-offset: 72px; /* trước là 110px */
+    --header-offset: 72px; /* trÆ°á»›c lÃ  110px */
   }
-  /* Có thể tinh chỉnh theo màn hình */
+  /* CÃ³ thá»ƒ tinh chá»‰nh theo mÃ n hÃ¬nh */
   @media (min-width: 1024px){
-    :root{ --header-offset: 0px; } /* desktop cao hơn chút */
+    :root{ --header-offset: 0px; } /* desktop cao hÆ¡n chÃºt */
   }
 
   .site-main{
@@ -48,3 +48,5 @@ export default function CustomerLayout() {
         </div>
     );
 }
+
+

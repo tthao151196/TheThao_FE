@@ -1,4 +1,4 @@
-// import React, { useEffect, useMemo, useState } from "react";
+﻿// import React, { useEffect, useMemo, useState } from "react";
 // import { useNavigate, Link } from "react-router-dom";
 
 // /* ===== Config ===== */
@@ -68,7 +68,7 @@
 //         let u = null;
 //         try { u = JSON.parse(localStorage.getItem("user") || "null"); } catch { }
 //         if (!token || !u) {
-//             navigate("/login", { replace: true, state: { denied: "Vui lòng đăng nhập để xem Tài khoản." } });
+//             navigate("/login", { replace: true, state: { denied: "Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ xem TÃ i khoáº£n." } });
 //             return;
 //         }
 //         setUser(u);
@@ -148,7 +148,7 @@
 //     const fmt = {
 //         money(n) {
 //             const num = Number(n || 0);
-//             try { return num.toLocaleString("vi-VN") + "₫"; } catch { return `${num}₫`; }
+//             try { return num.toLocaleString("vi-VN") + "â‚«"; } catch { return `${num}â‚«`; }
 //         },
 //         date(s) {
 //             if (!s) return "";
@@ -160,8 +160,8 @@
 //         id: o?.id ?? o?.order_id ?? o?.code ?? o?.order_code ?? "-",
 //         code: o?.code ?? o?.order_code ?? o?.id ?? "-",
 //         created_at: o?.created_at ?? o?.createdAt ?? o?.date ?? "",
-//         status: o?.status_text ?? o?.status ?? (o?.is_completed ? "Hoàn tất" : "Đang xử lý"),
-//         payment_status: o?.payment_status ?? (o?.is_paid ? "Đã thanh toán" : "Chưa thanh toán"),
+//         status: o?.status_text ?? o?.status ?? (o?.is_completed ? "HoÃ n táº¥t" : "Äang xá»­ lÃ½"),
+//         payment_status: o?.payment_status ?? (o?.is_paid ? "ÄÃ£ thanh toÃ¡n" : "ChÆ°a thanh toÃ¡n"),
 //         payment_method: o?.payment_method ?? o?.method ?? o?.payment ?? "",
 //         total: o?.total ?? o?.grand_total ?? o?.amount ?? o?.total_price ?? o?.sum ?? 0,
 //         user_id: o?.user_id ?? o?.customer_id ?? o?.user?.id ?? o?.customer?.id,
@@ -179,16 +179,16 @@
 //     const statusText = (st) => {
 //         if (typeof st === "number" || /^\d+$/.test(String(st))) {
 //             const n = Number(st);
-//             if (n === 0) return "Chờ xử lý";
-//             if (n === 1) return "Đang giao";
-//             if (n === 2) return "Hoàn tất";
-//             if (n === -1) return "Đã hủy";
+//             if (n === 0) return "Chá» xá»­ lÃ½";
+//             if (n === 1) return "Äang giao";
+//             if (n === 2) return "HoÃ n táº¥t";
+//             if (n === -1) return "ÄÃ£ há»§y";
 //         }
-//         return String(st || "Đang xử lý");
+//         return String(st || "Äang xá»­ lÃ½");
 //     };
 
-//     // Header columns render bằng array để tránh whitespace text node
-//     const columns = ["Mã đơn", "Ngày đặt", "Trạng thái", "Thanh toán", "Tổng tiền", ""];
+//     // Header columns render báº±ng array Ä‘á»ƒ trÃ¡nh whitespace text node
+//     const columns = ["MÃ£ Ä‘Æ¡n", "NgÃ y Ä‘áº·t", "Tráº¡ng thÃ¡i", "Thanh toÃ¡n", "Tá»•ng tiá»n", ""];
 
 //     return (
 //         <div className="account-page">
@@ -324,14 +324,14 @@
 //                                 <div className="info-item">
 //                                     <div className="icon">ID</div>
 //                                     <div className="kv">
-//                                         <div className="label">Mã người dùng</div>
+//                                         <div className="label">MÃ£ ngÆ°á»i dÃ¹ng</div>
 //                                         <div className="value">{profile?.id ?? user?.id ?? "-"}</div>
 //                                     </div>
 //                                 </div>
 //                                 <div className="info-item">
-//                                     <div className="icon">☎</div>
+//                                     <div className="icon">â˜Ž</div>
 //                                     <div className="kv">
-//                                         <div className="label">Số điện thoại</div>
+//                                         <div className="label">Sá»‘ Ä‘iá»‡n thoáº¡i</div>
 //                                         <div className="value">{profile?.phone ?? profile?.phone_number ?? "-"}</div>
 //                                     </div>
 //                                 </div>
@@ -342,19 +342,19 @@
 //                     {/* RIGHT: ORDERS */}
 //                     <section className="card">
 //                         <div className="orders-head">
-//                             <div className="title">Đơn hàng của tôi</div>
+//                             <div className="title">ÄÆ¡n hÃ ng cá»§a tÃ´i</div>
 //                             <div className="stats">
-//                                 <div className="chip">Số đơn: {orderCount}</div>
-//                                 <div className="chip">Tổng chi: {fmt.money(orderSum)}</div>
+//                                 <div className="chip">Sá»‘ Ä‘Æ¡n: {orderCount}</div>
+//                                 <div className="chip">Tá»•ng chi: {fmt.money(orderSum)}</div>
 //                             </div>
 //                         </div>
 
 //                         {loading ? (
-//                             <div style={{ padding: "0 16px 16px 16px" }}>Đang tải dữ liệu…</div>
+//                             <div style={{ padding: "0 16px 16px 16px" }}>Äang táº£i dá»¯ liá»‡uâ€¦</div>
 //                         ) : err ? (
 //                             <div style={{ padding: "0 16px 16px 16px" }}>{err}</div>
 //                         ) : orderCount === 0 ? (
-//                             <div style={{ padding: "0 16px 16px 16px" }}>Bạn chưa có đơn hàng nào.</div>
+//                             <div style={{ padding: "0 16px 16px 16px" }}>Báº¡n chÆ°a cÃ³ Ä‘Æ¡n hÃ ng nÃ o.</div>
 //                         ) : (
 //                             <div className="table-wrap">
 //                                 <table>
@@ -368,9 +368,9 @@
 //                                                 <td key="code">{n.code}</td>,
 //                                                 <td key="date">{fmt.date(n.created_at)}</td>,
 //                                                 <td key="status"><span className="badge gray">{statusText(n.status)}</span></td>,
-//                                                 <td key="payment"><span className="badge">{n.payment_status || n.payment_method || "Chưa rõ"}</span></td>,
+//                                                 <td key="payment"><span className="badge">{n.payment_status || n.payment_method || "ChÆ°a rÃµ"}</span></td>,
 //                                                 <td key="total">{fmt.money(n.total)}</td>,
-//                                                 <td key="link"><Link to={`/track?code=${code}`} className="btn-link">Chi tiết</Link></td>,
+//                                                 <td key="link"><Link to={`/track?code=${code}`} className="btn-link">Chi tiáº¿t</Link></td>,
 //                                             ];
 //                                             return <tr key={n.id ?? idx}>{cells}</tr>;
 //                                         })
@@ -397,9 +397,9 @@ const LOGOUT_URL = `${API_BASE}/api/logout`;
 export default function AccountOverview() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [compareCount, setCompareCount] = useState(0); // ✅ thêm state đếm sp so sánh
+  const [compareCount, setCompareCount] = useState(0); // âœ… thÃªm state Ä‘áº¿m sp so sÃ¡nh
 
-  // ✅ Ưu tiên user thường, nếu không có mới đọc admin
+  // âœ… Æ¯u tiÃªn user thÆ°á»ng, náº¿u khÃ´ng cÃ³ má»›i Ä‘á»c admin
   useEffect(() => {
     try {
       const normalUser = JSON.parse(localStorage.getItem("user") || "null");
@@ -411,7 +411,7 @@ export default function AccountOverview() {
     }
   }, []);
 
-  // ✅ Cập nhật số lượng sản phẩm so sánh
+  // âœ… Cáº­p nháº­t sá»‘ lÆ°á»£ng sáº£n pháº©m so sÃ¡nh
   useEffect(() => {
     const loadCompare = () => {
       try {
@@ -429,7 +429,7 @@ export default function AccountOverview() {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  // ✅ Đăng xuất
+  // âœ… ÄÄƒng xuáº¥t
   const handleLogout = async () => {
     const adminToken = localStorage.getItem("admin_token");
     const customerToken = localStorage.getItem("token");
@@ -448,7 +448,7 @@ export default function AccountOverview() {
       }
     } catch {}
 
-    // Xóa phiên
+    // XÃ³a phiÃªn
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("admin_token");
@@ -511,7 +511,7 @@ export default function AccountOverview() {
               fontWeight: 600,
             }}
           >
-            Xin chào{user?.name ? `, ${user.name}` : ""} 👋
+            Xin chÃ o{user?.name ? `, ${user.name}` : ""} ðŸ‘‹
           </div>
           <div
             style={{
@@ -523,7 +523,7 @@ export default function AccountOverview() {
               fontWeight: 600,
             }}
           >
-            {user?.email || "—"}
+            {user?.email || "â€”"}
           </div>
 
           <div style={{ flex: 1 }} />
@@ -540,7 +540,7 @@ export default function AccountOverview() {
               boxShadow: "0 6px 14px rgba(220,38,38,.35)",
             }}
           >
-            Đăng xuất
+            ÄÄƒng xuáº¥t
           </button>
         </div>
 
@@ -553,10 +553,10 @@ export default function AccountOverview() {
             color: "#0f172a",
           }}
         >
-          Tổng quan tài khoản
+          Tá»•ng quan tÃ i khoáº£n
         </h1>
         <p style={{ margin: 0, color: "#334155" }}>
-          Thông tin hồ sơ và trạng thái đăng nhập.
+          ThÃ´ng tin há»“ sÆ¡ vÃ  tráº¡ng thÃ¡i Ä‘Äƒng nháº­p.
         </p>
 
         <div
@@ -569,29 +569,29 @@ export default function AccountOverview() {
         >
           <div style={{ display: "grid", gap: 14 }}>
             <StatusBadge />
-            <Row label="Tên hiển thị" value={user?.name ?? "—"} />
-            <Row label="E-mail" value={user?.email ?? "—"} />
-            <Row label="ID người dùng" value={user?.id ?? user?._id ?? "—"} />
+            <Row label="TÃªn hiá»ƒn thá»‹" value={user?.name ?? "â€”"} />
+            <Row label="E-mail" value={user?.email ?? "â€”"} />
+            <Row label="ID ngÆ°á»i dÃ¹ng" value={user?.id ?? user?._id ?? "â€”"} />
           </div>
           <div style={{ display: "grid", gap: 14 }}>
             <InsightCard
-              title="Đơn hàng của tôi"
-              value="—"
-              hint={<Link to="/my-orders">Xem chi tiết</Link>}
+              title="ÄÆ¡n hÃ ng cá»§a tÃ´i"
+              value="â€”"
+              hint={<Link to="/my-orders">Xem chi tiáº¿t</Link>}
               color="sky"
             />
             <InsightCard
-              title="Đơn đã hủy"
-              value="—"
-              hint={<Link to="/canceled-orders">Xem chi tiết</Link>}
+              title="ÄÆ¡n Ä‘Ã£ há»§y"
+              value="â€”"
+              hint={<Link to="/canceled-orders">Xem chi tiáº¿t</Link>}
               color="rose"
             />
-            {/* ✅ thêm thẻ so sánh */}
+            {/* âœ… thÃªm tháº» so sÃ¡nh */}
             <InsightCard
-              title="Sản phẩm yêu thích"
-             value="—"
+              title="Sáº£n pháº©m yÃªu thÃ­ch"
+             value="â€”"
              
-              hint={<Link to="/wishlist">Xem chi tiết</Link>}
+              hint={<Link to="/wishlist">Xem chi tiáº¿t</Link>}
               color="emerald"
             />
           </div>
@@ -606,9 +606,9 @@ export default function AccountOverview() {
             color: "#475569",
           }}
         >
-          <span>© {new Date().getFullYear()}</span>
+          <span>Â© {new Date().getFullYear()}</span>
           <Link to="/" style={{ color: "#0ea5e9" }}>
-            ← Về trang chủ
+            â† Vá» trang chá»§
           </Link>
         </div>
       </div>
@@ -616,9 +616,9 @@ export default function AccountOverview() {
   );
 }
 
-/* ==== Background con vật pastel ==== */
+/* ==== Background con váº­t pastel ==== */
 function BackgroundAnimals() {
-  const animals = ["🐱", "🐰", "🐻", "🐼", "🐧", "🦊", "🐥"];
+  const animals = ["ðŸ±", "ðŸ°", "ðŸ»", "ðŸ¼", "ðŸ§", "ðŸ¦Š", "ðŸ¥"];
   return (
     <div
       style={{
@@ -699,8 +699,8 @@ function StatusBadge() {
         }}
       />
       <div style={{ fontSize: 13 }}>
-        <div style={{ fontWeight: 800, color: "#065f46" }}>Đang đăng nhập</div>
-        <div style={{ color: "#047857" }}>Phiên đang hoạt động</div>
+        <div style={{ fontWeight: 800, color: "#065f46" }}>Äang Ä‘Äƒng nháº­p</div>
+        <div style={{ color: "#047857" }}>PhiÃªn Ä‘ang hoáº¡t Ä‘á»™ng</div>
       </div>
     </div>
   );
@@ -739,3 +739,5 @@ function InsightCard({ title, value, hint, color }) {
     </div>
   );
 }
+
+

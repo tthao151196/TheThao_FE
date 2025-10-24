@@ -1,4 +1,4 @@
-// src/pages/Customers/QuickViewPage.jsx
+﻿// src/pages/Customers/QuickViewPage.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import QuickViewModal from "./QuickViewModal.jsx";
 
@@ -10,9 +10,9 @@ export default function QuickViewPage() {
     <QuickViewModal
       productId={id}
       open={true}
-      onClose={() => nav(-1)} // Đóng modal → quay lại trang trước
+      onClose={() => nav(-1)} // ÄÃ³ng modal â†’ quay láº¡i trang trÆ°á»›c
       onAdd={(prod, variant) => {
-        // Phát event để App nhận và thêm vào giỏ (không đụng logic hiện có)
+        // PhÃ¡t event Ä‘á»ƒ App nháº­n vÃ  thÃªm vÃ o giá» (khÃ´ng Ä‘á»¥ng logic hiá»‡n cÃ³)
         window.dispatchEvent(
           new CustomEvent("qv:add", { detail: { prod, variant } })
         );
@@ -20,3 +20,5 @@ export default function QuickViewPage() {
     />
   );
 }
+
+

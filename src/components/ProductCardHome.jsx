@@ -1,4 +1,4 @@
-// src/components/ProductCardHome.jsx
+﻿// src/components/ProductCardHome.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import HeartButton from "./HeartButton";
@@ -6,18 +6,18 @@ import HeartButton from "./HeartButton";
 const VND = new Intl.NumberFormat("vi-VN");
 const PLACEHOLDER = "https://placehold.co/400x300?text=No+Image";
 
-// Gradient dịu (pastel)
+// Gradient dá»‹u (pastel)
 const SOFT_GRADIENT =
     "linear-gradient(135deg, #a5b4fc 0%, #93c5fd 45%, #67e8f9 100%)";
 
-// Màu chữ
+// MÃ u chá»¯
 const INK = "#0b1220";
 const MUTED = "#475569";
 const SALE = "#e11d48";
 const CONTACT = "#2563eb";
 
 export default function ProductCardHome({ p }) {
-    // Chuẩn hoá giá
+    // Chuáº©n hoÃ¡ giÃ¡
     const basePrice = Number(p.price_root ?? 0);
     const salePrice = Number(p.price_sale ?? p.price ?? 0);
     const hasSale = basePrice > 0 && salePrice > 0 && salePrice < basePrice;
@@ -28,7 +28,7 @@ export default function ProductCardHome({ p }) {
 
     const imgSrc = p.thumbnail_url || p.image || p.thumbnail || PLACEHOLDER;
 
-    // Force re-render Heart khi toggle (để đổi màu ngay)
+    // Force re-render Heart khi toggle (Ä‘á»ƒ Ä‘á»•i mÃ u ngay)
     const [, force] = useState(0);
 
     return (
@@ -57,7 +57,7 @@ export default function ProductCardHome({ p }) {
                     e.currentTarget.style.boxShadow = "0 8px 24px rgba(2,6,23,.08)";
                 }}
             >
-                {/* Ảnh */}
+                {/* áº¢nh */}
                 <div
                     style={{
                         height: 190,
@@ -66,7 +66,7 @@ export default function ProductCardHome({ p }) {
                         overflow: "hidden",
                     }}
                 >
-                    {/* Badge giảm giá */}
+                    {/* Badge giáº£m giÃ¡ */}
                     {hasSale && (
                         <span
                             style={{
@@ -89,25 +89,25 @@ export default function ProductCardHome({ p }) {
                     {/* Tym */}
                     <div
                         style={{ position: "absolute", top: 10, right: 10, zIndex: 2 }}
-                        onClick={(e) => e.preventDefault()} // tránh click vào card bị điều hướng
+                        onClick={(e) => e.preventDefault()} // trÃ¡nh click vÃ o card bá»‹ Ä‘iá»u hÆ°á»›ng
                     >
                         <HeartButton productId={p.id} onToggle={() => force((x) => x + 1)} />
                     </div>
 
                     <img
                         src={imgSrc}
-                        alt={p.name || `Sản phẩm #${p.id}`}
+                        alt={p.name || `Sáº£n pháº©m #${p.id}`}
                         onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
                         style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         loading="lazy"
                     />
                 </div>
 
-                {/* Thông tin (nền gradient + lớp trắng để chữ rõ) */}
+                {/* ThÃ´ng tin (ná»n gradient + lá»›p tráº¯ng Ä‘á»ƒ chá»¯ rÃµ) */}
                 <div style={{ display: "flex", flexDirection: "column", padding: 0, flex: 1 }}>
                     <div
                         style={{
-                            // tăng lớp trắng mờ để tương phản tốt
+                            // tÄƒng lá»›p tráº¯ng má» Ä‘á»ƒ tÆ°Æ¡ng pháº£n tá»‘t
                             backgroundImage: `linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.86)), ${SOFT_GRADIENT}`,
                             color: INK,
                             padding: "12px 12px 14px",
@@ -119,7 +119,7 @@ export default function ProductCardHome({ p }) {
                             borderRadius: "0 0 16px 16px",
                         }}
                     >
-                        {/* Tên – cố định 2 dòng, chữ đậm màu mực */}
+                        {/* TÃªn â€“ cá»‘ Ä‘á»‹nh 2 dÃ²ng, chá»¯ Ä‘áº­m mÃ u má»±c */}
                         <h3
                             style={{
                                 fontSize: 16,
@@ -138,7 +138,7 @@ export default function ProductCardHome({ p }) {
                             {p.name}
                         </h3>
 
-                        {/* Brand – 1 dòng */}
+                        {/* Brand â€“ 1 dÃ²ng */}
                         <div
                             style={{
                                 color: MUTED,
@@ -151,10 +151,10 @@ export default function ProductCardHome({ p }) {
                             }}
                             title={p.brand_name || ""}
                         >
-                            {p.brand_name || "—"}
+                            {p.brand_name || "â€”"}
                         </div>
 
-                        {/* Giá – dồn đáy */}
+                        {/* GiÃ¡ â€“ dá»“n Ä‘Ã¡y */}
                         <div style={{ marginTop: "auto" }}>
                             <div
                                 style={{
@@ -163,7 +163,7 @@ export default function ProductCardHome({ p }) {
                                     color: showPrice > 0 ? (hasSale ? SALE : INK) : CONTACT,
                                 }}
                             >
-                                {showPrice > 0 ? `${VND.format(showPrice)} đ` : "Liên hệ"}
+                                {showPrice > 0 ? `${VND.format(showPrice)} Ä‘` : "LiÃªn há»‡"}
                             </div>
                             {hasSale && (
                                 <div
@@ -174,7 +174,7 @@ export default function ProductCardHome({ p }) {
                                         fontWeight: 800,
                                     }}
                                 >
-                                    {VND.format(basePrice)} đ
+                                    {VND.format(basePrice)} Ä‘
                                 </div>
                             )}
                         </div>
@@ -184,3 +184,5 @@ export default function ProductCardHome({ p }) {
         </Link>
     );
 }
+
+

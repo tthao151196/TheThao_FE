@@ -1,4 +1,4 @@
-// src/pages/Customers/Wishlist.jsx
+﻿// src/pages/Customers/Wishlist.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HeartButton from "../../components/HeartButton";
@@ -7,7 +7,7 @@ import { getWishlistIds, clearWishlist } from "../../utils/wishlist";
 const API = "http://127.0.0.1:8000/api";
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 
-// Chuẩn hoá payload: [], {data:[...]}, {data:{data:[...]}}
+// Chuáº©n hoÃ¡ payload: [], {data:[...]}, {data:{data:[...]}}
 function toList(payload) {
   if (Array.isArray(payload)) return payload;
   if (Array.isArray(payload?.data)) return payload.data;
@@ -20,7 +20,7 @@ export default function WishlistPage({ addToCart }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Lắng nghe thay đổi wishlist
+  // Láº¯ng nghe thay Ä‘á»•i wishlist
   useEffect(() => {
     const onChange = () => setIds(getWishlistIds());
     window.addEventListener("wishlist-changed", onChange);
@@ -31,7 +31,7 @@ export default function WishlistPage({ addToCart }) {
     };
   }, []);
 
-  // Tải danh sách
+  // Táº£i danh sÃ¡ch
   useEffect(() => {
     let cancelled = false;
 
@@ -89,12 +89,12 @@ export default function WishlistPage({ addToCart }) {
         fontFamily: "Montserrat, sans-serif",
         position: "relative",
         overflow: "hidden",
-        // 🌸 pastel rất nhẹ
+        // ðŸŒ¸ pastel ráº¥t nháº¹
         background:
           "radial-gradient(1000px 360px at 15% 0%, #fff0f7 0%, rgba(255,240,247,0) 70%), radial-gradient(900px 320px at 85% 8%, #ffe9f5 0%, rgba(255,233,245,0) 70%), linear-gradient(180deg,#fff7fb 0%, #ffffff 65%)",
       }}
     >
-      {/* Icons động */}
+      {/* Icons Ä‘á»™ng */}
       <FloatingDecor />
 
       {/* Header */}
@@ -121,7 +121,7 @@ export default function WishlistPage({ addToCart }) {
             WebkitTextFillColor: "transparent",
           }}
         >
-          💗 Danh sách yêu thích
+          ðŸ’— Danh sÃ¡ch yÃªu thÃ­ch
           <span style={{ opacity: 0.6, fontWeight: 700 }}>({count})</span>
         </h1>
 
@@ -146,19 +146,19 @@ export default function WishlistPage({ addToCart }) {
             onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.1)")}
             onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
           >
-            🗑️ Xóa hết
+            ðŸ—‘ï¸ XÃ³a háº¿t
           </button>
         )}
       </div>
 
       {/* States */}
       {loading ? (
-        <p style={{ textAlign: "center", color: "#f472b6" }}>Đang tải danh sách…</p>
+        <p style={{ textAlign: "center", color: "#f472b6" }}>Äang táº£i danh sÃ¡châ€¦</p>
       ) : count === 0 ? (
         <p style={{ textAlign: "center", color: "#444" }}>
-          Chưa có sản phẩm nào trong yêu thích.{" "}
+          ChÆ°a cÃ³ sáº£n pháº©m nÃ o trong yÃªu thÃ­ch.{" "}
           <Link to="/products" style={{ color: "#ec4899", fontWeight: 700 }}>
-            Xem sản phẩm →
+            Xem sáº£n pháº©m â†’
           </Link>
         </p>
       ) : (
@@ -167,7 +167,7 @@ export default function WishlistPage({ addToCart }) {
             maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
-            // 👇 lưới luôn căn giữa
+            // ðŸ‘‡ lÆ°á»›i luÃ´n cÄƒn giá»¯a
             gridTemplateColumns: "repeat(auto-fill, minmax(260px, 260px))",
             justifyContent: "center",
             gap: 24,
@@ -208,7 +208,7 @@ export default function WishlistPage({ addToCart }) {
                     "0 10px 24px rgba(17,24,39,.08)";
                 }}
               >
-                {/* Badge giảm giá */}
+                {/* Badge giáº£m giÃ¡ */}
                 {off > 0 && (
                   <div
                     style={{
@@ -236,7 +236,7 @@ export default function WishlistPage({ addToCart }) {
                   />
                 </div>
 
-                {/* Ảnh */}
+                {/* áº¢nh */}
                 <img
                   src={thumb}
                   alt={p.name}
@@ -249,7 +249,7 @@ export default function WishlistPage({ addToCart }) {
                   }}
                 />
 
-                {/* Thông tin */}
+                {/* ThÃ´ng tin */}
                 <div style={{ padding: "12px 16px" }}>
                   <div
                     style={{
@@ -263,10 +263,10 @@ export default function WishlistPage({ addToCart }) {
                     {p.name}
                   </div>
                   <div style={{ color: "#6b7280", fontSize: 13, marginBottom: 4 }}>
-                    {p.brand_name || "Không rõ"}
+                    {p.brand_name || "KhÃ´ng rÃµ"}
                   </div>
                   <div style={{ fontWeight: 900, color: "#ec4899", fontSize: 15 }}>
-                    {sale.toLocaleString()} đ{" "}
+                    {sale.toLocaleString()} Ä‘{" "}
                     {root > 0 && sale < root && (
                       <span
                         style={{
@@ -276,12 +276,12 @@ export default function WishlistPage({ addToCart }) {
                           fontSize: 13,
                         }}
                       >
-                        {root.toLocaleString()} đ
+                        {root.toLocaleString()} Ä‘
                       </span>
                     )}
                   </div>
 
-                  {/* Nút giỏ (nếu cần) */}
+                  {/* NÃºt giá» (náº¿u cáº§n) */}
                   {typeof addToCart === "function" && (
                     <div style={{ textAlign: "center", marginTop: 10 }}>
                       <button
@@ -303,7 +303,7 @@ export default function WishlistPage({ addToCart }) {
                           (e.currentTarget.style.filter = "brightness(1)")
                         }
                       >
-                        🛒 Thêm vào giỏ
+                        ðŸ›’ ThÃªm vÃ o giá»
                       </button>
                     </div>
                   )}
@@ -317,7 +317,7 @@ export default function WishlistPage({ addToCart }) {
   );
 }
 
-/* 🎈 Icon nền động: mây, trái tim, hoa (SVG inline) */
+/* ðŸŽˆ Icon ná»n Ä‘á»™ng: mÃ¢y, trÃ¡i tim, hoa (SVG inline) */
 function FloatingDecor() {
   return (
     <>
@@ -341,15 +341,15 @@ function FloatingDecor() {
         .row { position:absolute; left:0; width:100%; display:flex; gap:48px; opacity:.4; }
         .row svg { filter: drop-shadow(0 6px 10px rgba(236,72,153,.12)); }
 
-        /* 2 lớp mây chạy ngang */
+        /* 2 lá»›p mÃ¢y cháº¡y ngang */
         .clouds-1 { top:60px;  animation: cloud-move 42s linear infinite; }
         .clouds-2 { top:120px; animation: cloud-move 55s linear infinite; opacity:.35; }
 
-        /* trái tim bay dọc nhẹ */
+        /* trÃ¡i tim bay dá»c nháº¹ */
         .hearts { top:20px; justify-content:center; gap:24px; }
         .hearts svg { animation: float-slow 4.8s ease-in-out infinite; }
 
-        /* hoa lượn lờ */
+        /* hoa lÆ°á»£n lá» */
         .flowers { top:160px; justify-content:flex-end; gap:28px; opacity:.35; }
         .flowers svg { animation: drift 6.5s ease-in-out infinite; }
 
@@ -358,7 +358,7 @@ function FloatingDecor() {
       `}</style>
 
       <div className="decor">
-        {/* Mây lớp 1 */}
+        {/* MÃ¢y lá»›p 1 */}
         <div className="row clouds-1">
           <Cloud className="sm" />
           <Cloud className="md" />
@@ -367,7 +367,7 @@ function FloatingDecor() {
           <Cloud className="md" />
         </div>
 
-        {/* Mây lớp 2 */}
+        {/* MÃ¢y lá»›p 2 */}
         <div className="row clouds-2">
           <Cloud className="md" />
           <Cloud className="sm" />
@@ -376,7 +376,7 @@ function FloatingDecor() {
           <Cloud className="md" />
         </div>
 
-        {/* Trái tim */}
+        {/* TrÃ¡i tim */}
         <div className="row hearts" style={{ top: 10 }}>
           <Heart className="sm" color="#fda4af" />
           <Heart className="sm" color="#fb7185" />
@@ -428,3 +428,5 @@ function Flower({ className = "" }) {
     </svg>
   );
 }
+
+

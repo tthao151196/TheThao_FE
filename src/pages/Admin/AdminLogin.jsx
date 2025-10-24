@@ -1,4 +1,4 @@
-// src/pages/Admin/AdminLogin.jsx
+﻿// src/pages/Admin/AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -26,8 +26,8 @@ export default function AdminLogin() {
 
     const validate = () => {
         const e = {};
-        if (!form.email) e.email = "Vui lòng nhập email";
-        if (!form.password) e.password = "Vui lòng nhập mật khẩu";
+        if (!form.email) e.email = "Vui lÃ²ng nháº­p email";
+        if (!form.password) e.password = "Vui lÃ²ng nháº­p máº­t kháº©u";
         return e;
     };
 
@@ -48,33 +48,33 @@ export default function AdminLogin() {
             const data = await res.json().catch(() => ({}));
 
             if (!res.ok) {
-                if (res.status === 401) setServerError("Sai email hoặc mật khẩu.");
-                else if (res.status === 403) setServerError("Chỉ Admin được phép đăng nhập.");
+                if (res.status === 401) setServerError("Sai email hoáº·c máº­t kháº©u.");
+                else if (res.status === 403) setServerError("Chá»‰ Admin Ä‘Æ°á»£c phÃ©p Ä‘Äƒng nháº­p.");
                 else if (res.status === 422) {
                     setErrors({
                         email: data?.errors?.email?.[0],
                         password: data?.errors?.password?.[0],
                     });
-                    setServerError(data?.message || "Dữ liệu không hợp lệ.");
+                    setServerError(data?.message || "Dá»¯ liá»‡u khÃ´ng há»£p lá»‡.");
                 } else {
-                    setServerError(data?.message || `Đăng nhập thất bại (HTTP ${res.status}).`);
+                    setServerError(data?.message || `ÄÄƒng nháº­p tháº¥t báº¡i (HTTP ${res.status}).`);
                 }
                 return;
             }
 
             const { token, user } = data;
             if (!token || !user) {
-                setServerError("Phản hồi đăng nhập không hợp lệ.");
+                setServerError("Pháº£n há»“i Ä‘Äƒng nháº­p khÃ´ng há»£p lá»‡.");
                 return;
             }
 
             const role = String(user?.roles || user?.role || "").toLowerCase();
             if (role !== "admin") {
-                setServerError("Chỉ Admin được phép đăng nhập.");
+                setServerError("Chá»‰ Admin Ä‘Æ°á»£c phÃ©p Ä‘Äƒng nháº­p.");
                 return;
             }
 
-            // ✅ Lưu RIÊNG cho Admin (đừng dùng "token"/"user" để tránh ảnh hưởng Customer)
+            // âœ… LÆ°u RIÃŠNG cho Admin (Ä‘á»«ng dÃ¹ng "token"/"user" Ä‘á»ƒ trÃ¡nh áº£nh hÆ°á»Ÿng Customer)
             localStorage.setItem(ADMIN_TOKEN_KEY, token);                 // CHANGED
             localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(user));   // CHANGED
             localStorage.setItem("admin_session", "1");
@@ -85,7 +85,7 @@ export default function AdminLogin() {
                     : (from && from.pathname) || "/admin";
             navigate(target, { replace: true });
         } catch {
-            setServerError("Không thể kết nối máy chủ. Kiểm tra BE & CORS.");
+            setServerError("KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§. Kiá»ƒm tra BE & CORS.");
         } finally {
             setLoading(false);
         }
@@ -143,7 +143,7 @@ export default function AdminLogin() {
                         letterSpacing: 0.5,
                     }}
                 >
-                    Đăng nhập Quản trị
+                    ÄÄƒng nháº­p Quáº£n trá»‹
                 </h2>
 
                 {(navState.fromAdmin || navState.denied) && (
@@ -157,7 +157,7 @@ export default function AdminLogin() {
                             border: "1px solid #ffeeba",
                         }}
                     >
-                        {navState.denied || "Bạn cần đăng nhập để vào trang Quản trị."}
+                        {navState.denied || "Báº¡n cáº§n Ä‘Äƒng nháº­p Ä‘á»ƒ vÃ o trang Quáº£n trá»‹."}
                     </div>
                 )}
 
@@ -211,7 +211,7 @@ export default function AdminLogin() {
 
                     <div style={{ marginBottom: 18 }}>
                         <label htmlFor="password" style={{ display: "block", marginBottom: 6, fontWeight: 500 }}>
-                            Mật khẩu
+                            Máº­t kháº©u
                         </label>
                         <div style={{ position: "relative" }}>
                             <input
@@ -220,7 +220,7 @@ export default function AdminLogin() {
                                 type={showPass ? "text" : "password"}
                                 value={form.password}
                                 onChange={onChange}
-                                placeholder="••••••••"
+                                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                                 style={{
                                     display: "block",
                                     width: "90%",
@@ -251,7 +251,7 @@ export default function AdminLogin() {
                                     cursor: "pointer",
                                 }}
                             >
-                                {showPass ? "Ẩn" : "Hiện"}
+                                {showPass ? "áº¨n" : "Hiá»‡n"}
                             </button>
                         </div>
                         {errors.password && (
@@ -277,14 +277,16 @@ export default function AdminLogin() {
                             transition: "background 0.2s",
                         }}
                     >
-                        {loading ? "Đang xử lý..." : "Đăng nhập"}
+                        {loading ? "Äang xá»­ lÃ½..." : "ÄÄƒng nháº­p"}
                     </button>
 
                     <div style={{ marginTop: 12, fontSize: 12, color: "#64748b", textAlign: "center" }}>
-                        Chỉ tài khoản <b>roles = 'admin'</b> mới đăng nhập được.
+                        Chá»‰ tÃ i khoáº£n <b>roles = 'admin'</b> má»›i Ä‘Äƒng nháº­p Ä‘Æ°á»£c.
                     </div>
                 </form>
             </div>
         </div>
     );
 }
+
+

@@ -1,4 +1,6 @@
-// vite-project/src/pages/Register.jsx
+﻿// vite-project/src/pages/Register.jsx
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -59,11 +61,11 @@ export default function Register() {
       if (res.status === 422 && data?.errors) {
         setErrors(data.errors);
       } else {
-        setServerError(data?.message || `Có lỗi xảy ra (HTTP ${res.status}).`);
+        setServerError(data?.message || `CÃ³ lá»—i xáº£y ra (HTTP ${res.status}).`);
       }
     } catch (err) {
       console.error("Register failed:", err);
-      setServerError("Không thể kết nối máy chủ.");
+      setServerError("KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§.");
     } finally {
       setLoading(false);
     }
@@ -90,7 +92,7 @@ export default function Register() {
       }}
     >
       {/* Background image */}
-      {/* Background image bằng thẻ img */}
+      {/* Background image báº±ng tháº» img */}
       <img
         src="http://127.0.0.1:8000/assets/images/banner2.jpg"
         alt="Sports Banner"
@@ -105,7 +107,7 @@ export default function Register() {
         }}
       />
 
-      {/* Overlay mờ đen */}
+      {/* Overlay má» Ä‘en */}
       <div
         style={{
           position: "absolute",
@@ -116,7 +118,7 @@ export default function Register() {
       ></div>
 
 
-      {/* Overlay để form nổi hơn */}
+      {/* Overlay Ä‘á»ƒ form ná»•i hÆ¡n */}
       <div
         style={{
           position: "absolute",
@@ -141,7 +143,7 @@ export default function Register() {
         <h2
           style={{ marginBottom: 24, textAlign: "center", color: "#1316e08a" }}
         >
-          Đăng ký tài khoản
+          ÄÄƒng kÃ½ tÃ i khoáº£n
         </h2>
 
         {serverError && (
@@ -160,12 +162,12 @@ export default function Register() {
 
         <form onSubmit={submit} noValidate>
           {[
-            { label: "Họ tên", name: "name", type: "text" },
+            { label: "Há» tÃªn", name: "name", type: "text" },
             { label: "Email", name: "email", type: "email" },
-            { label: "Số điện thoại", name: "phone", type: "text" },
-            { label: "Mật khẩu (≥ 6 ký tự)", name: "password", type: "password" },
+            { label: "Sá»‘ Ä‘iá»‡n thoáº¡i", name: "phone", type: "text" },
+            { label: "Máº­t kháº©u (â‰¥ 6 kÃ½ tá»±)", name: "password", type: "password" },
             {
-              label: "Nhập lại mật khẩu",
+              label: "Nháº­p láº¡i máº­t kháº©u",
               name: "password_confirmation",
               type: "password",
             },
@@ -188,9 +190,9 @@ export default function Register() {
                 required
                 style={{
                   display: "block",
-                  width: "90%",        // ⬅️ cho ngắn lại
-                  maxWidth: 360,       // ⬅️ không quá to
-                  margin: "0 auto",    // ⬅️ canh giữa trong form
+                  width: "90%",        // â¬…ï¸ cho ngáº¯n láº¡i
+                  maxWidth: 360,       // â¬…ï¸ khÃ´ng quÃ¡ to
+                  margin: "0 auto",    // â¬…ï¸ canh giá»¯a trong form
                   padding: "10px 14px",
                   borderRadius: 10,
                   border: "1px solid #ccc",
@@ -222,10 +224,12 @@ export default function Register() {
               transition: "background 0.2s",
             }}
           >
-            {loading ? "Đang xử lý..." : "Đăng ký"}
+            {loading ? "Äang xá»­ lÃ½..." : "ÄÄƒng kÃ½"}
           </button>
         </form>
       </div>
     </div>
   );
 }
+
+

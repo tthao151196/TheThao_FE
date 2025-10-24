@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 
@@ -6,7 +6,7 @@ const HOST = "http://127.0.0.1:8000";
 const API_BASE = `${HOST}/api`;
 const IMG_FALLBACK = "https://placehold.co/120x90?text=No+Img";
 
-// Render mô tả HTML an toàn + preview ngắn gọn (~3 dòng)
+// Render mÃ´ táº£ HTML an toÃ n + preview ngáº¯n gá»n (~3 dÃ²ng)
 function DescCell({ html }) {
   const safe = DOMPurify.sanitize(html || "");
   return (
@@ -26,7 +26,7 @@ export default function Categories() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
-  const [selected, setSelected] = useState([]); // ✅ Danh sách tick
+  const [selected, setSelected] = useState([]); // âœ… Danh sÃ¡ch tick
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function Categories() {
         const data = await res.json();
         const list = Array.isArray(data) ? data : data.data ?? [];
 
-        // Chuẩn hóa nhẹ ảnh (nếu BE trả 'image' thì tự tạo url)
+        // Chuáº©n hÃ³a nháº¹ áº£nh (náº¿u BE tráº£ 'image' thÃ¬ tá»± táº¡o url)
         const normalized = list.map((c) => ({
           ...c,
           image_url: c.image_url || (c.image ? `${HOST}/storage/${c.image}` : null),
@@ -50,7 +50,7 @@ export default function Categories() {
 
         setRows(normalized);
       } catch (e) {
-        if (e.name !== "AbortError") setErr("Không tải được danh mục.");
+        if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh má»¥c.");
       } finally {
         setLoading(false);
       }
@@ -58,13 +58,13 @@ export default function Categories() {
     return () => ac.abort();
   }, []);
 
-  // ✅ Xóa (soft delete)
+  // âœ… XÃ³a (soft delete)
   const handleDelete = async (id) => {
-    if (!window.confirm(`Xóa danh mục #${id}?`)) return;
+    if (!window.confirm(`XÃ³a danh má»¥c #${id}?`)) return;
     try {
       const token = localStorage.getItem("admin_token") || "";
       if (!token) {
-        alert("Bạn cần đăng nhập admin để xóa.");
+        alert("Báº¡n cáº§n Ä‘Äƒng nháº­p admin Ä‘á»ƒ xÃ³a.");
         return;
       }
 
@@ -82,7 +82,7 @@ export default function Categories() {
       } catch {}
 
       if (!res.ok) {
-        const msg = payload?.message || `Xóa thất bại (HTTP ${res.status})`;
+        const msg = payload?.message || `XÃ³a tháº¥t báº¡i (HTTP ${res.status})`;
         throw new Error(msg);
       }
 
@@ -90,16 +90,16 @@ export default function Categories() {
       setSelected((prev) => prev.filter((x) => x !== id));
     } catch (e) {
       console.error(e);
-      alert(e.message || "Không xóa được danh mục.");
+      alert(e.message || "KhÃ´ng xÃ³a Ä‘Æ°á»£c danh má»¥c.");
     }
   };
 
-  // ✅ Xóa nhiều mục đã chọn
+  // âœ… XÃ³a nhiá»u má»¥c Ä‘Ã£ chá»n
   const handleBulkDelete = async () => {
     if (!selected.length) return;
-    if (!window.confirm(`Chuyển ${selected.length} danh mục vào thùng rác?`)) return;
+    if (!window.confirm(`Chuyá»ƒn ${selected.length} danh má»¥c vÃ o thÃ¹ng rÃ¡c?`)) return;
 
-    // Thực hiện tuần tự để đơn giản (có thể tối ưu song song nếu cần)
+    // Thá»±c hiá»‡n tuáº§n tá»± Ä‘á»ƒ Ä‘Æ¡n giáº£n (cÃ³ thá»ƒ tá»‘i Æ°u song song náº¿u cáº§n)
     for (const id of selected) {
       // eslint-disable-next-line no-await-in-loop
       await handleDelete(id);
@@ -122,7 +122,7 @@ export default function Categories() {
           flexWrap: "wrap",
         }}
       >
-        <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quản lý danh mục</h1>
+        <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quáº£n lÃ½ danh má»¥c</h1>
         <div>
           <button
             onClick={() => navigate("/admin/categories/add")}
@@ -135,7 +135,7 @@ export default function Categories() {
               cursor: "pointer",
             }}
           >
-            + Thêm
+            + ThÃªm
           </button>
 
           <button
@@ -149,7 +149,7 @@ export default function Categories() {
               cursor: "pointer",
             }}
           >
-            🗑️ Thùng rác
+            ðŸ—‘ï¸ ThÃ¹ng rÃ¡c
           </button>
 
           {selected.length > 0 && (
@@ -164,14 +164,14 @@ export default function Categories() {
                 cursor: "pointer",
               }}
             >
-              Xóa đã chọn ({selected.length})
+              XÃ³a Ä‘Ã£ chá»n ({selected.length})
             </button>
           )}
         </div>
       </div>
 
       {/* ==== Table ==== */}
-      {loading && <p>Đang tải dữ liệu…</p>}
+      {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
       {err && <p style={{ color: "red" }}>{err}</p>}
 
       {!loading && (
@@ -197,11 +197,11 @@ export default function Categories() {
                   />
                 </th>
                 <th align="left">ID</th>
-                <th align="left">Tên</th>
+                <th align="left">TÃªn</th>
                 <th align="left">Slug</th>
-                <th align="center">Ảnh</th>
-                <th align="left">Mô tả</th>
-                <th align="center">Hành động</th>
+                <th align="center">áº¢nh</th>
+                <th align="left">MÃ´ táº£</th>
+                <th align="center">HÃ nh Ä‘á»™ng</th>
               </tr>
             </thead>
             <tbody>
@@ -239,7 +239,7 @@ export default function Categories() {
                     />
                   </td>
                   <td>
-                    {/* ✅ render HTML an toàn thay vì hiển thị chuỗi thô */}
+                    {/* âœ… render HTML an toÃ n thay vÃ¬ hiá»ƒn thá»‹ chuá»—i thÃ´ */}
                     <DescCell html={c.description} />
                   </td>
                   <td align="center">
@@ -255,7 +255,7 @@ export default function Categories() {
                         cursor: "pointer",
                       }}
                     >
-                      Sửa
+                      Sá»­a
                     </button>
 
                     <button
@@ -269,7 +269,7 @@ export default function Categories() {
                         cursor: "pointer",
                       }}
                     >
-                      Xóa
+                      XÃ³a
                     </button>
                   </td>
                 </tr>
@@ -277,7 +277,7 @@ export default function Categories() {
               {!rows.length && (
                 <tr>
                   <td colSpan={7} align="center" style={{ padding: 18, color: "#777" }}>
-                    Trống
+                    Trá»‘ng
                   </td>
                 </tr>
               )}
@@ -288,3 +288,5 @@ export default function Categories() {
     </section>
   );
 }
+
+

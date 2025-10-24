@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 const API_BASE = (import.meta?.env?.VITE_API_BASE || "http://127.0.0.1:8000").replace(/\/+$/, "");
@@ -16,20 +16,20 @@ function toAbs(x) {
     if (/^(storage|uploads|images|img)\//i.test(s)) return `${API_BASE}/${s}`;
     return `${API_BASE}/storage/${s}`;
 }
-// sanitize đơn giản: bỏ <script> và on* inline (hỗ trợ "..." và '...')
+// sanitize Ä‘Æ¡n giáº£n: bá» <script> vÃ  on* inline (há»— trá»£ "..." vÃ  '...')
 function sanitize(html) {
     if (!html) return "";
     return String(html)
         .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
         .replace(/\son\w+=(?:"[^"]*"|'[^']*')/gi, "");
 }
-// Ước tính thời lượng đọc ~200 từ/phút
+// Æ¯á»›c tÃ­nh thá»i lÆ°á»£ng Ä‘á»c ~200 tá»«/phÃºt
 function readingTime(html) {
     const words = String(html || "").replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
     return Math.max(1, Math.round(words / 200));
 }
 
-/* ===== CSS riêng cho trang chi tiết ===== */
+/* ===== CSS riÃªng cho trang chi tiáº¿t ===== */
 const styles = `
 .nd{min-height:100vh;background:#f8fafc;color:#0f172a}
 .nd a{color:#2563eb;text-decoration:none}
@@ -38,7 +38,7 @@ const styles = `
 /* progress bar */
 .nd-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#6366f1,#06b6d4);width:0;z-index:50}
 
-/* HERO – sáng, ít che ảnh */
+/* HERO â€“ sÃ¡ng, Ã­t che áº£nh */
 .nd-hero{position:relative;isolation:isolate;min-height:46vh}
 .nd-hero__bg{
   position:absolute;inset:0;
@@ -82,7 +82,7 @@ const styles = `
 .nd-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid #e2e8f0;background:#fff;font-weight:800;cursor:pointer}
 .nd-btn:hover{box-shadow:0 8px 18px rgba(2,6,23,.08)}
 .nd-btn--primary{border:0;background:linear-gradient(135deg,#6366f1,#06b6d4);color:#fff;box-shadow:0 10px 22px rgba(37,99,235,.25)}
-/* nút lên đầu trang – màu nổi bật */
+/* nÃºt lÃªn Ä‘áº§u trang â€“ mÃ u ná»•i báº­t */
 .nd-btn--top{border:0;background:linear-gradient(135deg,#22c55e,#06b6d4);color:#fff;font-weight:800;box-shadow:0 10px 22px rgba(16,185,129,.25)}
 .nd-btn--top:hover{filter:saturate(1.05);box-shadow:0 12px 26px rgba(16,185,129,.32)}
 .nd-btn--top:active{transform:translateY(1px)}
@@ -149,10 +149,10 @@ export default function NewsDetail() {
                 <div className="nd-progress" style={{ width: `${progress}%` }} />
                 <div className="nd-main">
                     <div className="nd-summary" style={{ borderColor: "#fecaca", background: "#fef2f2", color: "#b91c1c" }}>
-                        {err || "Không tìm thấy bài viết"}
+                        {err || "KhÃ´ng tÃ¬m tháº¥y bÃ i viáº¿t"}
                     </div>
                     <div style={{ marginTop: 12 }}>
-                        <Link to="/news">← Quay lại Tin tức</Link>
+                        <Link to="/news">â† Quay láº¡i Tin tá»©c</Link>
                     </div>
                 </div>
             </div>
@@ -166,9 +166,9 @@ export default function NewsDetail() {
     const copyLink = async () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
-            alert("Đã sao chép liên kết!");
+            alert("ÄÃ£ sao chÃ©p liÃªn káº¿t!");
         } catch {
-            alert("Không thể sao chép liên kết.");
+            alert("KhÃ´ng thá»ƒ sao chÃ©p liÃªn káº¿t.");
         }
     };
 
@@ -183,19 +183,19 @@ export default function NewsDetail() {
                 <div className="nd-hero__mask" aria-hidden="true" />
                 <div className="nd-hero__inner">
                     <nav className="nd-breadcrumb">
-                        <Link to="/">Trang chủ</Link>
-                        <span aria-hidden="true">›</span>
-                        <Link to="/news">Tin tức</Link>
+                        <Link to="/">Trang chá»§</Link>
+                        <span aria-hidden="true">â€º</span>
+                        <Link to="/news">Tin tá»©c</Link>
                     </nav>
                     <h1 className="nd-title">{item.title}</h1>
                     <div className="nd-meta">
                         <span className="nd-chip">
                             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5v2H3v14h18V6h-2V4h-2V2H7zm0 4h10v2H7V6zm0 4h10v8H7v-8z" /></svg>
-                            {date || "—"}
+                            {date || "â€”"}
                         </span>
                         <span className="nd-chip">
                             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0-6a2 2 0 012 2v1.09A7.002 7.002 0 0119.91 10H21a2 2 0 110 4h-1.09A7.002 7.002 0 0114 19.91V21a2 2 0 11-4 0v-1.09A7.002 7.002 0 014.09 14H3a2 2 0 110-4h1.09A7.002 7.002 0 0110 4.09V3a2 2 0 012-2z" /></svg>
-                            {rtime} phút đọc
+                            {rtime} phÃºt Ä‘á»c
                         </span>
                     </div>
                 </div>
@@ -208,21 +208,23 @@ export default function NewsDetail() {
                 <article
                     className="nd-article"
                     dangerouslySetInnerHTML={{
-                        __html: sanitize(item.content || "") || "<p>(Không có nội dung)</p>",
+                        __html: sanitize(item.content || "") || "<p>(KhÃ´ng cÃ³ ná»™i dung)</p>",
                     }}
                 />
 
                 <div className="nd-share">
-                    <button className="nd-btn nd-btn--primary" onClick={copyLink} title="Sao chép liên kết">
+                    <button className="nd-btn nd-btn--primary" onClick={copyLink} title="Sao chÃ©p liÃªn káº¿t">
                         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12a5 5 0 017.78-4.03l1.41 1.41-1.42 1.42-1.4-1.4a3 3 0 10.01 4.24l1.41-1.41 1.42 1.42-1.41 1.41A5 5 0 113.9 12zm16.2 0a5 5 0 01-8.19 3.82l-1.41-1.41 1.42-1.42 1.4 1.4a3 3 0 10-.01-4.24l-1.41 1.41-1.42-1.42 1.41-1.41A5 5 0 0120.1 12z" /></svg>
-                        Sao chép link
+                        Sao chÃ©p link
                     </button>
-                    <a className="nd-btn" href="/news">← Về trang Tin tức</a>
+                    <a className="nd-btn" href="/news">â† Vá» trang Tin tá»©c</a>
                     <button className="nd-btn nd-btn--top" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                        Lên đầu trang ↑
+                        LÃªn Ä‘áº§u trang â†‘
                     </button>
                 </div>
             </main>
         </div>
     );
 }
+
+

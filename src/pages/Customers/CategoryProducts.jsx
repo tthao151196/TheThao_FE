@@ -1,4 +1,4 @@
-// src/pages/Customers/CategoryProducts.jsx
+﻿// src/pages/Customers/CategoryProducts.jsx
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductCardHome from "../../components/ProductCardHome";
@@ -7,7 +7,7 @@ const API_BASE = "http://127.0.0.1:8000/api";
 const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 const HEADER_OFFSET = 110;
 
-/* Helpers giống Products.jsx */
+/* Helpers giá»‘ng Products.jsx */
 const toNum = (x) => {
   if (x == null || x === "") return 0;
   if (typeof x === "string") return Number(x.replace(/[^\d.-]/g, "")) || 0;
@@ -33,18 +33,18 @@ export default function CategoryProducts() {
         setLoading(true);
         setErr("");
 
-        // 1) Thông tin danh mục
+        // 1) ThÃ´ng tin danh má»¥c
         const resCat = await fetch(`${API_BASE}/categories/${id}`, { signal: ac.signal });
         if (!resCat.ok) throw new Error(`HTTP ${resCat.status}`);
         const catJson = await resCat.json().catch(() => ({}));
         const c = Array.isArray(catJson) ? catJson[0] : catJson?.data ?? catJson;
         setCat({
           id: c?.id,
-          name: c?.name || c?.title || `Danh mục #${id}`,
+          name: c?.name || c?.title || `Danh má»¥c #${id}`,
           description: c?.description || c?.desc || "",
         });
 
-        // 2) Sản phẩm (đồng bộ shape với trang Products)
+        // 2) Sáº£n pháº©m (Ä‘á»“ng bá»™ shape vá»›i trang Products)
         const qs = new URLSearchParams({
           category_id: id,
           sort: "created_at:desc",
@@ -56,7 +56,7 @@ export default function CategoryProducts() {
         const data = await resProds.json().catch(() => ({}));
         const list = Array.isArray(data) ? data : data?.data ?? [];
 
-        // Chuẩn hoá cho ProductCardHome
+        // Chuáº©n hoÃ¡ cho ProductCardHome
         const normalized = list.map((p) => {
           const base = getRootPrice(p);
           const sale = getPrice(p);
@@ -66,8 +66,8 @@ export default function CategoryProducts() {
           return {
             ...p,
             image,
-            // set đủ các alias để card nào cũng đọc được
-            price,                       // chính
+            // set Ä‘á»§ cÃ¡c alias Ä‘á»ƒ card nÃ o cÅ©ng Ä‘á»c Ä‘Æ°á»£c
+            price,                       // chÃ­nh
             price_buy: price,
             amount: price,
             price_sale: sale || undefined,
@@ -82,7 +82,7 @@ export default function CategoryProducts() {
       } catch (e) {
         if (e.name !== "AbortError") {
           console.error(e);
-          setErr("Không tải được sản phẩm hoặc danh mục.");
+          setErr("KhÃ´ng táº£i Ä‘Æ°á»£c sáº£n pháº©m hoáº·c danh má»¥c.");
         }
       } finally {
         setLoading(false);
@@ -92,7 +92,7 @@ export default function CategoryProducts() {
   }, [id]);
 
   if (loading)
-    return <p style={{ padding: 20, color: "#2563eb", textAlign: "center" }}>Đang tải...</p>;
+    return <p style={{ padding: 20, color: "#2563eb", textAlign: "center" }}>Äang táº£i...</p>;
   if (err)
     return <p style={{ padding: 20, color: "#d32f2f", textAlign: "center" }}>{err}</p>;
 
@@ -108,9 +108,9 @@ export default function CategoryProducts() {
       <StyleTag />
 
       <header style={{ textAlign: "center", marginBottom: 8 }}>
-        <h2 className="products-title">{cat?.name || "Danh mục"}</h2>
+        <h2 className="products-title">{cat?.name || "Danh má»¥c"}</h2>
         <p style={{ margin: "6px auto 0", maxWidth: 820, color: "#334155", fontWeight: 700 }}>
-          {cat?.description || "Khám phá các sản phẩm trong danh mục."}
+          {cat?.description || "KhÃ¡m phÃ¡ cÃ¡c sáº£n pháº©m trong danh má»¥c."}
         </p>
       </header>
 
@@ -122,13 +122,13 @@ export default function CategoryProducts() {
             border: "1px solid rgba(37,99,235,.25)", padding: "8px 12px", borderRadius: 10
           }}
         >
-          ← Xem tất cả sản phẩm
+          â† Xem táº¥t cáº£ sáº£n pháº©m
         </Link>
       </p>
 
       {items.length === 0 ? (
         <p style={{ padding: 20, textAlign: "center", color: "#475569", fontWeight: 700 }}>
-          Không có sản phẩm trong danh mục này.
+          KhÃ´ng cÃ³ sáº£n pháº©m trong danh má»¥c nÃ y.
         </p>
       ) : (
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -143,7 +143,7 @@ export default function CategoryProducts() {
   );
 }
 
-/* Style đồng bộ */
+/* Style Ä‘á»“ng bá»™ */
 function StyleTag() {
   return (
     <style>{`
@@ -173,3 +173,5 @@ function StyleTag() {
     `}</style>
   );
 }
+
+

@@ -1,4 +1,4 @@
-// export default function AdminHeader() {
+﻿// export default function AdminHeader() {
 //   return (
 //     <div style={{
 //       height: 60, display: "flex", alignItems: "center",
@@ -7,7 +7,7 @@
 //       <strong>Admin Panel</strong>
 //       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
 //         <input
-//           placeholder="Search…"
+//           placeholder="Searchâ€¦"
 //           style={{ height: 34, padding: "0 10px", border: "1px solid #ddd", borderRadius: 6, minWidth: 220 }}
 //         />
 //         <div style={{
@@ -67,13 +67,13 @@ export default function AdminHeader() {
     >
       {/* Logo + title */}
       <div style={{ fontSize: 20, fontWeight: 800, display: "flex", alignItems: "center", gap: 8 }}>
-        🏋️‍♂️ <span>Quản Trị Viên Sports</span>
+        ðŸ‹ï¸â€â™‚ï¸ <span>Quáº£n Trá»‹ ViÃªn Sports</span>
       </div>
 
       {/* Search + User info + Logout */}
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <input
-          placeholder="Tìm kiếm..."
+          placeholder="TÃ¬m kiáº¿m..."
           style={{
             height: 36,
             padding: "0 10px",
@@ -103,7 +103,7 @@ export default function AdminHeader() {
             {displayName[0]?.toUpperCase() || "A"}
           </div>
           <span style={{ fontWeight: 600, fontSize: 15 }}>
-            Xin chào, {displayName} 👋
+            Xin chÃ o, {displayName} ðŸ‘‹
           </span>
         </div>
 
@@ -122,9 +122,11 @@ export default function AdminHeader() {
           onMouseOver={(e) => (e.target.style.background = "#c62828")}
           onMouseOut={(e) => (e.target.style.background = "#e53935")}
         >
-          Đăng xuất
+          ÄÄƒng xuáº¥t
         </button>
       </div>
     </header>
   );
 }
+
+

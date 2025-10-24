@@ -1,4 +1,4 @@
-// src/pages/Customers/CanceledOrders.jsx
+﻿// src/pages/Customers/CanceledOrders.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +43,7 @@ export default function CanceledOrders() {
     return o.total != null ? Number(o.total) : subtotal + shipping - discount;
   };
 
-  // ✅ Nhận đúng đơn đã hủy (status = 5)
+  // âœ… Nháº­n Ä‘Ãºng Ä‘Æ¡n Ä‘Ã£ há»§y (status = 5)
   const isCanceled = (o) => {
     const s = o?.status;
     if (s == 5 || s === "5") return true;
@@ -51,12 +51,12 @@ export default function CanceledOrders() {
     return k.includes("cancel");
   };
 
-  // ✅ Gọi danh sách đơn đã hủy
+  // âœ… Gá»i danh sÃ¡ch Ä‘Æ¡n Ä‘Ã£ há»§y
   const fetchBaseList = async (signal) => {
     const headers = { Accept: "application/json" };
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    // Nếu có token: gọi my-orders rồi FE lọc canceled
+    // Náº¿u cÃ³ token: gá»i my-orders rá»“i FE lá»c canceled
     if (token) {
       try {
         const r = await fetch(`${API_BASE}/orders/mine`, { signal, headers });
@@ -67,7 +67,7 @@ export default function CanceledOrders() {
       } catch {}
     }
 
-    // Public fallback: gọi theo status=5
+    // Public fallback: gá»i theo status=5
     try {
       const r = await fetch(`${API_BASE}/orders?status=5`, { signal, headers });
       if (r.ok) {
@@ -79,7 +79,7 @@ export default function CanceledOrders() {
     return [];
   };
 
-  // ✅ Hydrate để lấy chi tiết sản phẩm cho từng đơn
+  // âœ… Hydrate Ä‘á»ƒ láº¥y chi tiáº¿t sáº£n pháº©m cho tá»«ng Ä‘Æ¡n
   const hydrateOrders = async (list, signal) => {
     const headers = { Accept: "application/json" };
     if (token) headers.Authorization = `Bearer ${token}`;
@@ -122,7 +122,7 @@ export default function CanceledOrders() {
         setOrders(hydrated);
       } catch (e) {
         console.error(e);
-        setErr("Không tải được danh sách đơn đã hủy.");
+        setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch Ä‘Æ¡n Ä‘Ã£ há»§y.");
       } finally {
         setLoading(false);
       }
@@ -143,11 +143,11 @@ export default function CanceledOrders() {
     return list.filter((o) => String(o.code || o.id).toLowerCase().includes(k));
   }, [orders, q]);
 
-  // ✅ Mua lại
+  // âœ… Mua láº¡i
   const reorder = (order) => {
     const src = order.items || order.order_items || [];
     if (!src.length) {
-      alert("❗ Đơn này chưa có danh sách sản phẩm chi tiết.");
+      alert("â— ÄÆ¡n nÃ y chÆ°a cÃ³ danh sÃ¡ch sáº£n pháº©m chi tiáº¿t.");
       return;
     }
     const load = () => {
@@ -178,7 +178,7 @@ export default function CanceledOrders() {
       else merged.push({ id, name, price, qty, thumbnail_url: thumb });
     }
     save(merged);
-    alert("🛒 Đã thêm lại sản phẩm vào giỏ!");
+    alert("ðŸ›’ ÄÃ£ thÃªm láº¡i sáº£n pháº©m vÃ o giá»!");
     navigate("/cart");
   };
 
@@ -186,29 +186,29 @@ export default function CanceledOrders() {
     <div className="cxl-page">
       <div className="card">
         <div className="topbar">
-          <button className="back-home" onClick={() => navigate("/")}>🏠 Về trang chủ</button>
-          <h2 className="title">🗂️ Đơn đã hủy</h2>
+          <button className="back-home" onClick={() => navigate("/")}>ðŸ  Vá» trang chá»§</button>
+          <h2 className="title">ðŸ—‚ï¸ ÄÆ¡n Ä‘Ã£ há»§y</h2>
         </div>
 
         <div className="toolbar">
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Tìm theo mã đơn…"
+            placeholder="TÃ¬m theo mÃ£ Ä‘Æ¡nâ€¦"
             className="search"
           />
           <div className="who">
-            {user?.name ? <>👤 <b>{user.name}</b></> : "—"}
+            {user?.name ? <>ðŸ‘¤ <b>{user.name}</b></> : "â€”"}
           </div>
         </div>
 
-        {loading && <p className="muted">Đang tải…</p>}
-        {err && !loading && <p className="error">❌ {err}</p>}
+        {loading && <p className="muted">Äang táº£iâ€¦</p>}
+        {err && !loading && <p className="error">âŒ {err}</p>}
 
         {!loading && !err && visibleOrders.length === 0 && (
           <div className="empty">
             <img src="https://illustrations.popsy.co/teal/paper-trash.svg" alt="" />
-            <div>Không có đơn nào đã hủy.</div>
+            <div>KhÃ´ng cÃ³ Ä‘Æ¡n nÃ o Ä‘Ã£ há»§y.</div>
           </div>
         )}
 
@@ -234,27 +234,27 @@ export default function CanceledOrders() {
                       <div className="info">
                         <div className="name">{it.name || it.product_name || `#${it.product_id || it.id}`}</div>
                         <div className="sub">
-                          SL: {it.qty ?? it.quantity ?? 0} × ₫{fmt(it.price)}
+                          SL: {it.qty ?? it.quantity ?? 0} Ã— â‚«{fmt(it.price)}
                         </div>
                       </div>
-                      <div className="sum">₫{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
+                      <div className="sum">â‚«{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
                     </div>
                   ))}
                   {items.length > 4 && (
-                    <div className="more">+{items.length - 4} sản phẩm khác…</div>
+                    <div className="more">+{items.length - 4} sáº£n pháº©m khÃ¡câ€¦</div>
                   )}
                 </div>
 
                 <div className="foot">
-                  <div className="total">Tổng: <b>₫{fmt(total)}</b></div>
+                  <div className="total">Tá»•ng: <b>â‚«{fmt(total)}</b></div>
                   <div className="actions">
                     <button
                       className="btn outline"
                       onClick={() => navigate(`${ORDER_TRACK_PATH}?code=${encodeURIComponent(o.code || o.id)}`)}
                     >
-                      Xem chi tiết
+                      Xem chi tiáº¿t
                     </button>
-                    <button className="btn solid" onClick={() => reorder(o)}>Mua lại</button>
+                    <button className="btn solid" onClick={() => reorder(o)}>Mua láº¡i</button>
                   </div>
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function CanceledOrders() {
   );
 }
 
-/** Inline CSS giữ nguyên style */
+/** Inline CSS giá»¯ nguyÃªn style */
 function Style() {
   return (
     <style>{`
@@ -311,3 +311,5 @@ function Style() {
     `}</style>
   );
 }
+
+

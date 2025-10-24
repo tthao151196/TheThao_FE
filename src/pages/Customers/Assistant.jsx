@@ -1,11 +1,11 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
-const API_BASE = "http://127.0.0.1:8000/api"; // khớp với cấu hình hiện tại của bạn
+const API_BASE = "http://127.0.0.1:8000/api"; // khá»›p vá»›i cáº¥u hÃ¬nh hiá»‡n táº¡i cá»§a báº¡n
 
 export default function Assistant() {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([
-        { role: "assistant", content: "Xin chào 👋! Mình là trợ lý AI. Bạn cần hỗ trợ gì?" }
+        { role: "assistant", content: "Xin chÃ o ðŸ‘‹! MÃ¬nh lÃ  trá»£ lÃ½ AI. Báº¡n cáº§n há»— trá»£ gÃ¬?" }
     ]);
     const [loading, setLoading] = useState(false);
 
@@ -25,12 +25,12 @@ export default function Assistant() {
             });
             const data = await res.json();
             if (data?.ok) {
-                setMessages((m) => [...m, { role: "assistant", content: data.answer || "(không có nội dung)" }]);
+                setMessages((m) => [...m, { role: "assistant", content: data.answer || "(khÃ´ng cÃ³ ná»™i dung)" }]);
             } else {
-                setMessages((m) => [...m, { role: "assistant", content: "⚠️ Lỗi gọi AI. Vui lòng thử lại." }]);
+                setMessages((m) => [...m, { role: "assistant", content: "âš ï¸ Lá»—i gá»i AI. Vui lÃ²ng thá»­ láº¡i." }]);
             }
         } catch (e) {
-            setMessages((m) => [...m, { role: "assistant", content: "⚠️ Lỗi mạng khi gọi API." }]);
+            setMessages((m) => [...m, { role: "assistant", content: "âš ï¸ Lá»—i máº¡ng khi gá»i API." }]);
         } finally {
             setLoading(false);
         }
@@ -46,7 +46,7 @@ export default function Assistant() {
     return (
         <div className="min-h-screen bg-white text-slate-900">
             <div className="max-w-3xl mx-auto py-8 px-4">
-                <h1 className="text-2xl font-bold mb-4">Trợ lý AI</h1>
+                <h1 className="text-2xl font-bold mb-4">Trá»£ lÃ½ AI</h1>
 
                 <div className="border rounded-xl p-4 space-y-3 bg-slate-50">
                     {messages.map((m, i) => (
@@ -56,18 +56,18 @@ export default function Assistant() {
                                 }`}
                         >
                             <div className="text-xs uppercase opacity-60 mb-1">
-                                {m.role === "user" ? "Bạn" : "AI"}
+                                {m.role === "user" ? "Báº¡n" : "AI"}
                             </div>
                             <div className="whitespace-pre-wrap">{m.content}</div>
                         </div>
                     ))}
-                    {loading && <div className="text-sm opacity-70">AI đang soạn trả lời…</div>}
+                    {loading && <div className="text-sm opacity-70">AI Ä‘ang soáº¡n tráº£ lá»iâ€¦</div>}
                 </div>
 
                 <div className="mt-4 flex gap-2">
                     <textarea
                         className="flex-1 border rounded-lg p-3 focus:outline-none focus:ring"
-                        placeholder="Nhập câu hỏi… (Enter để gửi, Shift+Enter xuống dòng)"
+                        placeholder="Nháº­p cÃ¢u há»iâ€¦ (Enter Ä‘á»ƒ gá»­i, Shift+Enter xuá»‘ng dÃ²ng)"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={onKeyDown}
@@ -78,10 +78,12 @@ export default function Assistant() {
                         disabled={loading}
                         className="px-4 py-2 bg-indigo-600 text-white rounded-lg disabled:opacity-50"
                     >
-                        Gửi
+                        Gá»­i
                     </button>
                 </div>
             </div>
         </div>
     );
 }
+
+

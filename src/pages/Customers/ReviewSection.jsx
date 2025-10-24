@@ -1,4 +1,4 @@
-// import { useEffect, useMemo, useState } from "react";
+﻿// import { useEffect, useMemo, useState } from "react";
 // import { useParams, useNavigate, useLocation } from "react-router-dom";
 // import { toast } from "react-toastify";
 
@@ -26,14 +26,14 @@
 //     }
 //   })();
 
-//   // ⭐ Tính điểm trung bình
+//   // â­ TÃ­nh Ä‘iá»ƒm trung bÃ¬nh
 //   const avgRating = useMemo(() => {
 //     if (!reviews?.length) return null;
 //     const sum = reviews.reduce((s, r) => s + Number(r.rating || 0), 0);
 //     return Math.round((sum / reviews.length) * 10) / 10;
 //   }, [reviews]);
 
-//   // ✅ Lấy thông tin sản phẩm
+//   // âœ… Láº¥y thÃ´ng tin sáº£n pháº©m
 //   useEffect(() => {
 //     if (!pid) return;
 //     const ac = new AbortController();
@@ -52,7 +52,7 @@
 //     return () => ac.abort();
 //   }, [pid]);
 
-//   // ✅ Load danh sách review
+//   // âœ… Load danh sÃ¡ch review
 //   useEffect(() => {
 //     if (!pid) return;
 //     const ac = new AbortController();
@@ -65,14 +65,14 @@
 //         });
 //         const data = await res.json();
 //         if (!res.ok) {
-//           setError("Không tải được đánh giá.");
+//           setError("KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡.");
 //           setReviews([]);
 //           return;
 //         }
 //         setReviews(Array.isArray(data.data) ? data.data : []);
 //         setError("");
 //       } catch {
-//         setError("Không tải được đánh giá.");
+//         setError("KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡.");
 //       } finally {
 //         setLoading(false);
 //       }
@@ -80,7 +80,7 @@
 //     return () => ac.abort();
 //   }, [pid]);
 
-//   // ✅ Kiểm tra quyền đánh giá
+//   // âœ… Kiá»ƒm tra quyá»n Ä‘Ã¡nh giÃ¡
 //   useEffect(() => {
 //     if (!pid || !token) return;
 //     const ac = new AbortController();
@@ -103,12 +103,12 @@
 //     return () => ac.abort();
 //   }, [pid, token]);
 
-//   // ✅ Gửi đánh giá
+//   // âœ… Gá»­i Ä‘Ã¡nh giÃ¡
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     if (!token) {
 //       navigate("/login", { state: { redirectTo: location.pathname } });
-//       toast.info("Vui lòng đăng nhập để đánh giá sản phẩm!");
+//       toast.info("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ Ä‘Ã¡nh giÃ¡ sáº£n pháº©m!");
 //       return;
 //     }
 
@@ -129,27 +129,27 @@
 
 //       const data = await res.json().catch(() => ({}));
 //       if (!res.ok) {
-//         toast.error(data?.message || "Không thêm được đánh giá");
+//         toast.error(data?.message || "KhÃ´ng thÃªm Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡");
 //         return;
 //       }
 
 //       const reviewData = data.data || data;
 //       setReviews((cur) => [reviewData, ...cur]);
 //       setNewReview({ rating: 5, content: "" });
-//       toast.success("Đã gửi đánh giá, cảm ơn bạn!");
+//       toast.success("ÄÃ£ gá»­i Ä‘Ã¡nh giÃ¡, cáº£m Æ¡n báº¡n!");
 //     } catch {
-//       toast.error("Không kết nối được server");
+//       toast.error("KhÃ´ng káº¿t ná»‘i Ä‘Æ°á»£c server");
 //     }
 //   };
 
-//   // ✅ Xóa đánh giá
+//   // âœ… XÃ³a Ä‘Ã¡nh giÃ¡
 //   const handleDelete = async (id) => {
 //     if (!token) {
 //       navigate("/login", { state: { redirectTo: location.pathname } });
-//       toast.info("Cần đăng nhập");
+//       toast.info("Cáº§n Ä‘Äƒng nháº­p");
 //       return;
 //     }
-//     if (!confirm("Xóa review này?")) return;
+//     if (!confirm("XÃ³a review nÃ y?")) return;
 //     try {
 //       const res = await fetch(`${API_BASE}/reviews/${id}`, {
 //         method: "DELETE",
@@ -157,13 +157,13 @@
 //       });
 //       if (res.ok) {
 //         setReviews((rs) => rs.filter((r) => r.id !== id));
-//         toast.success("Đã xóa đánh giá");
+//         toast.success("ÄÃ£ xÃ³a Ä‘Ã¡nh giÃ¡");
 //       } else {
 //         const d = await res.json().catch(() => ({}));
-//         toast.error(d?.message || "Xóa thất bại");
+//         toast.error(d?.message || "XÃ³a tháº¥t báº¡i");
 //       }
 //     } catch {
-//       toast.error("Không kết nối được server");
+//       toast.error("KhÃ´ng káº¿t ná»‘i Ä‘Æ°á»£c server");
 //     }
 //   };
 
@@ -182,10 +182,10 @@
 //   const productThumb =
 //     product?.thumbnail_url || product?.image_url || product?.thumbnail || "";
 
-//   // 🩵 Giao diện hiển thị
+//   // ðŸ©µ Giao diá»‡n hiá»ƒn thá»‹
 //   return (
 //     <div style={{ marginTop: 40 }}>
-//       {/* === Thông tin sản phẩm === */}
+//       {/* === ThÃ´ng tin sáº£n pháº©m === */}
 //       <div
 //         style={{
 //           display: "grid",
@@ -208,10 +208,10 @@
 //         />
 //         <div>
 //           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 4, color: "#14532d" }}>
-//             {product?.name || `Sản phẩm #${pid}`}
+//             {product?.name || `Sáº£n pháº©m #${pid}`}
 //           </div>
 //           <div style={{ color: "#d97706", fontWeight: 700 }}>
-//             {avgRating != null ? `⭐ ${avgRating} / 5` : "Chưa có điểm"} ({reviews.length} đánh giá)
+//             {avgRating != null ? `â­ ${avgRating} / 5` : "ChÆ°a cÃ³ Ä‘iá»ƒm"} ({reviews.length} Ä‘Ã¡nh giÃ¡)
 //           </div>
 //         </div>
 //         <div style={{ textAlign: "right", fontWeight: 900, color: "#065f46" }}>
@@ -219,25 +219,25 @@
 //         </div>
 //       </div>
 
-//       {/* === Form đánh giá === */}
+//       {/* === Form Ä‘Ã¡nh giÃ¡ === */}
 //       <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: "#388e3c" }}>
-//         ⭐ Đánh giá sản phẩm
+//         â­ ÄÃ¡nh giÃ¡ sáº£n pháº©m
 //       </h3>
 
-//       {loading && <p>Đang tải review...</p>}
+//       {loading && <p>Äang táº£i review...</p>}
 //       {error && <p style={{ color: "red" }}>{error}</p>}
 
 //       {user && (
 //         <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
 //           <div style={{ marginBottom: 8 }}>
-//             <label>Chấm điểm: </label>
+//             <label>Cháº¥m Ä‘iá»ƒm: </label>
 //             <select
 //               value={newReview.rating}
 //               onChange={(e) => setNewReview((s) => ({ ...s, rating: Number(e.target.value) }))}
 //             >
 //               {[5, 4, 3, 2, 1].map((r) => (
 //                 <option key={r} value={r}>
-//                   {r} ⭐
+//                   {r} â­
 //                 </option>
 //               ))}
 //             </select>
@@ -245,7 +245,7 @@
 //           <textarea
 //             value={newReview.content}
 //             onChange={(e) => setNewReview((s) => ({ ...s, content: e.target.value }))}
-//             placeholder="Viết đánh giá của bạn..."
+//             placeholder="Viáº¿t Ä‘Ã¡nh giÃ¡ cá»§a báº¡n..."
 //             rows={3}
 //             style={{
 //               width: "100%",
@@ -268,14 +268,14 @@
 //               fontWeight: 700,
 //             }}
 //           >
-//             Gửi đánh giá
+//             Gá»­i Ä‘Ã¡nh giÃ¡
 //           </button>
 //         </form>
 //       )}
 
-//       {/* === Danh sách review === */}
+//       {/* === Danh sÃ¡ch review === */}
 //       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-//         {reviews.length === 0 && <p>Chưa có đánh giá nào.</p>}
+//         {reviews.length === 0 && <p>ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡ nÃ o.</p>}
 
 //         {reviews.map((r) => (
 //           <div
@@ -289,25 +289,25 @@
 //             }}
 //           >
 //             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//               <b style={{ color: "#065f46" }}>{r.user?.name || "Ẩn danh"}</b>
+//               <b style={{ color: "#065f46" }}>{r.user?.name || "áº¨n danh"}</b>
 //               <span style={{ color: "#facc15", fontSize: 16 }}>
-//                 {"⭐".repeat(r.rating)}{"☆".repeat(5 - r.rating)}
+//                 {"â­".repeat(r.rating)}{"â˜†".repeat(5 - r.rating)}
 //               </span>
 //             </div>
 
-//             {/* ✅ Hiển thị nội dung bình luận */}
+//             {/* âœ… Hiá»ƒn thá»‹ ná»™i dung bÃ¬nh luáº­n */}
 //             <p style={{ marginTop: 6, color: "#374151" }}>
-//               {r.content || <i>(Không có nội dung)</i>}
+//               {r.content || <i>(KhÃ´ng cÃ³ ná»™i dung)</i>}
 //             </p>
 
-//             {/* ✅ Hiển thị thời gian tạo */}
+//             {/* âœ… Hiá»ƒn thá»‹ thá»i gian táº¡o */}
 //             <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>
 //               {r.created_at
 //                 ? new Date(r.created_at).toLocaleString("vi-VN")
-//                 : "Chưa rõ thời gian"}
+//                 : "ChÆ°a rÃµ thá»i gian"}
 //             </div>
 
-//             {/* ✅ Nút xóa nếu là người viết */}
+//             {/* âœ… NÃºt xÃ³a náº¿u lÃ  ngÆ°á»i viáº¿t */}
 //             {user && user.id === r.user_id && (
 //               <button
 //                 onClick={() => handleDelete(r.id)}
@@ -320,7 +320,7 @@
 //                   cursor: "pointer",
 //                 }}
 //               >
-//                 ❌ Xóa
+//                 âŒ XÃ³a
 //               </button>
 //             )}
 //           </div>
@@ -329,6 +329,9 @@
 //     </div>
 //   );
 // }
+
+
+import { API_BASE } from "../config/env"; // chỉnh đường dẫn tùy file
 
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
@@ -349,7 +352,7 @@ export default function ReviewSection({ productId }) {
   const [error, setError] = useState("");
   const [canReview, setCanReview] = useState(false);
 
-  // 🆕 state cho ảnh
+  // ðŸ†• state cho áº£nh
   const [files, setFiles] = useState([]);        // File[]
   const [previews, setPreviews] = useState([]);  // objectURL[]
 
@@ -362,14 +365,14 @@ export default function ReviewSection({ productId }) {
     }
   })();
 
-  // ⭐ Tính điểm trung bình
+  // â­ TÃ­nh Ä‘iá»ƒm trung bÃ¬nh
   const avgRating = useMemo(() => {
     if (!reviews?.length) return null;
     const sum = reviews.reduce((s, r) => s + Number(r.rating || 0), 0);
     return Math.round((sum / reviews.length) * 10) / 10;
   }, [reviews]);
 
-  // ✅ Lấy thông tin sản phẩm
+  // âœ… Láº¥y thÃ´ng tin sáº£n pháº©m
   useEffect(() => {
     if (!pid) return;
     const ac = new AbortController();
@@ -388,7 +391,7 @@ export default function ReviewSection({ productId }) {
     return () => ac.abort();
   }, [pid]);
 
-  // ✅ Load danh sách review
+  // âœ… Load danh sÃ¡ch review
   useEffect(() => {
     if (!pid) return;
     const ac = new AbortController();
@@ -401,14 +404,14 @@ export default function ReviewSection({ productId }) {
         });
         const data = await res.json();
         if (!res.ok) {
-          setError("Không tải được đánh giá.");
+          setError("KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡.");
           setReviews([]);
           return;
         }
         setReviews(Array.isArray(data.data) ? data.data : []);
         setError("");
       } catch {
-        setError("Không tải được đánh giá.");
+        setError("KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡.");
       } finally {
         setLoading(false);
       }
@@ -416,7 +419,7 @@ export default function ReviewSection({ productId }) {
     return () => ac.abort();
   }, [pid]);
 
-  // ✅ Kiểm tra quyền đánh giá
+  // âœ… Kiá»ƒm tra quyá»n Ä‘Ã¡nh giÃ¡
   useEffect(() => {
     if (!pid || !token) return;
     const ac = new AbortController();
@@ -439,7 +442,7 @@ export default function ReviewSection({ productId }) {
     return () => ac.abort();
   }, [pid, token]);
 
-  // 🆕 chọn ảnh + preview (giới hạn nhẹ nhàng)
+  // ðŸ†• chá»n áº£nh + preview (giá»›i háº¡n nháº¹ nhÃ ng)
   const onPickFiles = (e) => {
     const picked = Array.from(e.target.files || []);
     if (!picked.length) {
@@ -452,22 +455,22 @@ export default function ReviewSection({ productId }) {
     const ok = [];
     for (const f of picked.slice(0, MAX_FILES)) {
       if (!/^image\//.test(f.type)) {
-        toast.warn(`Bỏ qua tệp không phải ảnh: ${f.name}`);
+        toast.warn(`Bá» qua tá»‡p khÃ´ng pháº£i áº£nh: ${f.name}`);
         continue;
       }
       if (f.size > MAX_MB * 1024 * 1024) {
-        toast.warn(`Ảnh quá lớn (> ${MAX_MB}MB): ${f.name}`);
+        toast.warn(`áº¢nh quÃ¡ lá»›n (> ${MAX_MB}MB): ${f.name}`);
         continue;
       }
       ok.push(f);
     }
     setFiles(ok);
-    // revoke url cũ
+    // revoke url cÅ©
     previews.forEach((u) => URL.revokeObjectURL(u));
     setPreviews(ok.map((f) => URL.createObjectURL(f)));
   };
 
-  // 🧹 dọn URL object khi unmount / thay file
+  // ðŸ§¹ dá»n URL object khi unmount / thay file
   useEffect(() => {
     return () => {
       previews.forEach((u) => URL.revokeObjectURL(u));
@@ -475,30 +478,30 @@ export default function ReviewSection({ productId }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ✅ Gửi đánh giá (giữ nguyên, chỉ thêm nhánh multipart khi có ảnh)
+  // âœ… Gá»­i Ä‘Ã¡nh giÃ¡ (giá»¯ nguyÃªn, chá»‰ thÃªm nhÃ¡nh multipart khi cÃ³ áº£nh)
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!token) {
       navigate("/login", { state: { redirectTo: location.pathname } });
-      toast.info("Vui lòng đăng nhập để đánh giá sản phẩm!");
+      toast.info("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ Ä‘Ã¡nh giÃ¡ sáº£n pháº©m!");
       return;
     }
 
     const content = newReview.content.trim();
     if (!content) {
-      toast.info("Hãy viết nội dung đánh giá.");
+      toast.info("HÃ£y viáº¿t ná»™i dung Ä‘Ã¡nh giÃ¡.");
       return;
     }
 
     try {
       let res;
-      // nếu có ảnh -> gửi multipart
+      // náº¿u cÃ³ áº£nh -> gá»­i multipart
       if (files.length) {
         const form = new FormData();
         form.append("product_id", String(pid));
         form.append("rating", String(newReview.rating));
         form.append("content", content);
-        files.forEach((f) => form.append("images[]", f)); // BE đọc images[] hoặc images
+        files.forEach((f) => form.append("images[]", f)); // BE Ä‘á»c images[] hoáº·c images
 
         res = await fetch(`${API_BASE}/products/${pid}/reviews`, {
           method: "POST",
@@ -509,7 +512,7 @@ export default function ReviewSection({ productId }) {
           body: form,
         });
       } else {
-        // không có ảnh -> giữ nguyên JSON như cũ
+        // khÃ´ng cÃ³ áº£nh -> giá»¯ nguyÃªn JSON nhÆ° cÅ©
         res = await fetch(`${API_BASE}/products/${pid}/reviews`, {
           method: "POST",
           headers: {
@@ -527,7 +530,7 @@ export default function ReviewSection({ productId }) {
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        toast.error(data?.message || "Không thêm được đánh giá");
+        toast.error(data?.message || "KhÃ´ng thÃªm Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡");
         return;
       }
 
@@ -537,20 +540,20 @@ export default function ReviewSection({ productId }) {
       setFiles([]);
       previews.forEach((u) => URL.revokeObjectURL(u));
       setPreviews([]);
-      toast.success("Đã gửi đánh giá, cảm ơn bạn!");
+      toast.success("ÄÃ£ gá»­i Ä‘Ã¡nh giÃ¡, cáº£m Æ¡n báº¡n!");
     } catch {
-      toast.error("Không kết nối được server");
+      toast.error("KhÃ´ng káº¿t ná»‘i Ä‘Æ°á»£c server");
     }
   };
 
-  // ✅ Xóa đánh giá
+  // âœ… XÃ³a Ä‘Ã¡nh giÃ¡
   const handleDelete = async (id) => {
     if (!token) {
       navigate("/login", { state: { redirectTo: location.pathname } });
-      toast.info("Cần đăng nhập");
+      toast.info("Cáº§n Ä‘Äƒng nháº­p");
       return;
     }
-    if (!confirm("Xóa review này?")) return;
+    if (!confirm("XÃ³a review nÃ y?")) return;
     try {
       const res = await fetch(`${API_BASE}/reviews/${id}`, {
         method: "DELETE",
@@ -558,13 +561,13 @@ export default function ReviewSection({ productId }) {
       });
       if (res.ok) {
         setReviews((rs) => rs.filter((r) => r.id !== id));
-        toast.success("Đã xóa đánh giá");
+        toast.success("ÄÃ£ xÃ³a Ä‘Ã¡nh giÃ¡");
       } else {
         const d = await res.json().catch(() => ({}));
-        toast.error(d?.message || "Xóa thất bại");
+        toast.error(d?.message || "XÃ³a tháº¥t báº¡i");
       }
     } catch {
-      toast.error("Không kết nối được server");
+      toast.error("KhÃ´ng káº¿t ná»‘i Ä‘Æ°á»£c server");
     }
   };
 
@@ -583,21 +586,21 @@ export default function ReviewSection({ productId }) {
   const productThumb =
     product?.thumbnail_url || product?.image_url || product?.thumbnail || "";
 
-  // 🥒 helper lấy danh sách url ảnh của review (linh hoạt theo key BE)
+  // ðŸ¥’ helper láº¥y danh sÃ¡ch url áº£nh cá»§a review (linh hoáº¡t theo key BE)
   const getReviewImages = (r) => {
-    // chấp nhận nhiều kiểu field khác nhau
+    // cháº¥p nháº­n nhiá»u kiá»ƒu field khÃ¡c nhau
     if (Array.isArray(r.images)) return r.images;
     if (Array.isArray(r.photos)) return r.photos;
     if (Array.isArray(r.media)) return r.media;
-    // một số BE trả object {images:[{url:"..."}]}
+    // má»™t sá»‘ BE tráº£ object {images:[{url:"..."}]}
     if (r.images && Array.isArray(r.images.data)) return r.images.data.map((x) => x.url || x.src).filter(Boolean);
     return [];
   };
 
-  // 🩵 Giao diện hiển thị
+  // ðŸ©µ Giao diá»‡n hiá»ƒn thá»‹
   return (
     <div style={{ marginTop: 40 }}>
-      {/* === Thông tin sản phẩm === */}
+      {/* === ThÃ´ng tin sáº£n pháº©m === */}
       <div
         style={{
           display: "grid",
@@ -620,10 +623,10 @@ export default function ReviewSection({ productId }) {
         />
         <div>
           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 4, color: "#14532d" }}>
-            {product?.name || `Sản phẩm #${pid}`}
+            {product?.name || `Sáº£n pháº©m #${pid}`}
           </div>
           <div style={{ color: "#d97706", fontWeight: 700 }}>
-            {avgRating != null ? `⭐ ${avgRating} / 5` : "Chưa có điểm"} ({reviews.length} đánh giá)
+            {avgRating != null ? `â­ ${avgRating} / 5` : "ChÆ°a cÃ³ Ä‘iá»ƒm"} ({reviews.length} Ä‘Ã¡nh giÃ¡)
           </div>
         </div>
         <div style={{ textAlign: "right", fontWeight: 900, color: "#065f46" }}>
@@ -631,25 +634,25 @@ export default function ReviewSection({ productId }) {
         </div>
       </div>
 
-      {/* === Form đánh giá === */}
+      {/* === Form Ä‘Ã¡nh giÃ¡ === */}
       <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: "#388e3c" }}>
-        ⭐ Đánh giá sản phẩm
+        â­ ÄÃ¡nh giÃ¡ sáº£n pháº©m
       </h3>
 
-      {loading && <p>Đang tải review...</p>}
+      {loading && <p>Äang táº£i review...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {user && (
         <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
           <div style={{ marginBottom: 8 }}>
-            <label>Chấm điểm: </label>
+            <label>Cháº¥m Ä‘iá»ƒm: </label>
             <select
               value={newReview.rating}
               onChange={(e) => setNewReview((s) => ({ ...s, rating: Number(e.target.value) }))}
             >
               {[5, 4, 3, 2, 1].map((r) => (
                 <option key={r} value={r}>
-                  {r} ⭐
+                  {r} â­
                 </option>
               ))}
             </select>
@@ -658,7 +661,7 @@ export default function ReviewSection({ productId }) {
           <textarea
             value={newReview.content}
             onChange={(e) => setNewReview((s) => ({ ...s, content: e.target.value }))}
-            placeholder="Viết đánh giá của bạn..."
+            placeholder="Viáº¿t Ä‘Ã¡nh giÃ¡ cá»§a báº¡n..."
             rows={3}
             style={{
               width: "100%",
@@ -669,9 +672,9 @@ export default function ReviewSection({ productId }) {
             }}
           />
 
-          {/* 🆕 chọn ảnh */}
+          {/* ðŸ†• chá»n áº£nh */}
           <div style={{ marginTop: 8 }}>
-            <label style={{ fontWeight: 600 }}>Ảnh đính kèm (tối đa 5, ≤ 5MB/ảnh):</label>
+            <label style={{ fontWeight: 600 }}>áº¢nh Ä‘Ã­nh kÃ¨m (tá»‘i Ä‘a 5, â‰¤ 5MB/áº£nh):</label>
             <input
               type="file"
               accept="image/*"
@@ -709,14 +712,14 @@ export default function ReviewSection({ productId }) {
               fontWeight: 700,
             }}
           >
-            Gửi đánh giá
+            Gá»­i Ä‘Ã¡nh giÃ¡
           </button>
         </form>
       )}
 
-      {/* === Danh sách review === */}
+      {/* === Danh sÃ¡ch review === */}
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {reviews.length === 0 && <p>Chưa có đánh giá nào.</p>}
+        {reviews.length === 0 && <p>ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡ nÃ o.</p>}
 
         {reviews.map((r) => {
           const imgs = getReviewImages(r);
@@ -732,18 +735,18 @@ export default function ReviewSection({ productId }) {
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <b style={{ color: "#065f46" }}>{r.user?.name || "Ẩn danh"}</b>
+                <b style={{ color: "#065f46" }}>{r.user?.name || "áº¨n danh"}</b>
                 <span style={{ color: "#facc15", fontSize: 16 }}>
-                  {"⭐".repeat(r.rating)}{"☆".repeat(Math.max(0, 5 - r.rating))}
+                  {"â­".repeat(r.rating)}{"â˜†".repeat(Math.max(0, 5 - r.rating))}
                 </span>
               </div>
 
-              {/* Nội dung */}
+              {/* Ná»™i dung */}
               <p style={{ marginTop: 6, color: "#374151" }}>
-                {r.content || <i>(Không có nội dung)</i>}
+                {r.content || <i>(KhÃ´ng cÃ³ ná»™i dung)</i>}
               </p>
 
-              {/* Ảnh của review */}
+              {/* áº¢nh cá»§a review */}
               {!!imgs.length && (
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
                   {imgs.map((u, idx) => (
@@ -761,14 +764,14 @@ export default function ReviewSection({ productId }) {
                 </div>
               )}
 
-              {/* Thời gian */}
+              {/* Thá»i gian */}
               <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>
                 {r.created_at
                   ? new Date(r.created_at).toLocaleString("vi-VN")
-                  : "Chưa rõ thời gian"}
+                  : "ChÆ°a rÃµ thá»i gian"}
               </div>
 
-              {/* Nút xóa nếu là người viết */}
+              {/* NÃºt xÃ³a náº¿u lÃ  ngÆ°á»i viáº¿t */}
               {user && user.id === r.user_id && (
                 <button
                   onClick={() => handleDelete(r.id)}
@@ -781,7 +784,7 @@ export default function ReviewSection({ productId }) {
                     cursor: "pointer",
                   }}
                 >
-                  ❌ Xóa
+                  âŒ XÃ³a
                 </button>
               )}
             </div>
@@ -791,3 +794,5 @@ export default function ReviewSection({ productId }) {
     </div>
   );
 }
+
+

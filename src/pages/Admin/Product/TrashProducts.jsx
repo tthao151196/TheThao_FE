@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+﻿// import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
 // const API_BASE = "http://127.0.0.1:8000/api";
@@ -27,7 +27,7 @@
 //         const data = await res.json();
 //         setItems(Array.isArray(data.data) ? data.data : []);
 //       } catch {
-//         setErr("Không tải được thùng rác.");
+//         setErr("KhÃ´ng táº£i Ä‘Æ°á»£c thÃ¹ng rÃ¡c.");
 //       } finally {
 //         setLoading(false);
 //       }
@@ -38,7 +38,7 @@
 
 //   const restore = async (id) => {
 //     const token = localStorage.getItem("admin_token");
-//     if (!window.confirm("Khôi phục sản phẩm này?")) return;
+//     if (!window.confirm("KhÃ´i phá»¥c sáº£n pháº©m nÃ y?")) return;
 //     const res = await fetch(`${API_BASE}/admin/products/${id}/restore`, {
 //       method: "POST",
 //       headers: {
@@ -48,13 +48,13 @@
 //     });
 //     if (res.ok) {
 //       setItems((prev) => prev.filter((x) => x.id !== id));
-//       alert("✅ Đã khôi phục sản phẩm!");
-//     } else alert("❌ Lỗi khi khôi phục");
+//       alert("âœ… ÄÃ£ khÃ´i phá»¥c sáº£n pháº©m!");
+//     } else alert("âŒ Lá»—i khi khÃ´i phá»¥c");
 //   };
 
 //   const forceDelete = async (id) => {
 //     const token = localStorage.getItem("admin_token");
-//     if (!window.confirm("Xóa vĩnh viễn sản phẩm này?")) return;
+//     if (!window.confirm("XÃ³a vÄ©nh viá»…n sáº£n pháº©m nÃ y?")) return;
 //     const res = await fetch(`${API_BASE}/admin/products/${id}/force`, {
 //       method: "DELETE",
 //       headers: {
@@ -64,14 +64,14 @@
 //     });
 //     if (res.ok) {
 //       setItems((prev) => prev.filter((x) => x.id !== id));
-//       alert("🗑 Đã xoá vĩnh viễn!");
-//     } else alert("❌ Lỗi xoá vĩnh viễn");
+//       alert("ðŸ—‘ ÄÃ£ xoÃ¡ vÄ©nh viá»…n!");
+//     } else alert("âŒ Lá»—i xoÃ¡ vÄ©nh viá»…n");
 //   };
 
 //   return (
 //     <section style={{ padding: 20 }}>
 //       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <h1 style={{ fontSize: 24 }}>🗂 Thùng rác sản phẩm</h1>
+//         <h1 style={{ fontSize: 24 }}>ðŸ—‚ ThÃ¹ng rÃ¡c sáº£n pháº©m</h1>
 //         <button
 //           onClick={() => navigate("/admin/products")}
 //           style={{
@@ -83,11 +83,11 @@
 //             cursor: "pointer",
 //           }}
 //         >
-//           ← Quay lại danh sách
+//           â† Quay láº¡i danh sÃ¡ch
 //         </button>
 //       </div>
 
-//       {loading && <p>Đang tải...</p>}
+//       {loading && <p>Äang táº£i...</p>}
 //       {err && <p style={{ color: "red" }}>{err}</p>}
 
 //       {!loading && (
@@ -95,10 +95,10 @@
 //           <thead>
 //             <tr style={{ background: "#fafafa" }}>
 //               <th>ID</th>
-//               <th>Tên</th>
+//               <th>TÃªn</th>
 //               <th>Slug</th>
-//               <th>Ảnh</th>
-//               <th align="center">Hành động</th>
+//               <th>áº¢nh</th>
+//               <th align="center">HÃ nh Ä‘á»™ng</th>
 //             </tr>
 //           </thead>
 //           <tbody>
@@ -128,7 +128,7 @@
 //                       cursor: "pointer",
 //                     }}
 //                   >
-//                     Khôi phục
+//                     KhÃ´i phá»¥c
 //                   </button>
 //                   <button
 //                     onClick={() => forceDelete(p.id)}
@@ -141,7 +141,7 @@
 //                       cursor: "pointer",
 //                     }}
 //                   >
-//                     Xoá vĩnh viễn
+//                     XoÃ¡ vÄ©nh viá»…n
 //                   </button>
 //                 </td>
 //               </tr>
@@ -149,7 +149,7 @@
 //             {!items.length && (
 //               <tr>
 //                 <td colSpan={5} align="center" style={{ padding: 20, color: "#777" }}>
-//                   Thùng rác trống
+//                   ThÃ¹ng rÃ¡c trá»‘ng
 //                 </td>
 //               </tr>
 //             )}
@@ -170,13 +170,13 @@ export default function TrashProducts() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
-  const [selected, setSelected] = useState(() => new Set()); // lưu các id đã chọn
-  const [busy, setBusy] = useState(false); // chặn bấm khi đang thao tác hàng loạt
+  const [selected, setSelected] = useState(() => new Set()); // lÆ°u cÃ¡c id Ä‘Ã£ chá»n
+  const [busy, setBusy] = useState(false); // cháº·n báº¥m khi Ä‘ang thao tÃ¡c hÃ ng loáº¡t
   const navigate = useNavigate();
 
   const adminToken = () => localStorage.getItem("admin_token");
 
-  // ===== Load danh sách trong thùng rác =====
+  // ===== Load danh sÃ¡ch trong thÃ¹ng rÃ¡c =====
   useEffect(() => {
     const ac = new AbortController();
 
@@ -194,9 +194,9 @@ export default function TrashProducts() {
         const data = await res.json();
         const list = Array.isArray(data?.data) ? data.data : [];
         setItems(list);
-        setSelected(new Set()); // reset các chọn cũ
+        setSelected(new Set()); // reset cÃ¡c chá»n cÅ©
       } catch {
-        setErr("Không tải được thùng rác.");
+        setErr("KhÃ´ng táº£i Ä‘Æ°á»£c thÃ¹ng rÃ¡c.");
       } finally {
         setLoading(false);
       }
@@ -205,7 +205,7 @@ export default function TrashProducts() {
     return () => ac.abort();
   }, []);
 
-  // ====== Helpers chọn ======
+  // ====== Helpers chá»n ======
   const allIds = useMemo(() => items.map((x) => x.id), [items]);
   const isAllChecked = selected.size > 0 && selected.size === items.length;
   const isIndeterminate = selected.size > 0 && selected.size < items.length;
@@ -221,15 +221,15 @@ export default function TrashProducts() {
 
   const toggleAll = useCallback(() => {
     setSelected((prev) => {
-      if (prev.size === items.length) return new Set(); // bỏ chọn hết
-      return new Set(allIds); // chọn tất cả
+      if (prev.size === items.length) return new Set(); // bá» chá»n háº¿t
+      return new Set(allIds); // chá»n táº¥t cáº£
     });
   }, [items.length, allIds]);
 
-  // ====== API actions đơn lẻ ======
+  // ====== API actions Ä‘Æ¡n láº» ======
   const restore = async (id) => {
     const token = adminToken();
-    if (!window.confirm("Khôi phục sản phẩm này?")) return;
+    if (!window.confirm("KhÃ´i phá»¥c sáº£n pháº©m nÃ y?")) return;
     const res = await fetch(`${API_BASE}/admin/products/${id}/restore`, {
       method: "POST",
       headers: {
@@ -244,13 +244,13 @@ export default function TrashProducts() {
         next.delete(id);
         return next;
       });
-      alert("✅ Đã khôi phục sản phẩm!");
-    } else alert("❌ Lỗi khi khôi phục");
+      alert("âœ… ÄÃ£ khÃ´i phá»¥c sáº£n pháº©m!");
+    } else alert("âŒ Lá»—i khi khÃ´i phá»¥c");
   };
 
   const forceDelete = async (id) => {
     const token = adminToken();
-    if (!window.confirm("Xóa vĩnh viễn sản phẩm này?")) return;
+    if (!window.confirm("XÃ³a vÄ©nh viá»…n sáº£n pháº©m nÃ y?")) return;
     const res = await fetch(`${API_BASE}/admin/products/${id}/force`, {
       method: "DELETE",
       headers: {
@@ -265,25 +265,25 @@ export default function TrashProducts() {
         next.delete(id);
         return next;
       });
-      alert("🗑 Đã xoá vĩnh viễn!");
-    } else alert("❌ Lỗi xoá vĩnh viễn");
+      alert("ðŸ—‘ ÄÃ£ xoÃ¡ vÄ©nh viá»…n!");
+    } else alert("âŒ Lá»—i xoÃ¡ vÄ©nh viá»…n");
   };
 
-  // ====== Hành động hàng loạt ======
+  // ====== HÃ nh Ä‘á»™ng hÃ ng loáº¡t ======
   const doBulk = async (type) => {
     const ids = Array.from(selected);
     if (ids.length === 0) return;
 
     const confirmMsg =
       type === "restore"
-        ? `Khôi phục ${ids.length} sản phẩm đã chọn?`
-        : `Xoá vĩnh viễn ${ids.length} sản phẩm đã chọn?`;
+        ? `KhÃ´i phá»¥c ${ids.length} sáº£n pháº©m Ä‘Ã£ chá»n?`
+        : `XoÃ¡ vÄ©nh viá»…n ${ids.length} sáº£n pháº©m Ä‘Ã£ chá»n?`;
     if (!window.confirm(confirmMsg)) return;
 
     setBusy(true);
     const token = adminToken();
 
-    // Nếu chưa có endpoint bulk, gọi tuần tự từng id
+    // Náº¿u chÆ°a cÃ³ endpoint bulk, gá»i tuáº§n tá»± tá»«ng id
     const tasks = ids.map((id) =>
       fetch(
         type === "restore"
@@ -313,11 +313,11 @@ export default function TrashProducts() {
         failIds.push(r.value.id);
       } else {
         // rejected
-        // r.reason chứa promise bị lỗi (đã catch ở trên nên ít khi vào đây)
+        // r.reason chá»©a promise bá»‹ lá»—i (Ä‘Ã£ catch á»Ÿ trÃªn nÃªn Ã­t khi vÃ o Ä‘Ã¢y)
       }
     });
 
-    // Cập nhật UI: bỏ các item đã ok
+    // Cáº­p nháº­t UI: bá» cÃ¡c item Ä‘Ã£ ok
     if (okIds.length) {
       setItems((prev) => prev.filter((x) => !okIds.includes(x.id)));
       setSelected((prev) => {
@@ -331,24 +331,24 @@ export default function TrashProducts() {
     if (okCount && !failIds.length) {
       alert(
         type === "restore"
-          ? `✅ Đã khôi phục ${okCount} sản phẩm.`
-          : `🗑 Đã xoá vĩnh viễn ${okCount} sản phẩm.`
+          ? `âœ… ÄÃ£ khÃ´i phá»¥c ${okCount} sáº£n pháº©m.`
+          : `ðŸ—‘ ÄÃ£ xoÃ¡ vÄ©nh viá»…n ${okCount} sáº£n pháº©m.`
       );
     } else if (okCount && failIds.length) {
       alert(
-        `${type === "restore" ? "⚠️" : "⚠️"} Thành công ${okCount}, thất bại ${
+        `${type === "restore" ? "âš ï¸" : "âš ï¸"} ThÃ nh cÃ´ng ${okCount}, tháº¥t báº¡i ${
           failIds.length
         }: ${failIds.join(", ")}`
       );
     } else {
-      alert("❌ Không thao tác được sản phẩm nào.");
+      alert("âŒ KhÃ´ng thao tÃ¡c Ä‘Æ°á»£c sáº£n pháº©m nÃ o.");
     }
   };
 
   return (
     <section style={{ padding: 20 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-        <h1 style={{ fontSize: 24, margin: 0 }}>🗂 Thùng rác sản phẩm</h1>
+        <h1 style={{ fontSize: 24, margin: 0 }}>ðŸ—‚ ThÃ¹ng rÃ¡c sáº£n pháº©m</h1>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <button
             onClick={() => doBulk("restore")}
@@ -361,9 +361,9 @@ export default function TrashProducts() {
               color: "#fff",
               cursor: selected.size === 0 ? "not-allowed" : "pointer",
             }}
-            title="Khôi phục các sản phẩm đã chọn"
+            title="KhÃ´i phá»¥c cÃ¡c sáº£n pháº©m Ä‘Ã£ chá»n"
           >
-            ↩ Khôi phục đã chọn ({selected.size})
+            â†© KhÃ´i phá»¥c Ä‘Ã£ chá»n ({selected.size})
           </button>
           <button
             onClick={() => doBulk("force")}
@@ -376,9 +376,9 @@ export default function TrashProducts() {
               color: "#fff",
               cursor: selected.size === 0 ? "not-allowed" : "pointer",
             }}
-            title="Xoá vĩnh viễn các sản phẩm đã chọn"
+            title="XoÃ¡ vÄ©nh viá»…n cÃ¡c sáº£n pháº©m Ä‘Ã£ chá»n"
           >
-            🗑 Xoá vĩnh viễn đã chọn ({selected.size})
+            ðŸ—‘ XoÃ¡ vÄ©nh viá»…n Ä‘Ã£ chá»n ({selected.size})
           </button>
           <button
             onClick={() => navigate("/admin/products")}
@@ -391,12 +391,12 @@ export default function TrashProducts() {
               cursor: "pointer",
             }}
           >
-            ← Quay lại danh sách
+            â† Quay láº¡i danh sÃ¡ch
           </button>
         </div>
       </div>
 
-      {loading && <p>Đang tải...</p>}
+      {loading && <p>Äang táº£i...</p>}
       {err && <p style={{ color: "red" }}>{err}</p>}
 
       {!loading && (
@@ -404,7 +404,7 @@ export default function TrashProducts() {
           <thead>
             <tr style={{ background: "#fafafa" }}>
               <th style={{ width: 36, textAlign: "center" }}>
-                {/* Checkbox chọn tất cả với trạng thái indeterminate */}
+                {/* Checkbox chá»n táº¥t cáº£ vá»›i tráº¡ng thÃ¡i indeterminate */}
                 <input
                   type="checkbox"
                   checked={isAllChecked}
@@ -412,14 +412,14 @@ export default function TrashProducts() {
                     if (el) el.indeterminate = isIndeterminate;
                   }}
                   onChange={toggleAll}
-                  aria-label="Chọn tất cả"
+                  aria-label="Chá»n táº¥t cáº£"
                 />
               </th>
               <th>ID</th>
-              <th>Tên</th>
+              <th>TÃªn</th>
               <th>Slug</th>
-              <th>Ảnh</th>
-              <th align="center">Hành động</th>
+              <th>áº¢nh</th>
+              <th align="center">HÃ nh Ä‘á»™ng</th>
             </tr>
           </thead>
           <tbody>
@@ -432,7 +432,7 @@ export default function TrashProducts() {
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleOne(p.id)}
-                      aria-label={`Chọn sản phẩm ${p.name}`}
+                      aria-label={`Chá»n sáº£n pháº©m ${p.name}`}
                     />
                   </td>
                   <td>{p.id}</td>
@@ -460,7 +460,7 @@ export default function TrashProducts() {
                         cursor: busy ? "not-allowed" : "pointer",
                       }}
                     >
-                      Khôi phục
+                      KhÃ´i phá»¥c
                     </button>
                     <button
                       onClick={() => forceDelete(p.id)}
@@ -474,7 +474,7 @@ export default function TrashProducts() {
                         cursor: busy ? "not-allowed" : "pointer",
                       }}
                     >
-                      Xoá vĩnh viễn
+                      XoÃ¡ vÄ©nh viá»…n
                     </button>
                   </td>
                 </tr>
@@ -483,7 +483,7 @@ export default function TrashProducts() {
             {!items.length && (
               <tr>
                 <td colSpan={6} align="center" style={{ padding: 20, color: "#777" }}>
-                  Thùng rác trống
+                  ThÃ¹ng rÃ¡c trá»‘ng
                 </td>
               </tr>
             )}
@@ -493,3 +493,5 @@ export default function TrashProducts() {
     </section>
   );
 }
+
+

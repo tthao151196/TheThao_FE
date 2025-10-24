@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -15,17 +15,17 @@ const STATUS_COLORS = {
 
 const humanStatus = (key) => {
   const map = {
-    pending:   "Chờ xác nhận",
-    confirmed: "Đã xác nhận",
-    ready:     "Chờ giao hàng",
-    shipping:  "Đang giao",
-    delivered: "Giao thành công",
-    canceled:  "Đã hủy",
+    pending:   "Chá» xÃ¡c nháº­n",
+    confirmed: "ÄÃ£ xÃ¡c nháº­n",
+    ready:     "Chá» giao hÃ ng",
+    shipping:  "Äang giao",
+    delivered: "Giao thÃ nh cÃ´ng",
+    canceled:  "ÄÃ£ há»§y",
   };
   return map[key] || key;
 };
 
-// FIX: map 2 chiều code <-> key
+// FIX: map 2 chiá»u code <-> key
 const STATUS_CODE_FROM_KEY = {
   pending: 0,
   confirmed: 1,
@@ -79,15 +79,15 @@ export default function Orders() {
       setOrders(list);
     } catch (e) {
       console.error(e);
-      setErr("Không tải được danh sách đơn hàng.");
+      setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch Ä‘Æ¡n hÃ ng.");
     } finally {
       setLoading(false);
     }
   }
 
   const handleStatusChange = async (id, newKey) => {
-    // newKey là "pending/confirmed/..."
-    if (!window.confirm(`Cập nhật trạng thái đơn #${id} thành "${humanStatus(newKey)}"?`))
+    // newKey lÃ  "pending/confirmed/..."
+    if (!window.confirm(`Cáº­p nháº­t tráº¡ng thÃ¡i Ä‘Æ¡n #${id} thÃ nh "${humanStatus(newKey)}"?`))
       return;
 
     try {
@@ -99,7 +99,7 @@ export default function Orders() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        // FE vẫn gửi chuỗi theo UI để BE map (đã hỗ trợ)
+        // FE váº«n gá»­i chuá»—i theo UI Ä‘á»ƒ BE map (Ä‘Ã£ há»— trá»£)
         body: JSON.stringify({ status: newKey }),
       });
 
@@ -110,12 +110,12 @@ export default function Orders() {
 
       const updated = await res.json();
 
-      // FIX: BE trả về code (số). Lưu lại vào orders[i].status là số.
+      // FIX: BE tráº£ vá» code (sá»‘). LÆ°u láº¡i vÃ o orders[i].status lÃ  sá»‘.
       const newCode =
         updated?.data?.status ?? updated?.status ?? null;
 
       if (newCode === null) {
-        // fallback: reload toàn danh sách nếu response không như mong đợi
+        // fallback: reload toÃ n danh sÃ¡ch náº¿u response khÃ´ng nhÆ° mong Ä‘á»£i
         await loadOrders();
       } else {
         setOrders((prev) =>
@@ -123,10 +123,10 @@ export default function Orders() {
         );
       }
 
-      alert("✅ Cập nhật trạng thái thành công!");
+      alert("âœ… Cáº­p nháº­t tráº¡ng thÃ¡i thÃ nh cÃ´ng!");
     } catch (e) {
       console.error(e);
-      alert("❌ Lỗi khi cập nhật trạng thái đơn hàng!");
+      alert("âŒ Lá»—i khi cáº­p nháº­t tráº¡ng thÃ¡i Ä‘Æ¡n hÃ ng!");
     }
   };
 
@@ -140,13 +140,13 @@ export default function Orders() {
           gap: 10,
         }}
       >
-        <h1 style={{ fontSize: 24 }}>Quản lý đơn hàng</h1>
+        <h1 style={{ fontSize: 24 }}>Quáº£n lÃ½ Ä‘Æ¡n hÃ ng</h1>
 
         <div style={{ display: "flex", gap: 8 }}>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Tìm theo mã đơn / tên / email / sđt"
+            placeholder="TÃ¬m theo mÃ£ Ä‘Æ¡n / tÃªn / email / sÄ‘t"
             style={{
               height: 36,
               padding: "0 10px",
@@ -165,12 +165,12 @@ export default function Orders() {
               cursor: "pointer",
             }}
           >
-            Xóa tìm
+            XÃ³a tÃ¬m
           </button>
         </div>
       </div>
 
-      {loading && <p>Đang tải dữ liệu…</p>}
+      {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
       {err && <p style={{ color: "red" }}>{err}</p>}
 
       {!loading && !err && (
@@ -182,19 +182,19 @@ export default function Orders() {
           >
             <thead>
               <tr style={{ background: "#f5f6fa" }}>
-                <th align="left">Mã đơn</th>
-                <th align="left">Khách hàng</th>
+                <th align="left">MÃ£ Ä‘Æ¡n</th>
+                <th align="left">KhÃ¡ch hÃ ng</th>
                 <th align="left">Email</th>
-                <th align="left">SĐT</th>
-                <th align="right">Tổng tiền</th>
-                <th align="left">Trạng thái</th>
-                <th align="center">Cập nhật</th>
-                <th align="center">Hành động</th>
+                <th align="left">SÄT</th>
+                <th align="right">Tá»•ng tiá»n</th>
+                <th align="left">Tráº¡ng thÃ¡i</th>
+                <th align="center">Cáº­p nháº­t</th>
+                <th align="center">HÃ nh Ä‘á»™ng</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((o) => {
-                // FIX: chuyển code -> key để hiển thị đúng màu/label/select
+                // FIX: chuyá»ƒn code -> key Ä‘á»ƒ hiá»ƒn thá»‹ Ä‘Ãºng mÃ u/label/select
                 const statusKey = STATUS_KEY_FROM_CODE(o.status);
                 const sColor = STATUS_COLORS[statusKey] || {};
                 return (
@@ -203,7 +203,7 @@ export default function Orders() {
                     <td>{o.name}</td>
                     <td>{o.email}</td>
                     <td>{o.phone}</td>
-                    <td align="right">₫{VND.format(Number(o.total ?? 0))}</td>
+                    <td align="right">â‚«{VND.format(Number(o.total ?? 0))}</td>
                     <td>
                       <span
                         style={{
@@ -221,7 +221,7 @@ export default function Orders() {
                     </td>
                     <td align="center">
                       <select
-                        // FIX: select dùng key (chuỗi) để khớp option
+                        // FIX: select dÃ¹ng key (chuá»—i) Ä‘á»ƒ khá»›p option
                         value={statusKey}
                         onChange={(e) =>
                           handleStatusChange(o.id, e.target.value)
@@ -232,12 +232,12 @@ export default function Orders() {
                           border: "1px solid #ccc",
                         }}
                       >
-                        <option value="pending">Chờ xác nhận</option>
-                        <option value="confirmed">Đã xác nhận</option>
-                        <option value="ready">Chờ giao hàng</option>
-                        <option value="shipping">Đang giao</option>
-                        <option value="delivered">Giao thành công</option>
-                        <option value="canceled">Đã hủy</option>
+                        <option value="pending">Chá» xÃ¡c nháº­n</option>
+                        <option value="confirmed">ÄÃ£ xÃ¡c nháº­n</option>
+                        <option value="ready">Chá» giao hÃ ng</option>
+                        <option value="shipping">Äang giao</option>
+                        <option value="delivered">Giao thÃ nh cÃ´ng</option>
+                        <option value="canceled">ÄÃ£ há»§y</option>
                       </select>
                     </td>
                     <td align="center">
@@ -262,7 +262,7 @@ export default function Orders() {
               {orders.length === 0 && (
                 <tr>
                   <td colSpan={8} align="center" style={{ color: "#666" }}>
-                    Không có đơn hàng.
+                    KhÃ´ng cÃ³ Ä‘Æ¡n hÃ ng.
                   </td>
                 </tr>
               )}
@@ -273,3 +273,5 @@ export default function Orders() {
     </section>
   );
 }
+
+

@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 
 /**
- * Ưu tiên lấy API_BASE từ .env (Vite):
+ * Æ¯u tiÃªn láº¥y API_BASE tá»« .env (Vite):
  *   VITE_API_BASE=http://127.0.0.1:8000/api
- * Nếu không có thì fallback về 127.0.0.1:8000/api.
+ * Náº¿u khÃ´ng cÃ³ thÃ¬ fallback vá» 127.0.0.1:8000/api.
  */
 const API_BASE =
   import.meta?.env?.VITE_API_BASE?.replace(/\/+$/, "") ||
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
 
   const validEmail = useMemo(() => {
-    // kiểm tra cơ bản
+    // kiá»ƒm tra cÆ¡ báº£n
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }, [email]);
 
@@ -26,7 +26,7 @@ export default function ForgotPassword() {
     setErr("");
 
     if (!validEmail) {
-      setErr("Email không hợp lệ");
+      setErr("Email khÃ´ng há»£p lá»‡");
       return;
     }
 
@@ -38,7 +38,7 @@ export default function ForgotPassword() {
         body: JSON.stringify({ email: email.trim() }),
       });
 
-      // cố gắng parse JSON; nếu BE trả rỗng, giữ object rỗng
+      // cá»‘ gáº¯ng parse JSON; náº¿u BE tráº£ rá»—ng, giá»¯ object rá»—ng
       let data = {};
       try {
         data = await res.json();
@@ -47,34 +47,34 @@ export default function ForgotPassword() {
       }
 
       if (!res.ok) {
-        // Phân loại lỗi để hiển thị rõ ràng
+        // PhÃ¢n loáº¡i lá»—i Ä‘á»ƒ hiá»ƒn thá»‹ rÃµ rÃ ng
         if (res.status === 404) {
-          setErr(data?.message || "Email không tồn tại trong hệ thống");
+          setErr(data?.message || "Email khÃ´ng tá»“n táº¡i trong há»‡ thá»‘ng");
         } else if (res.status === 500) {
-          // Nếu BE có trả 'error' -> show để debug SMTP/SendGrid
+          // Náº¿u BE cÃ³ tráº£ 'error' -> show Ä‘á»ƒ debug SMTP/SendGrid
           const detail = data?.error ? ` (${String(data.error)})` : "";
           setErr(
-            (data?.message || "Gửi email thất bại. Vui lòng thử lại sau.") +
+            (data?.message || "Gá»­i email tháº¥t báº¡i. Vui lÃ²ng thá»­ láº¡i sau.") +
               detail
           );
         } else if (res.status === 422) {
           setErr(
             data?.message ||
-              "Thiếu dữ liệu hoặc dữ liệu không hợp lệ. Vui lòng kiểm tra lại."
+              "Thiáº¿u dá»¯ liá»‡u hoáº·c dá»¯ liá»‡u khÃ´ng há»£p lá»‡. Vui lÃ²ng kiá»ƒm tra láº¡i."
           );
         } else {
           setErr(
             data?.message ||
-              `Có lỗi xảy ra (HTTP ${res.status}). Vui lòng thử lại.`
+              `CÃ³ lá»—i xáº£y ra (HTTP ${res.status}). Vui lÃ²ng thá»­ láº¡i.`
           );
         }
         return;
       }
 
-      setMsg(data?.message || "Đã gửi mật khẩu mới về email!");
+      setMsg(data?.message || "ÄÃ£ gá»­i máº­t kháº©u má»›i vá» email!");
       setErr("");
     } catch (e) {
-      setErr("Không thể kết nối máy chủ.");
+      setErr("KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§.");
     } finally {
       setLoading(false);
     }
@@ -82,7 +82,7 @@ export default function ForgotPassword() {
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-    // Khi người dùng sửa email, ẩn thông báo cũ để tránh hiểu nhầm
+    // Khi ngÆ°á»i dÃ¹ng sá»­a email, áº©n thÃ´ng bÃ¡o cÅ© Ä‘á»ƒ trÃ¡nh hiá»ƒu nháº§m
     if (msg) setMsg("");
     if (err) setErr("");
   };
@@ -98,9 +98,9 @@ export default function ForgotPassword() {
         boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
       }}
     >
-      <h2 style={{ marginTop: 0, marginBottom: 12 }}>Quên mật khẩu</h2>
+      <h2 style={{ marginTop: 0, marginBottom: 12 }}>QuÃªn máº­t kháº©u</h2>
       <p style={{ color: "#555" }}>
-        Nhập email tài khoản để nhận mật khẩu mới.
+        Nháº­p email tÃ i khoáº£n Ä‘á»ƒ nháº­n máº­t kháº©u má»›i.
       </p>
 
       <form onSubmit={submit} noValidate>
@@ -140,7 +140,7 @@ export default function ForgotPassword() {
           }}
           aria-busy={loading ? "true" : "false"}
         >
-          {loading ? "Đang gửi..." : "Gửi mật khẩu mới"}
+          {loading ? "Äang gá»­i..." : "Gá»­i máº­t kháº©u má»›i"}
         </button>
       </form>
 
@@ -174,7 +174,7 @@ export default function ForgotPassword() {
         </div>
       )}
 
-      {/* Gợi ý cấu hình nhanh */}
+      {/* Gá»£i Ã½ cáº¥u hÃ¬nh nhanh */}
       <div style={{ marginTop: 16, fontSize: 12, color: "#6b7280" }}>
         <div>
           <strong>API_BASE:</strong> {API_BASE}
@@ -183,3 +183,5 @@ export default function ForgotPassword() {
     </div>
   );
 }
+
+

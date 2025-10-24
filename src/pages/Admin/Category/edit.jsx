@@ -1,4 +1,4 @@
-// src/pages/Admin/Category/edit.jsx
+﻿// src/pages/Admin/Category/edit.jsx
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function EditCategory() {
                 const res = await fetch(`${API_BASE}/categories/${id}`, {
                     headers: { Accept: "application/json" },
                 });
-                if (!res.ok) throw new Error(`Không tải được dữ liệu (HTTP ${res.status})`);
+                if (!res.ok) throw new Error(`KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u (HTTP ${res.status})`);
                 const data = await res.json();
 
                 setForm({
@@ -34,7 +34,7 @@ export default function EditCategory() {
                     status: typeof data.status === "number" ? data.status : 1,
                 });
             } catch (e) {
-                setError(e.message || "Không tải được dữ liệu");
+                setError(e.message || "KhÃ´ng táº£i Ä‘Æ°á»£c dá»¯ liá»‡u");
             } finally {
                 setLoading(false);
             }
@@ -71,7 +71,7 @@ export default function EditCategory() {
         setError("");
 
         try {
-            if (!form.name) throw new Error("Vui lòng nhập tên danh mục");
+            if (!form.name) throw new Error("Vui lÃ²ng nháº­p tÃªn danh má»¥c");
 
             const token = localStorage.getItem("admin_token") || "";
 
@@ -118,14 +118,14 @@ export default function EditCategory() {
                 throw new Error(msg);
             }
 
-            alert("✅ Cập nhật danh mục thành công!");
+            alert("âœ… Cáº­p nháº­t danh má»¥c thÃ nh cÃ´ng!");
             navigate("/admin/categories");
         } catch (err) {
-            setError(err.message || "Cập nhật thất bại");
+            setError(err.message || "Cáº­p nháº­t tháº¥t báº¡i");
         }
     };
 
-    if (loading) return <p>Đang tải...</p>;
+    if (loading) return <p>Äang táº£i...</p>;
 
 
     return (
@@ -141,13 +141,13 @@ export default function EditCategory() {
                 }}
             >
                 <h1 style={{ fontSize: 24, marginBottom: 16, fontWeight: 700 }}>
-                    Sửa danh mục
+                    Sá»­a danh má»¥c
                 </h1>
 
                 {error && <p style={{ color: "red", marginBottom: 12 }}>{error}</p>}
 
                 <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
-                    {/* Lưới 2 cột giống Add */}
+                    {/* LÆ°á»›i 2 cá»™t giá»‘ng Add */}
                     <div
                         style={{
                             display: "grid",
@@ -157,7 +157,7 @@ export default function EditCategory() {
                         }}
                     >
                         <label style={{ display: "grid", gap: 6 }}>
-                            <span>Tên danh mục</span>
+                            <span>TÃªn danh má»¥c</span>
                             <input
                                 name="name"
                                 value={form.name}
@@ -188,7 +188,7 @@ export default function EditCategory() {
                         </label>
 
                         <label style={{ display: "grid", gap: 6 }}>
-                            <span>Thứ tự hiển thị</span>
+                            <span>Thá»© tá»± hiá»ƒn thá»‹</span>
                             <input
                                 type="number"
                                 name="sort_order"
@@ -204,7 +204,7 @@ export default function EditCategory() {
                         </label>
 
                         <label style={{ display: "grid", gap: 6 }}>
-                            <span>Parent ID (nếu có)</span>
+                            <span>Parent ID (náº¿u cÃ³)</span>
                             <input
                                 type="number"
                                 name="parent_id"
@@ -220,7 +220,7 @@ export default function EditCategory() {
                         </label>
 
                         <label style={{ display: "grid", gap: 6 }}>
-                            <span>Ảnh (đường dẫn / tên file)</span>
+                            <span>áº¢nh (Ä‘Æ°á»ng dáº«n / tÃªn file)</span>
                             <input
                                 name="image"
                                 value={form.image}
@@ -236,7 +236,7 @@ export default function EditCategory() {
                         </label>
 
                         <label style={{ display: "grid", gap: 6 }}>
-                            <span>Trạng thái</span>
+                            <span>Tráº¡ng thÃ¡i</span>
                             <select
                                 name="status"
                                 value={form.status}
@@ -248,14 +248,14 @@ export default function EditCategory() {
                                     borderRadius: 8,
                                 }}
                             >
-                                <option value={1}>Hiển thị</option>
-                                <option value={0}>Ẩn</option>
+                                <option value={1}>Hiá»ƒn thá»‹</option>
+                                <option value={0}>áº¨n</option>
                             </select>
                         </label>
                     </div>
 
                     <label style={{ display: "grid", gap: 6 }}>
-                        <span>Mô tả</span>
+                        <span>MÃ´ táº£</span>
                         <textarea
                             name="description"
                             rows={4}
@@ -277,7 +277,7 @@ export default function EditCategory() {
                                 cursor: "pointer",
                             }}
                         >
-                            Hủy
+                            Há»§y
                         </button>
                         <button
                             type="submit"
@@ -290,7 +290,7 @@ export default function EditCategory() {
                                 cursor: "pointer",
                             }}
                         >
-                            Lưu thay đổi
+                            LÆ°u thay Ä‘á»•i
                         </button>
                     </div>
                 </form>
@@ -298,3 +298,5 @@ export default function EditCategory() {
         </section>
     );
 }
+
+

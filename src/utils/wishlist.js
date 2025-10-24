@@ -1,4 +1,4 @@
-// src/utils/wishlist.js
+﻿// src/utils/wishlist.js
 export const API = "http://127.0.0.1:8000/api";
 const KEY = "wishlist_ids";
 
@@ -13,7 +13,7 @@ function read() {
 }
 function write(ids) {
   localStorage.setItem(KEY, JSON.stringify(ids));
-  // phát sự kiện để các trang khác (Header/Wishlist) cập nhật
+  // phÃ¡t sá»± kiá»‡n Ä‘á»ƒ cÃ¡c trang khÃ¡c (Header/Wishlist) cáº­p nháº­t
   window.dispatchEvent(new CustomEvent("wishlist-changed", { detail: ids.length }));
 }
 
@@ -41,7 +41,7 @@ export function toggleWishlist(id) {
   }
   write(ids);
 
-  // đồng bộ server nếu có token
+  // Ä‘á»“ng bá»™ server náº¿u cÃ³ token
   const token = localStorage.getItem("token");
   if (token) {
     fetch(`${API}/wishlist/toggle/${pid}`, {
@@ -54,5 +54,7 @@ export function toggleWishlist(id) {
 }
 
 export function clearWishlist() {
-  write([]); // rỗng + phát sự kiện
+  write([]); // rá»—ng + phÃ¡t sá»± kiá»‡n
 }
+
+

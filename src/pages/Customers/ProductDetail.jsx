@@ -1,4 +1,4 @@
-
+﻿
 
 
 
@@ -54,23 +54,23 @@
 //     return 0;
 //   }, [product]);
 
-//   // ✅ Tồn kho: lấy từ API (ProductController@show đã trả qty)
+//   // âœ… Tá»“n kho: láº¥y tá»« API (ProductController@show Ä‘Ã£ tráº£ qty)
 //   const stock = Number(product?.qty ?? 0);
 //   const outOfStock = stock <= 0;
 
 //   const pushToCart = (item) => {
 //     if (outOfStock) {
-//       showToast("Sản phẩm đã hết hàng.", false);
+//       showToast("Sáº£n pháº©m Ä‘Ã£ háº¿t hÃ ng.", false);
 //       return;
 //     }
 //     if (item.qty > stock) {
-//       showToast(`Chỉ còn ${stock} sản phẩm trong kho.`, false);
+//       showToast(`Chá»‰ cÃ²n ${stock} sáº£n pháº©m trong kho.`, false);
 //       return;
 //     }
 
 //     if (addToCart) {
 //       addToCart(item);
-//       showToast("🛒 Đã thêm vào giỏ!", true);
+//       showToast("ðŸ›’ ÄÃ£ thÃªm vÃ o giá»!", true);
 //       return;
 //     }
 //     const load = () => {
@@ -86,7 +86,7 @@
 //     if (idx >= 0) cart[idx].qty = Math.min(stock, cart[idx].qty + item.qty);
 //     else cart.push(item);
 //     save(cart);
-//     showToast("🛒 Đã thêm vào giỏ!", true);
+//     showToast("ðŸ›’ ÄÃ£ thÃªm vÃ o giá»!", true);
 //     navigate("/cart");
 //   };
 
@@ -137,7 +137,7 @@
 //         }
 //       } catch (e) {
 //         console.error(e);
-//         setErr("Không tải được sản phẩm.");
+//         setErr("KhÃ´ng táº£i Ä‘Æ°á»£c sáº£n pháº©m.");
 //       } finally {
 //         setLoading(false);
 //       }
@@ -192,7 +192,7 @@
 //   const submitReview = async (e) => {
 //     e.preventDefault();
 //     if (!token) {
-//       showToast("Vui lòng đăng nhập để đánh giá.", false);
+//       showToast("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ Ä‘Ã¡nh giÃ¡.", false);
 //       return;
 //     }
 //     try {
@@ -214,37 +214,37 @@
 //       setReviews(Array.isArray(lst) ? lst : lst.data ?? []);
 //       setShowForm(false);
 //       setRev({ rating: 5, content: "" });
-//       showToast("Đã gửi đánh giá. Cảm ơn bạn!", true);
+//       showToast("ÄÃ£ gá»­i Ä‘Ã¡nh giÃ¡. Cáº£m Æ¡n báº¡n!", true);
 //     } catch (err) {
 //       console.error(err);
-//       showToast("Gửi đánh giá thất bại.", false);
+//       showToast("Gá»­i Ä‘Ã¡nh giÃ¡ tháº¥t báº¡i.", false);
 //     }
 //   };
 
-//   if (loading) return <div style={{ padding: 16 }}>Đang tải...</div>;
+//   if (loading) return <div style={{ padding: 16 }}>Äang táº£i...</div>;
 //   if (err) return <div style={{ padding: 16, color: "#d32f2f" }}>{err}</div>;
-//   if (!product) return <div style={{ padding: 16 }}>Không tìm thấy sản phẩm.</div>;
+//   if (!product) return <div style={{ padding: 16 }}>KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m.</div>;
 
 //   const couponText = (c) => {
 //     const head =
 //       c.type === "percent"
-//         ? `Giảm ${Number(c.value)}%`
-//         : `Giảm ${VND.format(Number(c.value))}đ`;
-//     const cap = c.max_discount ? ` (tối đa ${VND.format(Number(c.max_discount))}đ)` : "";
-//     const min = c.min_order ? ` • ĐH tối thiểu ${VND.format(Number(c.min_order))}đ` : "";
+//         ? `Giáº£m ${Number(c.value)}%`
+//         : `Giáº£m ${VND.format(Number(c.value))}Ä‘`;
+//     const cap = c.max_discount ? ` (tá»‘i Ä‘a ${VND.format(Number(c.max_discount))}Ä‘)` : "";
+//     const min = c.min_order ? ` â€¢ ÄH tá»‘i thiá»ƒu ${VND.format(Number(c.min_order))}Ä‘` : "";
 //     return head + cap + min;
 //   };
 
 //   const dec = () => setQty((q) => Math.max(1, Number(q) - 1));
 
-//   // ✅ Tồn kho: giới hạn tăng số lượng theo stock
+//   // âœ… Tá»“n kho: giá»›i háº¡n tÄƒng sá»‘ lÆ°á»£ng theo stock
 //   const inc = () => setQty((q) => {
 //     const next = Number(q) + 1;
 //     if (outOfStock) return 1;
 //     return Math.min(stock, Math.min(99, next));
 //   });
 
-//   // ✅ Tồn kho: giới hạn nhập tay
+//   // âœ… Tá»“n kho: giá»›i háº¡n nháº­p tay
 //   const onQtyInput = (e) => {
 //     const v = e.target.value.replace(/\D/g, "");
 //     let n = Math.max(1, Math.min(99, Number(v || 1)));
@@ -252,7 +252,7 @@
 //     setQty(n);
 //   };
 
-//   // ✅ CSS thêm nhãn tồn kho
+//   // âœ… CSS thÃªm nhÃ£n tá»“n kho
 //   const styles = `
 //   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800;900&display=swap');
 //   :root{
@@ -307,7 +307,7 @@
 //     <div className="pd-page">
 //       <style>{styles}</style>
 
-//       {/* ====== Card chi tiết ====== */}
+//       {/* ====== Card chi tiáº¿t ====== */}
 //       <div className="pd-card">
 //         <div className="pd-hero">
 //           <img
@@ -320,27 +320,27 @@
 //         <div>
 //           <h1 className="pd-title">{product?.name}</h1>
 
-//           {/* ✅ Brand & Danh mục */}
+//           {/* âœ… Brand & Danh má»¥c */}
 //           <div className="pd-meta">
 //             {product?.brand_name && (
-//               <>Thương hiệu: <b>{product.brand_name}</b> · </>
+//               <>ThÆ°Æ¡ng hiá»‡u: <b>{product.brand_name}</b> Â· </>
 //             )}
 //             {product?.category_id && (
 //               <>
-//                 Danh mục:{" "}
-//                 <Link to={`/category/${product.category_id}`}>Xem danh mục</Link>
+//                 Danh má»¥c:{" "}
+//                 <Link to={`/category/${product.category_id}`}>Xem danh má»¥c</Link>
 //               </>
 //             )}
 //           </div>
 
 //           <div className="pd-prices">
 //             <div className="pd-price-now">
-//               ₫{VND.format(effectivePrice(product))}
+//               â‚«{VND.format(effectivePrice(product))}
 //             </div>
 //             {priceSale(product) > 0 && priceSale(product) < priceRoot(product) && (
 //               <>
 //                 <div className="pd-price-old">
-//                   ₫{VND.format(priceRoot(product))}
+//                   â‚«{VND.format(priceRoot(product))}
 //                 </div>
 //                 {discount > 0 && (
 //                   <span className="pd-badge-off">-{discount}%</span>
@@ -349,22 +349,22 @@
 //             )}
 //           </div>
 
-//           {/* ✅ Hiển thị tồn kho */}
+//           {/* âœ… Hiá»ƒn thá»‹ tá»“n kho */}
 //           <div style={{ marginTop: 8, marginBottom: 8 }}>
 //             <span className={`stock ${outOfStock ? "out" : stock <= 5 ? "low" : ""}`}>
-//               {outOfStock ? "Hết hàng" : `Còn ${VND.format(stock)} sản phẩm`}
+//               {outOfStock ? "Háº¿t hÃ ng" : `CÃ²n ${VND.format(stock)} sáº£n pháº©m`}
 //             </span>
 //           </div>
 
-//           {/* ✅ Mô tả có HTML */}
+//           {/* âœ… MÃ´ táº£ cÃ³ HTML */}
 //           <div
 //             className="pd-desc"
 //             dangerouslySetInnerHTML={{
-//               __html: product?.description || "<em>Không có mô tả</em>",
+//               __html: product?.description || "<em>KhÃ´ng cÃ³ mÃ´ táº£</em>",
 //             }}
 //           ></div>
 
-//           {/* ✅ Chi tiết sản phẩm */}
+//           {/* âœ… Chi tiáº¿t sáº£n pháº©m */}
 //           {product?.detail && (
 //             <div
 //               className="pd-desc"
@@ -372,9 +372,9 @@
 //             ></div>
 //           )}
 
-//           {/* Số lượng & hành động */}
+//           {/* Sá»‘ lÆ°á»£ng & hÃ nh Ä‘á»™ng */}
 //           <div className="pd-qty">
-//             <button onClick={dec} style={{ padding: "6px 12px" }} disabled={outOfStock}>−</button>
+//             <button onClick={dec} style={{ padding: "6px 12px" }} disabled={outOfStock}>âˆ’</button>
 //             <input
 //               value={outOfStock ? 0 : qty}
 //               onChange={onQtyInput}
@@ -397,21 +397,21 @@
 //               }
 //               className="pd-btn-primary"
 //               disabled={outOfStock}
-//               title={outOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+//               title={outOfStock ? "Háº¿t hÃ ng" : "ThÃªm vÃ o giá»"}
 //             >
-//               {outOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+//               {outOfStock ? "Háº¿t hÃ ng" : "ThÃªm vÃ o giá»"}
 //             </button>
 //             <Link to="/" className="pd-btn-ghost">
-//               ← Tiếp tục mua
+//               â† Tiáº¿p tá»¥c mua
 //             </Link>
 //           </div>
 //         </div>
 //       </div>
 
-//       {/* ====== Sản phẩm liên quan ====== */}
+//       {/* ====== Sáº£n pháº©m liÃªn quan ====== */}
 //       {!!related.length && (
 //         <div className="rel-wrap">
-//           <div className="rel-title">Sản phẩm liên quan</div>
+//           <div className="rel-title">Sáº£n pháº©m liÃªn quan</div>
 //           <div className="rel-grid">
 //             {related.map((r) => (
 //            <Link key={r.id} to={`/products/${r.id}`} className="rel-card">
@@ -422,7 +422,7 @@
 //                 />
 //                 <div className="rel-body">
 //                   <div className="rel-name">{r.name}</div>
-//                   <div className="rel-price">₫{VND.format(Number(r.price ?? r.price_sale ?? 0))}</div>
+//                   <div className="rel-price">â‚«{VND.format(Number(r.price ?? r.price_sale ?? 0))}</div>
 //                 </div>
 //               </Link>
 //             ))}
@@ -430,20 +430,20 @@
 //         </div>
 //       )}
 
-//       {/* ====== Đánh giá ====== */}
+//       {/* ====== ÄÃ¡nh giÃ¡ ====== */}
 //       <div className="rv-wrap">
-//         <div className="rv-title">Đánh giá</div>
+//         <div className="rv-title">ÄÃ¡nh giÃ¡</div>
 
 //         {reviews.length === 0 ? (
 //           <div className="rv-item" style={{ borderTop: "0" }}>
-//             Chưa có đánh giá nào.
+//             ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡ nÃ o.
 //           </div>
 //         ) : (
 //           reviews.map((rv) => (
 //             <div key={rv.id || rv.created_at} className="rv-item">
-//               <span className="rv-stars">{"★".repeat(rv.rating || 5)}</span>
+//               <span className="rv-stars">{"â˜…".repeat(rv.rating || 5)}</span>
 //               <span className="rv-meta">
-//                 {rv.user_name || "Người dùng"} • {rv.created_at?.slice(0, 10)}
+//                 {rv.user_name || "NgÆ°á»i dÃ¹ng"} â€¢ {rv.created_at?.slice(0, 10)}
 //               </span>
 //               <div style={{ marginTop: 4 }}>{rv.content}</div>
 //             </div>
@@ -456,13 +456,13 @@
 //               onClick={() => setShowForm((s) => !s)}
 //               style={{ marginTop: 12, padding: "8px 12px", borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff" }}
 //             >
-//               {showForm ? "Ẩn form đánh giá" : "Viết đánh giá"}
+//               {showForm ? "áº¨n form Ä‘Ã¡nh giÃ¡" : "Viáº¿t Ä‘Ã¡nh giÃ¡"}
 //             </button>
 
 //             {showForm && (
 //               <form className="rv-form" onSubmit={submitReview}>
 //                 <div>
-//                   <label>Chấm sao: </label>
+//                   <label>Cháº¥m sao: </label>
 //                   <select
 //                     value={rev.rating}
 //                     onChange={(e) => setRev((x) => ({ ...x, rating: e.target.value }))}
@@ -473,18 +473,18 @@
 //                   </select>
 //                 </div>
 //                 <textarea
-//                   placeholder="Cảm nhận của bạn…"
+//                   placeholder="Cáº£m nháº­n cá»§a báº¡nâ€¦"
 //                   value={rev.content}
 //                   onChange={(e) => setRev((x) => ({ ...x, content: e.target.value }))}
 //                 />
-//                 <button type="submit">Gửi đánh giá</button>
+//                 <button type="submit">Gá»­i Ä‘Ã¡nh giÃ¡</button>
 //               </form>
 //             )}
 //           </>
 //         )}
 //       </div>
 
-//       {/* Toast nhỏ */}
+//       {/* Toast nhá» */}
 //       {toast && (
 //         <div
 //           style={{
@@ -506,6 +506,7 @@
 // }
 
 
+
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -514,7 +515,7 @@ const ALT = "http://127.0.0.1:8000";
 const PLACEHOLDER = "https://placehold.co/400x300?text=No+Image";
 const VND = new Intl.NumberFormat("vi-VN");
 
-// ===== MÃ GIẢM GIÁ MẶC ĐỊNH (dùng khi API rỗng/500) =====
+// ===== MÃƒ GIáº¢M GIÃ Máº¶C Äá»ŠNH (dÃ¹ng khi API rá»—ng/500) =====
 const DEMO_COUPONS = [
   { code: "GIAM10K", type: "flat", value: 10000 },
   { code: "GIAM20K", type: "flat", value: 20000 },
@@ -536,7 +537,7 @@ export default function ProductDetail({ addToCart }) {
   const [coupons, setCoupons] = useState([]);
   const [savingCode, setSavingCode] = useState("");
 
-  // ==== NEW: lưu mã đã lưu + copy clipboard ====
+  // ==== NEW: lÆ°u mÃ£ Ä‘Ã£ lÆ°u + copy clipboard ====
   const [savedCodes, setSavedCodes] = useState(() => {
     try { return JSON.parse(localStorage.getItem("saved_coupons") || "[]"); }
     catch { return []; }
@@ -548,12 +549,12 @@ export default function ProductDetail({ addToCart }) {
     const next = [...savedCodes, code];
     setSavedCodes(next);
     localStorage.setItem("saved_coupons", JSON.stringify(next));
-    showToast(`Đã lưu mã ${code}`);
+    showToast(`ÄÃ£ lÆ°u mÃ£ ${code}`);
     setTimeout(() => setSavingCode(""), 250);
   };
   const copyCode = async (code) => {
-    try { await navigator.clipboard.writeText(code); showToast(`Đã sao chép mã ${code}`); }
-    catch { showToast("Không sao chép được mã.", false); }
+    try { await navigator.clipboard.writeText(code); showToast(`ÄÃ£ sao chÃ©p mÃ£ ${code}`); }
+    catch { showToast("KhÃ´ng sao chÃ©p Ä‘Æ°á»£c mÃ£.", false); }
   };
   // ==============================================
 
@@ -585,17 +586,17 @@ export default function ProductDetail({ addToCart }) {
     return 0;
   }, [product]);
 
-  // ✅ Tồn kho
+  // âœ… Tá»“n kho
   const stock = Number(product?.qty ?? 0);
   const outOfStock = stock <= 0;
 
   const pushToCart = (item) => {
-    if (outOfStock) return showToast("Sản phẩm đã hết hàng.", false);
-    if (item.qty > stock) return showToast(`Chỉ còn ${stock} sản phẩm trong kho.`, false);
+    if (outOfStock) return showToast("Sáº£n pháº©m Ä‘Ã£ háº¿t hÃ ng.", false);
+    if (item.qty > stock) return showToast(`Chá»‰ cÃ²n ${stock} sáº£n pháº©m trong kho.`, false);
 
     if (addToCart) {
       addToCart(item);
-      showToast("🛒 Đã thêm vào giỏ!");
+      showToast("ðŸ›’ ÄÃ£ thÃªm vÃ o giá»!");
       return;
     }
     const load = () => { try { return JSON.parse(localStorage.getItem("cart") || "[]"); } catch { return []; } };
@@ -605,7 +606,7 @@ export default function ProductDetail({ addToCart }) {
     if (idx >= 0) cart[idx].qty = Math.min(stock, cart[idx].qty + item.qty);
     else cart.push(item);
     save(cart);
-    showToast("🛒 Đã thêm vào giỏ!");
+    showToast("ðŸ›’ ÄÃ£ thÃªm vÃ o giá»!");
     navigate("/cart");
   };
 
@@ -639,7 +640,7 @@ export default function ProductDetail({ addToCart }) {
           } catch { setRelated([]); }
         } else setRelated([]);
       } catch (e) {
-        console.error(e); setErr("Không tải được sản phẩm.");
+        console.error(e); setErr("KhÃ´ng táº£i Ä‘Æ°á»£c sáº£n pháº©m.");
       } finally { setLoading(false); }
     })();
     return () => ac.abort();
@@ -683,7 +684,7 @@ export default function ProductDetail({ addToCart }) {
 
   const submitReview = async (e) => {
     e.preventDefault();
-    if (!token) return showToast("Vui lòng đăng nhập để đánh giá.", false);
+    if (!token) return showToast("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ Ä‘Ã¡nh giÃ¡.", false);
     try {
       const res = await fetch(`${API}/products/${id}/reviews`, {
         method: "POST",
@@ -694,26 +695,26 @@ export default function ProductDetail({ addToCart }) {
       const lst = await fetch(`${API}/products/${id}/reviews`).then((r) => r.json());
       setReviews(Array.isArray(lst) ? lst : lst.data ?? []);
       setShowForm(false); setRev({ rating: 5, content: "" });
-      showToast("Đã gửi đánh giá. Cảm ơn bạn!");
+      showToast("ÄÃ£ gá»­i Ä‘Ã¡nh giÃ¡. Cáº£m Æ¡n báº¡n!");
     } catch (err) {
-      console.error(err); showToast("Gửi đánh giá thất bại.", false);
+      console.error(err); showToast("Gá»­i Ä‘Ã¡nh giÃ¡ tháº¥t báº¡i.", false);
     }
   };
 
-  if (loading) return <div style={{ padding: 16 }}>Đang tải...</div>;
+  if (loading) return <div style={{ padding: 16 }}>Äang táº£i...</div>;
   if (err) return <div style={{ padding: 16, color: "#d32f2f" }}>{err}</div>;
-  if (!product) return <div style={{ padding: 16 }}>Không tìm thấy sản phẩm.</div>;
+  if (!product) return <div style={{ padding: 16 }}>KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m.</div>;
 
   const couponText = (c) => {
     const head = c.type === "percent"
-      ? `Giảm ${Number(c.value)}%`
-      : `Giảm ${VND.format(Number(c.value))}đ`;
-    const cap = c.max_discount ? ` (tối đa ${VND.format(Number(c.max_discount))}đ)` : "";
-    const min = c.min_order ? ` • ĐH tối thiểu ${VND.format(Number(c.min_order))}đ` : " • Không điều kiện";
+      ? `Giáº£m ${Number(c.value)}%`
+      : `Giáº£m ${VND.format(Number(c.value))}Ä‘`;
+    const cap = c.max_discount ? ` (tá»‘i Ä‘a ${VND.format(Number(c.max_discount))}Ä‘)` : "";
+    const min = c.min_order ? ` â€¢ ÄH tá»‘i thiá»ƒu ${VND.format(Number(c.min_order))}Ä‘` : " â€¢ KhÃ´ng Ä‘iá»u kiá»‡n";
     return head + cap + min;
   };
 
-  // số lượng
+  // sá»‘ lÆ°á»£ng
   const dec = () => setQty((q) => Math.max(1, Number(q) - 1));
   const inc = () => setQty((q) => {
     const next = Number(q) + 1;
@@ -768,14 +769,14 @@ export default function ProductDetail({ addToCart }) {
   .rel-price{font-weight:800}
   `;
 
-  // Dùng API nếu có; nếu không thì dùng DEMO_COUPONS
+  // DÃ¹ng API náº¿u cÃ³; náº¿u khÃ´ng thÃ¬ dÃ¹ng DEMO_COUPONS
   const couponsToShow = coupons && coupons.length > 0 ? coupons : DEMO_COUPONS;
 
   return (
     <div className="pd-page">
       <style>{styles}</style>
 
-      {/* ====== Card chi tiết ====== */}
+      {/* ====== Card chi tiáº¿t ====== */}
       <div className="pd-card">
         <div className="pd-hero">
           <img src={getThumb(product)} onError={(e)=> (e.currentTarget.src = PLACEHOLDER)} alt={product?.name}/>
@@ -784,36 +785,36 @@ export default function ProductDetail({ addToCart }) {
         <div>
           <h1 className="pd-title">{product?.name}</h1>
 
-          {/* Brand & Danh mục */}
+          {/* Brand & Danh má»¥c */}
           <div className="pd-meta">
-            {product?.brand_name && <>Thương hiệu: <b>{product.brand_name}</b> · </>}
-            {product?.category_id && <>Danh mục: <Link to={`/category/${product.category_id}`}>Xem danh mục</Link></>}
+            {product?.brand_name && <>ThÆ°Æ¡ng hiá»‡u: <b>{product.brand_name}</b> Â· </>}
+            {product?.category_id && <>Danh má»¥c: <Link to={`/category/${product.category_id}`}>Xem danh má»¥c</Link></>}
           </div>
 
           <div className="pd-prices">
-            <div className="pd-price-now">₫{VND.format(effectivePrice(product))}</div>
+            <div className="pd-price-now">â‚«{VND.format(effectivePrice(product))}</div>
             {priceSale(product) > 0 && priceSale(product) < priceRoot(product) && (
               <>
-                <div className="pd-price-old">₫{VND.format(priceRoot(product))}</div>
+                <div className="pd-price-old">â‚«{VND.format(priceRoot(product))}</div>
                 {discount > 0 && <span className="pd-badge-off">-{discount}%</span>}
               </>
             )}
           </div>
 
-          {/* Tồn kho */}
+          {/* Tá»“n kho */}
           <div style={{ marginTop: 8, marginBottom: 8 }}>
             <span className={`stock ${outOfStock ? "out" : stock <= 5 ? "low" : ""}`}>
-              {outOfStock ? "Hết hàng" : `Còn ${VND.format(stock)} sản phẩm`}
+              {outOfStock ? "Háº¿t hÃ ng" : `CÃ²n ${VND.format(stock)} sáº£n pháº©m`}
             </span>
           </div>
 
-          {/* Mô tả / Chi tiết (HTML) */}
-          <div className="pd-desc" dangerouslySetInnerHTML={{ __html: product?.description || "<em>Không có mô tả</em>" }} />
+          {/* MÃ´ táº£ / Chi tiáº¿t (HTML) */}
+          <div className="pd-desc" dangerouslySetInnerHTML={{ __html: product?.description || "<em>KhÃ´ng cÃ³ mÃ´ táº£</em>" }} />
           {product?.detail && <div className="pd-desc" dangerouslySetInnerHTML={{ __html: product.detail }} />}
 
-          {/* Số lượng & hành động */}
+          {/* Sá»‘ lÆ°á»£ng & hÃ nh Ä‘á»™ng */}
           <div className="pd-qty">
-            <button onClick={dec} style={{ padding: "6px 12px" }} disabled={outOfStock}>−</button>
+            <button onClick={dec} style={{ padding: "6px 12px" }} disabled={outOfStock}>âˆ’</button>
             <input value={outOfStock ? 0 : qty} onChange={onQtyInput} disabled={outOfStock} style={{ width: 50, textAlign: "center" }}/>
             <button onClick={inc} style={{ padding: "6px 12px" }} disabled={outOfStock}>+</button>
           </div>
@@ -823,18 +824,18 @@ export default function ProductDetail({ addToCart }) {
               onClick={() => pushToCart({ id: product.id, name: product.name, price: effectivePrice(product), qty: outOfStock ? 0 : qty, thumbnail_url: getThumb(product) })}
               className="pd-btn-primary"
               disabled={outOfStock}
-              title={outOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+              title={outOfStock ? "Háº¿t hÃ ng" : "ThÃªm vÃ o giá»"}
             >
-              {outOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+              {outOfStock ? "Háº¿t hÃ ng" : "ThÃªm vÃ o giá»"}
             </button>
-            <Link to="/" className="pd-btn-ghost">← Tiếp tục mua</Link>
+            <Link to="/" className="pd-btn-ghost">â† Tiáº¿p tá»¥c mua</Link>
           </div>
         </div>
       </div>
 
-      {/* ====== MÃ GIẢM GIÁ – luôn hiện, fallback DEMO_COUPONS ====== */}
+      {/* ====== MÃƒ GIáº¢M GIÃ â€“ luÃ´n hiá»‡n, fallback DEMO_COUPONS ====== */}
       <div className="cpn-wrap">
-        <div className="cpn-title">Mã giảm giá áp dụng</div>
+        <div className="cpn-title">MÃ£ giáº£m giÃ¡ Ã¡p dá»¥ng</div>
 
         {couponsToShow && couponsToShow.length > 0 ? (
           <div className="cpn-row">
@@ -843,11 +844,11 @@ export default function ProductDetail({ addToCart }) {
               return (
                 <div key={c.id || code} className="cpn-card">
                   <div className="cpn-head">
-                    {c.type === "percent" ? `Giảm ${Number(c.value)}%` : `Giảm ${VND.format(Number(c.value))}đ`}
+                    {c.type === "percent" ? `Giáº£m ${Number(c.value)}%` : `Giáº£m ${VND.format(Number(c.value))}Ä‘`}
                   </div>
                   <div className="cpn-desc">
-                    {c.max_discount ? `Tối đa ${VND.format(Number(c.max_discount))}đ` : "Không giới hạn"}
-                    {c.min_order ? ` • ĐH từ ${VND.format(Number(c.min_order))}đ` : " • Không điều kiện"}
+                    {c.max_discount ? `Tá»‘i Ä‘a ${VND.format(Number(c.max_discount))}Ä‘` : "KhÃ´ng giá»›i háº¡n"}
+                    {c.min_order ? ` â€¢ ÄH tá»« ${VND.format(Number(c.min_order))}Ä‘` : " â€¢ KhÃ´ng Ä‘iá»u kiá»‡n"}
                   </div>
                   <div className="cpn-code">{code}</div>
                   <div className="cpn-actions">
@@ -855,32 +856,32 @@ export default function ProductDetail({ addToCart }) {
                       className="cpn-btn primary"
                       onClick={() => saveCode(code)}
                       disabled={isSaved(code) || savingCode === code}
-                      title={isSaved(code) ? "Đã lưu" : "Lưu mã"}
+                      title={isSaved(code) ? "ÄÃ£ lÆ°u" : "LÆ°u mÃ£"}
                     >
-                      {isSaved(code) ? "Đã lưu" : (savingCode === code ? "Đang lưu..." : "Lưu mã")}
+                      {isSaved(code) ? "ÄÃ£ lÆ°u" : (savingCode === code ? "Äang lÆ°u..." : "LÆ°u mÃ£")}
                     </button>
-                    <button className="cpn-btn" onClick={() => copyCode(code)}>Sao chép</button>
+                    <button className="cpn-btn" onClick={() => copyCode(code)}>Sao chÃ©p</button>
                   </div>
                 </div>
               );
             })}
           </div>
         ) : (
-          <div style={{ color: "#64748b", fontStyle: "italic" }}>Hiện chưa có mã giảm giá.</div>
+          <div style={{ color: "#64748b", fontStyle: "italic" }}>Hiá»‡n chÆ°a cÃ³ mÃ£ giáº£m giÃ¡.</div>
         )}
       </div>
 
-      {/* ====== Sản phẩm liên quan ====== */}
+      {/* ====== Sáº£n pháº©m liÃªn quan ====== */}
       {!!related.length && (
         <div className="rel-wrap">
-          <div className="rel-title">Sản phẩm liên quan</div>
+          <div className="rel-title">Sáº£n pháº©m liÃªn quan</div>
           <div className="rel-grid">
             {related.map((r) => (
               <Link key={r.id} to={`/products/${r.id}`} className="rel-card">
                 <img src={r.thumbnail_url || r.thumbnail || PLACEHOLDER} onError={(e)=> (e.currentTarget.src = PLACEHOLDER)} alt={r.name}/>
                 <div className="rel-body">
                   <div className="rel-name">{r.name}</div>
-                  <div className="rel-price">₫{VND.format(Number(r.price ?? r.price_sale ?? 0))}</div>
+                  <div className="rel-price">â‚«{VND.format(Number(r.price ?? r.price_sale ?? 0))}</div>
                 </div>
               </Link>
             ))}
@@ -888,17 +889,17 @@ export default function ProductDetail({ addToCart }) {
         </div>
       )}
 
-      {/* ====== Đánh giá ====== */}
+      {/* ====== ÄÃ¡nh giÃ¡ ====== */}
       <div className="rv-wrap">
-        <div className="rv-title">Đánh giá</div>
+        <div className="rv-title">ÄÃ¡nh giÃ¡</div>
 
         {reviews.length === 0 ? (
-          <div className="rv-item" style={{ borderTop: "0" }}>Chưa có đánh giá nào.</div>
+          <div className="rv-item" style={{ borderTop: "0" }}>ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡ nÃ o.</div>
         ) : (
           reviews.map((rv) => (
             <div key={rv.id || rv.created_at} className="rv-item">
-              <span className="rv-stars">{"★".repeat(rv.rating || 5)}</span>
-              <span className="rv-meta">{rv.user_name || "Người dùng"} • {rv.created_at?.slice(0, 10)}</span>
+              <span className="rv-stars">{"â˜…".repeat(rv.rating || 5)}</span>
+              <span className="rv-meta">{rv.user_name || "NgÆ°á»i dÃ¹ng"} â€¢ {rv.created_at?.slice(0, 10)}</span>
               <div style={{ marginTop: 4 }}>{rv.content}</div>
             </div>
           ))
@@ -910,26 +911,26 @@ export default function ProductDetail({ addToCart }) {
               onClick={() => setShowForm((s) => !s)}
               style={{ marginTop: 12, padding: "8px 12px", borderRadius: 8, border: "1px solid #e2e8f0", background: "#fff" }}
             >
-              {showForm ? "Ẩn form đánh giá" : "Viết đánh giá"}
+              {showForm ? "áº¨n form Ä‘Ã¡nh giÃ¡" : "Viáº¿t Ä‘Ã¡nh giÃ¡"}
             </button>
 
             {showForm && (
               <form className="rv-form" onSubmit={submitReview}>
                 <div>
-                  <label>Chấm sao: </label>
+                  <label>Cháº¥m sao: </label>
                   <select value={rev.rating} onChange={(e) => setRev((x) => ({ ...x, rating: e.target.value }))}>
                     {[5,4,3,2,1].map((n) => (<option key={n} value={n}>{n} sao</option>))}
                   </select>
                 </div>
-                <textarea placeholder="Cảm nhận của bạn…" value={rev.content} onChange={(e) => setRev((x) => ({ ...x, content: e.target.value }))}/>
-                <button type="submit">Gửi đánh giá</button>
+                <textarea placeholder="Cáº£m nháº­n cá»§a báº¡nâ€¦" value={rev.content} onChange={(e) => setRev((x) => ({ ...x, content: e.target.value }))}/>
+                <button type="submit">Gá»­i Ä‘Ã¡nh giÃ¡</button>
               </form>
             )}
           </>
         )}
       </div>
 
-      {/* Toast nhỏ */}
+      {/* Toast nhá» */}
       {toast && (
         <div style={{ position: "fixed", right: 16, bottom: 16, background: toast.ok ? "#16a34a" : "#dc2626", color: "#fff", padding: "10px 14px", borderRadius: 10, fontWeight: 700 }}>
           {toast.msg}
@@ -938,3 +939,5 @@ export default function ProductDetail({ addToCart }) {
     </div>
   );
 }
+
+

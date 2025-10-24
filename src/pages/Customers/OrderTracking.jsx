@@ -1,4 +1,4 @@
-// // src/pages/Customers/OrderTracking.jsx
+﻿// // src/pages/Customers/OrderTracking.jsx
 // import { useEffect, useMemo, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
@@ -6,11 +6,11 @@
 // const PLACEHOLDER = "https://placehold.co/80x60?text=No+Img";
 
 // export const STATUS_STEPS = [
-//   { key: "pending",   label: "Chờ xác nhận" },
-//   { key: "confirmed", label: "Đã xác nhận" },
-//   { key: "ready",     label: "Chờ vận chuyển" },
-//   { key: "shipping",  label: "Đang giao" },
-//   { key: "delivered", label: "Giao thành công" },
+//   { key: "pending",   label: "Chá» xÃ¡c nháº­n" },
+//   { key: "confirmed", label: "ÄÃ£ xÃ¡c nháº­n" },
+//   { key: "ready",     label: "Chá» váº­n chuyá»ƒn" },
+//   { key: "shipping",  label: "Äang giao" },
+//   { key: "delivered", label: "Giao thÃ nh cÃ´ng" },
 // ];
 
 // const ACTIVE_POLL = new Set(["confirmed", "ready", "shipping"]);
@@ -41,7 +41,7 @@
 //   const [loading, setLoading] = useState(false);
 //   const [err, setErr] = useState("");
 
-//   // Modal hủy đơn
+//   // Modal há»§y Ä‘Æ¡n
 //   const [showCancelModal, setShowCancelModal] = useState(false);
 //   const [cancelReason, setCancelReason] = useState("");
 //   const [canceling, setCanceling] = useState(false);
@@ -65,7 +65,7 @@
 //   );
 
 //   const customerName = useMemo(() => {
-//     if (!order) return "—";
+//     if (!order) return "â€”";
 //     const localUser = (() => {
 //       try { return JSON.parse(localStorage.getItem("user") || "null"); } catch { return null; }
 //     })();
@@ -76,7 +76,7 @@
 //       order?.user?.name ||
 //       order?.recipient_name ||
 //       localUser?.name ||
-//       "—"
+//       "â€”"
 //     );
 //   }, [order]);
 
@@ -111,14 +111,14 @@
 
 //   const shippingFee = Number(order.shipping_fee ?? 0);
 
-//   // 🔥 Ưu tiên giảm giá từ coupon
+//   // ðŸ”¥ Æ¯u tiÃªn giáº£m giÃ¡ tá»« coupon
 //   // const couponDiscount =
 //   //   Number(order.coupon_discount ?? order.coupon_amount ?? 0) ||
 //   //   (order.coupon?.discount_value ?? 0);
 
 //   // const baseDiscount = Number(order.discount ?? 0);
 //   // const discount = couponDiscount > 0 ? couponDiscount : baseDiscount;
-// // Ưu tiên lấy từ cột discount trong DB
+// // Æ¯u tiÃªn láº¥y tá»« cá»™t discount trong DB
 // const discount =
 //   Number(order.discount ?? 0) ||
 //   Number(order.coupon_discount ?? order.coupon_amount ?? 0) ||
@@ -164,7 +164,7 @@
 //           : c.includes("j&t") || c.includes("jnt")
 //           ? `https://jtexpress.vn/vi/tracking?billcode=${n}`
 //           : `https://www.google.com/search?q=${encodeURIComponent(
-//               `tra cứu vận đơn ${n}`
+//               `tra cá»©u váº­n Ä‘Æ¡n ${n}`
 //             )}`)(trackingNo)
 //     : "";
 
@@ -276,7 +276,7 @@
 //     } catch (e) {
 //       if (e.name !== "AbortError") {
 //         console.error(e);
-//         setErr("Không tìm thấy đơn hàng. Hãy kiểm tra mã đơn/số điện thoại.");
+//         setErr("KhÃ´ng tÃ¬m tháº¥y Ä‘Æ¡n hÃ ng. HÃ£y kiá»ƒm tra mÃ£ Ä‘Æ¡n/sá»‘ Ä‘iá»‡n thoáº¡i.");
 //         setOrder(null);
 //       }
 //     } finally {
@@ -314,7 +314,7 @@
 
 //   const canCancel = order && ["pending", "confirmed"].includes(statusKey);
 
-//   // ==== Modal hủy đơn ====
+//   // ==== Modal há»§y Ä‘Æ¡n ====
 //   const openCancelModal = () => {
 //     setCancelReason("");
 //     setCancelError("");
@@ -358,7 +358,7 @@
 //       }
 
 //       if (!ok) {
-//         let msg = "Không hủy được đơn. Vui lòng thử lại.";
+//         let msg = "KhÃ´ng há»§y Ä‘Æ°á»£c Ä‘Æ¡n. Vui lÃ²ng thá»­ láº¡i.";
 //         try {
 //           const j = await lastRes.json();
 //           msg = j.message || j.error || msg;
@@ -368,7 +368,7 @@
 //       }
 
 //       setOrder((p) => (p ? { ...p, status: "canceled", status_key: "canceled" } : p));
-//       alert("✅ Hủy đơn hàng thành công!");
+//       alert("âœ… Há»§y Ä‘Æ¡n hÃ ng thÃ nh cÃ´ng!");
 //       setShowCancelModal(false);
 //       navigate("/canceled-orders");
 //     } finally {
@@ -393,7 +393,7 @@
 //       if (idx >= 0) out[idx].qty += qty; else out.push({ id, name, price, qty, thumbnail_url: thumb });
 //     }
 //     save(out);
-//     alert("🛒 Đã thêm lại các sản phẩm vào giỏ!");
+//     alert("ðŸ›’ ÄÃ£ thÃªm láº¡i cÃ¡c sáº£n pháº©m vÃ o giá»!");
 //     navigate("/cart");
 //   };
 
@@ -408,31 +408,31 @@
 //       <div className="track-card">
 //         <div className="topbar">
 //           <button className="back-home" onClick={() => navigate("/")}>
-//             <span className="home-ico" aria-hidden>🏠</span> Về trang chủ
+//             <span className="home-ico" aria-hidden>ðŸ </span> Vá» trang chá»§
 //           </button>
 //         </div>
 
-//         <h2 className="track-title">📦 Theo dõi đơn hàng</h2>
+//         <h2 className="track-title">ðŸ“¦ Theo dÃµi Ä‘Æ¡n hÃ ng</h2>
 
 //         <form onSubmit={onSearch} className="track-form">
 //           <input
 //             className="track-input"
-//             placeholder="Nhập mã đơn (VD: 23 hoặc SV-2025-0001)"
+//             placeholder="Nháº­p mÃ£ Ä‘Æ¡n (VD: 23 hoáº·c SV-2025-0001)"
 //             value={code}
 //             onChange={(e) => setCode(e.target.value)}
 //           />
 //           <input
 //             className="track-input"
-//             placeholder="Số điện thoại (không bắt buộc)"
+//             placeholder="Sá»‘ Ä‘iá»‡n thoáº¡i (khÃ´ng báº¯t buá»™c)"
 //             value={phone}
 //             onChange={(e) => setPhone(e.target.value)}
 //           />
 //           <button className="track-btn" type="submit" disabled={loading}>
-//             {loading ? "Đang tìm..." : "Tra cứu"}
+//             {loading ? "Äang tÃ¬m..." : "Tra cá»©u"}
 //           </button>
 //         </form>
 
-//         {err && <p className="track-error">❌ {err}</p>}
+//         {err && <p className="track-error">âŒ {err}</p>}
 //       </div>
 
 //       {order && (
@@ -441,20 +441,20 @@
 //           <div className="order-head">
 //             <div className="order-left">
 //               <div className="order-code">
-//                 Mã đơn: <b>{order.code || order.id}</b>
+//                 MÃ£ Ä‘Æ¡n: <b>{order.code || order.id}</b>
 //                 <button
 //                   className="copy-btn"
 //                   onClick={() => navigator.clipboard.writeText(order.code || order.id)}
 //                 >
-//                   Sao chép
+//                   Sao chÃ©p
 //                 </button>
 //               </div>
 
 //               <div className="order-meta">
-//                 <span className="meta-chip">👤 {customerName}</span>
-//                 <span className="meta-chip total">Tổng: ₫{fmt(money.total)}</span>
+//                 <span className="meta-chip">ðŸ‘¤ {customerName}</span>
+//                 <span className="meta-chip total">Tá»•ng: â‚«{fmt(money.total)}</span>
 //                 {order?.updated_at && (
-//                   <span className="meta-chip muted">Cập nhật: {fmtTime(order.updated_at)}</span>
+//                   <span className="meta-chip muted">Cáº­p nháº­t: {fmtTime(order.updated_at)}</span>
 //                 )}
 //               </div>
 //             </div>
@@ -465,47 +465,47 @@
 //                   className="btn solid danger"
 //                   onClick={openCancelModal}
 //                   disabled={canceling}
-//                   title="Hủy đơn hàng"
+//                   title="Há»§y Ä‘Æ¡n hÃ ng"
 //                 >
-//                   {canceling ? "Đang hủy..." : "Hủy đơn"}
+//                   {canceling ? "Äang há»§y..." : "Há»§y Ä‘Æ¡n"}
 //                 </button>
 //               )}
 //               {statusKey === "delivered" && (
 //                 <>
-//                   <button className="btn solid" onClick={reorder}>Mua lại</button>
-//                   <button className="btn outline" onClick={reviewFirst}>Đánh giá</button>
+//                   <button className="btn solid" onClick={reorder}>Mua láº¡i</button>
+//                   <button className="btn outline" onClick={reviewFirst}>ÄÃ¡nh giÃ¡</button>
 //                 </>
 //               )}
 //             </div>
 
 //             <div className={`status-badge s-${statusKey}`}>
 //               {STATUS_STEPS.find((s) => s.key === statusKey)?.label ||
-//                 (statusKey === "canceled" ? "Đã hủy" : statusKey)}
+//                 (statusKey === "canceled" ? "ÄÃ£ há»§y" : statusKey)}
 //             </div>
 //           </div>
 
-//           {/* Vận chuyển */}
+//           {/* Váº­n chuyá»ƒn */}
 //           {(carrierName || trackingNo) && (
 //             <div className="panel">
-//               <h4>🚚 Vận chuyển</h4>
+//               <h4>ðŸšš Váº­n chuyá»ƒn</h4>
 //               <div className="ship-wrap">
-//                 <div><span>Đơn vị:</span> {carrierName || "—"}</div>
+//                 <div><span>ÄÆ¡n vá»‹:</span> {carrierName || "â€”"}</div>
 //                 <div className="trackline">
-//                   <span>Mã vận đơn:</span>
-//                   <code className="code">{trackingNo || "—"}</code>
+//                   <span>MÃ£ váº­n Ä‘Æ¡n:</span>
+//                   <code className="code">{trackingNo || "â€”"}</code>
 //                   {trackingNo && (
 //                     <>
 //                       <button className="copy-btn" onClick={() => navigator.clipboard.writeText(trackingNo)}>
 //                         Copy
 //                       </button>
 //                       <a className="btn-link" href={carrierTrackUrl} target="_blank" rel="noreferrer">
-//                         Tra cứu
+//                         Tra cá»©u
 //                       </a>
 //                     </>
 //                   )}
 //                 </div>
 //                 {order?.estimated_delivery && (
-//                   <div><span>Dự kiến giao:</span> {fmtTime(order.estimated_delivery)}</div>
+//                   <div><span>Dá»± kiáº¿n giao:</span> {fmtTime(order.estimated_delivery)}</div>
 //                 )}
 //               </div>
 //             </div>
@@ -527,33 +527,33 @@
 //           {/* Info + money */}
 //           <div className="grid-two">
 //             <div className="panel">
-//               <h4>📍 Thông tin giao hàng</h4>
+//               <h4>ðŸ“ ThÃ´ng tin giao hÃ ng</h4>
 //               <div className="info">
-//                 <div><span>Khách:</span> {customerName}</div>
-//                 <div><span>Điện thoại:</span> {order?.shipping_phone || order?.phone || "—"}</div>
-//                 <div><span>Địa chỉ:</span> {order?.shipping_address || order?.address || "—"}</div>
-//                 <div><span>Ghi chú:</span> {order?.note || "—"}</div>
+//                 <div><span>KhÃ¡ch:</span> {customerName}</div>
+//                 <div><span>Äiá»‡n thoáº¡i:</span> {order?.shipping_phone || order?.phone || "â€”"}</div>
+//                 <div><span>Äá»‹a chá»‰:</span> {order?.shipping_address || order?.address || "â€”"}</div>
+//                 <div><span>Ghi chÃº:</span> {order?.note || "â€”"}</div>
 //               </div>
 //             </div>
 
 //             <div className="panel">
-//               <h4>💵 Thanh toán</h4>
+//               <h4>ðŸ’µ Thanh toÃ¡n</h4>
 //               <div className="info">
-//                 <div><span>Tổng tiền hàng:</span> ₫{fmt(money.subtotal)}</div>
-//                 <div><span>Phí vận chuyển:</span> ₫{fmt(money.shippingFee)}</div>
-//                 {/* <div><span>Giảm giá:</span> -₫{fmt(money.discount)}</div>
-//                 <div className="total"><span>Phải trả:</span> ₫{fmt(money.total)}</div>
-//                 <div><span>Phương thức:</span> {order?.payment_method || "—"}</div> */}
+//                 <div><span>Tá»•ng tiá»n hÃ ng:</span> â‚«{fmt(money.subtotal)}</div>
+//                 <div><span>PhÃ­ váº­n chuyá»ƒn:</span> â‚«{fmt(money.shippingFee)}</div>
+//                 {/* <div><span>Giáº£m giÃ¡:</span> -â‚«{fmt(money.discount)}</div>
+//                 <div className="total"><span>Pháº£i tráº£:</span> â‚«{fmt(money.total)}</div>
+//                 <div><span>PhÆ°Æ¡ng thá»©c:</span> {order?.payment_method || "â€”"}</div> */}
 
-//                 <div><span>Giảm giá:</span> -₫{fmt(money.discount)}</div>
+//                 <div><span>Giáº£m giÃ¡:</span> -â‚«{fmt(money.discount)}</div>
 // {(order?.coupon?.code || order?.coupon_code) && (
-//   <div><span>Mã giảm giá:</span> {order.coupon?.code || order.coupon_code}</div>
+//   <div><span>MÃ£ giáº£m giÃ¡:</span> {order.coupon?.code || order.coupon_code}</div>
 // )}
 
-// <div className="total"><span>Phải trả:</span> ₫{fmt(money.total)}</div>
+// <div className="total"><span>Pháº£i tráº£:</span> â‚«{fmt(money.total)}</div>
 // <div>
-//   <span>Phương thức:</span> 
-//   {order?.payment_method || order?.payment || order?.method || "—"}
+//   <span>PhÆ°Æ¡ng thá»©c:</span> 
+//   {order?.payment_method || order?.payment || order?.method || "â€”"}
 // </div>
 
 //               </div>
@@ -562,7 +562,7 @@
 
 //           {/* Items */}
 //           <div className="panel">
-//             <h4>🧺 Sản phẩm</h4>
+//             <h4>ðŸ§º Sáº£n pháº©m</h4>
 //             <div className="items">
 //               {(order.items || order.order_items || []).map((it) => (
 //                 <div key={it.id || `${it.product_id}-${it.variant_id || ""}`} className="item">
@@ -573,9 +573,9 @@
 //                   />
 //                   <div className="item-info">
 //                     <div className="item-name">{it.name}</div>
-//                     <div className="item-sub">SL: {it.qty ?? it.quantity ?? 0} × ₫{fmt(it.price)}</div>
+//                     <div className="item-sub">SL: {it.qty ?? it.quantity ?? 0} Ã— â‚«{fmt(it.price)}</div>
 //                   </div>
-//                   <div className="item-total">₫{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
+//                   <div className="item-total">â‚«{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
 
 //                   {statusKey === "delivered" && (
 //                     <div>
@@ -584,17 +584,17 @@
 //                         onClick={() => {
 //                           const pid = it?.product_id || it?.productId || it?.product?.id;
 //                           if (pid) navigate(`/products/${pid}/reviews`);
-//                           else alert("Không tìm được product_id để mở form đánh giá.");
+//                           else alert("KhÃ´ng tÃ¬m Ä‘Æ°á»£c product_id Ä‘á»ƒ má»Ÿ form Ä‘Ã¡nh giÃ¡.");
 //                         }}
 //                       >
-//                         Đánh giá
+//                         ÄÃ¡nh giÃ¡
 //                       </button>
 //                     </div>
 //                   )}
 //                 </div>
 //               ))}
 //               {(!order.items || (order.items || order.order_items || []).length === 0) && (
-//                 <div className="muted">Không có sản phẩm.</div>
+//                 <div className="muted">KhÃ´ng cÃ³ sáº£n pháº©m.</div>
 //               )}
 //             </div>
 //           </div>
@@ -602,14 +602,14 @@
 //           {/* History */}
 //           {(order.history || order.logs) && (
 //             <div className="panel">
-//               <h4>🕑 Lịch sử đơn hàng</h4>
+//               <h4>ðŸ•‘ Lá»‹ch sá»­ Ä‘Æ¡n hÃ ng</h4>
 //               <div className="history">
 //                 {(order.history || order.logs).map((h, i) => (
 //                   <div key={i} className="hrow">
 //                     <div className="hwhen">{fmtTime(h.at || h.created_at || h.time)}</div>
 //                     <div className="hstatus">{h.status || h.event}</div>
 //                     <div className="hmsg">{h.message || h.note || ""}</div>
-//                     {h.location && <div className="hloc">📍 {h.location}</div>}
+//                     {h.location && <div className="hloc">ðŸ“ {h.location}</div>}
 //                   </div>
 //                 ))}
 //               </div>
@@ -618,33 +618,33 @@
 //         </div>
 //       )}
 
-//       {/* Modal xác nhận hủy */}
+//       {/* Modal xÃ¡c nháº­n há»§y */}
 //       {showCancelModal && (
 //         <div className="modal-backdrop" role="dialog" aria-modal="true">
 //           <div className="modal">
-//             <h3 className="modal-title">Xác nhận hủy đơn</h3>
+//             <h3 className="modal-title">XÃ¡c nháº­n há»§y Ä‘Æ¡n</h3>
 //             <p className="modal-text">
-//               Bạn có chắc muốn hủy đơn <b>{order?.code || order?.id}</b>?
+//               Báº¡n cÃ³ cháº¯c muá»‘n há»§y Ä‘Æ¡n <b>{order?.code || order?.id}</b>?
 //             </p>
 
 //             <label className="modal-label">
-//               Lý do hủy (không bắt buộc)
+//               LÃ½ do há»§y (khÃ´ng báº¯t buá»™c)
 //               <textarea
 //                 className="modal-textarea"
 //                 value={cancelReason}
 //                 onChange={(e) => setCancelReason(e.target.value)}
-//                 placeholder="Ví dụ: Thay đổi sản phẩm, đặt nhầm..."
+//                 placeholder="VÃ­ dá»¥: Thay Ä‘á»•i sáº£n pháº©m, Ä‘áº·t nháº§m..."
 //               />
 //             </label>
 
-//             {cancelError && <div className="modal-error">❌ {cancelError}</div>}
+//             {cancelError && <div className="modal-error">âŒ {cancelError}</div>}
 
 //             <div className="modal-actions">
 //               <button className="btn outline" onClick={closeCancelModal} disabled={canceling}>
-//                 Bỏ qua
+//                 Bá» qua
 //               </button>
 //               <button className="btn solid danger" onClick={submitCancel} disabled={canceling}>
-//                 {canceling ? "Đang hủy..." : "Xác nhận hủy"}
+//                 {canceling ? "Äang há»§y..." : "XÃ¡c nháº­n há»§y"}
 //               </button>
 //             </div>
 //           </div>
@@ -658,11 +658,11 @@ const API_BASE = "http://127.0.0.1:8000/api";
 const PLACEHOLDER = "https://placehold.co/80x60?text=No+Img";
 
 export const STATUS_STEPS = [
-  { key: "pending",   label: "Chờ xác nhận" },
-  { key: "confirmed", label: "Đã xác nhận" },
-  { key: "ready",     label: "Chờ vận chuyển" },
-  { key: "shipping",  label: "Đang giao" },
-  { key: "delivered", label: "Giao thành công" },
+  { key: "pending",   label: "Chá» xÃ¡c nháº­n" },
+  { key: "confirmed", label: "ÄÃ£ xÃ¡c nháº­n" },
+  { key: "ready",     label: "Chá» váº­n chuyá»ƒn" },
+  { key: "shipping",  label: "Äang giao" },
+  { key: "delivered", label: "Giao thÃ nh cÃ´ng" },
 ];
 
 const ACTIVE_POLL = new Set(["confirmed", "ready", "shipping"]);
@@ -693,7 +693,7 @@ export default function OrderTracking() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  // Modal hủy đơn
+  // Modal há»§y Ä‘Æ¡n
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
   const [canceling, setCanceling] = useState(false);
@@ -717,7 +717,7 @@ export default function OrderTracking() {
   );
 
   const customerName = useMemo(() => {
-    if (!order) return "—";
+    if (!order) return "â€”";
     const localUser = (() => {
       try { return JSON.parse(localStorage.getItem("user") || "null"); } catch { return null; }
     })();
@@ -728,11 +728,11 @@ export default function OrderTracking() {
       order?.user?.name ||
       order?.recipient_name ||
       localUser?.name ||
-      "—"
+      "â€”"
     );
   }, [order]);
 
-  /* ---------- BỔ SUNG: parse giảm giá từ note khi API không có ---------- */
+  /* ---------- Bá»” SUNG: parse giáº£m giÃ¡ tá»« note khi API khÃ´ng cÃ³ ---------- */
   const parseVnMoney = (s) => {
     if (!s) return 0;
     const n = String(s).replace(/[^\d\-]/g, "");
@@ -743,9 +743,9 @@ export default function OrderTracking() {
 
   const extractFromNote = (note) => {
     const txt = String(note || "");
-    // ví dụ: "Tổng đơn: 90000 đ | Giảm: -10000 đ"
-    const mSubtotal = txt.match(/tổng\s*đơn[^0-9\-]*([0-9\.\,\s\-]+)/i);
-    const mDiscount = txt.match(/giảm[^0-9\-]*([0-9\.\,\s\-]+)/i);
+    // vÃ­ dá»¥: "Tá»•ng Ä‘Æ¡n: 90000 Ä‘ | Giáº£m: -10000 Ä‘"
+    const mSubtotal = txt.match(/tá»•ng\s*Ä‘Æ¡n[^0-9\-]*([0-9\.\,\s\-]+)/i);
+    const mDiscount = txt.match(/giáº£m[^0-9\-]*([0-9\.\,\s\-]+)/i);
     return {
       noteSubtotal: mSubtotal ? parseVnMoney(mSubtotal[1]) : 0,
       noteDiscount: mDiscount ? parseVnMoney(mDiscount[1]) : 0,
@@ -756,14 +756,14 @@ export default function OrderTracking() {
   const money = useMemo(() => {
     if (!order) return { subtotal: 0, shippingFee: 0, discount: 0, total: 0 };
 
-    // items -> tính tạm tính dự phòng
+    // items -> tÃ­nh táº¡m tÃ­nh dá»± phÃ²ng
     const items = (order.items || order.order_items || []).map((it) => ({
       qty: it.qty ?? it.quantity ?? 0,
       price: Number(it.price ?? 0),
     }));
     const itemsSubtotal = items.reduce((s, it) => s + it.qty * it.price, 0);
 
-    // fallback từ note (nếu có)
+    // fallback tá»« note (náº¿u cÃ³)
     const { noteSubtotal, noteDiscount } = extractFromNote(order.note);
 
     const subtotal =
@@ -773,7 +773,7 @@ export default function OrderTracking() {
 
     const shippingFee = Number(order.shipping_fee ?? 0);
 
-    // Ưu tiên discount field từ API; nếu không có → lấy từ note
+    // Æ¯u tiÃªn discount field tá»« API; náº¿u khÃ´ng cÃ³ â†’ láº¥y tá»« note
     const discount =
       Number(order.discount ?? 0) ||
       Number(order.coupon_discount ?? order.coupon_amount ?? 0) ||
@@ -820,7 +820,7 @@ export default function OrderTracking() {
           : c.includes("j&t") || c.includes("jnt")
           ? `https://jtexpress.vn/vi/tracking?billcode=${n}`
           : `https://www.google.com/search?q=${encodeURIComponent(
-              `tra cứu vận đơn ${n}`
+              `tra cá»©u váº­n Ä‘Æ¡n ${n}`
             )}`)(trackingNo)
     : "";
 
@@ -932,7 +932,7 @@ export default function OrderTracking() {
     } catch (e) {
       if (e.name !== "AbortError") {
         console.error(e);
-        setErr("Không tìm thấy đơn hàng. Hãy kiểm tra mã đơn/số điện thoại.");
+        setErr("KhÃ´ng tÃ¬m tháº¥y Ä‘Æ¡n hÃ ng. HÃ£y kiá»ƒm tra mÃ£ Ä‘Æ¡n/sá»‘ Ä‘iá»‡n thoáº¡i.");
         setOrder(null);
       }
     } finally {
@@ -970,7 +970,7 @@ export default function OrderTracking() {
 
   const canCancel = order && ["pending", "confirmed"].includes(statusKey);
 
-  // ==== Modal hủy đơn ====
+  // ==== Modal há»§y Ä‘Æ¡n ====
   const openCancelModal = () => {
     setCancelReason("");
     setCancelError("");
@@ -1014,7 +1014,7 @@ export default function OrderTracking() {
       }
 
       if (!ok) {
-        let msg = "Không hủy được đơn. Vui lòng thử lại.";
+        let msg = "KhÃ´ng há»§y Ä‘Æ°á»£c Ä‘Æ¡n. Vui lÃ²ng thá»­ láº¡i.";
         try {
           const j = await lastRes.json();
           msg = j.message || j.error || msg;
@@ -1024,7 +1024,7 @@ export default function OrderTracking() {
       }
 
       setOrder((p) => (p ? { ...p, status: "canceled", status_key: "canceled" } : p));
-      alert("✅ Hủy đơn hàng thành công!");
+      alert("âœ… Há»§y Ä‘Æ¡n hÃ ng thÃ nh cÃ´ng!");
       setShowCancelModal(false);
       navigate("/canceled-orders");
     } finally {
@@ -1049,7 +1049,7 @@ export default function OrderTracking() {
       if (idx >= 0) out[idx].qty += qty; else out.push({ id, name, price, qty, thumbnail_url: thumb });
     }
     save(out);
-    alert("🛒 Đã thêm lại các sản phẩm vào giỏ!");
+    alert("ðŸ›’ ÄÃ£ thÃªm láº¡i cÃ¡c sáº£n pháº©m vÃ o giá»!");
     navigate("/cart");
   };
 
@@ -1064,31 +1064,31 @@ export default function OrderTracking() {
       <div className="track-card">
         <div className="topbar">
           <button className="back-home" onClick={() => navigate("/")}>
-            <span className="home-ico" aria-hidden>🏠</span> Về trang chủ
+            <span className="home-ico" aria-hidden>ðŸ </span> Vá» trang chá»§
           </button>
         </div>
 
-        <h2 className="track-title">📦 Theo dõi đơn hàng</h2>
+        <h2 className="track-title">ðŸ“¦ Theo dÃµi Ä‘Æ¡n hÃ ng</h2>
 
         <form onSubmit={onSearch} className="track-form">
           <input
             className="track-input"
-            placeholder="Nhập mã đơn (VD: 23 hoặc SV-2025-0001)"
+            placeholder="Nháº­p mÃ£ Ä‘Æ¡n (VD: 23 hoáº·c SV-2025-0001)"
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />
           <input
             className="track-input"
-            placeholder="Số điện thoại (không bắt buộc)"
+            placeholder="Sá»‘ Ä‘iá»‡n thoáº¡i (khÃ´ng báº¯t buá»™c)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
           <button className="track-btn" type="submit" disabled={loading}>
-            {loading ? "Đang tìm..." : "Tra cứu"}
+            {loading ? "Äang tÃ¬m..." : "Tra cá»©u"}
           </button>
         </form>
 
-        {err && <p className="track-error">❌ {err}</p>}
+        {err && <p className="track-error">âŒ {err}</p>}
       </div>
 
       {order && (
@@ -1097,20 +1097,20 @@ export default function OrderTracking() {
           <div className="order-head">
             <div className="order-left">
               <div className="order-code">
-                Mã đơn: <b>{order.code || order.id}</b>
+                MÃ£ Ä‘Æ¡n: <b>{order.code || order.id}</b>
                 <button
                   className="copy-btn"
                   onClick={() => navigator.clipboard.writeText(order.code || order.id)}
                 >
-                  Sao chép
+                  Sao chÃ©p
                 </button>
               </div>
 
               <div className="order-meta">
-                <span className="meta-chip">👤 {customerName}</span>
-                <span className="meta-chip total">Tổng: ₫{fmt(money.total)}</span>
+                <span className="meta-chip">ðŸ‘¤ {customerName}</span>
+                <span className="meta-chip total">Tá»•ng: â‚«{fmt(money.total)}</span>
                 {order?.updated_at && (
-                  <span className="meta-chip muted">Cập nhật: {fmtTime(order.updated_at)}</span>
+                  <span className="meta-chip muted">Cáº­p nháº­t: {fmtTime(order.updated_at)}</span>
                 )}
               </div>
             </div>
@@ -1121,47 +1121,47 @@ export default function OrderTracking() {
                   className="btn solid danger"
                   onClick={openCancelModal}
                   disabled={canceling}
-                  title="Hủy đơn hàng"
+                  title="Há»§y Ä‘Æ¡n hÃ ng"
                 >
-                  {canceling ? "Đang hủy..." : "Hủy đơn"}
+                  {canceling ? "Äang há»§y..." : "Há»§y Ä‘Æ¡n"}
                 </button>
               )}
               {statusKey === "delivered" && (
                 <>
-                  <button className="btn solid" onClick={reorder}>Mua lại</button>
-                  <button className="btn outline" onClick={reviewFirst}>Đánh giá</button>
+                  <button className="btn solid" onClick={reorder}>Mua láº¡i</button>
+                  <button className="btn outline" onClick={reviewFirst}>ÄÃ¡nh giÃ¡</button>
                 </>
               )}
             </div>
 
             <div className={`status-badge s-${statusKey}`}>
               {STATUS_STEPS.find((s) => s.key === statusKey)?.label ||
-                (statusKey === "canceled" ? "Đã hủy" : statusKey)}
+                (statusKey === "canceled" ? "ÄÃ£ há»§y" : statusKey)}
             </div>
           </div>
 
-          {/* Vận chuyển */}
+          {/* Váº­n chuyá»ƒn */}
           {(carrierName || trackingNo) && (
             <div className="panel">
-              <h4>🚚 Vận chuyển</h4>
+              <h4>ðŸšš Váº­n chuyá»ƒn</h4>
               <div className="ship-wrap">
-                <div><span>Đơn vị:</span> {carrierName || "—"}</div>
+                <div><span>ÄÆ¡n vá»‹:</span> {carrierName || "â€”"}</div>
                 <div className="trackline">
-                  <span>Mã vận đơn:</span>
-                  <code className="code">{trackingNo || "—"}</code>
+                  <span>MÃ£ váº­n Ä‘Æ¡n:</span>
+                  <code className="code">{trackingNo || "â€”"}</code>
                   {trackingNo && (
                     <>
                       <button className="copy-btn" onClick={() => navigator.clipboard.writeText(trackingNo)}>
                         Copy
                       </button>
                       <a className="btn-link" href={carrierTrackUrl} target="_blank" rel="noreferrer">
-                        Tra cứu
+                        Tra cá»©u
                       </a>
                     </>
                   )}
                 </div>
                 {order?.estimated_delivery && (
-                  <div><span>Dự kiến giao:</span> {fmtTime(order.estimated_delivery)}</div>
+                  <div><span>Dá»± kiáº¿n giao:</span> {fmtTime(order.estimated_delivery)}</div>
                 )}
               </div>
             </div>
@@ -1183,30 +1183,30 @@ export default function OrderTracking() {
           {/* Info + money */}
           <div className="grid-two">
             <div className="panel">
-              <h4>📍 Thông tin giao hàng</h4>
+              <h4>ðŸ“ ThÃ´ng tin giao hÃ ng</h4>
               <div className="info">
-                <div><span>Khách:</span> {customerName}</div>
-                <div><span>Điện thoại:</span> {order?.shipping_phone || order?.phone || "—"}</div>
-                <div><span>Địa chỉ:</span> {order?.shipping_address || order?.address || "—"}</div>
-                <div><span>Ghi chú:</span> {order?.note || "—"}</div>
+                <div><span>KhÃ¡ch:</span> {customerName}</div>
+                <div><span>Äiá»‡n thoáº¡i:</span> {order?.shipping_phone || order?.phone || "â€”"}</div>
+                <div><span>Äá»‹a chá»‰:</span> {order?.shipping_address || order?.address || "â€”"}</div>
+                <div><span>Ghi chÃº:</span> {order?.note || "â€”"}</div>
               </div>
             </div>
 
             <div className="panel">
-              <h4>💵 Thanh toán</h4>
+              <h4>ðŸ’µ Thanh toÃ¡n</h4>
               <div className="info">
-                <div><span>Tổng tiền hàng:</span> ₫{fmt(money.subtotal)}</div>
-                <div><span>Phí vận chuyển:</span> ₫{fmt(money.shippingFee)}</div>
+                <div><span>Tá»•ng tiá»n hÃ ng:</span> â‚«{fmt(money.subtotal)}</div>
+                <div><span>PhÃ­ váº­n chuyá»ƒn:</span> â‚«{fmt(money.shippingFee)}</div>
 
-                <div><span>Giảm giá:</span> -₫{fmt(money.discount)}</div>
+                <div><span>Giáº£m giÃ¡:</span> -â‚«{fmt(money.discount)}</div>
                 {(order?.coupon?.code || order?.coupon_code) && (
-                  <div><span>Mã giảm giá:</span> {order.coupon?.code || order.coupon_code}</div>
+                  <div><span>MÃ£ giáº£m giÃ¡:</span> {order.coupon?.code || order.coupon_code}</div>
                 )}
 
-                <div className="total"><span>Phải trả:</span> ₫{fmt(money.total)}</div>
+                <div className="total"><span>Pháº£i tráº£:</span> â‚«{fmt(money.total)}</div>
                 <div>
-                  <span>Phương thức:</span>{" "}
-                  {order?.payment_method || order?.payment || order?.method || "—"}
+                  <span>PhÆ°Æ¡ng thá»©c:</span>{" "}
+                  {order?.payment_method || order?.payment || order?.method || "â€”"}
                 </div>
               </div>
             </div>
@@ -1214,7 +1214,7 @@ export default function OrderTracking() {
 
           {/* Items */}
           <div className="panel">
-            <h4>🧺 Sản phẩm</h4>
+            <h4>ðŸ§º Sáº£n pháº©m</h4>
             <div className="items">
               {(order.items || order.order_items || []).map((it) => (
                 <div key={it.id || `${it.product_id}-${it.variant_id || ""}`} className="item">
@@ -1225,9 +1225,9 @@ export default function OrderTracking() {
                   />
                   <div className="item-info">
                     <div className="item-name">{it.name}</div>
-                    <div className="item-sub">SL: {it.qty ?? it.quantity ?? 0} × ₫{fmt(it.price)}</div>
+                    <div className="item-sub">SL: {it.qty ?? it.quantity ?? 0} Ã— â‚«{fmt(it.price)}</div>
                   </div>
-                  <div className="item-total">₫{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
+                  <div className="item-total">â‚«{fmt((it.qty || it.quantity || 0) * (it.price || 0))}</div>
 
                   {statusKey === "delivered" && (
                     <div>
@@ -1236,17 +1236,17 @@ export default function OrderTracking() {
                         onClick={() => {
                           const pid = it?.product_id || it?.productId || it?.product?.id;
                           if (pid) navigate(`/products/${pid}/reviews`);
-                          else alert("Không tìm được product_id để mở form đánh giá.");
+                          else alert("KhÃ´ng tÃ¬m Ä‘Æ°á»£c product_id Ä‘á»ƒ má»Ÿ form Ä‘Ã¡nh giÃ¡.");
                         }}
                       >
-                        Đánh giá
+                        ÄÃ¡nh giÃ¡
                       </button>
                     </div>
                   )}
                 </div>
               ))}
               {(!order.items || (order.items || order.order_items || []).length === 0) && (
-                <div className="muted">Không có sản phẩm.</div>
+                <div className="muted">KhÃ´ng cÃ³ sáº£n pháº©m.</div>
               )}
             </div>
           </div>
@@ -1254,14 +1254,14 @@ export default function OrderTracking() {
           {/* History */}
           {(order.history || order.logs) && (
             <div className="panel">
-              <h4>🕑 Lịch sử đơn hàng</h4>
+              <h4>ðŸ•‘ Lá»‹ch sá»­ Ä‘Æ¡n hÃ ng</h4>
               <div className="history">
                 {(order.history || order.logs).map((h, i) => (
                   <div key={i} className="hrow">
                     <div className="hwhen">{fmtTime(h.at || h.created_at || h.time)}</div>
                     <div className="hstatus">{h.status || h.event}</div>
                     <div className="hmsg">{h.message || h.note || ""}</div>
-                    {h.location && <div className="hloc">📍 {h.location}</div>}
+                    {h.location && <div className="hloc">ðŸ“ {h.location}</div>}
                   </div>
                 ))}
               </div>
@@ -1270,33 +1270,33 @@ export default function OrderTracking() {
         </div>
       )}
 
-      {/* Modal xác nhận hủy */}
+      {/* Modal xÃ¡c nháº­n há»§y */}
       {showCancelModal && (
         <div className="modal-backdrop" role="dialog" aria-modal="true">
           <div className="modal">
-            <h3 className="modal-title">Xác nhận hủy đơn</h3>
+            <h3 className="modal-title">XÃ¡c nháº­n há»§y Ä‘Æ¡n</h3>
             <p className="modal-text">
-              Bạn có chắc muốn hủy đơn <b>{order?.code || order?.id}</b>?
+              Báº¡n cÃ³ cháº¯c muá»‘n há»§y Ä‘Æ¡n <b>{order?.code || order?.id}</b>?
             </p>
 
             <label className="modal-label">
-              Lý do hủy (không bắt buộc)
+              LÃ½ do há»§y (khÃ´ng báº¯t buá»™c)
               <textarea
                 className="modal-textarea"
                 value={cancelReason}
                 onChange={(e) => setCancelReason(e.target.value)}
-                placeholder="Ví dụ: Thay đổi sản phẩm, đặt nhầm..."
+                placeholder="VÃ­ dá»¥: Thay Ä‘á»•i sáº£n pháº©m, Ä‘áº·t nháº§m..."
               />
             </label>
 
-            {cancelError && <div className="modal-error">❌ {cancelError}</div>}
+            {cancelError && <div className="modal-error">âŒ {cancelError}</div>}
 
             <div className="modal-actions">
               <button className="btn outline" onClick={closeCancelModal} disabled={canceling}>
-                Bỏ qua
+                Bá» qua
               </button>
               <button className="btn solid danger" onClick={submitCancel} disabled={canceling}>
-                {canceling ? "Đang hủy..." : "Xác nhận hủy"}
+                {canceling ? "Äang há»§y..." : "XÃ¡c nháº­n há»§y"}
               </button>
             </div>
           </div>
@@ -1430,3 +1430,5 @@ export default function OrderTracking() {
     </div>
   );
 }
+
+

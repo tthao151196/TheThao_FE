@@ -1,4 +1,4 @@
-// src/pages/Admin/Orders/OrderDetail.jsx
+﻿// src/pages/Admin/Orders/OrderDetail.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const n = (v) => (v == null || v === "" ? 0 : Number(v));
 const first = (...xs) => xs.find((x) => x !== undefined && x !== null && x !== "") ?? null;
 
 function pickThumb(prod, it) {
-  // cố gắng lấy đủ mọi nguồn ảnh có thể
+  // cá»‘ gáº¯ng láº¥y Ä‘á»§ má»i nguá»“n áº£nh cÃ³ thá»ƒ
   const p = prod || {};
   const cand = first(
     it?.product_image,
@@ -45,13 +45,13 @@ function pickThumb(prod, it) {
     p.image
   );
   if (!cand) return null;
-  // nếu đã là URL http(s) thì trả luôn
+  // náº¿u Ä‘Ã£ lÃ  URL http(s) thÃ¬ tráº£ luÃ´n
   if (/^https?:\/\//i.test(cand)) return cand;
-  // còn lại: coi như file trong storage
+  // cÃ²n láº¡i: coi nhÆ° file trong storage
   return `${HOST}/storage/${cand}`;
 }
 
-/** Chuẩn hoá item từ nhiều cấu trúc khác nhau về dạng {id, name, price, qty, subtotal, img} */
+/** Chuáº©n hoÃ¡ item tá»« nhiá»u cáº¥u trÃºc khÃ¡c nhau vá» dáº¡ng {id, name, price, qty, subtotal, img} */
 function normalizeItems(order) {
   const raw =
     order?.items ??
@@ -61,7 +61,7 @@ function normalizeItems(order) {
     order?.order_details ??
     [];
 
-  // Một số API trả kèm product trong item
+  // Má»™t sá»‘ API tráº£ kÃ¨m product trong item
   return (Array.isArray(raw) ? raw : []).map((it, idx) => {
     const prod = it.product || it._product || null;
 
@@ -70,15 +70,15 @@ function normalizeItems(order) {
       it.name,
       prod?.name,
       prod?.title,
-      `Sản phẩm #${it.product_id ?? idx + 1}`
+      `Sáº£n pháº©m #${it.product_id ?? idx + 1}`
     );
 
     const qty = n(first(it.qty, it.quantity, it.qty_buy, it.amount_qty, 0));
     const price = n(
       first(
-        it.price,            // giá ghi trên item
-        it.price_buy,        // giá mua
-        it.price_sale,       // giá sale
+        it.price,            // giÃ¡ ghi trÃªn item
+        it.price_buy,        // giÃ¡ mua
+        it.price_sale,       // giÃ¡ sale
         it.sale_price,       // alias
         prod?.price_sale,
         prod?.sale_price,
@@ -114,7 +114,7 @@ export default function OrderDetail() {
         setErr("");
 
         const token = localStorage.getItem("admin_token") || "";
-        if (!token) throw new Error("Bạn chưa đăng nhập admin (thiếu admin_token).");
+        if (!token) throw new Error("Báº¡n chÆ°a Ä‘Äƒng nháº­p admin (thiáº¿u admin_token).");
 
         const res = await fetch(`${API_BASE}/admin/orders/${id}`, {
           headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
@@ -125,16 +125,16 @@ export default function OrderDetail() {
         try { body = text ? JSON.parse(text) : {}; } catch {}
 
         if (!res.ok) {
-          if (res.status === 401) throw new Error("Bạn chưa đăng nhập admin hoặc token đã hết hạn.");
-          if (res.status === 403) throw new Error(body?.message || "Token không có quyền admin.");
+          if (res.status === 401) throw new Error("Báº¡n chÆ°a Ä‘Äƒng nháº­p admin hoáº·c token Ä‘Ã£ háº¿t háº¡n.");
+          if (res.status === 403) throw new Error(body?.message || "Token khÃ´ng cÃ³ quyá»n admin.");
           throw new Error(body?.message ? `HTTP ${res.status} - ${body.message}` : `HTTP ${res.status}`);
         }
 
-        // Chuẩn hoá root (có thể trả {data: {...}} hoặc {...})
+        // Chuáº©n hoÃ¡ root (cÃ³ thá»ƒ tráº£ {data: {...}} hoáº·c {...})
         const root = body?.data || body?.order || body;
         if (!ignore) setOrder(root);
       } catch (e) {
-        if (!ignore) setErr(e.message || "Không tải được chi tiết đơn hàng.");
+        if (!ignore) setErr(e.message || "KhÃ´ng táº£i Ä‘Æ°á»£c chi tiáº¿t Ä‘Æ¡n hÃ ng.");
       } finally {
         if (!ignore) setLoading(false);
       }
@@ -149,50 +149,50 @@ export default function OrderDetail() {
     return items.reduce((s, it) => s + n(it.subtotal), 0);
   }, [order, items]);
 
-  if (loading) return <p>Đang tải...</p>;
+  if (loading) return <p>Äang táº£i...</p>;
   if (err) return <p style={{ color: "#d32f2f" }}>{err}</p>;
-  if (!order) return <p>Không tìm thấy đơn hàng.</p>;
+  if (!order) return <p>KhÃ´ng tÃ¬m tháº¥y Ä‘Æ¡n hÃ ng.</p>;
 
   return (
     <section>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
         <h1 style={{ fontSize: 22 }}>Order #{order.id}</h1>
         <Link to="/admin/orders" style={{ border: "1px solid #ddd", padding: "6px 10px", borderRadius: 6 }}>
-          ← Quay lại
+          â† Quay láº¡i
         </Link>
       </div>
 
       <div style={{ display: "grid", gap: 12, gridTemplateColumns: "1fr 1fr", marginBottom: 16 }}>
         <div style={{ background: "#fff", border: "1px solid #eee", borderRadius: 8, padding: 12 }}>
-          <h3>Thông tin khách hàng</h3>
-          <div>Tên: <b>{order.name || order.customer_name || "-"}</b></div>
+          <h3>ThÃ´ng tin khÃ¡ch hÃ ng</h3>
+          <div>TÃªn: <b>{order.name || order.customer_name || "-"}</b></div>
           <div>Email: {order.email || order.customer_email || "-"}</div>
-          <div>SĐT: {order.phone || order.customer_phone || "-"}</div>
-          <div>Địa chỉ: {order.address || order.customer_address || "-"}</div>
-          {(order.note || order.customer_note) && <div>Ghi chú: {order.note || order.customer_note}</div>}
+          <div>SÄT: {order.phone || order.customer_phone || "-"}</div>
+          <div>Äá»‹a chá»‰: {order.address || order.customer_address || "-"}</div>
+          {(order.note || order.customer_note) && <div>Ghi chÃº: {order.note || order.customer_note}</div>}
         </div>
 
         <div style={{ background: "#fff", border: "1px solid #eee", borderRadius: 8, padding: 12 }}>
-          <h3>Trạng thái</h3>
+          <h3>Tráº¡ng thÃ¡i</h3>
           <span style={badgeStyle(order.status)}>{humanStatus(order.status)}</span>
           <div style={{ marginTop: 6 }}>
-            Tạo lúc: {order.created_at ? new Date(order.created_at).toLocaleString() : "-"}
+            Táº¡o lÃºc: {order.created_at ? new Date(order.created_at).toLocaleString() : "-"}
           </div>
-          {order.updated_at && <div>Cập nhật: {new Date(order.updated_at).toLocaleString()}</div>}
+          {order.updated_at && <div>Cáº­p nháº­t: {new Date(order.updated_at).toLocaleString()}</div>}
         </div>
       </div>
 
       <div style={{ background: "#fff", border: "1px solid #eee", borderRadius: 8, padding: 12 }}>
-        <h3>Sản phẩm</h3>
+        <h3>Sáº£n pháº©m</h3>
         <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ background: "#fafafa" }}>
               <th>#</th>
-              <th align="left">Sản phẩm</th>
-              <th align="center">Ảnh</th>
-              <th align="right">Giá</th>
+              <th align="left">Sáº£n pháº©m</th>
+              <th align="center">áº¢nh</th>
+              <th align="right">GiÃ¡</th>
               <th align="right">SL</th>
-              <th align="right">Tạm tính</th>
+              <th align="right">Táº¡m tÃ­nh</th>
             </tr>
           </thead>
           <tbody>
@@ -210,26 +210,26 @@ export default function OrderDetail() {
                         onError={(e) => (e.currentTarget.src = "https://placehold.co/56x56")}
                       />
                     ) : (
-                      <span style={{ color: "#999" }}>—</span>
+                      <span style={{ color: "#999" }}>â€”</span>
                     )}
                   </td>
-                  <td align="right">₫{VND.format(n(it.price))}</td>
+                  <td align="right">â‚«{VND.format(n(it.price))}</td>
                   <td align="right">{n(it.qty)}</td>
-                  <td align="right">₫{VND.format(n(it.subtotal))}</td>
+                  <td align="right">â‚«{VND.format(n(it.subtotal))}</td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td colSpan={6} align="center" style={{ color: "#666" }}>
-                  Không có sản phẩm.
+                  KhÃ´ng cÃ³ sáº£n pháº©m.
                 </td>
               </tr>
             )}
           </tbody>
           <tfoot>
             <tr style={{ borderTop: "1px solid #eee" }}>
-              <td colSpan={5} align="right"><b>Tổng cộng</b></td>
-              <td align="right"><b>₫{VND.format(total)}</b></td>
+              <td colSpan={5} align="right"><b>Tá»•ng cá»™ng</b></td>
+              <td align="right"><b>â‚«{VND.format(total)}</b></td>
             </tr>
           </tfoot>
         </table>
@@ -237,3 +237,5 @@ export default function OrderDetail() {
     </section>
   );
 }
+
+

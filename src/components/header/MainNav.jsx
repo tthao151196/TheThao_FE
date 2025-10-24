@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function MainNav({
@@ -13,10 +13,10 @@ export default function MainNav({
   return (
     <nav className={`main-nav ${stickBelowTop ? "under-topbar" : ""}`}>
       <style>{`
-        /* ---- GIỮ ĐỒNG BỘ VỚI TopBarAuth: --topbar-h:64px ---- */
+        /* ---- GIá»® Äá»’NG Bá»˜ Vá»šI TopBarAuth: --topbar-h:64px ---- */
         .main-nav{
           --topbar-h:64px;
-          --accent1:#6366f1; /* tím */
+          --accent1:#6366f1; /* tÃ­m */
           --accent2:#06b6d4; /* cyan */
           --link:#ffffff;
           --linkHover:rgba(255,255,255,.12);
@@ -28,7 +28,7 @@ export default function MainNav({
           color:#fff; margin:0;
           box-shadow: var(--shadow);
         }
-        /* Lớp nền gradient loang + bo góc dưới */
+        /* Lá»›p ná»n gradient loang + bo gÃ³c dÆ°á»›i */
         .mn::before{
           content:""; position:absolute; inset:0; z-index:-1;
           background:
@@ -52,20 +52,20 @@ export default function MainNav({
 
         .mn-hotline{margin-left:auto; font-weight:900; color:#f0f9ff; font-size:18px;}
 
-        /* Dính ngay dưới topbar */
+        /* DÃ­nh ngay dÆ°á»›i topbar */
         .main-nav.under-topbar{position:sticky; top:var(--topbar-h); z-index:40;}
       `}</style>
 
       <div className="mn">
         <div className="mn-wrap mn-row">
           <ul className="mn-menu">
-            <li><NavLink to={routes.home} end>Trang chủ</NavLink></li>
-            <li><NavLink to={routes.products}>Sản phẩm</NavLink></li>
+            <li><NavLink to={routes.home} end>Trang chá»§</NavLink></li>
+            <li><NavLink to={routes.products}>Sáº£n pháº©m</NavLink></li>
             <li>
-              <NavLink to="/about">Giới Thiệu</NavLink>
+              <NavLink to="/about">Giá»›i Thiá»‡u</NavLink>
             </li>
-            <li><NavLink to="/news">Tin tức</NavLink></li>
-            <li><NavLink to={routes.contact}>Liên hệ</NavLink></li>
+            <li><NavLink to="/news">Tin tá»©c</NavLink></li>
+            <li><NavLink to={routes.contact}>LiÃªn há»‡</NavLink></li>
             
           </ul>
           <div className="mn-hotline">
@@ -76,3 +76,5 @@ export default function MainNav({
     </nav>
   );
 }
+
+

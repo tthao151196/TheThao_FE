@@ -1,4 +1,4 @@
-// src/boot/urlRewrite.js
+﻿// src/boot/urlRewrite.js
 const API_ROOT = (import.meta.env.VITE_API_URL || "https://thethao-be-9hcx.onrender.com").replace(/\/+$/, "");
 const LOCAL_HOSTS = ["http://127.0.0.1:8000", "http://localhost:8000"];
 
@@ -31,3 +31,5 @@ Object.defineProperty(Image.prototype, "src", {
   set(v) { d.set.call(this, rewrite(v)); },
   get() { return d.get.call(this); }
 });
+
+

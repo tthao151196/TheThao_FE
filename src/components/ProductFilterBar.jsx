@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 
 /**
  * props:
@@ -28,36 +28,36 @@ export default function ProductFilterBar({
     return (
         <div className={`rounded-2xl border border-gray-200 bg-white shadow-sm ${loading ? "opacity-70 pointer-events-none" : ""}`}>
             <div className="p-4 md:p-5 grid gap-3 md:gap-4 md:grid-cols-12">
-                {/* Tìm kiếm */}
+                {/* TÃ¬m kiáº¿m */}
                 <div className="md:col-span-4">
-                    <label className="block text-sm text-gray-600 mb-1">Tìm kiếm</label>
+                    <label className="block text-sm text-gray-600 mb-1">TÃ¬m kiáº¿m</label>
                     <input
                         type="text"
                         value={local.q || ""}
                         onChange={(e) => change({ q: e.target.value, page: 1 })}
-                        placeholder="Nhập tên sản phẩm..."
+                        placeholder="Nháº­p tÃªn sáº£n pháº©m..."
                         className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>
 
-                {/* Danh mục */}
+                {/* Danh má»¥c */}
                 <div className="md:col-span-3">
-                    <label className="block text-sm text-gray-600 mb-1">Danh mục</label>
+                    <label className="block text-sm text-gray-600 mb-1">Danh má»¥c</label>
                     <select
                         value={local.category_id || ""}
                         onChange={(e) => change({ category_id: e.target.value || null, page: 1 })}
                         className="w-full rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     >
-                        <option value="">— Tất cả —</option>
+                        <option value="">â€” Táº¥t cáº£ â€”</option>
                         {categories.map((c) => (
                             <option key={c.id} value={c.id}>{c.name}</option>
                         ))}
                     </select>
                 </div>
 
-                {/* Khoảng giá */}
+                {/* Khoáº£ng giÃ¡ */}
                 <div className="md:col-span-3">
-                    <label className="block text-sm text-gray-600 mb-1">Khoảng giá (VNĐ)</label>
+                    <label className="block text-sm text-gray-600 mb-1">Khoáº£ng giÃ¡ (VNÄ)</label>
                     <div className="flex gap-2">
                         <input
                             type="number"
@@ -66,7 +66,7 @@ export default function ProductFilterBar({
                             onChange={(e) =>
                                 change({ min_price: e.target.value ? Number(e.target.value) : null, page: 1 })
                             }
-                            placeholder="Từ"
+                            placeholder="Tá»«"
                             className="w-1/2 rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                         />
                         <input
@@ -76,25 +76,25 @@ export default function ProductFilterBar({
                             onChange={(e) =>
                                 change({ max_price: e.target.value ? Number(e.target.value) : null, page: 1 })
                             }
-                            placeholder="Đến"
+                            placeholder="Äáº¿n"
                             className="w-1/2 rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                         />
                     </div>
                 </div>
 
-                {/* Sắp xếp */}
+                {/* Sáº¯p xáº¿p */}
                 <div className="md:col-span-2">
-                    <label className="block text-sm text-gray-600 mb-1">Sắp xếp</label>
+                    <label className="block text-sm text-gray-600 mb-1">Sáº¯p xáº¿p</label>
                     <select
                         value={local.sort || "newest"}
                         onChange={(e) => change({ sort: e.target.value, page: 1 })}
                         className="w-full rounded-lg border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     >
-                        <option value="newest">Mới nhất</option>
-                        <option value="price-asc">Giá thấp → cao</option>
-                        <option value="price-desc">Giá cao → thấp</option>
-                        <option value="name-asc">Tên A → Z</option>
-                        <option value="name-desc">Tên Z → A</option>
+                        <option value="newest">Má»›i nháº¥t</option>
+                        <option value="price-asc">GiÃ¡ tháº¥p â†’ cao</option>
+                        <option value="price-desc">GiÃ¡ cao â†’ tháº¥p</option>
+                        <option value="name-asc">TÃªn A â†’ Z</option>
+                        <option value="name-desc">TÃªn Z â†’ A</option>
                     </select>
                 </div>
 
@@ -107,7 +107,7 @@ export default function ProductFilterBar({
                             onChange={(e) => change({ only_sale: e.target.checked, page: 1 })}
                             className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                         />
-                        <span className="text-sm">Chỉ sản phẩm giảm giá</span>
+                        <span className="text-sm">Chá»‰ sáº£n pháº©m giáº£m giÃ¡</span>
                     </label>
 
                     <label className="inline-flex items-center gap-2">
@@ -117,7 +117,7 @@ export default function ProductFilterBar({
                             onChange={(e) => change({ in_stock: e.target.checked, page: 1 })}
                             className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                         />
-                        <span className="text-sm">Chỉ còn hàng</span>
+                        <span className="text-sm">Chá»‰ cÃ²n hÃ ng</span>
                     </label>
 
                     <div className="ms-auto">
@@ -125,7 +125,7 @@ export default function ProductFilterBar({
                             onClick={() => onClear?.()}
                             className="rounded-lg border border-gray-300 px-3 py-2 text-sm hover:bg-gray-50"
                         >
-                            Xoá lọc
+                            XoÃ¡ lá»c
                         </button>
                     </div>
                 </div>
@@ -133,3 +133,5 @@ export default function ProductFilterBar({
         </div>
     );
 }
+
+

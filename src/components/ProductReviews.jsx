@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 
 const API = "http://127.0.0.1:8000/api";
 
-// helper: parse JSON an toàn (fallback text/empty)
+// helper: parse JSON an toÃ n (fallback text/empty)
 async function safeJson(resp) {
     try {
         const ct = resp.headers.get("content-type") || "";
         if (ct.includes("application/json")) return await resp.json();
-        // Có thể là HTML lỗi -> thử parse từ text
+        // CÃ³ thá»ƒ lÃ  HTML lá»—i -> thá»­ parse tá»« text
         const txt = await resp.text();
         try { return JSON.parse(txt); } catch { return { message: txt }; }
     } catch {
@@ -38,11 +38,11 @@ export default function ProductReviews({ productId }) {
             if (!r.ok) {
                 const msg =
                     (json && (json.message || json.error || json.errors?.[0])) ||
-                    `Không tải được đánh giá (HTTP ${r.status}).`;
+                    `KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡ (HTTP ${r.status}).`;
                 setErr(String(msg));
                 setList([]);
                 setMeta({ avg_rating: 0, total: 0 });
-                return; // ❗ KHÔNG throw -> tránh error boundary
+                return; // â— KHÃ”NG throw -> trÃ¡nh error boundary
             }
 
             const data = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : []);
@@ -53,7 +53,7 @@ export default function ProductReviews({ productId }) {
                 total: Number(m.total || data.length || 0),
             });
         } catch {
-            setErr("Không tải được đánh giá. Vui lòng thử lại sau.");
+            setErr("KhÃ´ng táº£i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡. Vui lÃ²ng thá»­ láº¡i sau.");
             setList([]);
             setMeta({ avg_rating: 0, total: 0 });
         } finally {
@@ -68,7 +68,7 @@ export default function ProductReviews({ productId }) {
 
     const submit = async (e) => {
         e.preventDefault();
-        if (!token) { alert("Bạn cần đăng nhập để đánh giá."); return; }
+        if (!token) { alert("Báº¡n cáº§n Ä‘Äƒng nháº­p Ä‘á»ƒ Ä‘Ã¡nh giÃ¡."); return; }
 
         setSubmitting(true);
         setErr("");
@@ -87,16 +87,16 @@ export default function ProductReviews({ productId }) {
             if (!r.ok) {
                 const msg =
                     (json && (json.message || json.error || json.errors?.[0])) ||
-                    `Gửi đánh giá thất bại (HTTP ${r.status}).`;
+                    `Gá»­i Ä‘Ã¡nh giÃ¡ tháº¥t báº¡i (HTTP ${r.status}).`;
                 setErr(String(msg));
-                return; // ❗ không throw
+                return; // â— khÃ´ng throw
             }
 
             setContent("");
             setRating(5);
             await load();
         } catch {
-            setErr("Không gửi được đánh giá. Kiểm tra kết nối mạng và thử lại.");
+            setErr("KhÃ´ng gá»­i Ä‘Æ°á»£c Ä‘Ã¡nh giÃ¡. Kiá»ƒm tra káº¿t ná»‘i máº¡ng vÃ  thá»­ láº¡i.");
         } finally {
             setSubmitting(false);
         }
@@ -105,7 +105,7 @@ export default function ProductReviews({ productId }) {
     return (
         <div style={{ marginTop: 30 }}>
             <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 10 }}>
-                Đánh giá & Bình luận • ★ {meta.avg_rating || 0} ({meta.total || 0})
+                ÄÃ¡nh giÃ¡ & BÃ¬nh luáº­n â€¢ â˜… {meta.avg_rating || 0} ({meta.total || 0})
             </h3>
 
             {err ? (
@@ -126,19 +126,19 @@ export default function ProductReviews({ productId }) {
             ) : null}
 
             {loading ? (
-                <p>Đang tải...</p>
+                <p>Äang táº£i...</p>
             ) : (
                 <div style={{ display: "grid", gap: 12 }}>
                     {list.length === 0 ? (
-                        <div style={{ opacity: 0.85 }}>Chưa có đánh giá nào.</div>
+                        <div style={{ opacity: 0.85 }}>ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡ nÃ o.</div>
                     ) : (
                         list.map((c) => (
                             <div key={c.id} style={{ background: "#1f1f1f", borderRadius: 10, padding: 12 }}>
                                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                                    <strong>{c?.user?.name || "Người dùng"}</strong>
+                                    <strong>{c?.user?.name || "NgÆ°á»i dÃ¹ng"}</strong>
                                     <span style={{ color: "#ffd166" }}>
-                                        {"★".repeat(Number(c.rating) || 0)}
-                                        {"☆".repeat(5 - (Number(c.rating) || 0))}
+                                        {"â˜…".repeat(Number(c.rating) || 0)}
+                                        {"â˜†".repeat(5 - (Number(c.rating) || 0))}
                                     </span>
                                 </div>
                                 <div style={{ color: "#ddd", whiteSpace: "pre-wrap" }}>{c.content}</div>
@@ -153,7 +153,7 @@ export default function ProductReviews({ productId }) {
                 style={{ marginTop: 16, background: "#172026", padding: 12, borderRadius: 10 }}
             >
                 <div style={{ marginBottom: 8 }}>
-                    <label>Chọn sao: </label>
+                    <label>Chá»n sao: </label>
                     <select
                         value={rating}
                         onChange={(e) => setRating(Number(e.target.value))}
@@ -161,7 +161,7 @@ export default function ProductReviews({ productId }) {
                     >
                         {[5, 4, 3, 2, 1].map((n) => (
                             <option key={n} value={n}>
-                                {n} ★
+                                {n} â˜…
                             </option>
                         ))}
                     </select>
@@ -170,7 +170,7 @@ export default function ProductReviews({ productId }) {
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Cảm nhận của bạn…"
+                    placeholder="Cáº£m nháº­n cá»§a báº¡nâ€¦"
                     rows={3}
                     style={{ width: "100%", borderRadius: 8, padding: 10 }}
                     disabled={submitting}
@@ -189,7 +189,7 @@ export default function ProductReviews({ productId }) {
                             cursor: submitting ? "not-allowed" : "pointer",
                         }}
                     >
-                        {submitting ? "Đang gửi..." : "Gửi đánh giá"}
+                        {submitting ? "Äang gá»­i..." : "Gá»­i Ä‘Ã¡nh giÃ¡"}
                     </button>
                     <button
                         type="button"
@@ -203,12 +203,14 @@ export default function ProductReviews({ productId }) {
                             borderRadius: 8,
                             cursor: loading || submitting ? "not-allowed" : "pointer",
                         }}
-                        title="Tải lại đánh giá"
+                        title="Táº£i láº¡i Ä‘Ã¡nh giÃ¡"
                     >
-                        Tải lại
+                        Táº£i láº¡i
                     </button>
                 </div>
             </form>
         </div>
     );
 }
+
+

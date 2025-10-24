@@ -1,25 +1,25 @@
-
+﻿
 // import { useEffect, useMemo, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import * as XLSX from "xlsx"; // ✅ dùng để đọc Excel
+// import * as XLSX from "xlsx"; // âœ… dÃ¹ng Ä‘á»ƒ Ä‘á»c Excel
 
-// const API_ROOT = "http://127.0.0.1:8000";       // không có /api
-// const API_BASE = `${API_ROOT}/api`;             // có /api
+// const API_ROOT = "http://127.0.0.1:8000";       // khÃ´ng cÃ³ /api
+// const API_BASE = `${API_BASE}/api`;             // cÃ³ /api
 // const PLACEHOLDER = "https://placehold.co/120x90?text=No+Img";
 
-// // 👉 URL tổng hợp tồn kho theo IDs (ưu tiên DB)
+// // ðŸ‘‰ URL tá»•ng há»£p tá»“n kho theo IDs (Æ°u tiÃªn DB)
 // const STOCK_SUMMARY_URL = (ids) =>
 //   `${API_BASE}/admin/stock/summary?product_ids=${ids.join(",")}`;
 
-// // 👉 URL tổng hợp thương hiệu & danh mục theo IDs (từ bảng ptdt_product - nếu BE hỗ trợ)
+// // ðŸ‘‰ URL tá»•ng há»£p thÆ°Æ¡ng hiá»‡u & danh má»¥c theo IDs (tá»« báº£ng ptdt_product - náº¿u BE há»— trá»£)
 // const BRAND_CATEGORY_SUMMARY_URL = (ids) =>
 //   `${API_BASE}/admin/ptdt_product/brand-category?product_ids=${ids.join(",")}`;
 
-// // 👉 NEW: URL tổng tồn kho & tổng đã bán (đổi lại nếu BE của bạn khác đường dẫn)
+// // ðŸ‘‰ NEW: URL tá»•ng tá»“n kho & tá»•ng Ä‘Ã£ bÃ¡n (Ä‘á»•i láº¡i náº¿u BE cá»§a báº¡n khÃ¡c Ä‘Æ°á»ng dáº«n)
 // const STOCK_TOTAL_URL = `${API_BASE}/admin/stock/total`;
 // const SOLD_TOTAL_URL  = `${API_BASE}/admin/orders/total-sold-products`;
 
-// /** Helper: trích đúng object paginator dù BE trả trực tiếp hay bọc trong {data: {...}} */
+// /** Helper: trÃ­ch Ä‘Ãºng object paginator dÃ¹ BE tráº£ trá»±c tiáº¿p hay bá»c trong {data: {...}} */
 // function pickPaginator(payload) {
 //   if (payload && Array.isArray(payload.data) && typeof payload.current_page !== "undefined") {
 //     return payload;
@@ -44,19 +44,19 @@
 //     .replace(/-+/g, "-");
 // }
 
-// // Map header linh hoạt -> key chuẩn của BE
+// // Map header linh hoáº¡t -> key chuáº©n cá»§a BE
 // const HEADER_MAP = {
-//   "name": "name", "tên": "name", "ten": "name",
+//   "name": "name", "tÃªn": "name", "ten": "name",
 //   "slug": "slug",
-//   "brand_id": "brand_id", "brand": "brand_id", "thương hiệu": "brand_id", "thuonghieu": "brand_id",
-//   "category_id": "category_id", "category": "category_id", "danh mục": "category_id", "danhmuc": "category_id",
-//   "price_root": "price_root", "giá gốc": "price_root", "giagoc": "price_root",
-//   "price_sale": "price_sale", "giá sale": "price_sale", "giasale": "price_sale",
-//   "qty": "qty", "số lượng": "qty", "soluong": "qty",
-//   "description": "description", "mô tả": "description", "mota": "description",
-//   "detail": "detail", "chi tiết": "detail", "chitiet": "detail",
-//   "status": "status", "trạng thái": "status", "trangthai": "status",
-//   "thumbnail": "thumbnail", "thumbnail_url": "thumbnail", "ảnh": "thumbnail", "anh": "thumbnail",
+//   "brand_id": "brand_id", "brand": "brand_id", "thÆ°Æ¡ng hiá»‡u": "brand_id", "thuonghieu": "brand_id",
+//   "category_id": "category_id", "category": "category_id", "danh má»¥c": "category_id", "danhmuc": "category_id",
+//   "price_root": "price_root", "giÃ¡ gá»‘c": "price_root", "giagoc": "price_root",
+//   "price_sale": "price_sale", "giÃ¡ sale": "price_sale", "giasale": "price_sale",
+//   "qty": "qty", "sá»‘ lÆ°á»£ng": "qty", "soluong": "qty",
+//   "description": "description", "mÃ´ táº£": "description", "mota": "description",
+//   "detail": "detail", "chi tiáº¿t": "detail", "chitiet": "detail",
+//   "status": "status", "tráº¡ng thÃ¡i": "status", "trangthai": "status",
+//   "thumbnail": "thumbnail", "thumbnail_url": "thumbnail", "áº£nh": "thumbnail", "anh": "thumbnail",
 // };
 
 // function normalizeHeaders(rawObj) {
@@ -69,7 +69,7 @@
 //   return out;
 // }
 
-// // 👉 Helper đọc số từ payload {data:number} | {total:number} | {count:number}
+// // ðŸ‘‰ Helper Ä‘á»c sá»‘ tá»« payload {data:number} | {total:number} | {count:number}
 // function pickNumber(obj, keys = ["data", "total", "count", "value"]) {
 //   if (!obj || typeof obj !== "object") return 0;
 //   for (const k of keys) {
@@ -80,18 +80,18 @@
 // }
 
 // /* =========================
-//    DonutChart (SVG thuần)
+//    DonutChart (SVG thuáº§n)
 //    ========================= */
 // function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
 //   const total = Math.max(0, Number(sold)) + Math.max(0, Number(inStock));
 //   const r = size / 2 - thickness / 2;
 //   const c = 2 * Math.PI * r;
 
-//   // phần trăm đã bán
+//   // pháº§n trÄƒm Ä‘Ã£ bÃ¡n
 //   const soldRatio = total > 0 ? Math.min(1, Math.max(0, sold / total)) : 0;
 //   const soldLength = c * soldRatio;
 
-//   // màu theo mockup (hồng/đỏ cho đã bán, xanh cho tồn kho)
+//   // mÃ u theo mockup (há»“ng/Ä‘á» cho Ä‘Ã£ bÃ¡n, xanh cho tá»“n kho)
 //   const SOLD_COLOR = "#ef4444";
 //   const STOCK_COLOR = "#3b82f6";
 
@@ -99,7 +99,7 @@
 //     <div style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "space-between" }}>
 //       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 //         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-//           {/* nền: tồn kho */}
+//           {/* ná»n: tá»“n kho */}
 //           <circle
 //             cx={size / 2}
 //             cy={size / 2}
@@ -110,7 +110,7 @@
 //             strokeLinecap="round"
 //             opacity={0.9}
 //           />
-//           {/* phần đã bán nằm trên */}
+//           {/* pháº§n Ä‘Ã£ bÃ¡n náº±m trÃªn */}
 //           <circle
 //             cx={size / 2}
 //             cy={size / 2}
@@ -122,7 +122,7 @@
 //             strokeLinecap="round"
 //           />
 //         </g>
-//         {/* lỗ donut */}
+//         {/* lá»— donut */}
 //         <circle cx={size / 2} cy={size / 2} r={r - thickness / 2} fill="#fff" />
 //       </svg>
 
@@ -130,14 +130,14 @@
 //       <div style={{ display: "grid", gap: 8 }}>
 //         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //           <span style={{ width: 14, height: 8, background: SOLD_COLOR, borderRadius: 2 }}></span>
-//           <span style={{ fontSize: 14 }}>Đã bán:5 <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
+//           <span style={{ fontSize: 14 }}>ÄÃ£ bÃ¡n:5 <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
 //         </div>
 //         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //           <span style={{ width: 14, height: 8, background: STOCK_COLOR, borderRadius: 2 }}></span>
-//           <span style={{ fontSize: 14 }}>Tồn kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
+//           <span style={{ fontSize: 14 }}>Tá»“n kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
 //         </div>
 //         <div style={{ color: "#6b7280", fontSize: 13 }}>
-//           Tổng: <b>{Number(total).toLocaleString("vi-VN")}</b>
+//           Tá»•ng: <b>{Number(total).toLocaleString("vi-VN")}</b>
 //         </div>
 //       </div>
 //     </div>
@@ -156,7 +156,7 @@
 //   const [selected, setSelected] = useState([]);
 //   const [viewItem, setViewItem] = useState(null);
 
-//   // 🔢 Phân trang
+//   // ðŸ”¢ PhÃ¢n trang
 //   const [page, setPage] = useState(1);
 //   const [perPage, setPerPage] = useState(10);
 //   const [meta, setMeta] = useState({
@@ -166,10 +166,10 @@
 //     per_page: 10,
 //   });
 
-//   // 🔁 Reload sau import
+//   // ðŸ” Reload sau import
 //   const [reload, setReload] = useState(0);
 
-//   // ⬆️ Import Excel states
+//   // â¬†ï¸ Import Excel states
 //   const [importing, setImporting] = useState(false);
 //   const fileInputRef = useRef(null);
 
@@ -179,18 +179,18 @@
 //   const [originalFile, setOriginalFile] = useState(null);
 //   const [showOnlyErrors, setShowOnlyErrors] = useState(false);
 
-//   // ✅ map thương hiệu & danh mục
+//   // âœ… map thÆ°Æ¡ng hiá»‡u & danh má»¥c
 //   const [brandCats, setBrandCats] = useState({});
 //   const [brandCatLoading, setBrandCatLoading] = useState(false);
 
-//   // ✅ Tổng số sp hiện có (tồn kho) & đã bán
+//   // âœ… Tá»•ng sá»‘ sp hiá»‡n cÃ³ (tá»“n kho) & Ä‘Ã£ bÃ¡n
 //   const [totalInStock, setTotalInStock] = useState(null);
 //   const [totalSold, setTotalSold] = useState(null);
 //   const [topCardLoading, setTopCardLoading] = useState(false);
 
 //   const navigate = useNavigate();
 
-//   /* ===== Load danh sách theo trang ===== */
+//   /* ===== Load danh sÃ¡ch theo trang ===== */
 //   useEffect(() => {
 //     const ac = new AbortController();
 //     const token = localStorage.getItem("admin_token");
@@ -254,7 +254,7 @@
 //           setBrandCats({});
 //         }
 //       } catch (e) {
-//         if (e.name !== "AbortError") setErr("Không tải được danh sách sản phẩm.");
+//         if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
 //         setItems([]);
 //         setMeta({ current_page: 1, last_page: 1, total: 0, per_page: perPage });
 //         setStocks({});
@@ -267,7 +267,7 @@
 //     return () => ac.abort();
 //   }, [page, perPage, reload]);
 
-//   /* ===== NEW: load số liệu tổng (2 thẻ / donut) ===== */
+//   /* ===== NEW: load sá»‘ liá»‡u tá»•ng (2 tháº» / donut) ===== */
 //   useEffect(() => {
 //     const ac = new AbortController();
 //     const token = localStorage.getItem("admin_token");
@@ -303,7 +303,7 @@
 //     return () => ac.abort();
 //   }, [reload, stocks]);
 
-//   // ===== Helper tồn kho / brand / category =====
+//   // ===== Helper tá»“n kho / brand / category =====
 //   const getQty = (p) => {
 //     const id = p?.id;
 //     if (id != null && Object.prototype.hasOwnProperty.call(stocks, id))
@@ -332,11 +332,11 @@
 //     );
 //   };
 
-//   // ===== Xoá sản phẩm & xoá nhiều =====
+//   // ===== XoÃ¡ sáº£n pháº©m & xoÃ¡ nhiá»u =====
 //   async function handleDelete(id, { silent = false } = {}) {
 //     const token = localStorage.getItem("admin_token");
 //     if (!silent) {
-//       if (!window.confirm("Bạn chắc chắn muốn xoá sản phẩm này?")) return false;
+//       if (!window.confirm("Báº¡n cháº¯c cháº¯n muá»‘n xoÃ¡ sáº£n pháº©m nÃ y?")) return false;
 //     }
 //     try {
 //       setDeletingId(id);
@@ -345,16 +345,16 @@
 //         headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
 //       });
 //       const data = await res.json().catch(() => ({}));
-//       if (!res.ok) throw new Error(data.message || "Xoá thất bại");
+//       if (!res.ok) throw new Error(data.message || "XoÃ¡ tháº¥t báº¡i");
 
 //       setItems((prev) => prev.filter((x) => x.id !== id));
 //       setStocks((prev) => { const n = { ...prev }; delete n[id]; return n; });
 //       setBrandCats((prev) => { const n = { ...prev }; delete n[id]; return n; });
 
-//       if (!silent) alert("✅ Đã chuyển sản phẩm vào thùng rác");
+//       if (!silent) alert("âœ… ÄÃ£ chuyá»ƒn sáº£n pháº©m vÃ o thÃ¹ng rÃ¡c");
 //       return true;
 //     } catch (err) {
-//       if (!silent) alert(`❌ Lỗi xoá: ${err.message}`);
+//       if (!silent) alert(`âŒ Lá»—i xoÃ¡: ${err.message}`);
 //       return false;
 //     } finally {
 //       setDeletingId(null);
@@ -362,8 +362,8 @@
 //   }
 
 //   async function handleBulkDelete() {
-//     if (!selected.length) return alert("Chưa chọn sản phẩm nào");
-//     if (!window.confirm(`Xoá ${selected.length} sản phẩm?`)) return;
+//     if (!selected.length) return alert("ChÆ°a chá»n sáº£n pháº©m nÃ o");
+//     if (!window.confirm(`XoÃ¡ ${selected.length} sáº£n pháº©m?`)) return;
 
 //     setDeletingMany(true);
 //     let ok = 0; const fail = [];
@@ -373,12 +373,12 @@
 //     }
 //     setDeletingMany(false); setSelected([]);
 
-//     if (ok && fail.length === 0) alert(`✅ Đã xoá ${ok} sản phẩm.`);
-//     else if (ok && fail.length > 0) alert(`⚠️ Thành công ${ok}, thất bại ${fail.length}: ${fail.join(", ")}`);
-//     else alert("❌ Không xoá được sản phẩm nào.");
+//     if (ok && fail.length === 0) alert(`âœ… ÄÃ£ xoÃ¡ ${ok} sáº£n pháº©m.`);
+//     else if (ok && fail.length > 0) alert(`âš ï¸ ThÃ nh cÃ´ng ${ok}, tháº¥t báº¡i ${fail.length}: ${fail.join(", ")}`);
+//     else alert("âŒ KhÃ´ng xoÃ¡ Ä‘Æ°á»£c sáº£n pháº©m nÃ o.");
 //   }
 
-//   // ===== Import cũ / Preview mới (giữ nguyên) =====
+//   // ===== Import cÅ© / Preview má»›i (giá»¯ nguyÃªn) =====
 //   async function handleImport(file) {
 //     const token = localStorage.getItem("admin_token");
 //     try {
@@ -392,14 +392,14 @@
 //         body: form,
 //       });
 //       const data = await res.json();
-//       if (!res.ok) throw new Error(data.message || "Import thất bại");
-//       alert(`✔ Import xong:
-// - Thêm: ${data.inserted}
-// - Cập nhật: ${data.updated}
-// - Bỏ qua: ${data.skipped}
-// ${data.errors?.length ? `- Lỗi: ${data.errors.length} dòng` : ""}`);
+//       if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
+//       alert(`âœ” Import xong:
+// - ThÃªm: ${data.inserted}
+// - Cáº­p nháº­t: ${data.updated}
+// - Bá» qua: ${data.skipped}
+// ${data.errors?.length ? `- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`);
 //       setReload((x) => x + 1); setPage(1);
-//     } catch (e) { alert(`❌ Lỗi import: ${e.message}`); }
+//     } catch (e) { alert(`âŒ Lá»—i import: ${e.message}`); }
 //     finally { setImporting(false); if (fileInputRef.current) fileInputRef.current.value = ""; }
 //   }
 
@@ -409,16 +409,16 @@
 //     const price_sale = Number(d.price_sale ?? 0);
 //     const qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : d.qty;
 
-//     if (!d.name || String(d.name).trim() === "") errors.push("Thiếu tên (name)");
-//     if (!d.slug || String(d.slug).trim() === "") errors.push("Thiếu slug (đã auto-gợi ý)");
-//     if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiếu brand_id");
-//     if (d.category_id === undefined || d.category_id === "") errors.push("Thiếu category_id");
+//     if (!d.name || String(d.name).trim() === "") errors.push("Thiáº¿u tÃªn (name)");
+//     if (!d.slug || String(d.slug).trim() === "") errors.push("Thiáº¿u slug (Ä‘Ã£ auto-gá»£i Ã½)");
+//     if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiáº¿u brand_id");
+//     if (d.category_id === undefined || d.category_id === "") errors.push("Thiáº¿u category_id");
 
-//     if (isNaN(price_root) || price_root < 0) errors.push("price_root phải là số ≥ 0");
-//     if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale phải là số ≥ 0");
-//     if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty phải là số nguyên ≥ 0");
+//     if (isNaN(price_root) || price_root < 0) errors.push("price_root pháº£i lÃ  sá»‘ â‰¥ 0");
+//     if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale pháº£i lÃ  sá»‘ â‰¥ 0");
+//     if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty pháº£i lÃ  sá»‘ nguyÃªn â‰¥ 0");
 //     if (!isNaN(price_root) && !isNaN(price_sale) && price_sale > price_root) {
-//       errors.push("price_sale không được lớn hơn price_root");
+//       errors.push("price_sale khÃ´ng Ä‘Æ°á»£c lá»›n hÆ¡n price_root");
 //     }
 
 //     const curSlug = (d.slug || "").toString().trim().toLowerCase();
@@ -426,7 +426,7 @@
 //       const dupIndex = allRows.findIndex((r, i2) =>
 //         i2 !== idx && (r.data.slug || "").toString().trim().toLowerCase() === curSlug
 //       );
-//       if (dupIndex !== -1) errors.push(`Slug trùng ở dòng ${dupIndex + 2}`);
+//       if (dupIndex !== -1) errors.push(`Slug trÃ¹ng á»Ÿ dÃ²ng ${dupIndex + 2}`);
 //     }
 //     return errors;
 //   }
@@ -447,7 +447,7 @@
 //         if (d.qty !== undefined) d.qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : 0;
 //         if (typeof d.status === "string") {
 //           const s = d.status.trim().toLowerCase();
-//           d.status = ["1","true","active","đang bán","dang ban"].includes(s) ? 1 : 0;
+//           d.status = ["1","true","active","Ä‘ang bÃ¡n","dang ban"].includes(s) ? 1 : 0;
 //         }
 //         return { rowIndex: i, data: d, errors: [] };
 //       });
@@ -459,7 +459,7 @@
 //       setOriginalFile(file);
 //       setPreviewOpen(true);
 //     } catch (e) {
-//       alert("Không đọc được file Excel: " + e.message);
+//       alert("KhÃ´ng Ä‘á»c Ä‘Æ°á»£c file Excel: " + e.message);
 //     } finally {
 //       if (fileInputRef.current) fileInputRef.current.value = "";
 //     }
@@ -514,7 +514,7 @@
 
 //   async function confirmImportValidRows() {
 //     const validRows = previewRows.filter((r) => !r.errors?.length);
-//     if (!validRows.length) return alert("Không có dòng hợp lệ để import.");
+//     if (!validRows.length) return alert("KhÃ´ng cÃ³ dÃ²ng há»£p lá»‡ Ä‘á»ƒ import.");
 
 //     const token = localStorage.getItem("admin_token");
 //     try {
@@ -533,13 +533,13 @@
 //         body: form,
 //       });
 //       const data = await res.json();
-//       if (!res.ok) throw new Error(data.message || "Import thất bại");
+//       if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
 
-//       alert(`✔ Import xong:
-// - Thêm: ${data.inserted}
-// - Cập nhật: ${data.updated}
-// - Bỏ qua: ${data.skipped}
-// ${data.errors?.length ? `- Lỗi: ${data.errors.length} dòng` : ""}`);
+//       alert(`âœ” Import xong:
+// - ThÃªm: ${data.inserted}
+// - Cáº­p nháº­t: ${data.updated}
+// - Bá» qua: ${data.skipped}
+// ${data.errors?.length ? `- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`);
 
 //       setPreviewOpen(false);
 //       setPreviewRows([]);
@@ -547,13 +547,13 @@
 //       setReload((x) => x + 1);
 //       setPage(1);
 //     } catch (e) {
-//       alert(`❌ Lỗi import: ${e.message}`);
+//       alert(`âŒ Lá»—i import: ${e.message}`);
 //     } finally {
 //       setImporting(false);
 //     }
 //   }
 
-//   // ===== Lọc cục bộ theo tên/slug (trên TRANG hiện tại) =====
+//   // ===== Lá»c cá»¥c bá»™ theo tÃªn/slug (trÃªn TRANG hiá»‡n táº¡i) =====
 //   const filtered = useMemo(() => {
 //     const s = q.trim().toLowerCase();
 //     if (!s) return items;
@@ -600,7 +600,7 @@
 
 //   const pages = buildPageNumbers();
 
-//   // ===== Styles helper cho thẻ thống kê =====
+//   // ===== Styles helper cho tháº» thá»‘ng kÃª =====
 //   const statCard = () => ({
 //     background: "#fff",
 //     border: "1px solid #e5e7eb",
@@ -616,7 +616,7 @@
 //   // ===== Render =====
 //   return (
 //     <section style={{ padding: 20 }}>
-//       {/* ====== HÀNG THẺ THỐNG KÊ ====== */}
+//       {/* ====== HÃ€NG THáºº THá»NG KÃŠ ====== */}
 //       <div
 //         style={{
 //           display: "grid",
@@ -625,23 +625,23 @@
 //           marginBottom: 12,
 //         }}
 //       >
-//         {/* Card 1: Tổng số sản phẩm hiện có */}
+//         {/* Card 1: Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³ */}
 //         <div style={statCard()}>
 //           <div style={{ fontSize: 14, color: "#374151", fontWeight: 700 }}>
-//             Tổng số sản phẩm hiện có
+//             Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³
 //           </div>
 //           <div style={{ fontSize: 32, fontWeight: 800 }}>
-//             {topCardLoading && totalInStock === null ? "…" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
+//             {topCardLoading && totalInStock === null ? "â€¦" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
 //           </div>
 //           <div style={{ color: "#10b981", fontSize: 13 }}>
-//             ↑ Tổng số sản phẩm còn trong kho
+//             â†‘ Tá»•ng sá»‘ sáº£n pháº©m cÃ²n trong kho
 //           </div>
 //         </div>
 
-//         {/* Card 2: Donut thống kê sản phẩm */}
+//         {/* Card 2: Donut thá»‘ng kÃª sáº£n pháº©m */}
 //         <div style={statCard()}>
 //           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>
-//             Thống kê sản phẩm
+//             Thá»‘ng kÃª sáº£n pháº©m
 //           </div>
 //           <DonutChart
 //             sold={Number(totalSold ?? 0)}
@@ -652,7 +652,7 @@
 //         </div>
 //       </div>
 
-//       {/* Thanh tiêu đề */}
+//       {/* Thanh tiÃªu Ä‘á» */}
 //       <div
 //         style={{
 //           display: "flex",
@@ -663,16 +663,16 @@
 //         }}
 //       >
 //         <h1 style={{ fontSize: 24, fontWeight: 700 }}>
-//           Quản lý sản phẩm
-//           {stockLoading ? " · đang tải tồn kho…" : ""}
-//           {brandCatLoading ? " · đang tải thương hiệu/danh mục…" : ""}
+//           Quáº£n lÃ½ sáº£n pháº©m
+//           {stockLoading ? " Â· Ä‘ang táº£i tá»“n khoâ€¦" : ""}
+//           {brandCatLoading ? " Â· Ä‘ang táº£i thÆ°Æ¡ng hiá»‡u/danh má»¥câ€¦" : ""}
 //         </h1>
 
 //         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
 //           <input
 //             value={q}
 //             onChange={(e) => setQ(e.target.value)}
-//             placeholder="Tìm tên/slug… (trang hiện tại)"
+//             placeholder="TÃ¬m tÃªn/slugâ€¦ (trang hiá»‡n táº¡i)"
 //             style={{
 //               height: 36,
 //               padding: "0 10px",
@@ -688,7 +688,7 @@
 //               setPage(1);
 //             }}
 //             style={{ height: 36, borderRadius: 8, border: "1px solid #ddd" }}
-//             title="Số dòng mỗi trang"
+//             title="Sá»‘ dÃ²ng má»—i trang"
 //           >
 //             {[5, 10, 20, 30, 50, 100].map((n) => (
 //               <option key={n} value={n}>
@@ -708,7 +708,7 @@
 //               cursor: "pointer",
 //             }}
 //           >
-//             + Thêm
+//             + ThÃªm
 //           </button>
 
 //           <button
@@ -723,7 +723,7 @@
 //               fontWeight: 700,
 //             }}
 //           >
-//             ⬆ Import Excel
+//             â¬† Import Excel
 //           </button>
 
 //           <button
@@ -737,7 +737,7 @@
 //                     ...(token ? { Authorization: `Bearer ${token}` } : {}),
 //                   },
 //                 });
-//                 if (!res.ok) throw new Error("Export thất bại");
+//                 if (!res.ok) throw new Error("Export tháº¥t báº¡i");
 //                 const blob = await res.blob();
 //                 const url = window.URL.createObjectURL(blob);
 //                 const a = document.createElement("a");
@@ -746,7 +746,7 @@
 //                 a.click();
 //                 window.URL.revokeObjectURL(url);
 //               } catch (err) {
-//                 alert("❌ " + err.message);
+//                 alert("âŒ " + err.message);
 //               }
 //             }}
 //             style={{
@@ -759,7 +759,7 @@
 //               fontWeight: 700,
 //             }}
 //           >
-//             ⬇ Export Excel
+//             â¬‡ Export Excel
 //           </button>
 
 //           <input
@@ -783,7 +783,7 @@
 //               cursor: selected.length && !deletingMany ? "pointer" : "not-allowed",
 //             }}
 //           >
-//             {deletingMany ? "Đang xoá…" : `🗑 Xoá chọn (${selected.length})`}
+//             {deletingMany ? "Äang xoÃ¡â€¦" : `ðŸ—‘ XoÃ¡ chá»n (${selected.length})`}
 //           </button>
 //           <button
 //             onClick={() => navigate("/admin/products/trash")}
@@ -796,13 +796,13 @@
 //               cursor: "pointer",
 //             }}
 //           >
-//             🗂 Thùng rác
+//             ðŸ—‚ ThÃ¹ng rÃ¡c
 //           </button>
 //         </div>
 //       </div>
 
-//       {/* Bảng sản phẩm */}
-//       {loading && <p>Đang tải dữ liệu…</p>}
+//       {/* Báº£ng sáº£n pháº©m */}
+//       {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
 //       {err && <p style={{ color: "red" }}>{err}</p>}
 
 //       {!loading && (
@@ -817,15 +817,15 @@
 //                 <tr style={{ background: "#fafafa" }}>
 //                   <th><input type="checkbox" checked={allChecked} onChange={toggleAll} /></th>
 //                   <th align="left">ID</th>
-//                   <th align="left">Tên</th>
+//                   <th align="left">TÃªn</th>
 //                   <th align="left">Slug</th>
-//                   <th align="left">Thương hiệu</th>
-//                   <th align="left">Danh mục</th>
-//                   <th align="right">Giá gốc</th>
-//                   <th align="right">Giá sale</th>
-//                   <th align="right">Tồn kho (DB)</th>
-//                   <th align="center">Ảnh</th>
-//                   <th align="center">Hành động</th>
+//                   <th align="left">ThÆ°Æ¡ng hiá»‡u</th>
+//                   <th align="left">Danh má»¥c</th>
+//                   <th align="right">GiÃ¡ gá»‘c</th>
+//                   <th align="right">GiÃ¡ sale</th>
+//                   <th align="right">Tá»“n kho (DB)</th>
+//                   <th align="center">áº¢nh</th>
+//                   <th align="center">HÃ nh Ä‘á»™ng</th>
 //                 </tr>
 //               </thead>
 //               <tbody>
@@ -843,8 +843,8 @@
 //                     <td>{p.slug}</td>
 //                     <td>{getBrandName(p)}</td>
 //                     <td>{getCategoryName(p)}</td>
-//                     <td align="right">₫{(p.price_root || 0).toLocaleString("vi-VN")}</td>
-//                     <td align="right">₫{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
+//                     <td align="right">â‚«{(p.price_root || 0).toLocaleString("vi-VN")}</td>
+//                     <td align="right">â‚«{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
 //                     <td align="right">{getQty(p).toLocaleString("vi-VN")}</td>
 //                     <td align="center">
 //                       <img
@@ -859,20 +859,20 @@
 //                         onClick={() => setViewItem(p)}
 //                         style={{ padding: "4px 10px", marginRight: 4, background: "#2563eb", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //                       >
-//                         👁 Xem
+//                         ðŸ‘ Xem
 //                       </button>
 //                       <button
 //                         onClick={() => navigate(`/admin/products/edit/${p.id}`)}
 //                         style={{ padding: "4px 10px", marginRight: 4, background: "#2e7d32", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //                       >
-//                         ✏️ Sửa
+//                         âœï¸ Sá»­a
 //                       </button>
 //                       <button
 //                         onClick={() => handleDelete(p.id)}
 //                         disabled={deletingId === p.id || deletingMany}
 //                         style={{ padding: "4px 10px", background: deletingId === p.id || deletingMany ? "#ef9a9a" : "#c62828", color: "#fff", border: 0, borderRadius: 6, cursor: deletingId === p.id || deletingMany ? "not-allowed" : "pointer" }}
 //                       >
-//                         {deletingId === p.id ? "Đang xoá..." : "🗑 Xóa"}
+//                         {deletingId === p.id ? "Äang xoÃ¡..." : "ðŸ—‘ XÃ³a"}
 //                       </button>
 //                     </td>
 //                   </tr>
@@ -880,7 +880,7 @@
 //                 {!filtered.length && (
 //                   <tr>
 //                     <td colSpan={11} align="center" style={{ padding: 18, color: "#777" }}>
-//                       Không có dữ liệu
+//                       KhÃ´ng cÃ³ dá»¯ liá»‡u
 //                     </td>
 //                   </tr>
 //                 )}
@@ -888,7 +888,7 @@
 //             </table>
 //           </div>
 
-//           {/* Thanh phân trang */}
+//           {/* Thanh phÃ¢n trang */}
 //           <div
 //             style={{
 //               marginTop: 12,
@@ -900,20 +900,20 @@
 //             }}
 //           >
 //             <div style={{ color: "#555" }}>
-//               Tổng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> — Trang{" "}
+//               Tá»•ng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> â€” Trang{" "}
 //               <b>{meta.current_page}</b>/<b>{meta.last_page}</b>
 //             </div>
 
 //             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-//               <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>« Đầu</button>
-//               <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>‹ Trước</button>
+//               <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>Â« Äáº§u</button>
+//               <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>â€¹ TrÆ°á»›c</button>
 
 //               {pages.map((p, idx) => {
 //                 const prev = pages[idx - 1];
 //                 const needDots = prev && p - prev > 1;
 //                 return (
 //                   <span key={p} style={{ display: "inline-flex", gap: 6 }}>
-//                     {needDots && <span style={{ padding: "6px 8px" }}>…</span>}
+//                     {needDots && <span style={{ padding: "6px 8px" }}>â€¦</span>}
 //                     <button
 //                       onClick={() => gotoPage(p)}
 //                       disabled={p === meta.current_page}
@@ -926,14 +926,14 @@
 //                 );
 //               })}
 
-//               <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau ›</button>
-//               <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuối »</button>
+//               <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau â€º</button>
+//               <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuá»‘i Â»</button>
 //             </div>
 //           </div>
 //         </>
 //       )}
 
-//       {/* Modal xem chi tiết */}
+//       {/* Modal xem chi tiáº¿t */}
 //       {viewItem && (
 //         <div
 //           style={{
@@ -950,7 +950,7 @@
 //             }}
 //             onClick={(e) => e.stopPropagation()}
 //           >
-//             <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>🏷 {viewItem.name}</h2>
+//             <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>ðŸ· {viewItem.name}</h2>
 
 //             <div style={{ textAlign: "center", marginBottom: 10 }}>
 //               <img
@@ -963,26 +963,26 @@
 
 //             <p><b>Slug:</b> {viewItem.slug}</p>
 //             <p>
-//               <b>Giá:</b> ₫{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
-//               <span style={{ color: "#888" }}>(Gốc: ₫{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
+//               <b>GiÃ¡:</b> â‚«{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
+//               <span style={{ color: "#888" }}>(Gá»‘c: â‚«{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
 //             </p>
-//             <p><b>Thương hiệu:</b> {getBrandName(viewItem)}</p>
-//             <p><b>Danh mục:</b> {getCategoryName(viewItem)}</p>
-//             <p><b>Tồn kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
-//             <p><b>Trạng thái:</b> {viewItem.status}</p>
+//             <p><b>ThÆ°Æ¡ng hiá»‡u:</b> {getBrandName(viewItem)}</p>
+//             <p><b>Danh má»¥c:</b> {getCategoryName(viewItem)}</p>
+//             <p><b>Tá»“n kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
+//             <p><b>Tráº¡ng thÃ¡i:</b> {viewItem.status}</p>
 
 //             <div style={{ marginTop: 10 }}>
-//               <p><b>Mô tả:</b></p>
+//               <p><b>MÃ´ táº£:</b></p>
 //               <div
-//                 dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>Không có mô tả</em>" }}
+//                 dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>KhÃ´ng cÃ³ mÃ´ táº£</em>" }}
 //                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
 //               />
 //             </div>
 
 //             <div style={{ marginTop: 10 }}>
-//               <p><b>Chi tiết:</b></p>
+//               <p><b>Chi tiáº¿t:</b></p>
 //               <div
-//                 dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>Không có chi tiết</em>" }}
+//                 dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>KhÃ´ng cÃ³ chi tiáº¿t</em>" }}
 //                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
 //               />
 //             </div>
@@ -992,7 +992,7 @@
 //                 onClick={() => setViewItem(null)}
 //                 style={{ padding: "8px 16px", background: "#0f62fe", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //               >
-//                 Đóng
+//                 ÄÃ³ng
 //               </button>
 //             </div>
 //           </div>
@@ -1017,21 +1017,21 @@
 //           >
 //             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
 //               <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-//                 📥 Xem trước Import — {originalFile?.name || "chưa đặt tên"}
+//                 ðŸ“¥ Xem trÆ°á»›c Import â€” {originalFile?.name || "chÆ°a Ä‘áº·t tÃªn"}
 //               </h2>
 //               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //                 <label style={{ display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
 //                   <input type="checkbox" checked={showOnlyErrors} onChange={(e) => setShowOnlyErrors(e.target.checked)} />
-//                   Chỉ hiển thị dòng lỗi
+//                   Chá»‰ hiá»ƒn thá»‹ dÃ²ng lá»—i
 //                 </label>
 //                 <button onClick={() => setPreviewOpen(false)} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #ddd", background: "#fff" }}>
-//                   Đóng
+//                   ÄÃ³ng
 //                 </button>
 //               </div>
 //             </div>
 
 //             <div style={{ margin: "8px 0", color: "#374151" }}>
-//               <b>Tổng dòng:</b> {previewRows.length} • <b>Lỗi:</b> {previewRows.filter(r => r.errors?.length).length} • <b>Hợp lệ:</b> {previewRows.filter(r => !r.errors?.length).length}
+//               <b>Tá»•ng dÃ²ng:</b> {previewRows.length} â€¢ <b>Lá»—i:</b> {previewRows.filter(r => r.errors?.length).length} â€¢ <b>Há»£p lá»‡:</b> {previewRows.filter(r => !r.errors?.length).length}
 //             </div>
 
 //             <div style={{ height: "65vh", overflow: "auto", border: "1px solid #eee", borderRadius: 8 }}>
@@ -1039,18 +1039,18 @@
 //                 <thead style={{ position: "sticky", top: 0, background: "#f9fafb", zIndex: 1 }}>
 //                   <tr>
 //                     <th>#</th>
-//                     <th>Lỗi</th>
-//                     <th>Tên</th>
+//                     <th>Lá»—i</th>
+//                     <th>TÃªn</th>
 //                     <th>Slug</th>
 //                     <th>Brand ID</th>
 //                     <th>Category ID</th>
-//                     <th>Giá gốc</th>
-//                     <th>Giá sale</th>
+//                     <th>GiÃ¡ gá»‘c</th>
+//                     <th>GiÃ¡ sale</th>
 //                     <th>Qty</th>
 //                     <th>Status</th>
 //                     <th>Thumbnail</th>
-//                     <th>Mô tả</th>
-//                     <th>Chi tiết</th>
+//                     <th>MÃ´ táº£</th>
+//                     <th>Chi tiáº¿t</th>
 //                     <th></th>
 //                   </tr>
 //                 </thead>
@@ -1081,14 +1081,14 @@
 //                         <td><input value={r.data.detail ?? ""} onChange={(e)=>updateCell(idx, "detail", e.target.value)} style={{...cellInputStyle, minWidth: 140}} /></td>
 //                         <td>
 //                           <button onClick={() => deleteRow(idx)} style={{ padding: "4px 8px", border: 0, borderRadius: 6, background: "#ef4444", color: "#fff", cursor: "pointer" }}>
-//                             Xoá
+//                             XoÃ¡
 //                           </button>
 //                         </td>
 //                       </tr>
 //                     );
 //                   })}
 //                   {(!previewRows.length) && (
-//                     <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>Không có dòng nào</td></tr>
+//                     <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>KhÃ´ng cÃ³ dÃ²ng nÃ o</td></tr>
 //                   )}
 //                 </tbody>
 //               </table>
@@ -1096,17 +1096,17 @@
 
 //             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 12 }}>
 //               <div style={{ color: hasAnyError(previewRows) ? "#b91c1c" : "#059669", fontWeight: 600 }}>
-//                 {hasAnyError(previewRows) ? "Còn lỗi — vui lòng sửa hoặc xoá dòng lỗi." : "Dữ liệu hợp lệ — có thể Import."}
+//                 {hasAnyError(previewRows) ? "CÃ²n lá»—i â€” vui lÃ²ng sá»­a hoáº·c xoÃ¡ dÃ²ng lá»—i." : "Dá»¯ liá»‡u há»£p lá»‡ â€” cÃ³ thá»ƒ Import."}
 //               </div>
 //               <div style={{ display: "flex", gap: 8 }}>
 //                 <button
 //                   onClick={() => {
-//                     if (!window.confirm("Xoá toàn bộ các dòng đang preview?")) return;
+//                     if (!window.confirm("XoÃ¡ toÃ n bá»™ cÃ¡c dÃ²ng Ä‘ang preview?")) return;
 //                     setPreviewRows([]);
 //                   }}
 //                   style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", cursor: "pointer" }}
 //                 >
-//                   🧹 Xoá tất cả
+//                   ðŸ§¹ XoÃ¡ táº¥t cáº£
 //                 </button>
 //                 <button
 //                   onClick={confirmImportValidRows}
@@ -1121,7 +1121,7 @@
 //                     fontWeight: 700,
 //                   }}
 //                 >
-//                   {importing ? "Đang import…" : "✅ Xác nhận Import (chỉ dòng hợp lệ)"}
+//                   {importing ? "Äang importâ€¦" : "âœ… XÃ¡c nháº­n Import (chá»‰ dÃ²ng há»£p lá»‡)"}
 //                 </button>
 //               </div>
 //             </div>
@@ -1132,7 +1132,7 @@
 //   );
 // }
 
-// // ===== Styles helper cho nút phân trang =====
+// // ===== Styles helper cho nÃºt phÃ¢n trang =====
 // function btnPager(disabled) {
 //   return {
 //     padding: "6px 10px",
@@ -1155,14 +1155,14 @@
 //   };
 // }
 
-// // style input nhỏ gọn cho ô trong bảng preview
+// // style input nhá» gá»n cho Ã´ trong báº£ng preview
 // const cellInputStyle = {
 //   width: 140,
 //   padding: "6px 8px",
 //   borderRadius: 6,
 //   border: "1px solid #e5e7eb",
 //   background: "#fff",
-// };  đó là code hoàn chỉnh import excel 
+// };  Ä‘Ã³ lÃ  code hoÃ n chá»‰nh import excel 
 
 
 
@@ -1188,25 +1188,25 @@
 
 // import { useEffect, useMemo, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import * as XLSX from "xlsx"; // ✅ dùng để đọc Excel
+// import * as XLSX from "xlsx"; // âœ… dÃ¹ng Ä‘á»ƒ Ä‘á»c Excel
 
-// const API_ROOT = "http://127.0.0.1:8000";       // không có /api
-// const API_BASE = `${API_ROOT}/api`;             // có /api
+// const API_ROOT = "http://127.0.0.1:8000";       // khÃ´ng cÃ³ /api
+// const API_BASE = `${API_BASE}/api`;             // cÃ³ /api
 // const PLACEHOLDER = "https://placehold.co/120x90?text=No+Img";
 
-// // 👉 URL tổng hợp tồn kho theo IDs (ưu tiên DB)
+// // ðŸ‘‰ URL tá»•ng há»£p tá»“n kho theo IDs (Æ°u tiÃªn DB)
 // const STOCK_SUMMARY_URL = (ids) =>
 //   `${API_BASE}/admin/stock/summary?product_ids=${ids.join(",")}`;
 
-// // 👉 URL tổng hợp thương hiệu & danh mục theo IDs (từ bảng ptdt_product - nếu BE hỗ trợ)
+// // ðŸ‘‰ URL tá»•ng há»£p thÆ°Æ¡ng hiá»‡u & danh má»¥c theo IDs (tá»« báº£ng ptdt_product - náº¿u BE há»— trá»£)
 // const BRAND_CATEGORY_SUMMARY_URL = (ids) =>
 //   `${API_BASE}/admin/ptdt_product/brand-category?product_ids=${ids.join(",")}`;
 
-// // 👉 NEW: URL tổng tồn kho & tổng đã bán (đổi lại nếu BE của bạn khác đường dẫn)
+// // ðŸ‘‰ NEW: URL tá»•ng tá»“n kho & tá»•ng Ä‘Ã£ bÃ¡n (Ä‘á»•i láº¡i náº¿u BE cá»§a báº¡n khÃ¡c Ä‘Æ°á»ng dáº«n)
 // const STOCK_TOTAL_URL = `${API_BASE}/admin/stock/total`;
 // const SOLD_TOTAL_URL  = `${API_BASE}/admin/orders/total-sold-products`;
 
-// /** Helper: trích đúng object paginator dù BE trả trực tiếp hay bọc trong {data: {...}} */
+// /** Helper: trÃ­ch Ä‘Ãºng object paginator dÃ¹ BE tráº£ trá»±c tiáº¿p hay bá»c trong {data: {...}} */
 // function pickPaginator(payload) {
 //   if (payload && Array.isArray(payload.data) && typeof payload.current_page !== "undefined") {
 //     return payload;
@@ -1231,36 +1231,36 @@
 //     .replace(/-+/g, "-");
 // }
 
-// // 👉 Thêm: chuẩn hoá thumbnail (giữ nguyên trùng, auto prefix assets/images/ nếu chỉ là tên file)
+// // ðŸ‘‰ ThÃªm: chuáº©n hoÃ¡ thumbnail (giá»¯ nguyÃªn trÃ¹ng, auto prefix assets/images/ náº¿u chá»‰ lÃ  tÃªn file)
 // function normalizeThumb(v) {
 //   if (v == null) return "";
 //   let s = String(v).trim();
-//   // nếu không phải URL tuyệt đối và không bắt đầu bằng "/" thì coi là file nội bộ
+//   // náº¿u khÃ´ng pháº£i URL tuyá»‡t Ä‘á»‘i vÃ  khÃ´ng báº¯t Ä‘áº§u báº±ng "/" thÃ¬ coi lÃ  file ná»™i bá»™
 //   if (s && !/^https?:\/\//i.test(s) && !s.startsWith("/")) {
 //     if (!s.startsWith("assets/images/")) s = `assets/images/${s}`;
 //   }
 //   return s;
 // }
 
-// // Map header linh hoạt -> key chuẩn của BE
+// // Map header linh hoáº¡t -> key chuáº©n cá»§a BE
 // const HEADER_MAP = {
-//   "name": "name", "tên": "name", "ten": "name",
+//   "name": "name", "tÃªn": "name", "ten": "name",
 //   "slug": "slug",
-//   "brand_id": "brand_id", "brand": "brand_id", "thương hiệu": "brand_id", "thuonghieu": "brand_id",
-//   "category_id": "category_id", "category": "category_id", "danh mục": "category_id", "danhmuc": "category_id",
-//   "price_root": "price_root", "giá gốc": "price_root", "giagoc": "price_root",
-//   "price_sale": "price_sale", "giá sale": "price_sale", "giasale": "price_sale",
-//   "qty": "qty", "số lượng": "qty", "soluong": "qty",
-//   "description": "description", "mô tả": "description", "mota": "description",
-//   "detail": "detail", "chi tiết": "detail", "chitiet": "detail",
-//   "status": "status", "trạng thái": "status", "trangthai": "status",
-//   // 👉 Mở rộng alias cho cột ảnh
+//   "brand_id": "brand_id", "brand": "brand_id", "thÆ°Æ¡ng hiá»‡u": "brand_id", "thuonghieu": "brand_id",
+//   "category_id": "category_id", "category": "category_id", "danh má»¥c": "category_id", "danhmuc": "category_id",
+//   "price_root": "price_root", "giÃ¡ gá»‘c": "price_root", "giagoc": "price_root",
+//   "price_sale": "price_sale", "giÃ¡ sale": "price_sale", "giasale": "price_sale",
+//   "qty": "qty", "sá»‘ lÆ°á»£ng": "qty", "soluong": "qty",
+//   "description": "description", "mÃ´ táº£": "description", "mota": "description",
+//   "detail": "detail", "chi tiáº¿t": "detail", "chitiet": "detail",
+//   "status": "status", "tráº¡ng thÃ¡i": "status", "trangthai": "status",
+//   // ðŸ‘‰ Má»Ÿ rá»™ng alias cho cá»™t áº£nh
 //   "thumbnail": "thumbnail",
 //   "thumbnail_url": "thumbnail",
-//   "ảnh": "thumbnail", "anh": "thumbnail",
-//   "hình": "thumbnail", "hinh": "thumbnail",
+//   "áº£nh": "thumbnail", "anh": "thumbnail",
+//   "hÃ¬nh": "thumbnail", "hinh": "thumbnail",
 //   "image": "thumbnail", "img": "thumbnail",
-//   "url ảnh": "thumbnail", "link ảnh": "thumbnail",
+//   "url áº£nh": "thumbnail", "link áº£nh": "thumbnail",
 // };
 
 // function normalizeHeaders(rawObj) {
@@ -1273,7 +1273,7 @@
 //   return out;
 // }
 
-// // 👉 Helper đọc số từ payload {data:number} | {total:number} | {count:number}
+// // ðŸ‘‰ Helper Ä‘á»c sá»‘ tá»« payload {data:number} | {total:number} | {count:number}
 // function pickNumber(obj, keys = ["data", "total", "count", "value"]) {
 //   if (!obj || typeof obj !== "object") return 0;
 //   for (const k of keys) {
@@ -1284,18 +1284,18 @@
 // }
 
 // /* =========================
-//    DonutChart (SVG thuần)
+//    DonutChart (SVG thuáº§n)
 //    ========================= */
 // function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
 //   const total = Math.max(0, Number(sold)) + Math.max(0, Number(inStock));
 //   const r = size / 2 - thickness / 2;
 //   const c = 2 * Math.PI * r;
 
-//   // phần trăm đã bán
+//   // pháº§n trÄƒm Ä‘Ã£ bÃ¡n
 //   const soldRatio = total > 0 ? Math.min(1, Math.max(0, sold / total)) : 0;
 //   const soldLength = c * soldRatio;
 
-//   // màu theo mockup (hồng/đỏ cho đã bán, xanh cho tồn kho)
+//   // mÃ u theo mockup (há»“ng/Ä‘á» cho Ä‘Ã£ bÃ¡n, xanh cho tá»“n kho)
 //   const SOLD_COLOR = "#ef4444";
 //   const STOCK_COLOR = "#3b82f6";
 
@@ -1303,7 +1303,7 @@
 //     <div style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "space-between" }}>
 //       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 //         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-//           {/* nền: tồn kho */}
+//           {/* ná»n: tá»“n kho */}
 //           <circle
 //             cx={size / 2}
 //             cy={size / 2}
@@ -1314,7 +1314,7 @@
 //             strokeLinecap="round"
 //             opacity={0.9}
 //           />
-//           {/* phần đã bán nằm trên */}
+//           {/* pháº§n Ä‘Ã£ bÃ¡n náº±m trÃªn */}
 //           <circle
 //             cx={size / 2}
 //             cy={size / 2}
@@ -1326,7 +1326,7 @@
 //             strokeLinecap="round"
 //           />
 //         </g>
-//         {/* lỗ donut */}
+//         {/* lá»— donut */}
 //         <circle cx={size / 2} cy={size / 2} r={r - thickness / 2} fill="#fff" />
 //       </svg>
 
@@ -1334,15 +1334,15 @@
 //       <div style={{ display: "grid", gap: 8 }}>
 //         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //           <span style={{ width: 14, height: 8, background: SOLD_COLOR, borderRadius: 2 }}></span>
-//           {/* sửa chữ thừa "5" */}
-//           <span style={{ fontSize: 14 }}>Đã bán: <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
+//           {/* sá»­a chá»¯ thá»«a "5" */}
+//           <span style={{ fontSize: 14 }}>ÄÃ£ bÃ¡n: <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
 //         </div>
 //         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //           <span style={{ width: 14, height: 8, background: STOCK_COLOR, borderRadius: 2 }}></span>
-//           <span style={{ fontSize: 14 }}>Tồn kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
+//           <span style={{ fontSize: 14 }}>Tá»“n kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
 //         </div>
 //         <div style={{ color: "#6b7280", fontSize: 13 }}>
-//           Tổng: <b>{Number(total).toLocaleString("vi-VN")}</b>
+//           Tá»•ng: <b>{Number(total).toLocaleString("vi-VN")}</b>
 //         </div>
 //       </div>
 //     </div>
@@ -1361,7 +1361,7 @@
 //   const [selected, setSelected] = useState([]);
 //   const [viewItem, setViewItem] = useState(null);
 
-//   // 🔢 Phân trang
+//   // ðŸ”¢ PhÃ¢n trang
 //   const [page, setPage] = useState(1);
 //   const [perPage, setPerPage] = useState(10);
 //   const [meta, setMeta] = useState({
@@ -1371,10 +1371,10 @@
 //     per_page: 10,
 //   });
 
-//   // 🔁 Reload sau import
+//   // ðŸ” Reload sau import
 //   const [reload, setReload] = useState(0);
 
-//   // ⬆️ Import Excel states
+//   // â¬†ï¸ Import Excel states
 //   const [importing, setImporting] = useState(false);
 //   const fileInputRef = useRef(null);
 
@@ -1384,18 +1384,18 @@
 //   const [originalFile, setOriginalFile] = useState(null);
 //   const [showOnlyErrors, setShowOnlyErrors] = useState(false);
 
-//   // ✅ map thương hiệu & danh mục
+//   // âœ… map thÆ°Æ¡ng hiá»‡u & danh má»¥c
 //   const [brandCats, setBrandCats] = useState({});
 //   const [brandCatLoading, setBrandCatLoading] = useState(false);
 
-//   // ✅ Tổng số sp hiện có (tồn kho) & đã bán
+//   // âœ… Tá»•ng sá»‘ sp hiá»‡n cÃ³ (tá»“n kho) & Ä‘Ã£ bÃ¡n
 //   const [totalInStock, setTotalInStock] = useState(null);
 //   const [totalSold, setTotalSold] = useState(null);
 //   const [topCardLoading, setTopCardLoading] = useState(false);
 
 //   const navigate = useNavigate();
 
-//   /* ===== Load danh sách theo trang ===== */
+//   /* ===== Load danh sÃ¡ch theo trang ===== */
 //   useEffect(() => {
 //     const ac = new AbortController();
 //     const token = localStorage.getItem("admin_token");
@@ -1459,7 +1459,7 @@
 //           setBrandCats({});
 //         }
 //       } catch (e) {
-//         if (e.name !== "AbortError") setErr("Không tải được danh sách sản phẩm.");
+//         if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
 //         setItems([]);
 //         setMeta({ current_page: 1, last_page: 1, total: 0, per_page: perPage });
 //         setStocks({});
@@ -1472,7 +1472,7 @@
 //     return () => ac.abort();
 //   }, [page, perPage, reload]);
 
-//   /* ===== NEW: load số liệu tổng (2 thẻ / donut) ===== */
+//   /* ===== NEW: load sá»‘ liá»‡u tá»•ng (2 tháº» / donut) ===== */
 //   useEffect(() => {
 //     const ac = new AbortController();
 //     const token = localStorage.getItem("admin_token");
@@ -1508,7 +1508,7 @@
 //     return () => ac.abort();
 //   }, [reload, stocks]);
 
-//   // ===== Helper tồn kho / brand / category =====
+//   // ===== Helper tá»“n kho / brand / category =====
 //   const getQty = (p) => {
 //     const id = p?.id;
 //     if (id != null && Object.prototype.hasOwnProperty.call(stocks, id))
@@ -1537,11 +1537,11 @@
 //     );
 //   };
 
-//   // ===== Xoá sản phẩm & xoá nhiều =====
+//   // ===== XoÃ¡ sáº£n pháº©m & xoÃ¡ nhiá»u =====
 //   async function handleDelete(id, { silent = false } = {}) {
 //     const token = localStorage.getItem("admin_token");
 //     if (!silent) {
-//       if (!window.confirm("Bạn chắc chắn muốn xoá sản phẩm này?")) return false;
+//       if (!window.confirm("Báº¡n cháº¯c cháº¯n muá»‘n xoÃ¡ sáº£n pháº©m nÃ y?")) return false;
 //     }
 //     try {
 //       setDeletingId(id);
@@ -1550,16 +1550,16 @@
 //         headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
 //       });
 //       const data = await res.json().catch(() => ({}));
-//       if (!res.ok) throw new Error(data.message || "Xoá thất bại");
+//       if (!res.ok) throw new Error(data.message || "XoÃ¡ tháº¥t báº¡i");
 
 //       setItems((prev) => prev.filter((x) => x.id !== id));
 //       setStocks((prev) => { const n = { ...prev }; delete n[id]; return n; });
 //       setBrandCats((prev) => { const n = { ...prev }; delete n[id]; return n; });
 
-//       if (!silent) alert("✅ Đã chuyển sản phẩm vào thùng rác");
+//       if (!silent) alert("âœ… ÄÃ£ chuyá»ƒn sáº£n pháº©m vÃ o thÃ¹ng rÃ¡c");
 //       return true;
 //     } catch (err) {
-//       if (!silent) alert(`❌ Lỗi xoá: ${err.message}`);
+//       if (!silent) alert(`âŒ Lá»—i xoÃ¡: ${err.message}`);
 //       return false;
 //     } finally {
 //       setDeletingId(null);
@@ -1567,8 +1567,8 @@
 //   }
 
 //   async function handleBulkDelete() {
-//     if (!selected.length) return alert("Chưa chọn sản phẩm nào");
-//     if (!window.confirm(`Xoá ${selected.length} sản phẩm?`)) return;
+//     if (!selected.length) return alert("ChÆ°a chá»n sáº£n pháº©m nÃ o");
+//     if (!window.confirm(`XoÃ¡ ${selected.length} sáº£n pháº©m?`)) return;
 
 //     setDeletingMany(true);
 //     let ok = 0; const fail = [];
@@ -1578,12 +1578,12 @@
 //     }
 //     setDeletingMany(false); setSelected([]);
 
-//     if (ok && fail.length === 0) alert(`✅ Đã xoá ${ok} sản phẩm.`);
-//     else if (ok && fail.length > 0) alert(`⚠️ Thành công ${ok}, thất bại ${fail.length}: ${fail.join(", ")}`);
-//     else alert("❌ Không xoá được sản phẩm nào.");
+//     if (ok && fail.length === 0) alert(`âœ… ÄÃ£ xoÃ¡ ${ok} sáº£n pháº©m.`);
+//     else if (ok && fail.length > 0) alert(`âš ï¸ ThÃ nh cÃ´ng ${ok}, tháº¥t báº¡i ${fail.length}: ${fail.join(", ")}`);
+//     else alert("âŒ KhÃ´ng xoÃ¡ Ä‘Æ°á»£c sáº£n pháº©m nÃ o.");
 //   }
 
-//   // ===== Import cũ / Preview mới (giữ nguyên) =====
+//   // ===== Import cÅ© / Preview má»›i (giá»¯ nguyÃªn) =====
 //   async function handleImport(file) {
 //     const token = localStorage.getItem("admin_token");
 //     try {
@@ -1597,14 +1597,14 @@
 //         body: form,
 //       });
 //       const data = await res.json();
-//       if (!res.ok) throw new Error(data.message || "Import thất bại");
-//       alert(`✔ Import xong:
-// - Thêm: ${data.inserted}
-// - Cập nhật: ${data.updated}
-// - Bỏ qua: ${data.skipped}
-// ${data.errors?.length ? `- Lỗi: ${data.errors.length} dòng` : ""}`);
+//       if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
+//       alert(`âœ” Import xong:
+// - ThÃªm: ${data.inserted}
+// - Cáº­p nháº­t: ${data.updated}
+// - Bá» qua: ${data.skipped}
+// ${data.errors?.length ? `- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`);
 //       setReload((x) => x + 1); setPage(1);
-//     } catch (e) { alert(`❌ Lỗi import: ${e.message}`); }
+//     } catch (e) { alert(`âŒ Lá»—i import: ${e.message}`); }
 //     finally { setImporting(false); if (fileInputRef.current) fileInputRef.current.value = ""; }
 //   }
 
@@ -1614,16 +1614,16 @@
 //     const price_sale = Number(d.price_sale ?? 0);
 //     const qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : d.qty;
 
-//     if (!d.name || String(d.name).trim() === "") errors.push("Thiếu tên (name)");
-//     if (!d.slug || String(d.slug).trim() === "") errors.push("Thiếu slug (đã auto-gợi ý)");
-//     if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiếu brand_id");
-//     if (d.category_id === undefined || d.category_id === "") errors.push("Thiếu category_id");
+//     if (!d.name || String(d.name).trim() === "") errors.push("Thiáº¿u tÃªn (name)");
+//     if (!d.slug || String(d.slug).trim() === "") errors.push("Thiáº¿u slug (Ä‘Ã£ auto-gá»£i Ã½)");
+//     if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiáº¿u brand_id");
+//     if (d.category_id === undefined || d.category_id === "") errors.push("Thiáº¿u category_id");
 
-//     if (isNaN(price_root) || price_root < 0) errors.push("price_root phải là số ≥ 0");
-//     if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale phải là số ≥ 0");
-//     if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty phải là số nguyên ≥ 0");
+//     if (isNaN(price_root) || price_root < 0) errors.push("price_root pháº£i lÃ  sá»‘ â‰¥ 0");
+//     if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale pháº£i lÃ  sá»‘ â‰¥ 0");
+//     if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty pháº£i lÃ  sá»‘ nguyÃªn â‰¥ 0");
 //     if (!isNaN(price_root) && !isNaN(price_sale) && price_sale > price_root) {
-//       errors.push("price_sale không được lớn hơn price_root");
+//       errors.push("price_sale khÃ´ng Ä‘Æ°á»£c lá»›n hÆ¡n price_root");
 //     }
 
 //     const curSlug = (d.slug || "").toString().trim().toLowerCase();
@@ -1631,7 +1631,7 @@
 //       const dupIndex = allRows.findIndex((r, i2) =>
 //         i2 !== idx && (r.data.slug || "").toString().trim().toLowerCase() === curSlug
 //       );
-//       if (dupIndex !== -1) errors.push(`Slug trùng ở dòng ${dupIndex + 2}`);
+//       if (dupIndex !== -1) errors.push(`Slug trÃ¹ng á»Ÿ dÃ²ng ${dupIndex + 2}`);
 //     }
 //     return errors;
 //   }
@@ -1646,7 +1646,7 @@
 //       let rows = json.map((raw, i) => {
 //         const d = normalizeHeaders(raw);
 //         if (!d.thumbnail && d.thumbnail_url) d.thumbnail = d.thumbnail_url;
-//         // 👉 chuẩn hoá thumbnail (tự thêm assets/images/ nếu chỉ là tên file)
+//         // ðŸ‘‰ chuáº©n hoÃ¡ thumbnail (tá»± thÃªm assets/images/ náº¿u chá»‰ lÃ  tÃªn file)
 //         if (d.thumbnail !== undefined) d.thumbnail = normalizeThumb(d.thumbnail);
 //         if (!d.slug && d.name) d.slug = toSlug(d.name);
 //         if (d.price_root !== undefined) d.price_root = Number(d.price_root || 0);
@@ -1654,7 +1654,7 @@
 //         if (d.qty !== undefined) d.qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : 0;
 //         if (typeof d.status === "string") {
 //           const s = d.status.trim().toLowerCase();
-//           d.status = ["1","true","active","đang bán","dang ban"].includes(s) ? 1 : 0;
+//           d.status = ["1","true","active","Ä‘ang bÃ¡n","dang ban"].includes(s) ? 1 : 0;
 //         }
 //         return { rowIndex: i, data: d, errors: [] };
 //       });
@@ -1666,7 +1666,7 @@
 //       setOriginalFile(file);
 //       setPreviewOpen(true);
 //     } catch (e) {
-//       alert("Không đọc được file Excel: " + e.message);
+//       alert("KhÃ´ng Ä‘á»c Ä‘Æ°á»£c file Excel: " + e.message);
 //     } finally {
 //       if (fileInputRef.current) fileInputRef.current.value = "";
 //     }
@@ -1721,7 +1721,7 @@
 
 //   async function confirmImportValidRows() {
 //     const validRows = previewRows.filter((r) => !r.errors?.length);
-//     if (!validRows.length) return alert("Không có dòng hợp lệ để import.");
+//     if (!validRows.length) return alert("KhÃ´ng cÃ³ dÃ²ng há»£p lá»‡ Ä‘á»ƒ import.");
 
 //     const token = localStorage.getItem("admin_token");
 //     try {
@@ -1740,13 +1740,13 @@
 //         body: form,
 //       });
 //       const data = await res.json();
-//       if (!res.ok) throw new Error(data.message || "Import thất bại");
+//       if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
 
-//       alert(`✔ Import xong:
-// - Thêm: ${data.inserted}
-// - Cập nhật: ${data.updated}
-// - Bỏ qua: ${data.skipped}
-// ${data.errors?.length ? `- Lỗi: ${data.errors.length} dòng` : ""}`);
+//       alert(`âœ” Import xong:
+// - ThÃªm: ${data.inserted}
+// - Cáº­p nháº­t: ${data.updated}
+// - Bá» qua: ${data.skipped}
+// ${data.errors?.length ? `- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`);
 
 //       setPreviewOpen(false);
 //       setPreviewRows([]);
@@ -1754,13 +1754,13 @@
 //       setReload((x) => x + 1);
 //       setPage(1);
 //     } catch (e) {
-//       alert(`❌ Lỗi import: ${e.message}`);
+//       alert(`âŒ Lá»—i import: ${e.message}`);
 //     } finally {
 //       setImporting(false);
 //     }
 //   }
 
-//   // ===== Lọc cục bộ theo tên/slug (trên TRANG hiện tại) =====
+//   // ===== Lá»c cá»¥c bá»™ theo tÃªn/slug (trÃªn TRANG hiá»‡n táº¡i) =====
 //   const filtered = useMemo(() => {
 //     const s = q.trim().toLowerCase();
 //     if (!s) return items;
@@ -1807,7 +1807,7 @@
 
 //   const pages = buildPageNumbers();
 
-//   // ===== Styles helper cho thẻ thống kê =====
+//   // ===== Styles helper cho tháº» thá»‘ng kÃª =====
 //   const statCard = () => ({
 //     background: "#fff",
 //     border: "1px solid #e5e7eb",
@@ -1823,7 +1823,7 @@
 //   // ===== Render =====
 //   return (
 //     <section style={{ padding: 20 }}>
-//       {/* ====== HÀNG THẺ THỐNG KÊ ====== */}
+//       {/* ====== HÃ€NG THáºº THá»NG KÃŠ ====== */}
 //       <div
 //         style={{
 //           display: "grid",
@@ -1832,23 +1832,23 @@
 //           marginBottom: 12,
 //         }}
 //       >
-//         {/* Card 1: Tổng số sản phẩm hiện có */}
+//         {/* Card 1: Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³ */}
 //         <div style={statCard()}>
 //           <div style={{ fontSize: 14, color: "#374151", fontWeight: 700 }}>
-//             Tổng số sản phẩm hiện có
+//             Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³
 //           </div>
 //           <div style={{ fontSize: 32, fontWeight: 800 }}>
-//             {topCardLoading && totalInStock === null ? "…" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
+//             {topCardLoading && totalInStock === null ? "â€¦" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
 //           </div>
 //           <div style={{ color: "#10b981", fontSize: 13 }}>
-//             ↑ Tổng số sản phẩm còn trong kho
+//             â†‘ Tá»•ng sá»‘ sáº£n pháº©m cÃ²n trong kho
 //           </div>
 //         </div>
 
-//         {/* Card 2: Donut thống kê sản phẩm */}
+//         {/* Card 2: Donut thá»‘ng kÃª sáº£n pháº©m */}
 //         <div style={statCard()}>
 //           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>
-//             Thống kê sản phẩm
+//             Thá»‘ng kÃª sáº£n pháº©m
 //           </div>
 //           <DonutChart
 //             sold={Number(totalSold ?? 0)}
@@ -1859,7 +1859,7 @@
 //         </div>
 //       </div>
 
-//       {/* Thanh tiêu đề */}
+//       {/* Thanh tiÃªu Ä‘á» */}
 //       <div
 //         style={{
 //           display: "flex",
@@ -1870,16 +1870,16 @@
 //         }}
 //       >
 //         <h1 style={{ fontSize: 24, fontWeight: 700 }}>
-//           Quản lý sản phẩm
-//           {stockLoading ? " · đang tải tồn kho…" : ""}
-//           {brandCatLoading ? " · đang tải thương hiệu/danh mục…" : ""}
+//           Quáº£n lÃ½ sáº£n pháº©m
+//           {stockLoading ? " Â· Ä‘ang táº£i tá»“n khoâ€¦" : ""}
+//           {brandCatLoading ? " Â· Ä‘ang táº£i thÆ°Æ¡ng hiá»‡u/danh má»¥câ€¦" : ""}
 //         </h1>
 
 //         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
 //           <input
 //             value={q}
 //             onChange={(e) => setQ(e.target.value)}
-//             placeholder="Tìm tên/slug… (trang hiện tại)"
+//             placeholder="TÃ¬m tÃªn/slugâ€¦ (trang hiá»‡n táº¡i)"
 //             style={{
 //               height: 36,
 //               padding: "0 10px",
@@ -1895,7 +1895,7 @@
 //               setPage(1);
 //             }}
 //             style={{ height: 36, borderRadius: 8, border: "1px solid #ddd" }}
-//             title="Số dòng mỗi trang"
+//             title="Sá»‘ dÃ²ng má»—i trang"
 //           >
 //             {[5, 10, 20, 30, 50, 100].map((n) => (
 //               <option key={n} value={n}>
@@ -1915,7 +1915,7 @@
 //               cursor: "pointer",
 //             }}
 //           >
-//             + Thêm
+//             + ThÃªm
 //           </button>
 
 //           <button
@@ -1930,12 +1930,12 @@
 //               fontWeight: 700,
 //             }}
 //           >
-//             ⬆ Import Excel
+//             â¬† Import Excel
 //           </button>
 
 //           <button
 //             onClick={async () => {
-//               // đồng bộ token
+//               // Ä‘á»“ng bá»™ token
 //               const token = localStorage.getItem("admin_token") || "";
 //               try {
 //                 const res = await fetch("http://127.0.0.1:8000/api/admin/products/export", {
@@ -1945,7 +1945,7 @@
 //                     ...(token ? { Authorization: `Bearer ${token}` } : {}),
 //                   },
 //                 });
-//                 if (!res.ok) throw new Error("Export thất bại");
+//                 if (!res.ok) throw new Error("Export tháº¥t báº¡i");
 //                 const blob = await res.blob();
 //                 const url = window.URL.createObjectURL(blob);
 //                 const a = document.createElement("a");
@@ -1954,7 +1954,7 @@
 //                 a.click();
 //                 window.URL.revokeObjectURL(url);
 //               } catch (err) {
-//                 alert("❌ " + err.message);
+//                 alert("âŒ " + err.message);
 //               }
 //             }}
 //             style={{
@@ -1967,7 +1967,7 @@
 //               fontWeight: 700,
 //             }}
 //           >
-//             ⬇ Export Excel
+//             â¬‡ Export Excel
 //           </button>
 
 //           <input
@@ -1991,7 +1991,7 @@
 //               cursor: selected.length && !deletingMany ? "pointer" : "not-allowed",
 //             }}
 //           >
-//             {deletingMany ? "Đang xoá…" : `🗑 Xoá chọn (${selected.length})`}
+//             {deletingMany ? "Äang xoÃ¡â€¦" : `ðŸ—‘ XoÃ¡ chá»n (${selected.length})`}
 //           </button>
 //           <button
 //             onClick={() => navigate("/admin/products/trash")}
@@ -2004,13 +2004,13 @@
 //               cursor: "pointer",
 //             }}
 //           >
-//             🗂 Thùng rác
+//             ðŸ—‚ ThÃ¹ng rÃ¡c
 //           </button>
 //         </div>
 //       </div>
 
-//       {/* Bảng sản phẩm */}
-//       {loading && <p>Đang tải dữ liệu…</p>}
+//       {/* Báº£ng sáº£n pháº©m */}
+//       {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
 //       {err && <p style={{ color: "red" }}>{err}</p>}
 
 //       {!loading && (
@@ -2025,15 +2025,15 @@
 //                 <tr style={{ background: "#fafafa" }}>
 //                   <th><input type="checkbox" checked={allChecked} onChange={toggleAll} /></th>
 //                   <th align="left">ID</th>
-//                   <th align="left">Tên</th>
+//                   <th align="left">TÃªn</th>
 //                   <th align="left">Slug</th>
-//                   <th align="left">Thương hiệu</th>
-//                   <th align="left">Danh mục</th>
-//                   <th align="right">Giá gốc</th>
-//                   <th align="right">Giá sale</th>
-//                   <th align="right">Tồn kho (DB)</th>
-//                   <th align="center">Ảnh</th>
-//                   <th align="center">Hành động</th>
+//                   <th align="left">ThÆ°Æ¡ng hiá»‡u</th>
+//                   <th align="left">Danh má»¥c</th>
+//                   <th align="right">GiÃ¡ gá»‘c</th>
+//                   <th align="right">GiÃ¡ sale</th>
+//                   <th align="right">Tá»“n kho (DB)</th>
+//                   <th align="center">áº¢nh</th>
+//                   <th align="center">HÃ nh Ä‘á»™ng</th>
 //                 </tr>
 //               </thead>
 //               <tbody>
@@ -2051,12 +2051,12 @@
 //                     <td>{p.slug}</td>
 //                     <td>{getBrandName(p)}</td>
 //                     <td>{getCategoryName(p)}</td>
-//                     <td align="right">₫{(p.price_root || 0).toLocaleString("vi-VN")}</td>
-//                     <td align="right">₫{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
+//                     <td align="right">â‚«{(p.price_root || 0).toLocaleString("vi-VN")}</td>
+//                     <td align="right">â‚«{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
 //                     <td align="right">{getQty(p).toLocaleString("vi-VN")}</td>
 //                     <td align="center">
 //                       <img
-//                         // 👉 Fallback đủ: thumbnail_url -> thumbnail -> placeholder
+//                         // ðŸ‘‰ Fallback Ä‘á»§: thumbnail_url -> thumbnail -> placeholder
 //                         src={p.thumbnail_url || p.thumbnail || PLACEHOLDER}
 //                         alt={p.name}
 //                         style={{ width: 60, height: 40, objectFit: "cover", borderRadius: 4 }}
@@ -2068,20 +2068,20 @@
 //                         onClick={() => setViewItem(p)}
 //                         style={{ padding: "4px 10px", marginRight: 4, background: "#2563eb", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //                       >
-//                         👁 Xem
+//                         ðŸ‘ Xem
 //                       </button>
 //                       <button
 //                         onClick={() => navigate(`/admin/products/edit/${p.id}`)}
 //                         style={{ padding: "4px 10px", marginRight: 4, background: "#2e7d32", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //                       >
-//                         ✏️ Sửa
+//                         âœï¸ Sá»­a
 //                       </button>
 //                       <button
 //                         onClick={() => handleDelete(p.id)}
 //                         disabled={deletingId === p.id || deletingMany}
 //                         style={{ padding: "4px 10px", background: deletingId === p.id || deletingMany ? "#ef9a9a" : "#c62828", color: "#fff", border: 0, borderRadius: 6, cursor: deletingId === p.id || deletingMany ? "not-allowed" : "pointer" }}
 //                       >
-//                         {deletingId === p.id ? "Đang xoá..." : "🗑 Xóa"}
+//                         {deletingId === p.id ? "Äang xoÃ¡..." : "ðŸ—‘ XÃ³a"}
 //                       </button>
 //                     </td>
 //                   </tr>
@@ -2089,7 +2089,7 @@
 //                 {!filtered.length && (
 //                   <tr>
 //                     <td colSpan={11} align="center" style={{ padding: 18, color: "#777" }}>
-//                       Không có dữ liệu
+//                       KhÃ´ng cÃ³ dá»¯ liá»‡u
 //                     </td>
 //                   </tr>
 //                 )}
@@ -2097,7 +2097,7 @@
 //             </table>
 //           </div>
 
-//           {/* Thanh phân trang */}
+//           {/* Thanh phÃ¢n trang */}
 //           <div
 //             style={{
 //               marginTop: 12,
@@ -2109,20 +2109,20 @@
 //             }}
 //           >
 //             <div style={{ color: "#555" }}>
-//               Tổng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> — Trang{" "}
+//               Tá»•ng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> â€” Trang{" "}
 //               <b>{meta.current_page}</b>/<b>{meta.last_page}</b>
 //             </div>
 
 //             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-//               <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>« Đầu</button>
-//               <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>‹ Trước</button>
+//               <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>Â« Äáº§u</button>
+//               <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>â€¹ TrÆ°á»›c</button>
 
 //               {pages.map((p, idx) => {
 //                 const prev = pages[idx - 1];
 //                 const needDots = prev && p - prev > 1;
 //                 return (
 //                   <span key={p} style={{ display: "inline-flex", gap: 6 }}>
-//                     {needDots && <span style={{ padding: "6px 8px" }}>…</span>}
+//                     {needDots && <span style={{ padding: "6px 8px" }}>â€¦</span>}
 //                     <button
 //                       onClick={() => gotoPage(p)}
 //                       disabled={p === meta.current_page}
@@ -2135,14 +2135,14 @@
 //                 );
 //               })}
 
-//               <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau ›</button>
-//               <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuối »</button>
+//               <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau â€º</button>
+//               <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuá»‘i Â»</button>
 //             </div>
 //           </div>
 //         </>
 //       )}
 
-//       {/* Modal xem chi tiết */}
+//       {/* Modal xem chi tiáº¿t */}
 //       {viewItem && (
 //         <div
 //           style={{
@@ -2159,11 +2159,11 @@
 //             }}
 //             onClick={(e) => e.stopPropagation()}
 //           >
-//             <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>🏷 {viewItem.name}</h2>
+//             <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>ðŸ· {viewItem.name}</h2>
 
 //             <div style={{ textAlign: "center", marginBottom: 10 }}>
 //               <img
-//                 // 👉 Fallback đủ: thumbnail_url -> thumbnail -> placeholder
+//                 // ðŸ‘‰ Fallback Ä‘á»§: thumbnail_url -> thumbnail -> placeholder
 //                 src={viewItem.thumbnail_url || viewItem.thumbnail || PLACEHOLDER}
 //                 alt={viewItem.name}
 //                 style={{ width: 200, height: 150, objectFit: "cover", borderRadius: 6, boxShadow: "0 0 6px rgba(0,0,0,0.2)" }}
@@ -2173,26 +2173,26 @@
 
 //             <p><b>Slug:</b> {viewItem.slug}</p>
 //             <p>
-//               <b>Giá:</b> ₫{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
-//               <span style={{ color: "#888" }}>(Gốc: ₫{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
+//               <b>GiÃ¡:</b> â‚«{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
+//               <span style={{ color: "#888" }}>(Gá»‘c: â‚«{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
 //             </p>
-//             <p><b>Thương hiệu:</b> {getBrandName(viewItem)}</p>
-//             <p><b>Danh mục:</b> {getCategoryName(viewItem)}</p>
-//             <p><b>Tồn kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
-//             <p><b>Trạng thái:</b> {viewItem.status}</p>
+//             <p><b>ThÆ°Æ¡ng hiá»‡u:</b> {getBrandName(viewItem)}</p>
+//             <p><b>Danh má»¥c:</b> {getCategoryName(viewItem)}</p>
+//             <p><b>Tá»“n kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
+//             <p><b>Tráº¡ng thÃ¡i:</b> {viewItem.status}</p>
 
 //             <div style={{ marginTop: 10 }}>
-//               <p><b>Mô tả:</b></p>
+//               <p><b>MÃ´ táº£:</b></p>
 //               <div
-//                 dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>Không có mô tả</em>" }}
+//                 dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>KhÃ´ng cÃ³ mÃ´ táº£</em>" }}
 //                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
 //               />
 //             </div>
 
 //             <div style={{ marginTop: 10 }}>
-//               <p><b>Chi tiết:</b></p>
+//               <p><b>Chi tiáº¿t:</b></p>
 //               <div
-//                 dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>Không có chi tiết</em>" }}
+//                 dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>KhÃ´ng cÃ³ chi tiáº¿t</em>" }}
 //                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
 //               />
 //             </div>
@@ -2202,7 +2202,7 @@
 //                 onClick={() => setViewItem(null)}
 //                 style={{ padding: "8px 16px", background: "#0f62fe", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
 //               >
-//                 Đóng
+//                 ÄÃ³ng
 //               </button>
 //             </div>
 //           </div>
@@ -2227,21 +2227,21 @@
 //           >
 //             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
 //               <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-//                 📥 Xem trước Import — {originalFile?.name || "chưa đặt tên"}
+//                 ðŸ“¥ Xem trÆ°á»›c Import â€” {originalFile?.name || "chÆ°a Ä‘áº·t tÃªn"}
 //               </h2>
 //               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
 //                 <label style={{ display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
 //                   <input type="checkbox" checked={showOnlyErrors} onChange={(e) => setShowOnlyErrors(e.target.checked)} />
-//                   Chỉ hiển thị dòng lỗi
+//                   Chá»‰ hiá»ƒn thá»‹ dÃ²ng lá»—i
 //                 </label>
 //                 <button onClick={() => setPreviewOpen(false)} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #ddd", background: "#fff" }}>
-//                   Đóng
+//                   ÄÃ³ng
 //                 </button>
 //               </div>
 //             </div>
 
 //             <div style={{ margin: "8px 0", color: "#374151" }}>
-//               <b>Tổng dòng:</b> {previewRows.length} • <b>Lỗi:</b> {previewRows.filter(r => r.errors?.length).length} • <b>Hợp lệ:</b> {previewRows.filter(r => !r.errors?.length).length}
+//               <b>Tá»•ng dÃ²ng:</b> {previewRows.length} â€¢ <b>Lá»—i:</b> {previewRows.filter(r => r.errors?.length).length} â€¢ <b>Há»£p lá»‡:</b> {previewRows.filter(r => !r.errors?.length).length}
 //             </div>
 
 //             <div style={{ height: "65vh", overflow: "auto", border: "1px solid #eee", borderRadius: 8 }}>
@@ -2249,18 +2249,18 @@
 //                 <thead style={{ position: "sticky", top: 0, background: "#f9fafb", zIndex: 1 }}>
 //                   <tr>
 //                     <th>#</th>
-//                     <th>Lỗi</th>
-//                     <th>Tên</th>
+//                     <th>Lá»—i</th>
+//                     <th>TÃªn</th>
 //                     <th>Slug</th>
 //                     <th>Brand ID</th>
 //                     <th>Category ID</th>
-//                     <th>Giá gốc</th>
-//                     <th>Giá sale</th>
+//                     <th>GiÃ¡ gá»‘c</th>
+//                     <th>GiÃ¡ sale</th>
 //                     <th>Qty</th>
 //                     <th>Status</th>
 //                     <th>Thumbnail</th>
-//                     <th>Mô tả</th>
-//                     <th>Chi tiết</th>
+//                     <th>MÃ´ táº£</th>
+//                     <th>Chi tiáº¿t</th>
 //                     <th></th>
 //                   </tr>
 //                 </thead>
@@ -2291,14 +2291,14 @@
 //                         <td><input value={r.data.detail ?? ""} onChange={(e)=>updateCell(idx, "detail", e.target.value)} style={{...cellInputStyle, minWidth: 140}} /></td>
 //                         <td>
 //                           <button onClick={() => deleteRow(idx)} style={{ padding: "4px 8px", border: 0, borderRadius: 6, background: "#ef4444", color: "#fff", cursor: "pointer" }}>
-//                             Xoá
+//                             XoÃ¡
 //                           </button>
 //                         </td>
 //                       </tr>
 //                     );
 //                   })}
 //                   {(!previewRows.length) && (
-//                     <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>Không có dòng nào</td></tr>
+//                     <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>KhÃ´ng cÃ³ dÃ²ng nÃ o</td></tr>
 //                   )}
 //                 </tbody>
 //               </table>
@@ -2306,17 +2306,17 @@
 
 //             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 12 }}>
 //               <div style={{ color: hasAnyError(previewRows) ? "#b91c1c" : "#059669", fontWeight: 600 }}>
-//                 {hasAnyError(previewRows) ? "Còn lỗi — vui lòng sửa hoặc xoá dòng lỗi." : "Dữ liệu hợp lệ — có thể Import."}
+//                 {hasAnyError(previewRows) ? "CÃ²n lá»—i â€” vui lÃ²ng sá»­a hoáº·c xoÃ¡ dÃ²ng lá»—i." : "Dá»¯ liá»‡u há»£p lá»‡ â€” cÃ³ thá»ƒ Import."}
 //               </div>
 //               <div style={{ display: "flex", gap: 8 }}>
 //                 <button
 //                   onClick={() => {
-//                     if (!window.confirm("Xoá toàn bộ các dòng đang preview?")) return;
+//                     if (!window.confirm("XoÃ¡ toÃ n bá»™ cÃ¡c dÃ²ng Ä‘ang preview?")) return;
 //                     setPreviewRows([]);
 //                   }}
 //                   style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", cursor: "pointer" }}
 //                 >
-//                   🧹 Xoá tất cả
+//                   ðŸ§¹ XoÃ¡ táº¥t cáº£
 //                 </button>
 //                 <button
 //                   onClick={confirmImportValidRows}
@@ -2331,7 +2331,7 @@
 //                     fontWeight: 700,
 //                   }}
 //                 >
-//                   {importing ? "Đang import…" : "✅ Xác nhận Import (chỉ dòng hợp lệ)"}
+//                   {importing ? "Äang importâ€¦" : "âœ… XÃ¡c nháº­n Import (chá»‰ dÃ²ng há»£p lá»‡)"}
 //                 </button>
 //               </div>
 //             </div>
@@ -2342,7 +2342,7 @@
 //   );
 // }
 
-// // ===== Styles helper cho nút phân trang =====
+// // ===== Styles helper cho nÃºt phÃ¢n trang =====
 // function btnPager(disabled) {
 //   return {
 //     padding: "6px 10px",
@@ -2365,39 +2365,39 @@
 //   };
 // }
 
-// // style input nhỏ gọn cho ô trong bảng preview
+// // style input nhá» gá»n cho Ã´ trong báº£ng preview
 // const cellInputStyle = {
 //   width: 140,
 //   padding: "6px 8px",
 //   borderRadius: 6,
 //   border: "1px solid #e5e7eb",
 //   background: "#fff",
-// };  CODE SAU KHI  SỬA CHÈN IMPORT CÙNG LINK ẢNH  
+// };  CODE SAU KHI  Sá»¬A CHÃˆN IMPORT CÃ™NG LINK áº¢NH  
 
 
 
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as XLSX from "xlsx"; // ✅ dùng để đọc Excel
+import * as XLSX from "xlsx"; // âœ… dÃ¹ng Ä‘á»ƒ Ä‘á»c Excel
 
-const API_ROOT = "http://127.0.0.1:8000";       // không có /api
-const API_BASE = `${API_ROOT}/api`;             // có /api
+const API_ROOT = "http://127.0.0.1:8000";       // khÃ´ng cÃ³ /api
+const API_BASE = `${API_BASE}/api`;             // cÃ³ /api
 const PLACEHOLDER = "https://placehold.co/120x90?text=No+Img";
 
-// 👉 URL tổng hợp tồn kho theo IDs (ưu tiên DB)
+// ðŸ‘‰ URL tá»•ng há»£p tá»“n kho theo IDs (Æ°u tiÃªn DB)
 const STOCK_SUMMARY_URL = (ids) =>
   `${API_BASE}/admin/stock/summary?product_ids=${ids.join(",")}`;
 
-// 👉 URL tổng hợp thương hiệu & danh mục theo IDs (từ bảng ptdt_product - nếu BE hỗ trợ)
+// ðŸ‘‰ URL tá»•ng há»£p thÆ°Æ¡ng hiá»‡u & danh má»¥c theo IDs (tá»« báº£ng ptdt_product - náº¿u BE há»— trá»£)
 const BRAND_CATEGORY_SUMMARY_URL = (ids) =>
   `${API_BASE}/admin/ptdt_product/brand-category?product_ids=${ids.join(",")}`;
 
-// 👉 NEW: URL tổng tồn kho & tổng đã bán (đổi lại nếu BE của bạn khác đường dẫn)
+// ðŸ‘‰ NEW: URL tá»•ng tá»“n kho & tá»•ng Ä‘Ã£ bÃ¡n (Ä‘á»•i láº¡i náº¿u BE cá»§a báº¡n khÃ¡c Ä‘Æ°á»ng dáº«n)
 const STOCK_TOTAL_URL = `${API_BASE}/admin/stock/total`;
 const SOLD_TOTAL_URL  = `${API_BASE}/admin/orders/total-sold-products`;
 
-/** Helper: trích đúng object paginator dù BE trả trực tiếp hay bọc trong {data: {...}} */
+/** Helper: trÃ­ch Ä‘Ãºng object paginator dÃ¹ BE tráº£ trá»±c tiáº¿p hay bá»c trong {data: {...}} */
 function pickPaginator(payload) {
   if (payload && Array.isArray(payload.data) && typeof payload.current_page !== "undefined") {
     return payload;
@@ -2422,36 +2422,36 @@ function toSlug(str = "") {
     .replace(/-+/g, "-");
 }
 
-// 👉 Thêm: chuẩn hoá thumbnail (giữ nguyên trùng, auto prefix assets/images/ nếu chỉ là tên file)
+// ðŸ‘‰ ThÃªm: chuáº©n hoÃ¡ thumbnail (giá»¯ nguyÃªn trÃ¹ng, auto prefix assets/images/ náº¿u chá»‰ lÃ  tÃªn file)
 function normalizeThumb(v) {
   if (v == null) return "";
   let s = String(v).trim();
-  // nếu không phải URL tuyệt đối và không bắt đầu bằng "/" thì coi là file nội bộ
+  // náº¿u khÃ´ng pháº£i URL tuyá»‡t Ä‘á»‘i vÃ  khÃ´ng báº¯t Ä‘áº§u báº±ng "/" thÃ¬ coi lÃ  file ná»™i bá»™
   if (s && !/^https?:\/\//i.test(s) && !s.startsWith("/")) {
     if (!s.startsWith("assets/images/")) s = `assets/images/${s}`;
   }
   return s;
 }
 
-// Map header linh hoạt -> key chuẩn của BE
+// Map header linh hoáº¡t -> key chuáº©n cá»§a BE
 const HEADER_MAP = {
-  "name": "name", "tên": "name", "ten": "name",
+  "name": "name", "tÃªn": "name", "ten": "name",
   "slug": "slug",
-  "brand_id": "brand_id", "brand": "brand_id", "thương hiệu": "brand_id", "thuonghieu": "brand_id",
-  "category_id": "category_id", "category": "category_id", "danh mục": "category_id", "danhmuc": "category_id",
-  "price_root": "price_root", "giá gốc": "price_root", "giagoc": "price_root",
-  "price_sale": "price_sale", "giá sale": "price_sale", "giasale": "price_sale",
-  "qty": "qty", "số lượng": "qty", "soluong": "qty",
-  "description": "description", "mô tả": "description", "mota": "description",
-  "detail": "detail", "chi tiết": "detail", "chitiet": "detail",
-  "status": "status", "trạng thái": "status", "trangthai": "status",
-  // 👉 Mở rộng alias cho cột ảnh
+  "brand_id": "brand_id", "brand": "brand_id", "thÆ°Æ¡ng hiá»‡u": "brand_id", "thuonghieu": "brand_id",
+  "category_id": "category_id", "category": "category_id", "danh má»¥c": "category_id", "danhmuc": "category_id",
+  "price_root": "price_root", "giÃ¡ gá»‘c": "price_root", "giagoc": "price_root",
+  "price_sale": "price_sale", "giÃ¡ sale": "price_sale", "giasale": "price_sale",
+  "qty": "qty", "sá»‘ lÆ°á»£ng": "qty", "soluong": "qty",
+  "description": "description", "mÃ´ táº£": "description", "mota": "description",
+  "detail": "detail", "chi tiáº¿t": "detail", "chitiet": "detail",
+  "status": "status", "tráº¡ng thÃ¡i": "status", "trangthai": "status",
+  // ðŸ‘‰ Má»Ÿ rá»™ng alias cho cá»™t áº£nh
   "thumbnail": "thumbnail",
   "thumbnail_url": "thumbnail",
-  "ảnh": "thumbnail", "anh": "thumbnail",
-  "hình": "thumbnail", "hinh": "thumbnail",
+  "áº£nh": "thumbnail", "anh": "thumbnail",
+  "hÃ¬nh": "thumbnail", "hinh": "thumbnail",
   "image": "thumbnail", "img": "thumbnail",
-  "url ảnh": "thumbnail", "link ảnh": "thumbnail",
+  "url áº£nh": "thumbnail", "link áº£nh": "thumbnail",
 };
 
 function normalizeHeaders(rawObj) {
@@ -2464,7 +2464,7 @@ function normalizeHeaders(rawObj) {
   return out;
 }
 
-// 👉 Helper đọc số từ payload {data:number} | {total:number} | {count:number}
+// ðŸ‘‰ Helper Ä‘á»c sá»‘ tá»« payload {data:number} | {total:number} | {count:number}
 function pickNumber(obj, keys = ["data", "total", "count", "value"]) {
   if (!obj || typeof obj !== "object") return 0;
   for (const k of keys) {
@@ -2474,7 +2474,7 @@ function pickNumber(obj, keys = ["data", "total", "count", "value"]) {
   return 0;
 }
 
-/* ====== Helpers hiển thị thời gian import ====== */
+/* ====== Helpers hiá»ƒn thá»‹ thá»i gian import ====== */
 function pad2(n) { return String(n).padStart(2, "0"); }
 function formatTime(d) {
   const hh = pad2(d.getHours());
@@ -2484,25 +2484,25 @@ function formatTime(d) {
 }
 function humanizeDuration(ms) {
   const sec = Math.round(ms / 1000);
-  if (sec < 60) return `${sec} giây`;
+  if (sec < 60) return `${sec} giÃ¢y`;
   const m = Math.floor(sec / 60);
   const s = sec % 60;
-  return `${m} phút ${s} giây`;
+  return `${m} phÃºt ${s} giÃ¢y`;
 }
 
 /* =========================
-   DonutChart (SVG thuần)
+   DonutChart (SVG thuáº§n)
    ========================= */
 function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
   const total = Math.max(0, Number(sold)) + Math.max(0, Number(inStock));
   const r = size / 2 - thickness / 2;
   const c = 2 * Math.PI * r;
 
-  // phần trăm đã bán
+  // pháº§n trÄƒm Ä‘Ã£ bÃ¡n
   const soldRatio = total > 0 ? Math.min(1, Math.max(0, sold / total)) : 0;
   const soldLength = c * soldRatio;
 
-  // màu theo mockup (hồng/đỏ cho đã bán, xanh cho tồn kho)
+  // mÃ u theo mockup (há»“ng/Ä‘á» cho Ä‘Ã£ bÃ¡n, xanh cho tá»“n kho)
   const SOLD_COLOR = "#ef4444";
   const STOCK_COLOR = "#3b82f6";
 
@@ -2510,7 +2510,7 @@ function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
     <div style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "space-between" }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-          {/* nền: tồn kho */}
+          {/* ná»n: tá»“n kho */}
           <circle
             cx={size / 2}
             cy={size / 2}
@@ -2521,7 +2521,7 @@ function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
             strokeLinecap="round"
             opacity={0.9}
           />
-          {/* phần đã bán nằm trên */}
+          {/* pháº§n Ä‘Ã£ bÃ¡n náº±m trÃªn */}
           <circle
             cx={size / 2}
             cy={size / 2}
@@ -2533,7 +2533,7 @@ function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
             strokeLinecap="round"
           />
         </g>
-        {/* lỗ donut */}
+        {/* lá»— donut */}
         <circle cx={size / 2} cy={size / 2} r={r - thickness / 2} fill="#fff" />
       </svg>
 
@@ -2541,15 +2541,15 @@ function DonutChart({ sold = 0, inStock = 0, size = 150, thickness = 22 }) {
       <div style={{ display: "grid", gap: 8 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{ width: 14, height: 8, background: SOLD_COLOR, borderRadius: 2 }}></span>
-          {/* sửa chữ thừa "5" */}
-          <span style={{ fontSize: 14 }}>Đã bán: <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
+          {/* sá»­a chá»¯ thá»«a "5" */}
+          <span style={{ fontSize: 14 }}>ÄÃ£ bÃ¡n: <b>{Number(sold || 0).toLocaleString("vi-VN")}</b></span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{ width: 14, height: 8, background: STOCK_COLOR, borderRadius: 2 }}></span>
-          <span style={{ fontSize: 14 }}>Tồn kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
+          <span style={{ fontSize: 14 }}>Tá»“n kho: <b>{Number(inStock || 0).toLocaleString("vi-VN")}</b></span>
         </div>
         <div style={{ color: "#6b7280", fontSize: 13 }}>
-          Tổng: <b>{Number(total).toLocaleString("vi-VN")}</b>
+          Tá»•ng: <b>{Number(total).toLocaleString("vi-VN")}</b>
         </div>
       </div>
     </div>
@@ -2568,7 +2568,7 @@ export default function Products() {
   const [selected, setSelected] = useState([]);
   const [viewItem, setViewItem] = useState(null);
 
-  // 🔢 Phân trang
+  // ðŸ”¢ PhÃ¢n trang
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [meta, setMeta] = useState({
@@ -2578,10 +2578,10 @@ export default function Products() {
     per_page: 10,
   });
 
-  // 🔁 Reload sau import
+  // ðŸ” Reload sau import
   const [reload, setReload] = useState(0);
 
-  // ⬆️ Import Excel states
+  // â¬†ï¸ Import Excel states
   const [importing, setImporting] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -2591,22 +2591,22 @@ export default function Products() {
   const [originalFile, setOriginalFile] = useState(null);
   const [showOnlyErrors, setShowOnlyErrors] = useState(false);
 
-  // ✅ map thương hiệu & danh mục
+  // âœ… map thÆ°Æ¡ng hiá»‡u & danh má»¥c
   const [brandCats, setBrandCats] = useState({});
   const [brandCatLoading, setBrandCatLoading] = useState(false);
 
-  // ✅ Tổng số sp hiện có (tồn kho) & đã bán
+  // âœ… Tá»•ng sá»‘ sp hiá»‡n cÃ³ (tá»“n kho) & Ä‘Ã£ bÃ¡n
   const [totalInStock, setTotalInStock] = useState(null);
   const [totalSold, setTotalSold] = useState(null);
   const [topCardLoading, setTopCardLoading] = useState(false);
 
-  // 🆕 Tóm tắt lần import gần nhất (để hiển thị thẻ giống ảnh)
+  // ðŸ†• TÃ³m táº¯t láº§n import gáº§n nháº¥t (Ä‘á»ƒ hiá»ƒn thá»‹ tháº» giá»‘ng áº£nh)
   const [lastImport, setLastImport] = useState(null);
   // { startedAt: Date, finishedAt: Date, durationMs: number, inserted, updated, skipped, errors }
 
   const navigate = useNavigate();
 
-  /* ===== Load danh sách theo trang ===== */
+  /* ===== Load danh sÃ¡ch theo trang ===== */
   useEffect(() => {
     const ac = new AbortController();
     const token = localStorage.getItem("admin_token");
@@ -2670,7 +2670,7 @@ export default function Products() {
           setBrandCats({});
         }
       } catch (e) {
-        if (e.name !== "AbortError") setErr("Không tải được danh sách sản phẩm.");
+        if (e.name !== "AbortError") setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch sáº£n pháº©m.");
         setItems([]);
         setMeta({ current_page: 1, last_page: 1, total: 0, per_page: perPage });
         setStocks({});
@@ -2683,7 +2683,7 @@ export default function Products() {
     return () => ac.abort();
   }, [page, perPage, reload]);
 
-  /* ===== NEW: load số liệu tổng (2 thẻ / donut) ===== */
+  /* ===== NEW: load sá»‘ liá»‡u tá»•ng (2 tháº» / donut) ===== */
   useEffect(() => {
     const ac = new AbortController();
     const token = localStorage.getItem("admin_token");
@@ -2719,7 +2719,7 @@ export default function Products() {
     return () => ac.abort();
   }, [reload, stocks]);
 
-  // ===== Helper tồn kho / brand / category =====
+  // ===== Helper tá»“n kho / brand / category =====
   const getQty = (p) => {
     const id = p?.id;
     if (id != null && Object.prototype.hasOwnProperty.call(stocks, id))
@@ -2748,11 +2748,11 @@ export default function Products() {
     );
   };
 
-  // ===== Xoá sản phẩm & xoá nhiều =====
+  // ===== XoÃ¡ sáº£n pháº©m & xoÃ¡ nhiá»u =====
   async function handleDelete(id, { silent = false } = {}) {
     const token = localStorage.getItem("admin_token");
     if (!silent) {
-      if (!window.confirm("Bạn chắc chắn muốn xoá sản phẩm này?")) return false;
+      if (!window.confirm("Báº¡n cháº¯c cháº¯n muá»‘n xoÃ¡ sáº£n pháº©m nÃ y?")) return false;
     }
     try {
       setDeletingId(id);
@@ -2761,16 +2761,16 @@ export default function Products() {
         headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.message || "Xoá thất bại");
+      if (!res.ok) throw new Error(data.message || "XoÃ¡ tháº¥t báº¡i");
 
       setItems((prev) => prev.filter((x) => x.id !== id));
       setStocks((prev) => { const n = { ...prev }; delete n[id]; return n; });
       setBrandCats((prev) => { const n = { ...prev }; delete n[id]; return n; });
 
-      if (!silent) alert("✅ Đã chuyển sản phẩm vào thùng rác");
+      if (!silent) alert("âœ… ÄÃ£ chuyá»ƒn sáº£n pháº©m vÃ o thÃ¹ng rÃ¡c");
       return true;
     } catch (err) {
-      if (!silent) alert(`❌ Lỗi xoá: ${err.message}`);
+      if (!silent) alert(`âŒ Lá»—i xoÃ¡: ${err.message}`);
       return false;
     } finally {
       setDeletingId(null);
@@ -2778,8 +2778,8 @@ export default function Products() {
   }
 
   async function handleBulkDelete() {
-    if (!selected.length) return alert("Chưa chọn sản phẩm nào");
-    if (!window.confirm(`Xoá ${selected.length} sản phẩm?`)) return;
+    if (!selected.length) return alert("ChÆ°a chá»n sáº£n pháº©m nÃ o");
+    if (!window.confirm(`XoÃ¡ ${selected.length} sáº£n pháº©m?`)) return;
 
     setDeletingMany(true);
     let ok = 0; const fail = [];
@@ -2789,12 +2789,12 @@ export default function Products() {
     }
     setDeletingMany(false); setSelected([]);
 
-    if (ok && fail.length === 0) alert(`✅ Đã xoá ${ok} sản phẩm.`);
-    else if (ok && fail.length > 0) alert(`⚠️ Thành công ${ok}, thất bại ${fail.length}: ${fail.join(", ")}`);
-    else alert("❌ Không xoá được sản phẩm nào.");
+    if (ok && fail.length === 0) alert(`âœ… ÄÃ£ xoÃ¡ ${ok} sáº£n pháº©m.`);
+    else if (ok && fail.length > 0) alert(`âš ï¸ ThÃ nh cÃ´ng ${ok}, tháº¥t báº¡i ${fail.length}: ${fail.join(", ")}`);
+    else alert("âŒ KhÃ´ng xoÃ¡ Ä‘Æ°á»£c sáº£n pháº©m nÃ o.");
   }
 
-  /* ====== IMPORT (giữ logic, thêm đo thời gian) ====== */
+  /* ====== IMPORT (giá»¯ logic, thÃªm Ä‘o thá»i gian) ====== */
   async function handleImport(file) {
     const token = localStorage.getItem("admin_token");
     const t0 = new Date();
@@ -2809,23 +2809,23 @@ export default function Products() {
         body: form,
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Import thất bại");
+      if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
 
       const t1 = new Date();
       const dur = t1 - t0;
 
-      // 🧾 thông báo có thời gian
+      // ðŸ§¾ thÃ´ng bÃ¡o cÃ³ thá»i gian
       alert(
-        `✔ Import xong:
-- Thêm: ${data.inserted}
-- Cập nhật: ${data.updated}
-- Bỏ qua: ${data.skipped}
-- Bắt đầu: ${formatTime(t0)}
-- Hoàn thành: ${formatTime(t1)} (mất ${humanizeDuration(dur)})`
-        + `${data.errors?.length ? `\n- Lỗi: ${data.errors.length} dòng` : ""}`
+        `âœ” Import xong:
+- ThÃªm: ${data.inserted}
+- Cáº­p nháº­t: ${data.updated}
+- Bá» qua: ${data.skipped}
+- Báº¯t Ä‘áº§u: ${formatTime(t0)}
+- HoÃ n thÃ nh: ${formatTime(t1)} (máº¥t ${humanizeDuration(dur)})`
+        + `${data.errors?.length ? `\n- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`
       );
 
-      // 🆕 Lưu thẻ tóm tắt lần import
+      // ðŸ†• LÆ°u tháº» tÃ³m táº¯t láº§n import
       setLastImport({
         startedAt: t0,
         finishedAt: t1,
@@ -2838,7 +2838,7 @@ export default function Products() {
 
       setReload((x) => x + 1); setPage(1);
     } catch (e) {
-      alert(`❌ Lỗi import: ${e.message}`);
+      alert(`âŒ Lá»—i import: ${e.message}`);
     } finally {
       setImporting(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -2851,16 +2851,16 @@ export default function Products() {
     const price_sale = Number(d.price_sale ?? 0);
     const qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : d.qty;
 
-    if (!d.name || String(d.name).trim() === "") errors.push("Thiếu tên (name)");
-    if (!d.slug || String(d.slug).trim() === "") errors.push("Thiếu slug (đã auto-gợi ý)");
-    if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiếu brand_id");
-    if (d.category_id === undefined || d.category_id === "") errors.push("Thiếu category_id");
+    if (!d.name || String(d.name).trim() === "") errors.push("Thiáº¿u tÃªn (name)");
+    if (!d.slug || String(d.slug).trim() === "") errors.push("Thiáº¿u slug (Ä‘Ã£ auto-gá»£i Ã½)");
+    if (d.brand_id === undefined || d.brand_id === "") errors.push("Thiáº¿u brand_id");
+    if (d.category_id === undefined || d.category_id === "") errors.push("Thiáº¿u category_id");
 
-    if (isNaN(price_root) || price_root < 0) errors.push("price_root phải là số ≥ 0");
-    if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale phải là số ≥ 0");
-    if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty phải là số nguyên ≥ 0");
+    if (isNaN(price_root) || price_root < 0) errors.push("price_root pháº£i lÃ  sá»‘ â‰¥ 0");
+    if (isNaN(price_sale) || price_sale < 0) errors.push("price_sale pháº£i lÃ  sá»‘ â‰¥ 0");
+    if (!Number.isInteger(Number(qty)) || Number(qty) < 0) errors.push("qty pháº£i lÃ  sá»‘ nguyÃªn â‰¥ 0");
     if (!isNaN(price_root) && !isNaN(price_sale) && price_sale > price_root) {
-      errors.push("price_sale không được lớn hơn price_root");
+      errors.push("price_sale khÃ´ng Ä‘Æ°á»£c lá»›n hÆ¡n price_root");
     }
 
     const curSlug = (d.slug || "").toString().trim().toLowerCase();
@@ -2868,7 +2868,7 @@ export default function Products() {
       const dupIndex = allRows.findIndex((r, i2) =>
         i2 !== idx && (r.data.slug || "").toString().trim().toLowerCase() === curSlug
       );
-      if (dupIndex !== -1) errors.push(`Slug trùng ở dòng ${dupIndex + 2}`);
+      if (dupIndex !== -1) errors.push(`Slug trÃ¹ng á»Ÿ dÃ²ng ${dupIndex + 2}`);
     }
     return errors;
   }
@@ -2883,7 +2883,7 @@ export default function Products() {
       let rows = json.map((raw, i) => {
         const d = normalizeHeaders(raw);
         if (!d.thumbnail && d.thumbnail_url) d.thumbnail = d.thumbnail_url;
-        // 👉 chuẩn hoá thumbnail (tự thêm assets/images/ nếu chỉ là tên file)
+        // ðŸ‘‰ chuáº©n hoÃ¡ thumbnail (tá»± thÃªm assets/images/ náº¿u chá»‰ lÃ  tÃªn file)
         if (d.thumbnail !== undefined) d.thumbnail = normalizeThumb(d.thumbnail);
         if (!d.slug && d.name) d.slug = toSlug(d.name);
         if (d.price_root !== undefined) d.price_root = Number(d.price_root || 0);
@@ -2891,7 +2891,7 @@ export default function Products() {
         if (d.qty !== undefined) d.qty = Number.isFinite(Number(d.qty)) ? Number(d.qty) : 0;
         if (typeof d.status === "string") {
           const s = d.status.trim().toLowerCase();
-          d.status = ["1","true","active","đang bán","dang ban"].includes(s) ? 1 : 0;
+          d.status = ["1","true","active","Ä‘ang bÃ¡n","dang ban"].includes(s) ? 1 : 0;
         }
         return { rowIndex: i, data: d, errors: [] };
       });
@@ -2903,7 +2903,7 @@ export default function Products() {
       setOriginalFile(file);
       setPreviewOpen(true);
     } catch (e) {
-      alert("Không đọc được file Excel: " + e.message);
+      alert("KhÃ´ng Ä‘á»c Ä‘Æ°á»£c file Excel: " + e.message);
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
@@ -2958,7 +2958,7 @@ export default function Products() {
 
   async function confirmImportValidRows() {
     const validRows = previewRows.filter((r) => !r.errors?.length);
-    if (!validRows.length) return alert("Không có dòng hợp lệ để import.");
+    if (!validRows.length) return alert("KhÃ´ng cÃ³ dÃ²ng há»£p lá»‡ Ä‘á»ƒ import.");
 
     const token = localStorage.getItem("admin_token");
     const t0 = new Date();
@@ -2978,22 +2978,22 @@ export default function Products() {
         body: form,
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Import thất bại");
+      if (!res.ok) throw new Error(data.message || "Import tháº¥t báº¡i");
 
       const t1 = new Date();
       const dur = t1 - t0;
 
       alert(
-        `✔ Import xong:
-- Thêm: ${data.inserted}
-- Cập nhật: ${data.updated}
-- Bỏ qua: ${data.skipped}
-- Bắt đầu: ${formatTime(t0)}
-- Hoàn thành: ${formatTime(t1)} (mất ${humanizeDuration(dur)})`
-        + `${data.errors?.length ? `\n- Lỗi: ${data.errors.length} dòng` : ""}`
+        `âœ” Import xong:
+- ThÃªm: ${data.inserted}
+- Cáº­p nháº­t: ${data.updated}
+- Bá» qua: ${data.skipped}
+- Báº¯t Ä‘áº§u: ${formatTime(t0)}
+- HoÃ n thÃ nh: ${formatTime(t1)} (máº¥t ${humanizeDuration(dur)})`
+        + `${data.errors?.length ? `\n- Lá»—i: ${data.errors.length} dÃ²ng` : ""}`
       );
 
-      // lưu thẻ tóm tắt
+      // lÆ°u tháº» tÃ³m táº¯t
       setLastImport({
         startedAt: t0,
         finishedAt: t1,
@@ -3010,13 +3010,13 @@ export default function Products() {
       setReload((x) => x + 1);
       setPage(1);
     } catch (e) {
-      alert(`❌ Lỗi import: ${e.message}`);
+      alert(`âŒ Lá»—i import: ${e.message}`);
     } finally {
       setImporting(false);
     }
   }
 
-  // ===== Lọc cục bộ theo tên/slug (trên TRANG hiện tại) =====
+  // ===== Lá»c cá»¥c bá»™ theo tÃªn/slug (trÃªn TRANG hiá»‡n táº¡i) =====
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
     if (!s) return items;
@@ -3063,7 +3063,7 @@ export default function Products() {
 
   const pages = buildPageNumbers();
 
-  // ===== Styles helper cho thẻ thống kê =====
+  // ===== Styles helper cho tháº» thá»‘ng kÃª =====
   const statCard = () => ({
     background: "#fff",
     border: "1px solid #e5e7eb",
@@ -3079,7 +3079,7 @@ export default function Products() {
   // ===== Render =====
   return (
     <section style={{ padding: 20 }}>
-      {/* ====== HÀNG THẺ THỐNG KÊ ====== */}
+      {/* ====== HÃ€NG THáºº THá»NG KÃŠ ====== */}
       <div
         style={{
           display: "grid",
@@ -3088,23 +3088,23 @@ export default function Products() {
           marginBottom: 12,
         }}
       >
-        {/* Card 1: Tổng số sản phẩm hiện có */}
+        {/* Card 1: Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³ */}
         <div style={statCard()}>
           <div style={{ fontSize: 14, color: "#374151", fontWeight: 700 }}>
-            Tổng số sản phẩm hiện có
+            Tá»•ng sá»‘ sáº£n pháº©m hiá»‡n cÃ³
           </div>
           <div style={{ fontSize: 32, fontWeight: 800 }}>
-            {topCardLoading && totalInStock === null ? "…" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
+            {topCardLoading && totalInStock === null ? "â€¦" : (Number(totalInStock ?? 0)).toLocaleString("vi-VN")}
           </div>
           <div style={{ color: "#10b981", fontSize: 13 }}>
-            ↑ Tổng số sản phẩm còn trong kho
+            â†‘ Tá»•ng sá»‘ sáº£n pháº©m cÃ²n trong kho
           </div>
         </div>
 
-        {/* Card 2: Donut thống kê sản phẩm */}
+        {/* Card 2: Donut thá»‘ng kÃª sáº£n pháº©m */}
         <div style={statCard()}>
           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>
-            Thống kê sản phẩm
+            Thá»‘ng kÃª sáº£n pháº©m
           </div>
           <DonutChart
             sold={Number(totalSold ?? 0)}
@@ -3114,30 +3114,30 @@ export default function Products() {
           />
         </div>
 
-        {/* 🆕 Card 3: Tóm tắt lần import gần nhất (giống ảnh) */}
+        {/* ðŸ†• Card 3: TÃ³m táº¯t láº§n import gáº§n nháº¥t (giá»‘ng áº£nh) */}
         {lastImport && (
           <div style={statCard()}>
             <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 6 }}>Import xong:</div>
             <div style={{ lineHeight: 1.7 }}>
-              <div>• Thêm: <b style={{ color: "#ec4899" }}>{lastImport.inserted}</b></div>
-              <div>• Cập nhật: <b style={{ color: "#ec4899" }}>{lastImport.updated}</b></div>
-              <div>• Bỏ qua: <b style={{ color: "#ec4899" }}>{lastImport.skipped}</b></div>
+              <div>â€¢ ThÃªm: <b style={{ color: "#ec4899" }}>{lastImport.inserted}</b></div>
+              <div>â€¢ Cáº­p nháº­t: <b style={{ color: "#ec4899" }}>{lastImport.updated}</b></div>
+              <div>â€¢ Bá» qua: <b style={{ color: "#ec4899" }}>{lastImport.skipped}</b></div>
               {typeof lastImport.errors === "number" && lastImport.errors > 0 && (
-                <div>• Lỗi: <b style={{ color: "#ef4444" }}>{lastImport.errors} dòng</b></div>
+                <div>â€¢ Lá»—i: <b style={{ color: "#ef4444" }}>{lastImport.errors} dÃ²ng</b></div>
               )}
               <div style={{ marginTop: 6 }}>
-                <span role="img" aria-label="clock">⏱</span> Bắt đầu: <b>{formatTime(new Date(lastImport.startedAt))}</b>
+                <span role="img" aria-label="clock">â±</span> Báº¯t Ä‘áº§u: <b>{formatTime(new Date(lastImport.startedAt))}</b>
               </div>
               <div>
-                ✅ Hoàn thành: <b>{formatTime(new Date(lastImport.finishedAt))}</b>{" "}
-                <span style={{ color: "#6b7280" }}>(mất {humanizeDuration(lastImport.durationMs)})</span>
+                âœ… HoÃ n thÃ nh: <b>{formatTime(new Date(lastImport.finishedAt))}</b>{" "}
+                <span style={{ color: "#6b7280" }}>(máº¥t {humanizeDuration(lastImport.durationMs)})</span>
               </div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Thanh tiêu đề */}
+      {/* Thanh tiÃªu Ä‘á» */}
       <div
         style={{
           display: "flex",
@@ -3148,16 +3148,16 @@ export default function Products() {
         }}
       >
         <h1 style={{ fontSize: 24, fontWeight: 700 }}>
-          Quản lý sản phẩm
-          {stockLoading ? " · đang tải tồn kho…" : ""}
-          {brandCatLoading ? " · đang tải thương hiệu/danh mục…" : ""}
+          Quáº£n lÃ½ sáº£n pháº©m
+          {stockLoading ? " Â· Ä‘ang táº£i tá»“n khoâ€¦" : ""}
+          {brandCatLoading ? " Â· Ä‘ang táº£i thÆ°Æ¡ng hiá»‡u/danh má»¥câ€¦" : ""}
         </h1>
 
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Tìm tên/slug… (trang hiện tại)"
+            placeholder="TÃ¬m tÃªn/slugâ€¦ (trang hiá»‡n táº¡i)"
             style={{
               height: 36,
               padding: "0 10px",
@@ -3173,7 +3173,7 @@ export default function Products() {
               setPage(1);
             }}
             style={{ height: 36, borderRadius: 8, border: "1px solid #ddd" }}
-            title="Số dòng mỗi trang"
+            title="Sá»‘ dÃ²ng má»—i trang"
           >
             {[5, 10, 20, 30, 50, 100].map((n) => (
               <option key={n} value={n}>
@@ -3193,7 +3193,7 @@ export default function Products() {
               cursor: "pointer",
             }}
           >
-            + Thêm
+            + ThÃªm
           </button>
 
           <button
@@ -3208,12 +3208,12 @@ export default function Products() {
               fontWeight: 700,
             }}
           >
-            ⬆ Import Excel
+            â¬† Import Excel
           </button>
 
           <button
             onClick={async () => {
-              // đồng bộ token
+              // Ä‘á»“ng bá»™ token
               const token = localStorage.getItem("admin_token") || "";
               try {
                 const res = await fetch("http://127.0.0.1:8000/api/admin/products/export", {
@@ -3223,7 +3223,7 @@ export default function Products() {
                     ...(token ? { Authorization: `Bearer ${token}` } : {}),
                   },
                 });
-                if (!res.ok) throw new Error("Export thất bại");
+                if (!res.ok) throw new Error("Export tháº¥t báº¡i");
                 const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
@@ -3232,7 +3232,7 @@ export default function Products() {
                 a.click();
                 window.URL.revokeObjectURL(url);
               } catch (err) {
-                alert("❌ " + err.message);
+                alert("âŒ " + err.message);
               }
             }}
             style={{
@@ -3245,7 +3245,7 @@ export default function Products() {
               fontWeight: 700,
             }}
           >
-            ⬇ Export Excel
+            â¬‡ Export Excel
           </button>
 
           <input
@@ -3269,7 +3269,7 @@ export default function Products() {
               cursor: selected.length && !deletingMany ? "pointer" : "not-allowed",
             }}
           >
-            {deletingMany ? "Đang xoá…" : `🗑 Xoá chọn (${selected.length})`}
+            {deletingMany ? "Äang xoÃ¡â€¦" : `ðŸ—‘ XoÃ¡ chá»n (${selected.length})`}
           </button>
           <button
             onClick={() => navigate("/admin/products/trash")}
@@ -3282,13 +3282,13 @@ export default function Products() {
               cursor: "pointer",
             }}
           >
-            🗂 Thùng rác
+            ðŸ—‚ ThÃ¹ng rÃ¡c
           </button>
         </div>
       </div>
 
-      {/* Bảng sản phẩm */}
-      {loading && <p>Đang tải dữ liệu…</p>}
+      {/* Báº£ng sáº£n pháº©m */}
+      {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
       {err && <p style={{ color: "red" }}>{err}</p>}
 
       {!loading && (
@@ -3303,15 +3303,15 @@ export default function Products() {
                 <tr style={{ background: "#fafafa" }}>
                   <th><input type="checkbox" checked={allChecked} onChange={toggleAll} /></th>
                   <th align="left">ID</th>
-                  <th align="left">Tên</th>
+                  <th align="left">TÃªn</th>
                   <th align="left">Slug</th>
-                  <th align="left">Thương hiệu</th>
-                  <th align="left">Danh mục</th>
-                  <th align="right">Giá gốc</th>
-                  <th align="right">Giá sale</th>
-                  <th align="right">Tồn kho (DB)</th>
-                  <th align="center">Ảnh</th>
-                  <th align="center">Hành động</th>
+                  <th align="left">ThÆ°Æ¡ng hiá»‡u</th>
+                  <th align="left">Danh má»¥c</th>
+                  <th align="right">GiÃ¡ gá»‘c</th>
+                  <th align="right">GiÃ¡ sale</th>
+                  <th align="right">Tá»“n kho (DB)</th>
+                  <th align="center">áº¢nh</th>
+                  <th align="center">HÃ nh Ä‘á»™ng</th>
                 </tr>
               </thead>
               <tbody>
@@ -3329,12 +3329,12 @@ export default function Products() {
                     <td>{p.slug}</td>
                     <td>{getBrandName(p)}</td>
                     <td>{getCategoryName(p)}</td>
-                    <td align="right">₫{(p.price_root || 0).toLocaleString("vi-VN")}</td>
-                    <td align="right">₫{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
+                    <td align="right">â‚«{(p.price_root || 0).toLocaleString("vi-VN")}</td>
+                    <td align="right">â‚«{(p.price_sale || 0).toLocaleString("vi-VN")}</td>
                     <td align="right">{getQty(p).toLocaleString("vi-VN")}</td>
                     <td align="center">
                       <img
-                        // 👉 Fallback đủ: thumbnail_url -> thumbnail -> placeholder
+                        // ðŸ‘‰ Fallback Ä‘á»§: thumbnail_url -> thumbnail -> placeholder
                         src={p.thumbnail_url || p.thumbnail || PLACEHOLDER}
                         alt={p.name}
                         style={{ width: 60, height: 40, objectFit: "cover", borderRadius: 4 }}
@@ -3346,20 +3346,20 @@ export default function Products() {
                         onClick={() => setViewItem(p)}
                         style={{ padding: "4px 10px", marginRight: 4, background: "#2563eb", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
                       >
-                        👁 Xem
+                        ðŸ‘ Xem
                       </button>
                       <button
                         onClick={() => navigate(`/admin/products/edit/${p.id}`)}
                         style={{ padding: "4px 10px", marginRight: 4, background: "#2e7d32", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
                       >
-                        ✏️ Sửa
+                        âœï¸ Sá»­a
                       </button>
                       <button
                         onClick={() => handleDelete(p.id)}
                         disabled={deletingId === p.id || deletingMany}
                         style={{ padding: "4px 10px", background: deletingId === p.id || deletingMany ? "#ef9a9a" : "#c62828", color: "#fff", border: 0, borderRadius: 6, cursor: deletingId === p.id || deletingMany ? "not-allowed" : "pointer" }}
                       >
-                        {deletingId === p.id ? "Đang xoá..." : "🗑 Xóa"}
+                        {deletingId === p.id ? "Äang xoÃ¡..." : "ðŸ—‘ XÃ³a"}
                       </button>
                     </td>
                   </tr>
@@ -3367,7 +3367,7 @@ export default function Products() {
                 {!filtered.length && (
                   <tr>
                     <td colSpan={11} align="center" style={{ padding: 18, color: "#777" }}>
-                      Không có dữ liệu
+                      KhÃ´ng cÃ³ dá»¯ liá»‡u
                     </td>
                   </tr>
                 )}
@@ -3375,7 +3375,7 @@ export default function Products() {
             </table>
           </div>
 
-          {/* Thanh phân trang */}
+          {/* Thanh phÃ¢n trang */}
           <div
             style={{
               marginTop: 12,
@@ -3387,20 +3387,20 @@ export default function Products() {
             }}
           >
             <div style={{ color: "#555" }}>
-              Tổng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> — Trang{" "}
+              Tá»•ng: <b>{Number(meta.total).toLocaleString("vi-VN")}</b> â€” Trang{" "}
               <b>{meta.current_page}</b>/<b>{meta.last_page}</b>
             </div>
 
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>« Đầu</button>
-              <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>‹ Trước</button>
+              <button onClick={() => gotoPage(1)} disabled={!canPrev} style={btnPager(!canPrev)}>Â« Äáº§u</button>
+              <button onClick={() => gotoPage(meta.current_page - 1)} disabled={!canPrev} style={btnPager(!canPrev)}>â€¹ TrÆ°á»›c</button>
 
               {pages.map((p, idx) => {
                 const prev = pages[idx - 1];
                 const needDots = prev && p - prev > 1;
                 return (
                   <span key={p} style={{ display: "inline-flex", gap: 6 }}>
-                    {needDots && <span style={{ padding: "6px 8px" }}>…</span>}
+                    {needDots && <span style={{ padding: "6px 8px" }}>â€¦</span>}
                     <button
                       onClick={() => gotoPage(p)}
                       disabled={p === meta.current_page}
@@ -3413,14 +3413,14 @@ export default function Products() {
                 );
               })}
 
-              <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau ›</button>
-              <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuối »</button>
+              <button onClick={() => gotoPage(meta.current_page + 1)} disabled={!canNext} style={btnPager(!canNext)}>Sau â€º</button>
+              <button onClick={() => gotoPage(meta.last_page)} disabled={!canNext} style={btnPager(!canNext)}>Cuá»‘i Â»</button>
             </div>
           </div>
         </>
       )}
 
-      {/* Modal xem chi tiết */}
+      {/* Modal xem chi tiáº¿t */}
       {viewItem && (
         <div
           style={{
@@ -3437,11 +3437,11 @@ export default function Products() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>🏷 {viewItem.name}</h2>
+            <h2 style={{ fontSize: 20, marginBottom: 10, fontWeight: 700 }}>ðŸ· {viewItem.name}</h2>
 
             <div style={{ textAlign: "center", marginBottom: 10 }}>
               <img
-                // 👉 Fallback đủ: thumbnail_url -> thumbnail -> placeholder
+                // ðŸ‘‰ Fallback Ä‘á»§: thumbnail_url -> thumbnail -> placeholder
                 src={viewItem.thumbnail_url || viewItem.thumbnail || PLACEHOLDER}
                 alt={viewItem.name}
                 style={{ width: 200, height: 150, objectFit: "cover", borderRadius: 6, boxShadow: "0 0 6px rgba(0,0,0,0.2)" }}
@@ -3451,26 +3451,26 @@ export default function Products() {
 
             <p><b>Slug:</b> {viewItem.slug}</p>
             <p>
-              <b>Giá:</b> ₫{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
-              <span style={{ color: "#888" }}>(Gốc: ₫{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
+              <b>GiÃ¡:</b> â‚«{Number(viewItem.price_sale ?? 0).toLocaleString("vi-VN")}{" "}
+              <span style={{ color: "#888" }}>(Gá»‘c: â‚«{Number(viewItem.price_root ?? 0).toLocaleString("vi-VN")})</span>
             </p>
-            <p><b>Thương hiệu:</b> {getBrandName(viewItem)}</p>
-            <p><b>Danh mục:</b> {getCategoryName(viewItem)}</p>
-            <p><b>Tồn kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
-            <p><b>Trạng thái:</b> {viewItem.status}</p>
+            <p><b>ThÆ°Æ¡ng hiá»‡u:</b> {getBrandName(viewItem)}</p>
+            <p><b>Danh má»¥c:</b> {getCategoryName(viewItem)}</p>
+            <p><b>Tá»“n kho (DB):</b> {getQty(viewItem).toLocaleString("vi-VN")}</p>
+            <p><b>Tráº¡ng thÃ¡i:</b> {viewItem.status}</p>
 
             <div style={{ marginTop: 10 }}>
-              <p><b>Mô tả:</b></p>
+              <p><b>MÃ´ táº£:</b></p>
               <div
-                dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>Không có mô tả</em>" }}
+                dangerouslySetInnerHTML={{ __html: viewItem.description?.trim() ? viewItem.description : "<em>KhÃ´ng cÃ³ mÃ´ táº£</em>" }}
                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
               />
             </div>
 
             <div style={{ marginTop: 10 }}>
-              <p><b>Chi tiết:</b></p>
+              <p><b>Chi tiáº¿t:</b></p>
               <div
-                dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>Không có chi tiết</em>" }}
+                dangerouslySetInnerHTML={{ __html: viewItem.detail?.trim() ? viewItem.detail : "<em>KhÃ´ng cÃ³ chi tiáº¿t</em>" }}
                 style={{ color: "#333", lineHeight: "1.6", background: "#f8fafc", padding: "8px 10px", borderRadius: 6 }}
               />
             </div>
@@ -3480,7 +3480,7 @@ export default function Products() {
                 onClick={() => setViewItem(null)}
                 style={{ padding: "8px 16px", background: "#0f62fe", color: "#fff", border: 0, borderRadius: 6, cursor: "pointer" }}
               >
-                Đóng
+                ÄÃ³ng
               </button>
             </div>
           </div>
@@ -3505,21 +3505,21 @@ export default function Products() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
               <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-                📥 Xem trước Import — {originalFile?.name || "chưa đặt tên"}
+                ðŸ“¥ Xem trÆ°á»›c Import â€” {originalFile?.name || "chÆ°a Ä‘áº·t tÃªn"}
               </h2>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <label style={{ display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
                   <input type="checkbox" checked={showOnlyErrors} onChange={(e) => setShowOnlyErrors(e.target.checked)} />
-                  Chỉ hiển thị dòng lỗi
+                  Chá»‰ hiá»ƒn thá»‹ dÃ²ng lá»—i
                 </label>
                 <button onClick={() => setPreviewOpen(false)} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #ddd", background: "#fff" }}>
-                  Đóng
+                  ÄÃ³ng
                 </button>
               </div>
             </div>
 
             <div style={{ margin: "8px 0", color: "#374151" }}>
-              <b>Tổng dòng:</b> {previewRows.length} • <b>Lỗi:</b> {previewRows.filter(r => r.errors?.length).length} • <b>Hợp lệ:</b> {previewRows.filter(r => !r.errors?.length).length}
+              <b>Tá»•ng dÃ²ng:</b> {previewRows.length} â€¢ <b>Lá»—i:</b> {previewRows.filter(r => r.errors?.length).length} â€¢ <b>Há»£p lá»‡:</b> {previewRows.filter(r => !r.errors?.length).length}
             </div>
 
             <div style={{ height: "65vh", overflow: "auto", border: "1px solid #eee", borderRadius: 8 }}>
@@ -3527,18 +3527,18 @@ export default function Products() {
                 <thead style={{ position: "sticky", top: 0, background: "#f9fafb", zIndex: 1 }}>
                   <tr>
                     <th>#</th>
-                    <th>Lỗi</th>
-                    <th>Tên</th>
+                    <th>Lá»—i</th>
+                    <th>TÃªn</th>
                     <th>Slug</th>
                     <th>Brand ID</th>
                     <th>Category ID</th>
-                    <th>Giá gốc</th>
-                    <th>Giá sale</th>
+                    <th>GiÃ¡ gá»‘c</th>
+                    <th>GiÃ¡ sale</th>
                     <th>Qty</th>
                     <th>Status</th>
                     <th>Thumbnail</th>
-                    <th>Mô tả</th>
-                    <th>Chi tiết</th>
+                    <th>MÃ´ táº£</th>
+                    <th>Chi tiáº¿t</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -3569,14 +3569,14 @@ export default function Products() {
                         <td><input value={r.data.detail ?? ""} onChange={(e)=>updateCell(idx, "detail", e.target.value)} style={{...cellInputStyle, minWidth: 140}} /></td>
                         <td>
                           <button onClick={() => deleteRow(idx)} style={{ padding: "4px 8px", border: 0, borderRadius: 6, background: "#ef4444", color: "#fff", cursor: "pointer" }}>
-                            Xoá
+                            XoÃ¡
                           </button>
                         </td>
                       </tr>
                     );
                   })}
                   {(!previewRows.length) && (
-                    <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>Không có dòng nào</td></tr>
+                    <tr><td colSpan={14} align="center" style={{ padding: 16, color: "#6b7280" }}>KhÃ´ng cÃ³ dÃ²ng nÃ o</td></tr>
                   )}
                 </tbody>
               </table>
@@ -3584,17 +3584,17 @@ export default function Products() {
 
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 12 }}>
               <div style={{ color: hasAnyError(previewRows) ? "#b91c1c" : "#059669", fontWeight: 600 }}>
-                {hasAnyError(previewRows) ? "Còn lỗi — vui lòng sửa hoặc xoá dòng lỗi." : "Dữ liệu hợp lệ — có thể Import."}
+                {hasAnyError(previewRows) ? "CÃ²n lá»—i â€” vui lÃ²ng sá»­a hoáº·c xoÃ¡ dÃ²ng lá»—i." : "Dá»¯ liá»‡u há»£p lá»‡ â€” cÃ³ thá»ƒ Import."}
               </div>
               <div style={{ display: "flex", gap: 8 }}>
                 <button
                   onClick={() => {
-                    if (!window.confirm("Xoá toàn bộ các dòng đang preview?")) return;
+                    if (!window.confirm("XoÃ¡ toÃ n bá»™ cÃ¡c dÃ²ng Ä‘ang preview?")) return;
                     setPreviewRows([]);
                   }}
                   style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", cursor: "pointer" }}
                 >
-                  🧹 Xoá tất cả
+                  ðŸ§¹ XoÃ¡ táº¥t cáº£
                 </button>
                 <button
                   onClick={confirmImportValidRows}
@@ -3609,7 +3609,7 @@ export default function Products() {
                     fontWeight: 700,
                   }}
                 >
-                  {importing ? "Đang import…" : "✅ Xác nhận Import (chỉ dòng hợp lệ)"}
+                  {importing ? "Äang importâ€¦" : "âœ… XÃ¡c nháº­n Import (chá»‰ dÃ²ng há»£p lá»‡)"}
                 </button>
               </div>
             </div>
@@ -3620,7 +3620,7 @@ export default function Products() {
   );
 }
 
-// ===== Styles helper cho nút phân trang =====
+// ===== Styles helper cho nÃºt phÃ¢n trang =====
 function btnPager(disabled) {
   return {
     padding: "6px 10px",
@@ -3643,7 +3643,7 @@ function btnNumber(active) {
   };
 }
 
-// style input nhỏ gọn cho ô trong bảng preview
+// style input nhá» gá»n cho Ã´ trong báº£ng preview
 const cellInputStyle = {
   width: 140,
   padding: "6px 8px",
@@ -3651,3 +3651,5 @@ const cellInputStyle = {
   border: "1px solid #e5e7eb",
   background: "#fff",
 };
+
+

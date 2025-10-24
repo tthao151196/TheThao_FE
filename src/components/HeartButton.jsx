@@ -1,4 +1,4 @@
-// src/components/HeartButton.jsx
+﻿// src/components/HeartButton.jsx
 import { useEffect, useState } from "react";
 import { isLiked, toggleWishlist } from "../utils/wishlist";
 
@@ -7,19 +7,19 @@ export default function HeartButton({
   onToggle,
   className = "",
   size = 22,
-  outlineColor = "#ffffff", // viền khi chưa like
-  fillColor = "#ff4d6d",    // màu khi like
+  outlineColor = "#ffffff", // viá»n khi chÆ°a like
+  fillColor = "#ff4d6d",    // mÃ u khi like
 }) {
-  // giữ state local để re-render ngay
+  // giá»¯ state local Ä‘á»ƒ re-render ngay
   const [liked, setLiked] = useState(() => isLiked(productId));
   const [hovered, setHovered] = useState(false);
 
-  // đổi productId thì đồng bộ lại trạng thái
+  // Ä‘á»•i productId thÃ¬ Ä‘á»“ng bá»™ láº¡i tráº¡ng thÃ¡i
   useEffect(() => {
     setLiked(isLiked(productId));
   }, [productId]);
 
-  // đồng bộ khi danh sách yêu thích đổi từ nơi khác
+  // Ä‘á»“ng bá»™ khi danh sÃ¡ch yÃªu thÃ­ch Ä‘á»•i tá»« nÆ¡i khÃ¡c
   useEffect(() => {
     const sync = () => setLiked(isLiked(productId));
     window.addEventListener("wishlist-changed", sync);
@@ -33,8 +33,8 @@ export default function HeartButton({
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const newLiked = toggleWishlist(productId); // cập nhật localStorage + phát event
-    setLiked(newLiked);                         // cập nhật UI ngay lập tức
+    const newLiked = toggleWishlist(productId); // cáº­p nháº­t localStorage + phÃ¡t event
+    setLiked(newLiked);                         // cáº­p nháº­t UI ngay láº­p tá»©c
     onToggle?.(newLiked);
   };
 
@@ -43,23 +43,23 @@ export default function HeartButton({
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      title={liked ? "Bỏ yêu thích" : "Thêm yêu thích"}
-      aria-label="Yêu thích"
+      title={liked ? "Bá» yÃªu thÃ­ch" : "ThÃªm yÃªu thÃ­ch"}
+      aria-label="YÃªu thÃ­ch"
       aria-pressed={liked}
       className={`hb-btn ${liked ? "liked" : ""} ${className || ""}`}
       style={{
-        // bỏ nền tròn & viền
+        // bá» ná»n trÃ²n & viá»n
         background: "transparent",
         border: "none",
         padding: 0,
         margin: 0,
 
-        // canh giữa icon
+        // canh giá»¯a icon
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
 
-        // hiệu ứng mượt
+        // hiá»‡u á»©ng mÆ°á»£t
         cursor: "pointer",
         transform: hovered ? "scale(1.1)" : "scale(1)",
         transition: "transform 160ms ease",
@@ -71,7 +71,7 @@ export default function HeartButton({
         height={size}
         className={`hb-icon ${liked ? "is-liked" : ""}`}
         style={{
-          // bóng nhẹ để nhìn rõ trên ảnh sáng
+          // bÃ³ng nháº¹ Ä‘á»ƒ nhÃ¬n rÃµ trÃªn áº£nh sÃ¡ng
           filter: "drop-shadow(0 1px 2px rgba(0,0,0,.3))",
           transition: "fill 160ms ease, stroke 160ms ease",
         }}
@@ -99,3 +99,5 @@ export default function HeartButton({
     </button>
   );
 }
+
+

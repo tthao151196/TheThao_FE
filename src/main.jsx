@@ -1,4 +1,4 @@
-// // src/main.jsx
+﻿// // src/main.jsx
 // import React, { useState, useEffect } from "react";
 // import ReactDOM from "react-dom/client";
 // import {
@@ -21,7 +21,7 @@
 // import Register from "./pages/Customers/Register";
 // import Login from "./pages/Customers/Login";
 // import Checkout from "./pages/Customers/Checkout";
-// /* 👇 NEW: Trang liên hệ */
+// /* ðŸ‘‡ NEW: Trang liÃªn há»‡ */
 // import Contact from "./pages/Customers/Contact";
 
 // /* ===== Admin pages/layout ===== */
@@ -97,7 +97,7 @@
 //       <Navigate
 //         to="/admin/login"
 //         replace
-//         state={{ denied: "Bạn không có quyền truy cập khu vực Quản trị." }}
+//         state={{ denied: "Báº¡n khÃ´ng cÃ³ quyá»n truy cáº­p khu vá»±c Quáº£n trá»‹." }}
 //       />
 //     );
 //   }
@@ -119,7 +119,7 @@
 //     return saved ? JSON.parse(saved) : [];
 //   });
 
-//   // Lưu giỏ + phát sự kiện cho header cập nhật badge
+//   // LÆ°u giá» + phÃ¡t sá»± kiá»‡n cho header cáº­p nháº­t badge
 //   useEffect(() => {
 //     localStorage.setItem("cart", JSON.stringify(cart));
 //     try {
@@ -130,7 +130,7 @@
 //     } catch { }
 //   }, [cart]);
 
-//   // Đồng bộ lần đầu tiên khi mở trang
+//   // Äá»“ng bá»™ láº§n Ä‘áº§u tiÃªn khi má»Ÿ trang
 //   useEffect(() => {
 //     try {
 //       const arr = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -142,12 +142,12 @@
 //   }, []);
 
 //   const addToCart = (product) => {
-//     // bắt buộc đăng nhập mới cho thêm giỏ
+//     // báº¯t buá»™c Ä‘Äƒng nháº­p má»›i cho thÃªm giá»
 //     const token = localStorage.getItem("token");
 //     if (!token) {
-//       alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!");
+//       alert("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ thÃªm sáº£n pháº©m vÃ o giá» hÃ ng!");
 //       navigate("/login", {
-//         state: { success: "Vui lòng đăng nhập để tiếp tục thêm vào giỏ hàng." },
+//         state: { success: "Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ tiáº¿p tá»¥c thÃªm vÃ o giá» hÃ ng." },
 //       });
 //       return;
 //     }
@@ -158,7 +158,7 @@
 //         ? prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + 1 } : i))
 //         : [...prev, { ...product, qty: 1 }];
 //     });
-//     alert("🎉 Sản phẩm đã được thêm vào giỏ hàng!");
+//     alert("ðŸŽ‰ Sáº£n pháº©m Ä‘Ã£ Ä‘Æ°á»£c thÃªm vÃ o giá» hÃ ng!");
 //   };
 
 //   return (
@@ -189,12 +189,12 @@
 //         <Route path="/wishlist" element={<WishlistPage />} />
 //         <Route path="/news" element={<News />} />
 //         <Route path="/news/:slugOrId" element={<NewsDetail />} />
-//         {/* 👇 NEW: route trang Liên hệ */}
+//         {/* ðŸ‘‡ NEW: route trang LiÃªn há»‡ */}
 //         <Route path="/contact" element={<Contact />} />
 //       </Route>
 
 //       <Route element={<CustomerLayout />}>
-//         {/* ...các route khác của khách hàng */}
+//         {/* ...cÃ¡c route khÃ¡c cá»§a khÃ¡ch hÃ ng */}
 //         <Route path="/products" element={<ProductsPage />} />
 //       </Route>
 
@@ -225,12 +225,12 @@
 
 //       </Route>
 
-//       {/* Khác */}
+//       {/* KhÃ¡c */}
 //       <Route path="/forgot-password" element={<ForgotPassword />} />
 
-//       {/* 404 (dùng layout khách cho đồng bộ UI) */}
+//       {/* 404 (dÃ¹ng layout khÃ¡ch cho Ä‘á»“ng bá»™ UI) */}
 //       <Route element={<CustomerLayout />}>
-//         <Route path="*" element={<div>Không tìm thấy trang</div>} />
+//         <Route path="*" element={<div>KhÃ´ng tÃ¬m tháº¥y trang</div>} />
 //       </Route>
 //     </Routes>
 //   );
@@ -245,7 +245,7 @@
 // src/main.jsx
 
 
-import "./boot/urlRewrite";   // phải đứng trước mọi import khác
+import "./boot/urlRewrite";   // pháº£i Ä‘á»©ng trÆ°á»›c má»i import khÃ¡c
 
 
 
@@ -285,7 +285,7 @@ import NewsDetail from "./pages/Customers/NewsDetail";
 import WishlistPage from "./pages/Customers/Wishlist";
 import MomoReturn from "./pages/Customers/MomoReturn";
 import CategoryTrash from "./pages/Admin/Category/CategoryTrash.jsx";
-import QuickViewPage from "./pages/Customers/QuickViewPage.jsx"; // ✅ chỉ 1 lần
+import QuickViewPage from "./pages/Customers/QuickViewPage.jsx"; // âœ… chá»‰ 1 láº§n
 
 import ReviewSection from "./pages/Customers/ReviewSection";
 import CanceledOrders from "./pages/Customers/CanceledOrders.jsx";
@@ -312,7 +312,7 @@ import StockMovements from "./pages/Admin/StockMovements";
 import FloatingAIWidget from "./components/FloatingAIWidget";
 import Coupons from "./pages/Admin/Coupons.jsx";
 /* =============================
-   🧩 CUSTOMER LAYOUT GẮN TRỰC TIẾP TẠI ĐÂY
+   ðŸ§© CUSTOMER LAYOUT Gáº®N TRá»°C TIáº¾P Táº I ÄÃ‚Y
    ============================= */
 const PLACEHOLDER = "https://placehold.co/160x120?text=No+Img";
 const VND = new Intl.NumberFormat("vi-VN");
@@ -367,15 +367,15 @@ function MiniCart() {
       onMouseLeave={() => setOpen(false)}
     >
       <button className="mini-cart" onClick={() => navigate("/cart")}>
-        🛒
+        ðŸ›’
         {count > 0 && <span className="mini-cart-badge">{count}</span>}
       </button>
       {open && (
         <div className="mini-cart-pop">
-          <div className="pop-head">Sản phẩm mới thêm</div>
+          <div className="pop-head">Sáº£n pháº©m má»›i thÃªm</div>
           <ul className="pop-list">
             {items.length === 0 && (
-              <li className="pop-empty">Giỏ hàng đang trống</li>
+              <li className="pop-empty">Giá» hÃ ng Ä‘ang trá»‘ng</li>
             )}
             {items.slice(0, 6).map((it) => (
               <li key={it.id} className="pop-item">
@@ -384,7 +384,7 @@ function MiniCart() {
                   <div className="pop-name">{it.name}</div>
                   <div className="pop-sub">
                     <span>x{it.qty}</span>
-                    <b>{VND.format(it.price)}đ</b>
+                    <b>{VND.format(it.price)}Ä‘</b>
                   </div>
                 </div>
               </li>
@@ -392,7 +392,7 @@ function MiniCart() {
           </ul>
           <div className="pop-actions">
             <button className="btn-view" onClick={() => navigate("/cart")}>
-              Xem giỏ hàng
+              Xem giá» hÃ ng
             </button>
           </div>
         </div>
@@ -426,7 +426,7 @@ function UserMenu() {
   }, []);
 
   if (!user) return null;
-  const name = user.name || user.email || "Khách hàng";
+  const name = user.name || user.email || "KhÃ¡ch hÃ ng";
   const initials = name
     .trim()
     .split(/\s+/)
@@ -443,7 +443,7 @@ function UserMenu() {
   );
 }
 
-/* --- Layout chính --- */
+/* --- Layout chÃ­nh --- */
 function CustomerLayout() {
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
@@ -451,14 +451,14 @@ function CustomerLayout() {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-orange-50/50">
       <header className="header">
         <div className="brand">
-          🏋️‍♂️ <span className="tracking-tight">SportShop</span>
+          ðŸ‹ï¸â€â™‚ï¸ <span className="tracking-tight">SportShop</span>
         </div>
 
         <nav className="mainnav">
-          <NavLink to="/" end className="navlink">Trang chủ</NavLink>
-          <NavLink to="/products" className="navlink">Sản phẩm</NavLink>
-          <NavLink to="/news" className="navlink">Tin tức</NavLink>
-          <NavLink to="/contact" className="navlink">Liên hệ</NavLink>
+          <NavLink to="/" end className="navlink">Trang chá»§</NavLink>
+          <NavLink to="/products" className="navlink">Sáº£n pháº©m</NavLink>
+          <NavLink to="/news" className="navlink">Tin tá»©c</NavLink>
+          <NavLink to="/contact" className="navlink">LiÃªn há»‡</NavLink>
         </nav>
 
         <div className="right">
@@ -466,8 +466,8 @@ function CustomerLayout() {
             <UserMenu />
           ) : (
             <>
-              <NavLink to="/register" className="navlink">Đăng ký</NavLink>
-              <NavLink to="/login" className="navlink">Đăng nhập</NavLink>
+              <NavLink to="/register" className="navlink">ÄÄƒng kÃ½</NavLink>
+              <NavLink to="/login" className="navlink">ÄÄƒng nháº­p</NavLink>
             </>
           )}
           <MiniCart />
@@ -480,8 +480,8 @@ function CustomerLayout() {
 
       <footer className="px-4 py-4 border-t text-sm text-gray-600 bg-white/80 backdrop-blur">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <span>© {new Date().getFullYear()} SportShop</span>
-          <span className="text-gray-500">Năng động mỗi ngày 🏃</span>
+          <span>Â© {new Date().getFullYear()} SportShop</span>
+          <span className="text-gray-500">NÄƒng Ä‘á»™ng má»—i ngÃ y ðŸƒ</span>
         </div>
       </footer>
 
@@ -540,7 +540,7 @@ function RequireAdmin({ children }) {
       <Navigate
         to="/admin/login"
         replace
-        state={{ denied: "Bạn không có quyền truy cập khu vực Quản trị." }}
+        state={{ denied: "Báº¡n khÃ´ng cÃ³ quyá»n truy cáº­p khu vá»±c Quáº£n trá»‹." }}
       />
     );
   }
@@ -554,7 +554,7 @@ function RedirectCategory() {
   return <Navigate to={`/category/${id}`} replace />;
 }
 
-/* ---------- App chính ---------- */
+/* ---------- App chÃ­nh ---------- */
 function App() {
   const navigate = useNavigate();
   const [cart, setCart] = useState(() => {
@@ -575,7 +575,7 @@ function App() {
   const addToCart = (product) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Vui lòng đăng nhập để thêm sản phẩm!");
+      alert("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ thÃªm sáº£n pháº©m!");
       navigate("/login");
       return;
     }
@@ -585,10 +585,10 @@ function App() {
         ? prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + 1 } : i))
         : [...prev, { ...product, qty: 1 }];
     });
-    toast.success("Đã thêm vào giỏ hàng 🏀");
+    toast.success("ÄÃ£ thÃªm vÃ o giá» hÃ ng ðŸ€");
   };
 
-  // Sync cart khi tab khác thay đổi
+  // Sync cart khi tab khÃ¡c thay Ä‘á»•i
   useEffect(() => {
     const syncFromLS = () => {
       try {
@@ -608,7 +608,7 @@ function App() {
     };
   }, [setCart]);
 
-  // ✅ Nhận event từ QuickViewPage để thêm giỏ theo logic sẵn có
+  // âœ… Nháº­n event tá»« QuickViewPage Ä‘á»ƒ thÃªm giá» theo logic sáºµn cÃ³
   useEffect(() => {
     const onQVAdd = (e) => {
       const { prod, variant } = e.detail || {};
@@ -616,7 +616,7 @@ function App() {
 
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("Vui lòng đăng nhập để thêm sản phẩm!");
+        alert("Vui lÃ²ng Ä‘Äƒng nháº­p Ä‘á»ƒ thÃªm sáº£n pháº©m!");
         navigate("/login");
         return;
       }
@@ -643,7 +643,7 @@ function App() {
             )
           : [...prev, item];
       });
-      toast.success("Đã thêm vào giỏ hàng 🏀");
+      toast.success("ÄÃ£ thÃªm vÃ o giá» hÃ ng ðŸ€");
     };
     window.addEventListener("qv:add", onQVAdd);
     return () => window.removeEventListener("qv:add", onQVAdd);
@@ -660,7 +660,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetail addToCart={addToCart} />} />
         <Route path="/checkout" element={<Checkout setCart={setCart} />} />
 
-        {/* ✅ Quick View: chỉ 1 route */}
+        {/* âœ… Quick View: chá»‰ 1 route */}
         <Route path="/quick/:id" element={<QuickViewPage />} />
 
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
@@ -676,7 +676,7 @@ function App() {
         <Route path="/momo-return" element={<MomoReturn />} />
         <Route path="/admin/categories/trash" element={<CategoryTrash />} />
 <Route path="/admin/coupons" element={<Coupons />} /> 
-        {/* khác */}
+        {/* khÃ¡c */}
         <Route path="/products/:id/reviews" element={<ReviewSection />} />
         <Route path="/canceled-orders" element={<CanceledOrders />} />
         <Route path="/my-orders" element={<MyOrders />} />
@@ -712,7 +712,7 @@ function App() {
 
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route element={<CustomerLayout />}>
-        <Route path="*" element={<div>Không tìm thấy trang</div>} />
+        <Route path="*" element={<div>KhÃ´ng tÃ¬m tháº¥y trang</div>} />
       </Route>
     </Routes>
   );
@@ -724,3 +724,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <FloatingAIWidget />
   </BrowserRouter>
 );
+
+

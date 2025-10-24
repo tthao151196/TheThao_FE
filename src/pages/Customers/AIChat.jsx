@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://127.0.0.1:8000/api";
 
 export default function AIChat() {
   const [input, setInput] = useState("");
   const [items, setItems] = useState([
-    { role: "assistant", text: "Xin chào 👋 Hỏi mình về: giá min/max/trung bình, giá theo tên sản phẩm (vd: “Con Chó giá bao nhiêu”), tìm sản phẩm theo mức giá (vd: 199.000đ), top bán chạy (trong N ngày), hoặc giờ hiện tại." }
+    { role: "assistant", text: "Xin chÃ o ðŸ‘‹ Há»i mÃ¬nh vá»: giÃ¡ min/max/trung bÃ¬nh, giÃ¡ theo tÃªn sáº£n pháº©m (vd: â€œCon ChÃ³ giÃ¡ bao nhiÃªuâ€), tÃ¬m sáº£n pháº©m theo má»©c giÃ¡ (vd: 199.000Ä‘), top bÃ¡n cháº¡y (trong N ngÃ y), hoáº·c giá» hiá»‡n táº¡i." }
   ]);
   const [loading, setLoading] = useState(false);
   const listRef = useRef(null);
@@ -28,12 +28,12 @@ export default function AIChat() {
 
       setItems(arr => [...arr, {
         role: "assistant",
-        text: data?.reply ?? "Không có phản hồi.",
+        text: data?.reply ?? "KhÃ´ng cÃ³ pháº£n há»“i.",
         title: data?.title ?? null,
         cards: Array.isArray(data?.cards) ? data.cards : [],
       }]);
     } catch (e) {
-      setItems(arr => [...arr, { role: "assistant", text: "Lỗi gọi API (kiểm tra backend/CORS)." }]);
+      setItems(arr => [...arr, { role: "assistant", text: "Lá»—i gá»i API (kiá»ƒm tra backend/CORS)." }]);
     } finally {
       setLoading(false);
     }
@@ -47,7 +47,7 @@ export default function AIChat() {
     <div className="min-h-[calc(100vh-110px)] bg-white text-slate-900 font-[Montserrat]">
       <div className="max-w-3xl mx-auto px-4 py-6">
         <h1 className="text-2xl font-bold uppercase tracking-wide">
-          Trợ lý AI
+          Trá»£ lÃ½ AI
           <span className="block h-1 w-28 bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-400 mt-2 rounded-full" />
         </h1>
 
@@ -55,7 +55,7 @@ export default function AIChat() {
           <div ref={listRef} className="h-[60vh] overflow-y-auto bg-[#f8fafc] p-4 space-y-3">
             {items.map((m, i) => (
               <div key={i} className={`max-w-[85%] rounded-2xl px-4 py-2 shadow-sm ${m.role === "user" ? "ml-auto bg-indigo-100" : "bg-white border"}`}>
-                <div className="text-xs opacity-60 mb-1">{m.role === "user" ? "Bạn" : "AI"}</div>
+                <div className="text-xs opacity-60 mb-1">{m.role === "user" ? "Báº¡n" : "AI"}</div>
 
                 {m.text && <div className="whitespace-pre-wrap leading-relaxed">{m.text}</div>}
                 {m.title && <div className="font-semibold mt-2">{m.title}</div>}
@@ -77,7 +77,7 @@ export default function AIChat() {
                           )}
                         </div>
                         <div className="p-2">
-                          <div className="text-sm font-medium line-clamp-2">{c.title || "Sản phẩm"}</div>
+                          <div className="text-sm font-medium line-clamp-2">{c.title || "Sáº£n pháº©m"}</div>
                           {c.subtitle && <div className="text-xs text-slate-500 mt-1">{c.subtitle}</div>}
                         </div>
                       </a>
@@ -89,7 +89,7 @@ export default function AIChat() {
 
             {loading && (
               <div className="w-28 h-8 bg-white border rounded-2xl px-4 py-2 shadow-sm flex items-center">
-                <span className="animate-pulse">Đang trả lời…</span>
+                <span className="animate-pulse">Äang tráº£ lá»iâ€¦</span>
               </div>
             )}
           </div>
@@ -97,7 +97,7 @@ export default function AIChat() {
           <div className="p-3 bg-white border-t flex gap-2">
             <input
               className="flex-1 border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="Nhập câu hỏi… (vd: Con Chó giá bao nhiêu? | Sản phẩm giá 199.000đ | Top bán chạy 30 ngày?)"
+              placeholder="Nháº­p cÃ¢u há»iâ€¦ (vd: Con ChÃ³ giÃ¡ bao nhiÃªu? | Sáº£n pháº©m giÃ¡ 199.000Ä‘ | Top bÃ¡n cháº¡y 30 ngÃ y?)"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send()}
@@ -107,15 +107,17 @@ export default function AIChat() {
               disabled={loading || !input.trim()}
               className="rounded-xl px-4 py-2 bg-indigo-600 text-white disabled:opacity-50 hover:bg-indigo-700"
             >
-              Gửi
+              Gá»­i
             </button>
           </div>
         </div>
 
         <div className="text-sm text-slate-500 mt-3">
-          Ví dụ: “Con Chó giá bao nhiêu?”, “Sản phẩm giá 199.000đ”, “Top bán chạy 30 ngày?”, “Bây giờ mấy giờ?”
+          VÃ­ dá»¥: â€œCon ChÃ³ giÃ¡ bao nhiÃªu?â€, â€œSáº£n pháº©m giÃ¡ 199.000Ä‘â€, â€œTop bÃ¡n cháº¡y 30 ngÃ y?â€, â€œBÃ¢y giá» máº¥y giá»?â€
         </div>
       </div>
     </div>
   );
 }
+
+

@@ -1,11 +1,11 @@
-// src/pages/Customers/layout.jsx
+﻿// src/pages/Customers/layout.jsx
 import React from "react";
 import { FiBox, FiBriefcase, FiUsers, FiTwitter, FiLinkedin } from "react-icons/fi";
 
 export default function Layout() {
   return (
     <div className="about-page">
-      {/* ===== CSS riêng cho trang ===== */}
+      {/* ===== CSS riÃªng cho trang ===== */}
       <style>{`
         .about-page {
           --bg1: #064e3b;         /* emerald-900 */
@@ -251,46 +251,46 @@ export default function Layout() {
       `}</style>
 
       <main className="container">
-        {/* SECTION 1: HƠN CẢ MỘT CỬA HÀNG */}
+        {/* SECTION 1: HÆ N Cáº¢ Má»˜T Cá»¬A HÃ€NG */}
         <section className="hero">
           <div className="head">
-            <h2>HƠN CẢ MỘT CỬA HÀNG</h2>
+            <h2>HÆ N Cáº¢ Má»˜T Cá»¬A HÃ€NG</h2>
             <p className="sub">
-              Chúng tôi là những người yêu bóng đá, xây dựng nên không gian này để chia sẻ
-              <em> страсть</em> và mang đến những sản phẩm tốt nhất cho cộng đồng.
+              ChÃºng tÃ´i lÃ  nhá»¯ng ngÆ°á»i yÃªu bÃ³ng Ä‘Ã¡, xÃ¢y dá»±ng nÃªn khÃ´ng gian nÃ y Ä‘á»ƒ chia sáº»
+              <em> ÑÑ‚Ñ€Ð°ÑÑ‚ÑŒ</em> vÃ  mang Ä‘áº¿n nhá»¯ng sáº£n pháº©m tá»‘t nháº¥t cho cá»™ng Ä‘á»“ng.
             </p>
           </div>
 
           <div className="hero-grid">
             <div className="hero-copy">
-              <h3>Từ Đam Mê Đến Hành Động</h3>
+              <h3>Tá»« Äam MÃª Äáº¿n HÃ nh Äá»™ng</h3>
               <p>
-                Câu chuyện của chúng tôi bắt đầu từ những buổi tập luyện dưới mưa, những trận cầu nảy lửa
-                trên sân cỏ và khát khao sở hữu những trang thiết bị chất lượng nhất. Chính niềm đam mê
-                cháy bỏng ấy đã thôi thúc chúng tôi tạo ra <span className="hl">Thế Giới Bóng Đá</span> –
-                nơi mọi <em>футболист</em> đều có thể tìm thấy "người bạn đồng hành" hoàn hảo.
+                CÃ¢u chuyá»‡n cá»§a chÃºng tÃ´i báº¯t Ä‘áº§u tá»« nhá»¯ng buá»•i táº­p luyá»‡n dÆ°á»›i mÆ°a, nhá»¯ng tráº­n cáº§u náº£y lá»­a
+                trÃªn sÃ¢n cá» vÃ  khÃ¡t khao sá»Ÿ há»¯u nhá»¯ng trang thiáº¿t bá»‹ cháº¥t lÆ°á»£ng nháº¥t. ChÃ­nh niá»m Ä‘am mÃª
+                chÃ¡y bá»ng áº¥y Ä‘Ã£ thÃ´i thÃºc chÃºng tÃ´i táº¡o ra <span className="hl">Tháº¿ Giá»›i BÃ³ng ÄÃ¡</span> â€“
+                nÆ¡i má»i <em>Ñ„ÑƒÑ‚Ð±Ð¾Ð»Ð¸ÑÑ‚</em> Ä‘á»u cÃ³ thá»ƒ tÃ¬m tháº¥y "ngÆ°á»i báº¡n Ä‘á»“ng hÃ nh" hoÃ n háº£o.
               </p>
               <ul>
-                <li>Chúng tôi tin vào sức mạnh của tinh thần đồng đội và sự Fair Play.</li>
-                <li>Chất lượng sản phẩm luôn là ưu tiên hàng đầu.</li>
-                <li>Không ngừng đổi mới để đáp ứng nhu cầu ngày càng cao của khách hàng.</li>
+                <li>ChÃºng tÃ´i tin vÃ o sá»©c máº¡nh cá»§a tinh tháº§n Ä‘á»“ng Ä‘á»™i vÃ  sá»± Fair Play.</li>
+                <li>Cháº¥t lÆ°á»£ng sáº£n pháº©m luÃ´n lÃ  Æ°u tiÃªn hÃ ng Ä‘áº§u.</li>
+                <li>KhÃ´ng ngá»«ng Ä‘á»•i má»›i Ä‘á»ƒ Ä‘Ã¡p á»©ng nhu cáº§u ngÃ y cÃ ng cao cá»§a khÃ¡ch hÃ ng.</li>
               </ul>
             </div>
 
             <div className="image">
               <img
                 src="http://127.0.0.1:8000/assets/images/logo.webp"
-                alt="Câu chuyện của chúng tôi"
+                alt="CÃ¢u chuyá»‡n cá»§a chÃºng tÃ´i"
                 loading="lazy"
               />
             </div>
           </div>
         </section>
 
-        {/* SECTION 2: NHỮNG CON SỐ BIẾT NÓI */}
+        {/* SECTION 2: NHá»®NG CON Sá» BIáº¾T NÃ“I */}
         <section className="stats">
           <div className="section-head">
-            <h2 className="section-title">NHỮNG CON SỐ BIẾT NÓI</h2>
+            <h2 className="section-title">NHá»®NG CON Sá» BIáº¾T NÃ“I</h2>
             <div className="divider" />
           </div>
 
@@ -298,47 +298,47 @@ export default function Layout() {
             <div className="stat-card">
               <div className="stat-icon"><FiBox /></div>
               <div className="stat-number">100+</div>
-              <div className="stat-label">Sản Phẩm Đa Dạng</div>
+              <div className="stat-label">Sáº£n Pháº©m Äa Dáº¡ng</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-icon"><FiBriefcase /></div>
               <div className="stat-number">5+</div>
-              <div className="stat-label">Năm Kinh Nghiệm</div>
+              <div className="stat-label">NÄƒm Kinh Nghiá»‡m</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-icon"><FiUsers /></div>
               <div className="stat-number">10K+</div>
-              <div className="stat-label">Khách Hàng Tin Tưởng</div>
+              <div className="stat-label">KhÃ¡ch HÃ ng Tin TÆ°á»Ÿng</div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 3: ĐỘI NGŨ CỦA CHÚNG TÔI */}
+        {/* SECTION 3: Äá»˜I NGÅ¨ Cá»¦A CHÃšNG TÃ”I */}
         <section className="team">
           <div className="section-head">
-            <h2 className="section-title">ĐỘI NGŨ CỦA CHÚNG TÔI</h2>
+            <h2 className="section-title">Äá»˜I NGÅ¨ Cá»¦A CHÃšNG TÃ”I</h2>
             <div className="divider" />
             <p style={{ color: "var(--ink-2)", marginTop: 12 }}>
-              Những con người đứng sau <strong style={{ color: "var(--brand)" }}>Thế Giới Bóng Đá</strong>,
-              cùng chung <em>страсть</em> và nỗ lực mang đến trải nghiệm tốt nhất cho bạn.
+              Nhá»¯ng con ngÆ°á»i Ä‘á»©ng sau <strong style={{ color: "var(--brand)" }}>Tháº¿ Giá»›i BÃ³ng ÄÃ¡</strong>,
+              cÃ¹ng chung <em>ÑÑ‚Ñ€Ð°ÑÑ‚ÑŒ</em> vÃ  ná»— lá»±c mang Ä‘áº¿n tráº£i nghiá»‡m tá»‘t nháº¥t cho báº¡n.
             </p>
           </div>
 
           <div className="team-grid">
-            {/* Thành viên 1 */}
+            {/* ThÃ nh viÃªn 1 */}
             <article className="member">
               <div className="photo">
                 <img
                   src="http://127.0.0.1:8000/assets/images/tin.jpg"
-                  alt="Phan Thanh Đức Tín"
+                  alt="Phan Thanh Äá»©c TÃ­n"
                   loading="lazy"
                 />
               </div>
               <div className="body">
-                <h3 className="name">Phan Thanh Đức Tín</h3>
-                <p className="role">Nhà Sáng Lập &amp; CEO</p>
+                <h3 className="name">Phan Thanh Äá»©c TÃ­n</h3>
+                <p className="role">NhÃ  SÃ¡ng Láº­p &amp; CEO</p>
                 <div className="links">
                   <a className="social" href="#" aria-label="Twitter"><FiTwitter /></a>
                   <a className="social" href="#" aria-label="LinkedIn"><FiLinkedin /></a>
@@ -346,18 +346,18 @@ export default function Layout() {
               </div>
             </article>
 
-            {/* Thành viên 2 */}
+            {/* ThÃ nh viÃªn 2 */}
             <article className="member">
               <div className="photo">
                 <img
                   src="http://127.0.0.1:8000/assets/images/truong.jpg"
-                  alt="Nguyễn Trúc Trường"
+                  alt="Nguyá»…n TrÃºc TrÆ°á»ng"
                   loading="lazy"
                 />
               </div>
               <div className="body">
-                <h3 className="name">Nguyễn Trúc Trường</h3>
-                <p className="role">Quản Lý Sản Phẩm</p>
+                <h3 className="name">Nguyá»…n TrÃºc TrÆ°á»ng</h3>
+                <p className="role">Quáº£n LÃ½ Sáº£n Pháº©m</p>
                 <div className="links">
                   <a className="social" href="#" aria-label="Twitter"><FiTwitter /></a>
                   <a className="social" href="#" aria-label="LinkedIn"><FiLinkedin /></a>
@@ -365,18 +365,18 @@ export default function Layout() {
               </div>
             </article>
 
-            {/* Thành viên 3 */}
+            {/* ThÃ nh viÃªn 3 */}
             <article className="member">
               <div className="photo">
                 <img
                   src="http://127.0.0.1:8000/assets/images/tai.jpg"
-                  alt="Nguyễn Tuấn Tài"
+                  alt="Nguyá»…n Tuáº¥n TÃ i"
                   loading="lazy"
                 />
               </div>
               <div className="body">
-                <h3 className="name">Nguyễn Tuấn Tài</h3>
-                <p className="role">Chuyên Viên Hỗ Trợ</p>
+                <h3 className="name">Nguyá»…n Tuáº¥n TÃ i</h3>
+                <p className="role">ChuyÃªn ViÃªn Há»— Trá»£</p>
                 <div className="links">
                   <a className="social" href="#" aria-label="Twitter"><FiTwitter /></a>
                   <a className="social" href="#" aria-label="LinkedIn"><FiLinkedin /></a>
@@ -389,3 +389,5 @@ export default function Layout() {
     </div>
   );
 }
+
+

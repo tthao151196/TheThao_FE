@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+﻿import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -7,12 +7,12 @@ const PLACEHOLDER = "https://placehold.co/60x60?text=No+Img";
 /* ===== UI bits ===== */
 function TypeBadge({ type }) {
   const map = {
-    import: { text: "Nhập", cls: "type-import" },
-    export: { text: "Xuất", cls: "type-export" },
-    return: { text: "Trả về", cls: "type-return" },
-    adjust: { text: "Điều chỉnh", cls: "type-adjust" },
+    import: { text: "Nháº­p", cls: "type-import" },
+    export: { text: "Xuáº¥t", cls: "type-export" },
+    return: { text: "Tráº£ vá»", cls: "type-return" },
+    adjust: { text: "Äiá»u chá»‰nh", cls: "type-adjust" },
   };
-  const meta = map[type] || { text: type || "—", cls: "type-other" };
+  const meta = map[type] || { text: type || "â€”", cls: "type-other" };
   return <span className={`type-badge ${meta.cls}`}>{meta.text}</span>;
 }
 
@@ -39,7 +39,7 @@ function pickPaginator(payload) {
     meta: {
       current_page: Number(p.current_page ?? 1),
       last_page: Number(p.last_page ?? 1),
-      per_page: Number(p.per_page ?? (items.length || 10)), // 👈 fallback 10
+      per_page: Number(p.per_page ?? (items.length || 10)), // ðŸ‘ˆ fallback 10
       total: Number(p.total ?? items.length),
     },
   };
@@ -53,7 +53,7 @@ export default function StockMovements() {
   const [meta, setMeta] = useState({
     current_page: 1,
     last_page: 1,
-    per_page: 10,  // 👈 hiển thị
+    per_page: 10,  // ðŸ‘ˆ hiá»ƒn thá»‹
     total: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ export default function StockMovements() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10); // 👈 gửi API
+  const [perPage, setPerPage] = useState(10); // ðŸ‘ˆ gá»­i API
 
   // Modal state
   const [showModal, setShowModal] = useState(false);
@@ -83,7 +83,7 @@ export default function StockMovements() {
       if (from) params.set("from", from);
       if (to) params.set("to", to);
       params.set("page", String(page));
-      params.set("per_page", String(perPage)); // 👈 10/trang
+      params.set("per_page", String(perPage)); // ðŸ‘ˆ 10/trang
 
       const res = await fetch(
         `${API_BASE}/admin/stock-movements?${params.toString()}`,
@@ -92,13 +92,13 @@ export default function StockMovements() {
 
       const ct = res.headers.get("content-type") || "";
       const payload = ct.includes("application/json") ? await res.json() : await res.text();
-      if (!res.ok) throw new Error(typeof payload === "string" ? payload : (payload?.message || "Lỗi tải dữ liệu"));
+      if (!res.ok) throw new Error(typeof payload === "string" ? payload : (payload?.message || "Lá»—i táº£i dá»¯ liá»‡u"));
 
       const picked = pickPaginator(payload);
       setItems(picked.items);
       setMeta(picked.meta);
     } catch (e) {
-      setErr(e.message || "Đã xảy ra lỗi");
+      setErr(e.message || "ÄÃ£ xáº£y ra lá»—i");
     } finally {
       setLoading(false);
     }
@@ -110,7 +110,7 @@ export default function StockMovements() {
     return () => clearTimeout(t);
   }, [q, type, from, to]);
 
-  // Nếu sau này đổi perPage, tự quay về trang 1
+  // Náº¿u sau nÃ y Ä‘á»•i perPage, tá»± quay vá» trang 1
   useEffect(() => { setPage(1); }, [perPage]);
 
   const filtered = useMemo(() => {
@@ -149,11 +149,11 @@ export default function StockMovements() {
 
       const ct = res.headers.get("content-type") || "";
       const data = ct.includes("application/json") ? await res.json() : await res.text();
-      if (!res.ok) throw new Error(typeof data === "string" ? data : (data?.message || "Lỗi thao tác kho"));
+      if (!res.ok) throw new Error(typeof data === "string" ? data : (data?.message || "Lá»—i thao tÃ¡c kho"));
 
-      alert("✅ Thao tác kho thành công!");
+      alert("âœ… Thao tÃ¡c kho thÃ nh cÃ´ng!");
 
-      // Cập nhật UI tại chỗ
+      // Cáº­p nháº­t UI táº¡i chá»—
       setItems((prev) =>
         prev.map((it) =>
           it.product_id === selected.product_id
@@ -175,7 +175,7 @@ export default function StockMovements() {
 
       setShowModal(false);
     } catch (e) {
-      alert("❌ " + e.message);
+      alert("âŒ " + e.message);
     }
   }
 
@@ -190,9 +190,9 @@ export default function StockMovements() {
     const end = Math.min(total, cur + 2);
 
     out.push(1);
-    if (start > 2) out.push("…");
+    if (start > 2) out.push("â€¦");
     for (let i = start; i <= end; i++) out.push(i);
-    if (end < total - 1) out.push("…");
+    if (end < total - 1) out.push("â€¦");
     if (total > 1) out.push(total);
     return out;
   }, [meta]);
@@ -241,26 +241,26 @@ export default function StockMovements() {
       {/* Topbar */}
       <div className="topbar">
         <div className="topbar-left">
-          <button className="btn-link" onClick={() => navigate(-1)}>← Quay lại</button>
-          <button className="btn-link" onClick={() => navigate("/admin")}>🏠 Trang chủ</button>
+          <button className="btn-link" onClick={() => navigate(-1)}>â† Quay láº¡i</button>
+          <button className="btn-link" onClick={() => navigate("/admin")}>ðŸ  Trang chá»§</button>
         </div>
-        <h1 style={{margin:0}}>Quản lý nhập – xuất kho</h1>
+        <h1 style={{margin:0}}>Quáº£n lÃ½ nháº­p â€“ xuáº¥t kho</h1>
         <div style={{width:120}} />
       </div>
 
       {/* Filters */}
       <div className="filters">
-        <input type="text" placeholder="Tìm tên/ID..." value={q} onChange={(e)=>setQ(e.target.value)} />
+        <input type="text" placeholder="TÃ¬m tÃªn/ID..." value={q} onChange={(e)=>setQ(e.target.value)} />
         <select value={type} onChange={(e)=>setType(e.target.value)}>
-          <option value="">Tất cả loại</option>
-          <option value="import">Nhập</option>
-          <option value="export">Xuất</option>
-          <option value="return">Trả về</option>
-          <option value="adjust">Điều chỉnh</option>
+          <option value="">Táº¥t cáº£ loáº¡i</option>
+          <option value="import">Nháº­p</option>
+          <option value="export">Xuáº¥t</option>
+          <option value="return">Tráº£ vá»</option>
+          <option value="adjust">Äiá»u chá»‰nh</option>
         </select>
         <input type="date" value={from} onChange={(e)=>setFrom(e.target.value)} />
         <input type="date" value={to} onChange={(e)=>setTo(e.target.value)} />
-        <button onClick={load}>Làm mới</button>
+        <button onClick={load}>LÃ m má»›i</button>
       </div>
 
       {/* Table */}
@@ -268,24 +268,24 @@ export default function StockMovements() {
         <thead>
           <tr>
             <th>#</th>
-            <th>Sản phẩm</th>
-            <th>Loại</th>
-            <th>Số lượng</th>
-            <th>Ngày</th>
-            <th>Ghi chú</th>
-            <th>Thao tác</th>
+            <th>Sáº£n pháº©m</th>
+            <th>Loáº¡i</th>
+            <th>Sá»‘ lÆ°á»£ng</th>
+            <th>NgÃ y</th>
+            <th>Ghi chÃº</th>
+            <th>Thao tÃ¡c</th>
           </tr>
         </thead>
         <tbody>
-          {loading && <tr><td colSpan={7}>Đang tải…</td></tr>}
-          {!loading && err && <tr><td colSpan={7} style={{color:'#b91c1c'}}>Lỗi: {err}</td></tr>}
-          {!loading && !err && filtered.length === 0 && <tr><td colSpan={7}>Không có dữ liệu</td></tr>}
+          {loading && <tr><td colSpan={7}>Äang táº£iâ€¦</td></tr>}
+          {!loading && err && <tr><td colSpan={7} style={{color:'#b91c1c'}}>Lá»—i: {err}</td></tr>}
+          {!loading && !err && filtered.length === 0 && <tr><td colSpan={7}>KhÃ´ng cÃ³ dá»¯ liá»‡u</td></tr>}
 
           {!loading && !err && filtered.map((x,i)=> {
             const tType = x.type ?? x.last_movement_type ?? "";
             const tQty  = (x.qty_change ?? x.last_movement_qty ?? 0);
             const tDate = x.created_at || x.last_movement_date || "";
-            const tNote = (x.note ?? x.last_movement_note ?? "—").toString();
+            const tNote = (x.note ?? x.last_movement_note ?? "â€”").toString();
 
             return (
               <tr key={`${x.product_id}-${i}`}>
@@ -302,8 +302,8 @@ export default function StockMovements() {
                 <td><TypeBadge type={tType} /></td>
                 <td><QtyBadge qty_change={tQty} qty={Math.abs(Number(tQty))} /></td>
                 <td>{fmtDate(tDate)}</td>
-                <td style={{textAlign:'left'}}>{tNote.trim() || "—"}</td>
-                <td><button className="action-btn" onClick={()=>openModal(x)}>Chỉnh</button></td>
+                <td style={{textAlign:'left'}}>{tNote.trim() || "â€”"}</td>
+                <td><button className="action-btn" onClick={()=>openModal(x)}>Chá»‰nh</button></td>
               </tr>
             );
           })}
@@ -312,10 +312,10 @@ export default function StockMovements() {
 
       {/* Pagination */}
       <div className="pager">
-        <span style={{marginRight:'auto'}}>Tổng: {meta.total} mục • {meta.per_page} mục/trang</span>
+        <span style={{marginRight:'auto'}}>Tá»•ng: {meta.total} má»¥c â€¢ {meta.per_page} má»¥c/trang</span>
 
-        <button onClick={()=>setPage(1)} disabled={meta.current_page <= 1}>«</button>
-        <button onClick={()=>setPage(p=>Math.max(1, p-1))} disabled={meta.current_page <= 1}>‹</button>
+        <button onClick={()=>setPage(1)} disabled={meta.current_page <= 1}>Â«</button>
+        <button onClick={()=>setPage(p=>Math.max(1, p-1))} disabled={meta.current_page <= 1}>â€¹</button>
 
         {(() => {
           const total = Number(meta.last_page || 1);
@@ -324,14 +324,14 @@ export default function StockMovements() {
           const start = Math.max(1, cur - 2);
           const end = Math.min(total, cur + 2);
           nums.push(1);
-          if (start > 2) nums.push("…");
+          if (start > 2) nums.push("â€¦");
           for (let i = start; i <= end; i++) nums.push(i);
-          if (end < total - 1) nums.push("…");
+          if (end < total - 1) nums.push("â€¦");
           if (total > 1) nums.push(total);
 
           return nums.map((p, idx) =>
-            p === "…" ? (
-              <span key={`dots-${idx}`}>…</span>
+            p === "â€¦" ? (
+              <span key={`dots-${idx}`}>â€¦</span>
             ) : (
               <button
                 key={p}
@@ -345,35 +345,35 @@ export default function StockMovements() {
           );
         })()}
 
-        <button onClick={()=>setPage(p=>Math.min(meta.last_page, p+1))} disabled={meta.current_page >= meta.last_page}>›</button>
-        <button onClick={()=>setPage(meta.last_page)} disabled={meta.current_page >= meta.last_page}>»</button>
+        <button onClick={()=>setPage(p=>Math.min(meta.last_page, p+1))} disabled={meta.current_page >= meta.last_page}>â€º</button>
+        <button onClick={()=>setPage(meta.last_page)} disabled={meta.current_page >= meta.last_page}>Â»</button>
       </div>
 
       {/* Modal */}
       {showModal && selected && (
         <div className="modal-bg" onClick={()=>setShowModal(false)}>
           <div className="modal-box" onClick={(e)=>e.stopPropagation()}>
-            <h3>Thao tác kho</h3>
+            <h3>Thao tÃ¡c kho</h3>
             <p><b>{selected.product_name}</b> (ID: {selected.product_id})</p>
             <div style={{marginTop:8}}>
-              <label>Loại phiếu</label>
+              <label>Loáº¡i phiáº¿u</label>
               <select value={form.type} onChange={(e)=>setForm({...form, type:e.target.value})}>
-                <option value="import">Nhập</option>
-                <option value="export">Xuất</option>
-                <option value="adjust">Điều chỉnh</option>
+                <option value="import">Nháº­p</option>
+                <option value="export">Xuáº¥t</option>
+                <option value="adjust">Äiá»u chá»‰nh</option>
               </select>
             </div>
             <div>
-              <label>Số lượng</label>
+              <label>Sá»‘ lÆ°á»£ng</label>
               <input type="number" value={form.qty} onChange={(e)=>setForm({...form, qty:e.target.value})}/>
             </div>
             <div>
-              <label>Ghi chú</label>
+              <label>Ghi chÃº</label>
               <textarea rows={2} value={form.note} onChange={(e)=>setForm({...form, note:e.target.value})}/>
             </div>
             <div className="modal-actions">
-              <button className="btn btn-secondary" onClick={()=>setShowModal(false)}>Hủy</button>
-              <button className="btn btn-primary" onClick={handleSubmit}>Lưu</button>
+              <button className="btn btn-secondary" onClick={()=>setShowModal(false)}>Há»§y</button>
+              <button className="btn btn-primary" onClick={handleSubmit}>LÆ°u</button>
             </div>
           </div>
         </div>
@@ -381,3 +381,5 @@ export default function StockMovements() {
     </div>
   );
 }
+
+

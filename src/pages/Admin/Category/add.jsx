@@ -1,4 +1,4 @@
-// src/pages/Admin/Category/add.jsx
+﻿// src/pages/Admin/Category/add.jsx
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
@@ -12,7 +12,7 @@ export default function AddCategory() {
   const [form, setForm] = useState({
     name: "",
     slug: "",
-    description: "", // sẽ lưu HTML từ TinyMCE
+    description: "", // sáº½ lÆ°u HTML tá»« TinyMCE
     sort_order: "",
     parent_id: "",
     image: "",
@@ -42,14 +42,14 @@ export default function AddCategory() {
     setError("");
 
     try {
-      // Lấy HTML từ TinyMCE (nếu có)
+      // Láº¥y HTML tá»« TinyMCE (náº¿u cÃ³)
       const descHtml =
         editorRef.current?.getContent({ format: "html" }) ?? form.description ?? "";
 
       const payload = {
         name: form.name,
         slug: form.slug || form.name,
-        description: descHtml, // gửi HTML giàu định dạng
+        description: descHtml, // gá»­i HTML giÃ u Ä‘á»‹nh dáº¡ng
         sort_order: form.sort_order === "" ? 0 : Number(form.sort_order),
         parent_id: form.parent_id === "" ? null : Number(form.parent_id),
         image: form.image || null,
@@ -57,7 +57,7 @@ export default function AddCategory() {
       };
 
       const token = localStorage.getItem("admin_token") || "";
-      if (!token) throw new Error("Bạn chưa đăng nhập admin (thiếu token).");
+      if (!token) throw new Error("Báº¡n chÆ°a Ä‘Äƒng nháº­p admin (thiáº¿u token).");
 
       const res = await fetch(`${API_BASE}/admin/categories`, {
         method: "POST",
@@ -70,7 +70,7 @@ export default function AddCategory() {
       });
 
       if (!res.ok) {
-        let message = `Thêm thất bại (HTTP ${res.status})`;
+        let message = `ThÃªm tháº¥t báº¡i (HTTP ${res.status})`;
         try {
           const errData = await res.json();
           if (errData?.errors) {
@@ -87,10 +87,10 @@ export default function AddCategory() {
       }
 
       const data = await res.json();
-      alert(data.message || "Thêm danh mục thành công!");
+      alert(data.message || "ThÃªm danh má»¥c thÃ nh cÃ´ng!");
       navigate("/admin/categories");
     } catch (err) {
-      setError(err.message || "Có lỗi xảy ra khi thêm danh mục.");
+      setError(err.message || "CÃ³ lá»—i xáº£y ra khi thÃªm danh má»¥c.");
     } finally {
       setLoading(false);
     }
@@ -109,7 +109,7 @@ export default function AddCategory() {
         }}
       >
         <h1 style={{ fontSize: 24, marginBottom: 16, fontWeight: 700 }}>
-          Thêm danh mục
+          ThÃªm danh má»¥c
         </h1>
 
         {error && (
@@ -119,7 +119,7 @@ export default function AddCategory() {
         )}
 
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
-          {/* Lưới 2 cột giống các form khác */}
+          {/* LÆ°á»›i 2 cá»™t giá»‘ng cÃ¡c form khÃ¡c */}
           <div
             style={{
               display: "grid",
@@ -129,7 +129,7 @@ export default function AddCategory() {
             }}
           >
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Tên danh mục</span>
+              <span>TÃªn danh má»¥c</span>
               <input
                 name="name"
                 value={form.name}
@@ -145,7 +145,7 @@ export default function AddCategory() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Slug (tùy chọn)</span>
+              <span>Slug (tÃ¹y chá»n)</span>
               <input
                 name="slug"
                 value={form.slug}
@@ -160,7 +160,7 @@ export default function AddCategory() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Thứ tự hiển thị (mặc định 0)</span>
+              <span>Thá»© tá»± hiá»ƒn thá»‹ (máº·c Ä‘á»‹nh 0)</span>
               <input
                 type="number"
                 name="sort_order"
@@ -176,7 +176,7 @@ export default function AddCategory() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Parent ID (nếu có)</span>
+              <span>Parent ID (náº¿u cÃ³)</span>
               <input
                 type="number"
                 name="parent_id"
@@ -192,7 +192,7 @@ export default function AddCategory() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Ảnh (đường dẫn / tên file)</span>
+              <span>áº¢nh (Ä‘Æ°á»ng dáº«n / tÃªn file)</span>
               <input
                 name="image"
                 value={form.image}
@@ -208,7 +208,7 @@ export default function AddCategory() {
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span>Trạng thái</span>
+              <span>Tráº¡ng thÃ¡i</span>
               <select
                 name="status"
                 value={form.status}
@@ -220,19 +220,19 @@ export default function AddCategory() {
                   borderRadius: 8,
                 }}
               >
-                <option value={1}>Hiển thị</option>
-                <option value={0}>Nháp</option>
+                <option value={1}>Hiá»ƒn thá»‹</option>
+                <option value={0}>NhÃ¡p</option>
               </select>
             </label>
           </div>
 
-          {/* MÔ TẢ (Rich Text, tối ưu dán từ Word) */}
+          {/* MÃ” Táº¢ (Rich Text, tá»‘i Æ°u dÃ¡n tá»« Word) */}
           <label style={{ display: "grid", gap: 6 }}>
-            <span>Mô tả (hỗ trợ dán từ Word)</span>
+            <span>MÃ´ táº£ (há»— trá»£ dÃ¡n tá»« Word)</span>
 
             <Editor
-              // Nếu bạn có API key Tiny, dùng: tinymceScriptSrc="https://cdn.tiny.cloud/1/<API_KEY>/tinymce/6/tinymce.min.js"
-              // Nếu không, TinyMCE sẽ được bundle từ package 'tinymce' đã cài.
+              // Náº¿u báº¡n cÃ³ API key Tiny, dÃ¹ng: tinymceScriptSrc="https://cdn.tiny.cloud/1/<API_KEY>/tinymce/6/tinymce.min.js"
+              // Náº¿u khÃ´ng, TinyMCE sáº½ Ä‘Æ°á»£c bundle tá»« package 'tinymce' Ä‘Ã£ cÃ i.
               onInit={(_evt, editor) => (editorRef.current = editor)}
               initialValue={form.description || ""}
               onEditorChange={(content) =>
@@ -247,19 +247,19 @@ export default function AddCategory() {
                   "undo redo | blocks | bold italic underline forecolor | " +
                   "alignleft aligncenter alignright alignjustify | " +
                   "bullist numlist outdent indent | table link | removeformat | code",
-                // Tối ưu dán từ Word
-                paste_as_text: false, // giữ lại format cơ bản
-                paste_data_images: false, // chặn dán ảnh base64 (giảm payload)
+                // Tá»‘i Æ°u dÃ¡n tá»« Word
+                paste_as_text: false, // giá»¯ láº¡i format cÆ¡ báº£n
+                paste_data_images: false, // cháº·n dÃ¡n áº£nh base64 (giáº£m payload)
                 paste_enable_default_filters: true,
                 paste_word_valid_elements:
                   "b,strong,i,em,u,a[href|target],p,br,ul,ol,li,table,thead,tbody,tr,td,th,span[style],h1,h2,h3,h4,h5,h6",
                 paste_convert_word_fake_lists: true,
-                // Giới hạn style giữ lại
+                // Giá»›i háº¡n style giá»¯ láº¡i
                 valid_elements:
                   "a[href|target=_blank],strong/b,em/i,u,br,p,ul,ol,li,table,thead,tbody,tr,td[colspan|rowspan],th[colspan|rowspan],h1,h2,h3,h4,h5,h6,span[style]",
                 content_style:
                   "body{font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto; font-size:14px; color:#0f172a;} p{margin:0 0 8px;} table{border-collapse:collapse;width:100%;} td,th{border:1px solid #ddd;padding:6px;}",
-                // Tự động mở rộng chiều cao theo nội dung
+                // Tá»± Ä‘á»™ng má»Ÿ rá»™ng chiá»u cao theo ná»™i dung
                 autoresize_bottom_margin: 16,
               }}
             />
@@ -277,7 +277,7 @@ export default function AddCategory() {
                 cursor: "pointer",
               }}
             >
-              Hủy
+              Há»§y
             </button>
             <button
               disabled={loading}
@@ -291,7 +291,7 @@ export default function AddCategory() {
                 cursor: "pointer",
               }}
             >
-              {loading ? "Đang lưu…" : "Lưu danh mục"}
+              {loading ? "Äang lÆ°uâ€¦" : "LÆ°u danh má»¥c"}
             </button>
           </div>
         </form>
@@ -299,3 +299,5 @@ export default function AddCategory() {
     </section>
   );
 }
+
+

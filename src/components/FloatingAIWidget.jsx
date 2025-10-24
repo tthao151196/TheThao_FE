@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 
 const API = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
 
@@ -7,7 +7,7 @@ export default function FloatingAIWidget() {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState('');
   const [msgs, setMsgs] = useState([
-    { role: 'ai', content: 'Xin chào! Mình là trợ lý AI. Bạn có thể hỏi ngoài lề hoặc hỏi về sản phẩm (ví dụ: "áo jersey size M giá bao nhiêu?").' }
+    { role: 'ai', content: 'Xin chÃ o! MÃ¬nh lÃ  trá»£ lÃ½ AI. Báº¡n cÃ³ thá»ƒ há»i ngoÃ i lá» hoáº·c há»i vá» sáº£n pháº©m (vÃ­ dá»¥: "Ã¡o jersey size M giÃ¡ bao nhiÃªu?").' }
   ]);
   const boxRef = useRef(null);
 
@@ -30,9 +30,9 @@ export default function FloatingAIWidget() {
         body: JSON.stringify({ message: text })
       });
       const data = await res.json();
-      setMsgs(m => [...m, { role: 'ai', content: data.reply || 'Không có phản hồi.' }]);
+      setMsgs(m => [...m, { role: 'ai', content: data.reply || 'KhÃ´ng cÃ³ pháº£n há»“i.' }]);
     } catch (e) {
-      setMsgs(m => [...m, { role: 'ai', content: 'Lỗi kết nối đến AI.' }]);
+      setMsgs(m => [...m, { role: 'ai', content: 'Lá»—i káº¿t ná»‘i Ä‘áº¿n AI.' }]);
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ export default function FloatingAIWidget() {
           background: '#6366f1', color: '#fff', fontWeight: 700,
           boxShadow: '0 8px 24px rgba(2,6,23,.18)'
         }}
-      >{open ? 'Đóng AI' : 'AI Chat'}</button>
+      >{open ? 'ÄÃ³ng AI' : 'AI Chat'}</button>
 
       {open && (
         <div style={{
@@ -65,7 +65,7 @@ export default function FloatingAIWidget() {
           display: 'flex', flexDirection: 'column', overflow: 'hidden'
         }}>
           <div style={{ padding: 12, fontWeight: 800, background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-            Trợ lý AI — TheThao Sports
+            Trá»£ lÃ½ AI â€” TheThao Sports
           </div>
 
           <div ref={boxRef} style={{ flex: 1, padding: 12, overflowY: 'auto' }}>
@@ -78,12 +78,12 @@ export default function FloatingAIWidget() {
                 }}>{m.content}</div>
               </div>
             ))}
-            {loading && <div style={{ fontSize: 12, color: '#64748b' }}>AI đang trả lời…</div>}
+            {loading && <div style={{ fontSize: 12, color: '#64748b' }}>AI Ä‘ang tráº£ lá»iâ€¦</div>}
           </div>
 
           <div style={{ padding: 10, borderTop: '1px solid #e2e8f0', background: '#fff' }}>
             <textarea
-              placeholder="Gõ tin nhắn…"
+              placeholder="GÃµ tin nháº¯nâ€¦"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={onKey}
@@ -98,7 +98,7 @@ export default function FloatingAIWidget() {
                 background: loading ? '#94a3b8' : '#6366f1', color: '#fff', fontWeight: 800
               }}
             >
-              Gửi
+              Gá»­i
             </button>
           </div>
         </div>
@@ -106,3 +106,5 @@ export default function FloatingAIWidget() {
     </div>
   );
 }
+
+

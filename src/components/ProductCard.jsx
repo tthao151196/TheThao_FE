@@ -1,4 +1,6 @@
-// src/components/ProductCard.jsx
+﻿// src/components/ProductCard.jsx
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import HeartButton from "./HeartButton";
@@ -36,9 +38,9 @@ export default function ProductCard({ p }) {
       if (exists) {
         next = arr.filter((it) => Number(it?.id) !== Number(p.id));
       } else {
-        // Giới hạn tối đa 4 sản phẩm so sánh
+        // Giá»›i háº¡n tá»‘i Ä‘a 4 sáº£n pháº©m so sÃ¡nh
         if (arr.length >= 4) {
-          // đẩy cái cũ nhất ra
+          // Ä‘áº©y cÃ¡i cÅ© nháº¥t ra
           arr.shift();
         }
         next = [...arr, { id: p.id, name: p.name, thumbnail_url: imgSrc, price: sale }];
@@ -46,7 +48,7 @@ export default function ProductCard({ p }) {
       localStorage.setItem(key, JSON.stringify(next));
       setIsCompared(!exists);
 
-      // phát event để Drawer so sánh (nếu có) cập nhật
+      // phÃ¡t event Ä‘á»ƒ Drawer so sÃ¡nh (náº¿u cÃ³) cáº­p nháº­t
       window.dispatchEvent(new CustomEvent("compare:changed", { detail: next }));
     } catch {}
   };
@@ -60,7 +62,7 @@ export default function ProductCard({ p }) {
   const inStock =
     p?.in_stock !== undefined
       ? !!p.in_stock
-      : (Number(p?.stock) || 0) > 0; // fallback nếu có trường stock
+      : (Number(p?.stock) || 0) > 0; // fallback náº¿u cÃ³ trÆ°á»ng stock
 
   return (
     <div
@@ -75,18 +77,18 @@ export default function ProductCard({ p }) {
         e.currentTarget.style.boxShadow = styles.card.boxShadow;
       }}
     >
-      {/* Badge giảm giá */}
+      {/* Badge giáº£m giÃ¡ */}
       {off > 0 && <div style={styles.saleTag}>-{off}%</div>}
 
-      {/* Badge hết hàng (nếu có) */}
-      {!inStock && <div style={styles.oosTag}>Hết hàng</div>}
+      {/* Badge háº¿t hÃ ng (náº¿u cÃ³) */}
+      {!inStock && <div style={styles.oosTag}>Háº¿t hÃ ng</div>}
 
-      {/* Nút trái tim */}
+      {/* NÃºt trÃ¡i tim */}
       <div className="heart-wrapper" style={styles.heartWrapper}>
         <HeartButton productId={p.id} />
       </div>
 
-      {/* Ảnh + overlay action */}
+      {/* áº¢nh + overlay action */}
       <Link
         to={`/products/${p.id}`}
         style={{ textDecoration: "none", color: "inherit", display: "block", position: "relative" }}
@@ -110,7 +112,7 @@ export default function ProductCard({ p }) {
               className="btn-qv"
               title="Xem nhanh"
             >
-              👁️ Xem nhanh
+              ðŸ‘ï¸ Xem nhanh
             </button>
 
             <button
@@ -120,19 +122,19 @@ export default function ProductCard({ p }) {
                 ...(isCompared ? styles.compareBtnActive : null),
               }}
               className="btn-compare"
-              title={isCompared ? "Bỏ khỏi so sánh" : "Thêm vào so sánh"}
+              title={isCompared ? "Bá» khá»i so sÃ¡nh" : "ThÃªm vÃ o so sÃ¡nh"}
             >
-              {isCompared ? "✓ Đã thêm so sánh" : "⇄ So sánh"}
+              {isCompared ? "âœ“ ÄÃ£ thÃªm so sÃ¡nh" : "â‡„ So sÃ¡nh"}
             </button>
           </div>
         </div>
 
         <div style={styles.info}>
           <div style={styles.name} title={p.name}>{p.name}</div>
-          <div style={styles.brand}>{p.brand_name || "Không rõ"}</div>
+          <div style={styles.brand}>{p.brand_name || "KhÃ´ng rÃµ"}</div>
           <div style={styles.priceBox}>
-            <span style={styles.priceSale}>{sale.toLocaleString()} đ</span>
-            {root > sale && <span style={styles.priceRoot}>{root.toLocaleString()} đ</span>}
+            <span style={styles.priceSale}>{sale.toLocaleString()} Ä‘</span>
+            {root > sale && <span style={styles.priceRoot}>{root.toLocaleString()} Ä‘</span>}
           </div>
         </div>
       </Link>
@@ -141,7 +143,7 @@ export default function ProductCard({ p }) {
         .product-card:hover .heart-wrapper { transform: scale(1.1); }
         .heart-wrapper svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
 
-        /* overlay xuất hiện khi hover card */
+        /* overlay xuáº¥t hiá»‡n khi hover card */
         .product-card:hover .overlay-actions { opacity: 1; transform: translateY(0); }
       `}</style>
     </div>
@@ -175,7 +177,7 @@ const styles = {
     display: "block",
     transition: "transform .25s ease",
   },
-  /* Tim căn chỉnh chuẩn pixel */
+  /* Tim cÄƒn chá»‰nh chuáº©n pixel */
   heartWrapper: {
     position: "absolute",
     top: 14,
@@ -202,7 +204,7 @@ const styles = {
   oosTag: {
     position: "absolute",
     top: 14,
-    left: 14 + 58, // đẩy sang phải sau saleTag ~58px
+    left: 14 + 58, // Ä‘áº©y sang pháº£i sau saleTag ~58px
     background: "#ef4444",
     color: "#fff",
     fontSize: 12,
@@ -287,3 +289,5 @@ const styles = {
     fontSize: 13,
   },
 };
+
+

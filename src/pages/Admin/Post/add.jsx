@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+﻿import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const API_BASE = "http://127.0.0.1:8000/api";
@@ -9,7 +9,7 @@ export default function PostAdd() {
     const [f, setF] = useState({
         title: "",
         slug: "",
-        status: "draft", // FE: draft/published → BE: 0/1
+        status: "draft", // FE: draft/published â†’ BE: 0/1
         excerpt: "",
         content: "",
         image_url: "",
@@ -40,7 +40,7 @@ export default function PostAdd() {
             const fd = new FormData();
             fd.append("title", f.title);
 
-            // --- slug fallback chống trùng/blank ---
+            // --- slug fallback chá»‘ng trÃ¹ng/blank ---
             const safeSlug =
                 (f.slug && f.slug.trim()) ||
                 autoSlug(f.title) ||
@@ -58,12 +58,12 @@ export default function PostAdd() {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    Accept: "application/json", // quan trọng để nhận JSON khi lỗi
+                    Accept: "application/json", // quan trá»ng Ä‘á»ƒ nháº­n JSON khi lá»—i
                 },
                 body: fd,
             });
 
-            // thử đọc JSON trước, nếu không phải JSON thì đọc text
+            // thá»­ Ä‘á»c JSON trÆ°á»›c, náº¿u khÃ´ng pháº£i JSON thÃ¬ Ä‘á»c text
             const contentType = res.headers.get("content-type") || "";
             const payload = contentType.includes("application/json")
                 ? await res.json().catch(() => ({}))
@@ -80,10 +80,10 @@ export default function PostAdd() {
                 throw new Error(msg);
             }
 
-            alert("✅ Đã tạo bài viết");
+            alert("âœ… ÄÃ£ táº¡o bÃ i viáº¿t");
             nav("/admin/posts");
         } catch (err) {
-            alert(`❌ Lỗi lưu: ${err.message}`);
+            alert(`âŒ Lá»—i lÆ°u: ${err.message}`);
         }
     }
 
@@ -97,7 +97,7 @@ export default function PostAdd() {
                     gap: 10,
                 }}
             >
-                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Thêm bài viết</h1>
+                <h1 style={{ fontSize: 24, fontWeight: 700 }}>ThÃªm bÃ i viáº¿t</h1>
                 <div style={{ display: "flex", gap: 8 }}>
                     <button
                         onClick={() => nav("/admin/posts")}
@@ -109,7 +109,7 @@ export default function PostAdd() {
                             cursor: "pointer",
                         }}
                     >
-                        ← Quay lại
+                        â† Quay láº¡i
                     </button>
                     <button
                         form="post-form"
@@ -123,7 +123,7 @@ export default function PostAdd() {
                             cursor: "pointer",
                         }}
                     >
-                        Lưu
+                        LÆ°u
                     </button>
                 </div>
             </div>
@@ -135,7 +135,7 @@ export default function PostAdd() {
                     {/* Left */}
                     <div style={{ display: "grid", gap: 12 }}>
                         <div>
-                            <label style={{ fontSize: 13 }}>Tiêu đề *</label>
+                            <label style={{ fontSize: 13 }}>TiÃªu Ä‘á» *</label>
                             <input
                                 required
                                 value={f.title}
@@ -193,7 +193,7 @@ export default function PostAdd() {
                             }}
                         >
                             <div>
-                                <label style={{ fontSize: 13 }}>Trạng thái</label>
+                                <label style={{ fontSize: 13 }}>Tráº¡ng thÃ¡i</label>
                                 <select
                                     value={f.status}
                                     onChange={(e) => setF({ ...f, status: e.target.value })}
@@ -210,7 +210,7 @@ export default function PostAdd() {
                                 </select>
                             </div>
                             <div>
-                                <label style={{ fontSize: 13 }}>Ngày xuất bản</label>
+                                <label style={{ fontSize: 13 }}>NgÃ y xuáº¥t báº£n</label>
                                 <input
                                     value={f.published_at}
                                     onChange={(e) =>
@@ -229,7 +229,7 @@ export default function PostAdd() {
                         </div>
 
                         <div>
-                            <label style={{ fontSize: 13 }}>Tóm tắt</label>
+                            <label style={{ fontSize: 13 }}>TÃ³m táº¯t</label>
                             <textarea
                                 value={f.excerpt}
                                 onChange={(e) => setF({ ...f, excerpt: e.target.value })}
@@ -247,7 +247,7 @@ export default function PostAdd() {
 
                     {/* Right */}
                     <div style={{ display: "grid", gap: 12 }}>
-                        <label style={{ fontSize: 13 }}>Ảnh đại diện</label>
+                        <label style={{ fontSize: 13 }}>áº¢nh Ä‘áº¡i diá»‡n</label>
                         <div
                             style={{
                                 display: "flex",
@@ -311,19 +311,19 @@ export default function PostAdd() {
                                         onChange={(e) => onPick(e.target.files?.[0] || null)}
                                     />
                                     <span style={{ fontSize: 12, color: "#64748b" }}>
-                                        Tối đa 2MB
+                                        Tá»‘i Ä‘a 2MB
                                     </span>
                                 </div>
 
                                 <div style={{ marginTop: 10 }}>
-                                    <label style={{ fontSize: 13 }}>Hoặc dán URL ảnh</label>
+                                    <label style={{ fontSize: 13 }}>Hoáº·c dÃ¡n URL áº£nh</label>
                                     <input
                                         value={f.image_url}
                                         onChange={(e) => {
                                             setF({ ...f, image_url: e.target.value });
                                             setPreview("");
                                         }}
-                                        placeholder="https://…"
+                                        placeholder="https://â€¦"
                                         style={{
                                             width: "100%",
                                             height: 36,
@@ -337,11 +337,11 @@ export default function PostAdd() {
                         </div>
 
                         <div>
-                            <label style={{ fontSize: 13 }}>Nội dung</label>
+                            <label style={{ fontSize: 13 }}>Ná»™i dung</label>
                             <textarea
                                 value={f.content}
                                 onChange={(e) => setF({ ...f, content: e.target.value })}
-                                placeholder="Bạn có thể tích hợp WYSIWYG sau."
+                                placeholder="Báº¡n cÃ³ thá»ƒ tÃ­ch há»£p WYSIWYG sau."
                                 style={{
                                     width: "100%",
                                     minHeight: 120,
@@ -357,3 +357,5 @@ export default function PostAdd() {
         </section>
     );
 }
+
+

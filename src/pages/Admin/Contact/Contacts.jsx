@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000";
 const api = (p) => (p.startsWith("http") ? p : `${API_BASE}${p.startsWith("/") ? "" : "/"}${p}`);
@@ -45,9 +45,9 @@ export default function AdminContacts() {
             const j = await res.json();
             setView(j);
             setOpen(true);
-            // đánh dấu read_at ở BE đã xử lý trong adminShow
+            // Ä‘Ã¡nh dáº¥u read_at á»Ÿ BE Ä‘Ã£ xá»­ lÃ½ trong adminShow
         } catch (e) {
-            alert(e.message || "Không tải được liên hệ");
+            alert(e.message || "KhÃ´ng táº£i Ä‘Æ°á»£c liÃªn há»‡");
         }
     };
 
@@ -67,19 +67,19 @@ export default function AdminContacts() {
             setOpen(false);
             await fetchData();
         } catch (e) {
-            alert(e.message || "Lưu thất bại");
+            alert(e.message || "LÆ°u tháº¥t báº¡i");
         } finally { setSaving(false); }
     };
 
     const onDelete = async (id) => {
-        if (!confirm("Xoá liên hệ này?")) return;
+        if (!confirm("XoÃ¡ liÃªn há»‡ nÃ y?")) return;
         try {
             setDeletingId(id);
             const res = await fetch(api(`/api/admin/contacts/${id}`), { method: "DELETE", headers });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             setItems((prev) => prev.filter((x) => x.id !== id));
         } catch (e) {
-            alert(e.message || "Lỗi xoá");
+            alert(e.message || "Lá»—i xoÃ¡");
         } finally { setDeletingId(null); }
     };
 
@@ -91,7 +91,7 @@ export default function AdminContacts() {
                 fontSize: 12, fontWeight: 600, color: ok ? "#0b6b3a" : "#475569",
                 background: ok ? "#d1fae5" : "#e2e8f0"
             }}>
-                {ok ? "đã xử lý" : "mới"}
+                {ok ? "Ä‘Ã£ xá»­ lÃ½" : "má»›i"}
             </span>
         );
     };
@@ -100,12 +100,12 @@ export default function AdminContacts() {
         <section style={{ padding: 20 }}>
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginBottom: 12 }}>
-                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quản trị Liên hệ</h1>
+                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quáº£n trá»‹ LiÃªn há»‡</h1>
                 <div style={{ display: "flex", gap: 8 }}>
                     <input
                         value={q}
                         onChange={(e) => setQ(e.target.value)}
-                        placeholder="Tìm tên/email/điện thoại…"
+                        placeholder="TÃ¬m tÃªn/email/Ä‘iá»‡n thoáº¡iâ€¦"
                         style={{ height: 36, padding: "0 10px", border: "1px solid #ddd", borderRadius: 8, minWidth: 260 }}
                     />
                     <select
@@ -113,14 +113,14 @@ export default function AdminContacts() {
                         onChange={(e) => setStatus(e.target.value)}
                         style={{ height: 36, padding: "0 10px", border: "1px solid #ddd", borderRadius: 8 }}
                     >
-                        <option value="">Tất cả</option>
-                        <option value="0">Mới</option>
-                        <option value="1">Đã xử lý</option>
+                        <option value="">Táº¥t cáº£</option>
+                        <option value="0">Má»›i</option>
+                        <option value="1">ÄÃ£ xá»­ lÃ½</option>
                     </select>
                 </div>
             </div>
 
-            {loading && <p>Đang tải dữ liệu…</p>}
+            {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
             {err && <p style={{ color: "red" }}>{err}</p>}
 
             {!loading && (
@@ -129,13 +129,13 @@ export default function AdminContacts() {
                         <thead>
                             <tr style={{ background: "#fafafa" }}>
                                 <th align="left">ID</th>
-                                <th align="left">Tên</th>
+                                <th align="left">TÃªn</th>
                                 <th align="left">Email</th>
-                                <th align="left">Điện thoại</th>
-                                <th align="left">Chủ đề</th>
-                                <th align="left">Trạng thái</th>
-                                <th align="left">Ngày</th>
-                                <th align="center">Hành động</th>
+                                <th align="left">Äiá»‡n thoáº¡i</th>
+                                <th align="left">Chá»§ Ä‘á»</th>
+                                <th align="left">Tráº¡ng thÃ¡i</th>
+                                <th align="left">NgÃ y</th>
+                                <th align="center">HÃ nh Ä‘á»™ng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,19 +157,19 @@ export default function AdminContacts() {
                                             onClick={() => onDelete(c.id)}
                                             disabled={deletingId === c.id}
                                             style={{ padding: "4px 10px", background: deletingId === c.id ? "#ef9a9a" : "#c62828", color: "#fff", border: 0, borderRadius: 6 }}
-                                        >{deletingId === c.id ? "Đang xoá..." : "Xóa"}</button>
+                                        >{deletingId === c.id ? "Äang xoÃ¡..." : "XÃ³a"}</button>
                                     </td>
                                 </tr>
                             ))}
                             {!items.length && (
-                                <tr><td colSpan={8} align="center" style={{ padding: 18, color: "#777" }}>Không có dữ liệu</td></tr>
+                                <tr><td colSpan={8} align="center" style={{ padding: 18, color: "#777" }}>KhÃ´ng cÃ³ dá»¯ liá»‡u</td></tr>
                             )}
                         </tbody>
                     </table>
                 </div>
             )}
 
-            {/* Modal xem/chỉnh trạng thái */}
+            {/* Modal xem/chá»‰nh tráº¡ng thÃ¡i */}
             {open && view && (
                 <div
                     onClick={() => setOpen(false)}
@@ -177,53 +177,53 @@ export default function AdminContacts() {
                 >
                     <div onClick={(e) => e.stopPropagation()} style={{ width: 760, maxWidth: "92vw", background: "#fff", borderRadius: 12, boxShadow: "0 10px 30px rgba(0,0,0,.2)", overflow: "hidden" }}>
                         <div style={{ padding: 14, background: "linear-gradient(90deg,#4f46e5 0%,#0ea5e9 100%)", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <div style={{ fontWeight: 700 }}>Chi tiết liên hệ</div>
-                            <button onClick={() => setOpen(false)} style={{ padding: "6px 10px", background: "rgba(255,255,255,.2)", border: 0, borderRadius: 8, color: "#fff" }}>Đóng</button>
+                            <div style={{ fontWeight: 700 }}>Chi tiáº¿t liÃªn há»‡</div>
+                            <button onClick={() => setOpen(false)} style={{ padding: "6px 10px", background: "rgba(255,255,255,.2)", border: 0, borderRadius: 8, color: "#fff" }}>ÄÃ³ng</button>
                         </div>
 
                         <div style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                             <div>
-                                <div style={{ marginBottom: 8 }}><b>Tên:</b> {view.name}</div>
+                                <div style={{ marginBottom: 8 }}><b>TÃªn:</b> {view.name}</div>
                                 <div style={{ marginBottom: 8 }}><b>Email:</b> {view.email || "-"}</div>
-                                <div style={{ marginBottom: 8 }}><b>Điện thoại:</b> {view.phone || "-"}</div>
-                                <div style={{ marginBottom: 8 }}><b>Chủ đề:</b> {view.subject || "-"}</div>
-                                <div style={{ marginBottom: 8 }}><b>Ngày gửi:</b> {String(view.created_at || "").replace("T", " ").slice(0, 19)}</div>
-                                <div style={{ marginBottom: 8 }}><b>Đã đọc:</b> {view.read_at ? String(view.read_at).replace("T", " ").slice(0, 19) : "Chưa"}</div>
+                                <div style={{ marginBottom: 8 }}><b>Äiá»‡n thoáº¡i:</b> {view.phone || "-"}</div>
+                                <div style={{ marginBottom: 8 }}><b>Chá»§ Ä‘á»:</b> {view.subject || "-"}</div>
+                                <div style={{ marginBottom: 8 }}><b>NgÃ y gá»­i:</b> {String(view.created_at || "").replace("T", " ").slice(0, 19)}</div>
+                                <div style={{ marginBottom: 8 }}><b>ÄÃ£ Ä‘á»c:</b> {view.read_at ? String(view.read_at).replace("T", " ").slice(0, 19) : "ChÆ°a"}</div>
                             </div>
                             <div>
-                                <div style={{ marginBottom: 8 }}><b>Nội dung</b></div>
+                                <div style={{ marginBottom: 8 }}><b>Ná»™i dung</b></div>
                                 <div style={{ whiteSpace: "pre-wrap", border: "1px solid #eee", borderRadius: 8, padding: 10, minHeight: 120 }}>{view.message}</div>
                             </div>
                         </div>
 
                         <div style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
                             <div>
-                                <label style={{ fontSize: 13 }}>Trạng thái</label>
+                                <label style={{ fontSize: 13 }}>Tráº¡ng thÃ¡i</label>
                                 <select
                                     value={view.status ?? 0}
                                     onChange={(e) => setView(v => ({ ...v, status: Number(e.target.value) }))}
                                     style={{ width: "100%", height: 36, padding: "0 10px", border: "1px solid #ddd", borderRadius: 10 }}
                                 >
-                                    <option value={0}>Mới</option>
-                                    <option value={1}>Đã xử lý</option>
+                                    <option value={0}>Má»›i</option>
+                                    <option value={1}>ÄÃ£ xá»­ lÃ½</option>
                                 </select>
                             </div>
                             <div>
-                                <label style={{ fontSize: 13 }}>Ghi chú nội bộ</label>
+                                <label style={{ fontSize: 13 }}>Ghi chÃº ná»™i bá»™</label>
                                 <input
                                     value={view.note || ""}
                                     onChange={(e) => setView(v => ({ ...v, note: e.target.value }))}
-                                    placeholder="Ghi chú cho team..."
+                                    placeholder="Ghi chÃº cho team..."
                                     style={{ width: "100%", height: 36, padding: "0 10px", border: "1px solid #ddd", borderRadius: 10 }}
                                 />
                             </div>
                         </div>
 
                         <div style={{ padding: 16, display: "flex", justifyContent: "flex-end", gap: 8, borderTop: "1px solid #eee" }}>
-                            <button onClick={() => setOpen(false)} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff" }}>Huỷ</button>
+                            <button onClick={() => setOpen(false)} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ddd", background: "#fff" }}>Huá»·</button>
                             <button onClick={saveStatus} disabled={saving}
                                 style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #0f62fe", background: saving ? "#9bbcff" : "#0f62fe", color: "#fff" }}>
-                                {saving ? "Đang lưu…" : "Lưu"}
+                                {saving ? "Äang lÆ°uâ€¦" : "LÆ°u"}
                             </button>
                         </div>
                     </div>
@@ -232,3 +232,5 @@ export default function AdminContacts() {
         </section>
     );
 }
+
+

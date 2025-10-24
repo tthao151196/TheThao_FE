@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function TopBarAuth({
@@ -175,13 +175,13 @@ export default function TopBarAuth({
         .topbar-auth{
           --topbar-h:64px;
           --white:#fff;
-          --accent1:#6366f1; /* tím */
+          --accent1:#6366f1; /* tÃ­m */
           --accent2:#06b6d4; /* cyan */
           --search-max:780px;
         }
         .topbar-auth.is-fixed{ position:fixed; left:0; right:0; top:0; z-index:60; }
 
-        /* Thanh topbar với nền gradient loang + bo 2 góc dưới */
+        /* Thanh topbar vá»›i ná»n gradient loang + bo 2 gÃ³c dÆ°á»›i */
         .tba{
           position:relative; isolation:isolate;
           color:var(--white);
@@ -194,7 +194,7 @@ export default function TopBarAuth({
             radial-gradient(130% 160% at -10% -30%, rgba(99,102,241,.35) 0%, rgba(99,102,241,0) 48%),
             radial-gradient(130% 160% at 110% -20%, rgba(6,182,212,.35) 0%, rgba(6,182,212,0) 50%),
             linear-gradient(90deg, var(--accent1) 0%, var(--accent2) 100%);
-          border-radius:0 0 22px 22px;           /* 👈 bo tròn giống ảnh */
+          border-radius:0 0 22px 22px;           /* ðŸ‘ˆ bo trÃ²n giá»‘ng áº£nh */
           box-shadow:0 8px 24px rgba(2,6,23,.22);
           z-index:-1;
         }
@@ -280,22 +280,22 @@ export default function TopBarAuth({
               <input
                 ref={inputRef}
                 type="search"
-                placeholder="Tìm sản phẩm..."
+                placeholder="TÃ¬m sáº£n pháº©m..."
                 value={q}
                 onChange={(e) => { setQ(e.target.value); setOpenDrop(true); }}
                 onFocus={() => { setOpenDrop(true); setFocused(true); }}
               />
-              <button type="submit" aria-label="Tìm"><i className="fa-solid fa-magnifying-glass" /></button>
+              <button type="submit" aria-label="TÃ¬m"><i className="fa-solid fa-magnifying-glass" /></button>
             </form>
 
-            {/* Dropdown: lịch sử + gợi ý */}
+            {/* Dropdown: lá»‹ch sá»­ + gá»£i Ã½ */}
             {openDrop && (history.length > 0 || focused) && (
               <div className="tba-dd" role="listbox">
                 {history.length > 0 && (
                   <>
                     <h5>
-                      Lịch sử tìm kiếm
-                      <button className="clear-btn" onMouseDown={(e) => e.preventDefault()} onClick={clearAllHistory}>Xoá lịch sử</button>
+                      Lá»‹ch sá»­ tÃ¬m kiáº¿m
+                      <button className="clear-btn" onMouseDown={(e) => e.preventDefault()} onClick={clearAllHistory}>XoÃ¡ lá»‹ch sá»­</button>
                     </h5>
                     {history.map((term) => (
                       <div
@@ -316,32 +316,32 @@ export default function TopBarAuth({
                         <span>{term}</span>
                         <button
                           className="remove"
-                          title="Xoá khỏi lịch sử"
+                          title="XoÃ¡ khá»i lá»‹ch sá»­"
                           onMouseDown={(e) => e.preventDefault()}
                           onClick={(e) => { e.stopPropagation(); removeHistoryItem(term); }}
                         >
-                          ✕
+                          âœ•
                         </button>
                       </div>
                     ))}
                   </>
                 )}
 
-                {/* Gợi ý sản phẩm */}
+                {/* Gá»£i Ã½ sáº£n pháº©m */}
                 {focused && (
                   <>
-                    <h5>Gợi ý sản phẩm {sugLoading ? "…" : ""}</h5>
+                    <h5>Gá»£i Ã½ sáº£n pháº©m {sugLoading ? "â€¦" : ""}</h5>
                     {(sugs.length === 0 && String(q).trim() && !sugLoading) ? (
                       <div className="row" style={{ cursor: "default" }}>
                         <i className="fa-regular fa-circle-xmark" />
-                        <span>Không có gợi ý phù hợp</span>
+                        <span>KhÃ´ng cÃ³ gá»£i Ã½ phÃ¹ há»£p</span>
                       </div>
                     ) : (
                       sugs.map((p) => {
                         const img =
                           p.thumbnail || p.image_url || p.image || p.thumb || p.cover ||
                           "https://placehold.co/60x60?text=IMG";
-                        const name = p.name || p.title || p.slug || `Sản phẩm #${p.id}`;
+                        const name = p.name || p.title || p.slug || `Sáº£n pháº©m #${p.id}`;
                         const price = p.sale_price ?? p.price;
                         return (
                           <div
@@ -360,7 +360,7 @@ export default function TopBarAuth({
                           >
                             <img src={img} alt={name} className="sug-img" onError={(e) => e.currentTarget.src = "https://placehold.co/60x60?text=IMG"} />
                             <span className="sug-name">{name}</span>
-                            {price != null && <span className="sug-price">{Number(price).toLocaleString("vi-VN")}₫</span>}
+                            {price != null && <span className="sug-price">{Number(price).toLocaleString("vi-VN")}â‚«</span>}
                           </div>
                         );
                       })
@@ -373,28 +373,28 @@ export default function TopBarAuth({
 
           {/* Right section */}
           <div className="tba-right">
-            <Link to={routes.cart} className="tba-cart" title="Giỏ hàng" aria-label={`Giỏ hàng: ${totalCount} sản phẩm`}>
+            <Link to={routes.cart} className="tba-cart" title="Giá» hÃ ng" aria-label={`Giá» hÃ ng: ${totalCount} sáº£n pháº©m`}>
               <span className="tba-cart-ico" aria-hidden="true"><CartIcon className="tba-icon" /></span>
-              <span className="label">Giỏ hàng</span>
+              <span className="label">Giá» hÃ ng</span>
               {totalCount > 0 && <span className={`tba-pill ${bump ? "bump" : ""}`}>{displayCount}</span>}
             </Link>
 
             <div className="tba-user">
               {user ? (
                 <>
-                  <Link to={routes.account || "/account"} className="tba-user-link" title="Xem tài khoản">
+                  <Link to={routes.account || "/account"} className="tba-user-link" title="Xem tÃ i khoáº£n">
                     <span className="tba-avatar" aria-hidden="true">
                       {user?.name ? <span className="initial">{String(user.name).trim().charAt(0).toUpperCase()}</span> : <i className="fa-solid fa-user" />}
                     </span>
-                    <span className="tba-hello">Xin chào, {user.name}</span>
+                    <span className="tba-hello">Xin chÃ o, {user.name}</span>
                   </Link>
-                  <button className="tba-logout" onClick={handleLogout}>Đăng xuất</button>
+                  <button className="tba-logout" onClick={handleLogout}>ÄÄƒng xuáº¥t</button>
                 </>
               ) : (
                 <>
-                  <Link to={routes.login}>Đăng nhập</Link>
+                  <Link to={routes.login}>ÄÄƒng nháº­p</Link>
                   <span>|</span>
-                  <Link to={routes.register}>Đăng ký</Link>
+                  <Link to={routes.register}>ÄÄƒng kÃ½</Link>
                 </>
               )}
             </div>
@@ -413,3 +413,5 @@ function CartIcon({ className }) {
     </svg>
   );
 }
+
+

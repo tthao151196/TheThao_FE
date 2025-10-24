@@ -1,4 +1,4 @@
-// src/pages/Customers/Cart.jsx
+﻿// src/pages/Customers/Cart.jsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const fmt = (n) => (Number(n) || 0).toLocaleString("vi-VN");
 export default function Cart({ cart, setCart }) {
   const navigate = useNavigate();
 
-  // 👇 Lắng nghe khi trang khác phát 'cart:clear' hoặc khi localStorage 'cart' đổi
+  // ðŸ‘‡ Láº¯ng nghe khi trang khÃ¡c phÃ¡t 'cart:clear' hoáº·c khi localStorage 'cart' Ä‘á»•i
   useEffect(() => {
     const syncFromLS = () => {
       try {
@@ -58,7 +58,7 @@ export default function Cart({ cart, setCart }) {
   };
 
   const clearCart = () => {
-    if (window.confirm("Bạn có chắc muốn xoá toàn bộ giỏ hàng?")) {
+    if (window.confirm("Báº¡n cÃ³ cháº¯c muá»‘n xoÃ¡ toÃ n bá»™ giá» hÃ ng?")) {
       setCart([]);
       localStorage.setItem("cart", "[]");
       window.dispatchEvent(new Event("cart:clear"));
@@ -70,24 +70,24 @@ export default function Cart({ cart, setCart }) {
     <div className="cart-page">
       <StyleTag />
 
-      {/* HERO (padding-top 110px để KHÔNG bị header che) */}
+      {/* HERO (padding-top 110px Ä‘á»ƒ KHÃ”NG bá»‹ header che) */}
       <section className="hero">
         <div className="wrap">
-          <h1>Giỏ hàng</h1>
-          <p>Kiểm tra các sản phẩm bạn đã thêm trước khi thanh toán.</p>
+          <h1>Giá» hÃ ng</h1>
+          <p>Kiá»ƒm tra cÃ¡c sáº£n pháº©m báº¡n Ä‘Ã£ thÃªm trÆ°á»›c khi thanh toÃ¡n.</p>
         </div>
       </section>
 
       <div className="container">
         {cart.length === 0 ? (
           <div className="card empty">
-            <p>Giỏ hàng trống</p>
+            <p>Giá» hÃ ng trá»‘ng</p>
             <button
               className="btn"
               onClick={() => navigate("/products")}
-              aria-label="Tiếp tục mua sắm"
+              aria-label="Tiáº¿p tá»¥c mua sáº¯m"
             >
-              Tiếp tục mua sắm
+              Tiáº¿p tá»¥c mua sáº¯m
             </button>
           </div>
         ) : (
@@ -96,12 +96,12 @@ export default function Cart({ cart, setCart }) {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="left">Sản phẩm</th>
-                    <th>Ảnh</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                    <th>Hành động</th>
+                    <th className="left">Sáº£n pháº©m</th>
+                    <th>áº¢nh</th>
+                    <th>GiÃ¡</th>
+                    <th>Sá»‘ lÆ°á»£ng</th>
+                    <th>ThÃ nh tiá»n</th>
+                    <th>HÃ nh Ä‘á»™ng</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,37 +118,37 @@ export default function Cart({ cart, setCart }) {
                           loading="lazy"
                         />
                       </td>
-                      <td className="muted">{fmt(item.price)} đ</td>
+                      <td className="muted">{fmt(item.price)} Ä‘</td>
                       <td>
                         <div className="qty">
                           <button
                             type="button"
                             className="qty-btn"
                             onClick={() => decreaseQty(item.id)}
-                            aria-label="Giảm số lượng"
+                            aria-label="Giáº£m sá»‘ lÆ°á»£ng"
                           >
-                            −
+                            âˆ’
                           </button>
                           <span className="qty-num">{item.qty}</span>
                           <button
                             type="button"
                             className="qty-btn"
                             onClick={() => increaseQty(item.id)}
-                            aria-label="Tăng số lượng"
+                            aria-label="TÄƒng sá»‘ lÆ°á»£ng"
                           >
                             +
                           </button>
                         </div>
                       </td>
-                      <td className="total">{fmt(item.price * item.qty)} đ</td>
+                      <td className="total">{fmt(item.price * item.qty)} Ä‘</td>
                       <td>
                         <button
                           type="button"
                           className="btn danger"
                           onClick={() => removeItem(item.id)}
-                          aria-label="Xoá sản phẩm"
+                          aria-label="XoÃ¡ sáº£n pháº©m"
                         >
-                          Xoá
+                          XoÃ¡
                         </button>
                       </td>
                     </tr>
@@ -160,11 +160,11 @@ export default function Cart({ cart, setCart }) {
             {/* Footer actions */}
             <div className="footer">
               <button type="button" className="btn gray" onClick={clearCart}>
-                🗑 Xoá toàn bộ
+                ðŸ—‘ XoÃ¡ toÃ n bá»™
               </button>
 
               <h3 className="sum">
-                Tổng cộng: <span>{fmt(total)} đ</span>
+                Tá»•ng cá»™ng: <span>{fmt(total)} Ä‘</span>
               </h3>
 
               <button
@@ -172,7 +172,7 @@ export default function Cart({ cart, setCart }) {
                 className="btn"
                 onClick={() => navigate("/checkout", { state: { cart } })}
               >
-                Thanh toán
+                Thanh toÃ¡n
               </button>
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function Cart({ cart, setCart }) {
 }
 
 /* ===== Styles (match Contact page look & feel) ===== */
-/* ===== Styles: chữ sáng – nổi bật hơn ===== */
+/* ===== Styles: chá»¯ sÃ¡ng â€“ ná»•i báº­t hÆ¡n ===== */
 function StyleTag() {
   return (
     <style>{`
@@ -192,9 +192,9 @@ function StyleTag() {
         --brand2:#06b6d4;      /* cyan   */
         --accent:#ff7043;      /* orange for money */
         --surface:#fff;
-        --text:#0b1220;        /* chữ đậm hơn */
-        --text-strong:#020617; /* chữ tiêu đề rất đậm */
-        --muted:#334155;       /* ghi đậm, dễ đọc */
+        --text:#0b1220;        /* chá»¯ Ä‘áº­m hÆ¡n */
+        --text-strong:#020617; /* chá»¯ tiÃªu Ä‘á» ráº¥t Ä‘áº­m */
+        --muted:#334155;       /* ghi Ä‘áº­m, dá»… Ä‘á»c */
         --header-offset:110px;
         background:#f8fafc;
         min-height:100vh;
@@ -213,7 +213,7 @@ function StyleTag() {
         font-weight:900;
         letter-spacing:-.02em;
         color:var(--text-strong);
-        /* làm chữ nổi nhẹ */
+        /* lÃ m chá»¯ ná»•i nháº¹ */
         text-shadow:0 1px 0 #fff, 0 0 24px rgba(99,102,241,.25);
       }
       .hero p{ margin:0; color:var(--muted); opacity:.95; }
@@ -235,7 +235,7 @@ function StyleTag() {
         background:linear-gradient(135deg,var(--brand1),var(--brand2));
         color:#fff; font-weight:900; cursor:pointer;
         box-shadow:0 8px 22px rgba(37,99,235,.25);
-        text-shadow:0 1px 0 rgba(0,0,0,.06); /* tăng độ rõ chữ trên nền sáng */
+        text-shadow:0 1px 0 rgba(0,0,0,.06); /* tÄƒng Ä‘á»™ rÃµ chá»¯ trÃªn ná»n sÃ¡ng */
         transition:transform .12s, box-shadow .12s, filter .12s;
       }
       .btn:hover{ filter:saturate(1.05); box-shadow:0 10px 26px rgba(37,99,235,.32); }
@@ -253,27 +253,27 @@ function StyleTag() {
         color:var(--text-strong);
         background:linear-gradient(90deg,rgba(99,102,241,.10),rgba(6,182,212,.10));
         border-bottom:2px solid rgba(2,6,23,.08);
-        text-shadow:0 1px 0 #fff; /* sáng hơn */
+        text-shadow:0 1px 0 #fff; /* sÃ¡ng hÆ¡n */
       }
       .table thead th.left, .table tbody td.left{ text-align:left; }
 
       .table tbody tr{ border-bottom:1px solid rgba(2,6,23,.06); }
-      .table tbody tr.odd{ background:#f6fbff; } /* zebra nhẹ cho dễ đọc */
+      .table tbody tr.odd{ background:#f6fbff; } /* zebra nháº¹ cho dá»… Ä‘á»c */
 
       .table tbody td{
         padding:12px; text-align:center; vertical-align:middle;
         color:var(--text);
-        font-weight:700; /* tăng độ nét chữ */
+        font-weight:700; /* tÄƒng Ä‘á»™ nÃ©t chá»¯ */
       }
       .table tbody td.left strong{ color:var(--text-strong); }
       .table tbody td img{
         width:90px; height:68px; object-fit:cover; border-radius:10px;
         border:1px solid rgba(2,6,23,.06);
       }
-      .table .muted{ color:#1f2937; font-weight:800; }  /* giá đơn vị rõ hơn */
+      .table .muted{ color:#1f2937; font-weight:800; }  /* giÃ¡ Ä‘Æ¡n vá»‹ rÃµ hÆ¡n */
       .table .total{
         font-weight:900; color:var(--accent);
-        text-shadow:0 0 0 #fff, 0 0 14px rgba(255,112,67,.35); /* làm số tiền nổi */
+        text-shadow:0 0 0 #fff, 0 0 14px rgba(255,112,67,.35); /* lÃ m sá»‘ tiá»n ná»•i */
       }
 
       .qty{ display:inline-flex; align-items:center; gap:10px; padding:4px 8px;
@@ -293,3 +293,5 @@ function StyleTag() {
     `}</style>
   );
 }
+
+

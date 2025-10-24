@@ -1,4 +1,4 @@
-// src/App.jsx
+﻿// src/App.jsx
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import "./App.css";
 import Products from "./pages/Admin/Product/Products.jsx";
 import AddProduct from "./pages/Admin/Product/add.jsx";
 
-// Trang Home giữ nguyên demo Vite
+// Trang Home giá»¯ nguyÃªn demo Vite
 function Home() {
   const [count, setCount] = useState(0);
 
@@ -50,8 +50,10 @@ export default function App() {
         <Route path="/admin/products/add" element={<AddProduct />} />
 
         {/* Not found */}
-        <Route path="*" element={<div style={{ padding: 16 }}>Không tìm thấy trang</div>} />
+        <Route path="*" element={<div style={{ padding: 16 }}>KhÃ´ng tÃ¬m tháº¥y trang</div>} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+

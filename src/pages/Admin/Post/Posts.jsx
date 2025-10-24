@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/* API giống Products */
+/* API giá»‘ng Products */
 const API_BASE = "http://127.0.0.1:8000/api";
 
 export default function Posts() {
@@ -37,7 +37,7 @@ export default function Posts() {
                 setItems(list);
             } catch (e) {
                 if (e.name !== "AbortError")
-                    setErr("Không tải được danh sách bài viết.");
+                    setErr("KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch bÃ i viáº¿t.");
             } finally {
                 setLoading(false);
             }
@@ -47,7 +47,7 @@ export default function Posts() {
 
     /* ======================= DELETE ======================= */
     async function handleDelete(id) {
-        if (!window.confirm("Bạn chắc chắn muốn xoá bài viết này?")) return;
+        if (!window.confirm("Báº¡n cháº¯c cháº¯n muá»‘n xoÃ¡ bÃ i viáº¿t nÃ y?")) return;
         try {
             setDeletingId(id);
             const res = await fetch(`${API_BASE}/admin/posts/${id}`, {
@@ -55,11 +55,11 @@ export default function Posts() {
                 headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
             });
             const data = await res.json().catch(() => ({}));
-            if (!res.ok) throw new Error(data.message || "Xoá thất bại");
+            if (!res.ok) throw new Error(data.message || "XoÃ¡ tháº¥t báº¡i");
             setItems((prev) => prev.filter((x) => x.id !== id));
-            alert("✅ Đã xoá bài viết");
+            alert("âœ… ÄÃ£ xoÃ¡ bÃ i viáº¿t");
         } catch (err) {
-            alert(`❌ Lỗi xoá: ${err.message}`);
+            alert(`âŒ Lá»—i xoÃ¡: ${err.message}`);
         } finally {
             setDeletingId(null);
         }
@@ -89,13 +89,13 @@ export default function Posts() {
                     marginBottom: 12,
                 }}
             >
-                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quản lý bài viết</h1>
+                <h1 style={{ fontSize: 24, fontWeight: 700 }}>Quáº£n lÃ½ bÃ i viáº¿t</h1>
 
                 <div style={{ display: "flex", gap: 8 }}>
                     <input
                         value={q}
                         onChange={(e) => setQ(e.target.value)}
-                        placeholder="Tìm tiêu đề/slug…"
+                        placeholder="TÃ¬m tiÃªu Ä‘á»/slugâ€¦"
                         style={{
                             height: 36,
                             padding: "0 10px",
@@ -105,7 +105,7 @@ export default function Posts() {
                         }}
                     />
                     <button
-                        onClick={() => nav("/admin/posts/add")} // <-- đúng route, chữ thường
+                        onClick={() => nav("/admin/posts/add")} // <-- Ä‘Ãºng route, chá»¯ thÆ°á»ng
                         style={{
                             padding: "8px 12px",
                             borderRadius: 8,
@@ -115,12 +115,12 @@ export default function Posts() {
                             cursor: "pointer",
                         }}
                     >
-                        + Thêm
+                        + ThÃªm
                     </button>
                 </div>
             </div>
 
-            {loading && <p>Đang tải dữ liệu…</p>}
+            {loading && <p>Äang táº£i dá»¯ liá»‡uâ€¦</p>}
             {err && <p style={{ color: "red" }}>{err}</p>}
 
             {/* Table */}
@@ -134,12 +134,12 @@ export default function Posts() {
                         <thead>
                             <tr style={{ background: "#fafafa" }}>
                                 <th align="left">ID</th>
-                                <th align="left">Ảnh</th>
-                                <th align="left">Tiêu đề</th>
+                                <th align="left">áº¢nh</th>
+                                <th align="left">TiÃªu Ä‘á»</th>
                                 <th align="left">Slug</th>
-                                <th align="left">Trạng thái</th>
-                                <th align="left">Ngày</th>
-                                <th align="center">Hành động</th>
+                                <th align="left">Tráº¡ng thÃ¡i</th>
+                                <th align="left">NgÃ y</th>
+                                <th align="center">HÃ nh Ä‘á»™ng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -204,7 +204,7 @@ export default function Posts() {
                                                 cursor: "pointer",
                                             }}
                                         >
-                                            Sửa
+                                            Sá»­a
                                         </button>
                                         <button
                                             onClick={() => handleDelete(p.id)}
@@ -220,7 +220,7 @@ export default function Posts() {
                                                     deletingId === p.id ? "not-allowed" : "pointer",
                                             }}
                                         >
-                                            {deletingId === p.id ? "Đang xoá..." : "Xóa"}
+                                            {deletingId === p.id ? "Äang xoÃ¡..." : "XÃ³a"}
                                         </button>
                                     </td>
                                 </tr>
@@ -233,7 +233,7 @@ export default function Posts() {
                                         align="center"
                                         style={{ padding: 18, color: "#777" }}
                                     >
-                                        Không có dữ liệu
+                                        KhÃ´ng cÃ³ dá»¯ liá»‡u
                                     </td>
                                 </tr>
                             )}
@@ -244,3 +244,5 @@ export default function Posts() {
         </section>
     );
 }
+
+

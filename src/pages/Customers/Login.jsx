@@ -1,6 +1,8 @@
-// vite-project/src/pages/Login.jsx
+﻿// vite-project/src/pages/Login.jsx
+
+
 import { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom"; // ⬅️ thêm Link
+import { useNavigate, useLocation, Link } from "react-router-dom"; // â¬…ï¸ thÃªm Link
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ export default function Login() {
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ nhận message từ trang đăng ký (nếu có)
+  // âœ… nháº­n message tá»« trang Ä‘Äƒng kÃ½ (náº¿u cÃ³)
   const successMsg = location.state?.success;
 
   const onChange = (e) => {
@@ -52,7 +54,7 @@ export default function Login() {
       } catch { }
 
       if (res.ok) {
-        // ✅ Lưu token + user vào localStorage
+        // âœ… LÆ°u token + user vÃ o localStorage
         if (data.token) {
           localStorage.setItem("token", data.token);
         }
@@ -60,26 +62,26 @@ export default function Login() {
           localStorage.setItem("user", JSON.stringify(data.user));
         }
 
-        // 🔔 Báo cho TopBar cập nhật NGAY (không cần refresh)
+        // ðŸ”” BÃ¡o cho TopBar cáº­p nháº­t NGAY (khÃ´ng cáº§n refresh)
         window.dispatchEvent(new Event("auth-changed"));
 
-        // ✅ Thông báo
-        alert(data.message || "Đăng nhập thành công!");
+        // âœ… ThÃ´ng bÃ¡o
+        alert(data.message || "ÄÄƒng nháº­p thÃ nh cÃ´ng!");
 
-        // ✅ Quay về trang chủ
+        // âœ… Quay vá» trang chá»§
         navigate("/");
         return;
       }
 
-      // Xử lý lỗi validation
+      // Xá»­ lÃ½ lá»—i validation
       if (res.status === 422 && data?.errors) {
         setErrors(data.errors);
       } else {
-        setServerError(data?.message || `Có lỗi xảy ra (HTTP ${res.status}).`);
+        setServerError(data?.message || `CÃ³ lá»—i xáº£y ra (HTTP ${res.status}).`);
       }
     } catch (err) {
       console.error("Login failed:", err);
-      setServerError("Không thể kết nối máy chủ.");
+      setServerError("KhÃ´ng thá»ƒ káº¿t ná»‘i mÃ¡y chá»§.");
     } finally {
       setLoading(false);
     }
@@ -118,7 +120,7 @@ export default function Login() {
         }}
       />
 
-      {/* Overlay mờ đen */}
+      {/* Overlay má» Ä‘en */}
       <div
         style={{
           position: "absolute",
@@ -141,7 +143,7 @@ export default function Login() {
         }}
       >
         <h2 style={{ marginBottom: 24, textAlign: "center", color: "#023ea5c6" }}>
-          Đăng nhập
+          ÄÄƒng nháº­p
         </h2>
 
         {successMsg && (
@@ -175,7 +177,7 @@ export default function Login() {
         <form onSubmit={submit} noValidate>
           {[
             { label: "Email", name: "email", type: "email" },
-            { label: "Mật khẩu", name: "password", type: "password" },
+            { label: "Máº­t kháº©u", name: "password", type: "password" },
           ].map((f) => (
             <div key={f.name} style={{ marginBottom: 18 }}>
               <label
@@ -212,10 +214,10 @@ export default function Login() {
             </div>
           ))}
 
-          {/* ⬇️ Link tới trang Quên mật khẩu */}
+          {/* â¬‡ï¸ Link tá»›i trang QuÃªn máº­t kháº©u */}
           <div style={{ textAlign: "right", marginBottom: 18 }}>
             <Link to="/forgot-password" style={{ color: "#1e88e5", textDecoration: "underline", fontSize: 14 }}>
-              Quên mật khẩu?
+              QuÃªn máº­t kháº©u?
             </Link>
           </div>
 
@@ -226,7 +228,7 @@ export default function Login() {
               width: "100%",
               padding: "12px",
               borderRadius: 10,
-              border: 0, // ✅ fix lỗi cú pháp: bỏ chữ "token" dư
+              border: 0, // âœ… fix lá»—i cÃº phÃ¡p: bá» chá»¯ "token" dÆ°
               cursor: "pointer",
               background: loading ? "#9ccc65" : "#023ea5c6",
               color: "#fff",
@@ -235,10 +237,12 @@ export default function Login() {
               transition: "background 0.2s",
             }}
           >
-            {loading ? "Đang xử lý..." : "Đăng nhập"}
+            {loading ? "Äang xá»­ lÃ½..." : "ÄÄƒng nháº­p"}
           </button>
         </form>
       </div>
     </div>
   );
 }
+
+
