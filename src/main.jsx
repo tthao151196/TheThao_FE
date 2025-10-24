@@ -243,6 +243,12 @@
 // );
 
 // src/main.jsx
+
+
+import "./boot/urlRewrite";   // phải đứng trước mọi import khác
+
+
+
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import {
