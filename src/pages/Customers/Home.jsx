@@ -620,8 +620,7 @@
 //     `}</style>
 //   );
 // }
-import { API_BASE } from "../config/env";
-
+import { API_BASE, ASSET_ORIGIN, toHttps } from "../config/env";
 
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -632,10 +631,9 @@ const PLACEHOLDER = "https://placehold.co/300x200?text=No+Image";
 
 /* ====== BANNER SLIDES ====== */
 const BANNERS = [
-  { src: `${API_BASE}/assets/images/banner.webp`, alt: "SiÃªu Æ°u Ä‘Ã£i thá»ƒ thao", link: "/products" },
-  { src: `${API_BASE}/assets/images/banner1.jpg`, alt: "Phong cÃ¡ch & hiá»‡u nÄƒng", link: "/products?only_sale=1" },
-  { src: `${API_BASE}/assets/images/banner11.jpg`, alt: "BÃ¹ng ná»• mÃ¹a giáº£i má»›i", link: "/category/1" },
-];
+ { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner.webp`),  alt: "Siêu ưu đãi thể thao",          link: "/products" },
+  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner1.jpg`),  alt: "Phong cách & hiệu năng",        link: "/products?only_sale=1" },
+  { src: toHttps(`${ASSET_ORIGIN}/assets/images/banner11.jpg`), alt: "Bùng nổ mùa giải mới",           link: "/category/1" }, ];
 
 /* ---------- Icon chevron ---------- */
 function IconChevron({ dir = "left", size = 24 }) {
@@ -817,8 +815,7 @@ function SearchBar() {
         const mapped = list.map((p) => ({
           id: p.id,
           name: p.name || p.title || `#${p.id}`,
-          thumbnail_url: p.thumbnail_url || (p.thumbnail ? `${API_BASE}/storage/${p.thumbnail}` : null),
-          slug: p.slug,
+thumbnail_url: p.thumbnail_url || (p.thumbnail ? toHttps(`${ASSET_ORIGIN}/storage/${p.thumbnail}`) : null),          slug: p.slug,
         }));
         setItems(mapped);
         setOpen(true);
@@ -1047,7 +1044,7 @@ export default function Home() {
         const cats = await resCats.json();
         setCategories(Array.isArray(cats) ? cats : cats?.data ?? []);
 
-        const resProds = await fetch(`${API_BASE}/products`, { signal: ac.signal });
+        const resProds = await fetch(`${API_BASE}/products`)
         if (!resProds.ok) throw new Error(`HTTP ${resProds.status}`);
         const prods = await resProds.json();
         const list = Array.isArray(prods) ? prods : prods?.data ?? [];
